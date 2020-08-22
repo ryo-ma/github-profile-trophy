@@ -1,6 +1,4 @@
-import ky from "https://deno.land/x/ky/index.js";
-import "https://deno.land/x/dotenv@v0.5.0/load.ts";
-
+import {soxa} from "../deps.ts";
 class UserInfo {
   constructor(
     public totalCommits: Number,
@@ -52,25 +50,27 @@ export class GithubAPIClient {
           }
         }
         `;
-    const response = await ky.post(
+    const response = await soxa.post(
       "https://api.github.com/graphql",
+      {},
       {
-        json: { query: query, variables },
+        data: { query: query, variables },
         headers: { Authorization: `bearer ${token}` },
       },
-    ).json();
-    const totalCommits = response.data.user.contributionsCollection.restrictedContributionsCount + response.data.user.contributionsCollection.totalCommitContributions;
-    const totalStargazers = response.data.user.repositories.nodes.reduce((prev: Number, node: any) => {
+    );
+    const userData = response.data.data.user;
+    const totalCommits = userData.contributionsCollection.restrictedContributionsCount + userData.contributionsCollection.totalCommitContributions;
+    const totalStargazers = userData.repositories.nodes.reduce((prev: Number, node: any) => {
         return prev + node.stargazers.totalCount;
       }, 0);
     const userInfo = new UserInfo(
         totalCommits,
-        response.data.user.followers.totalCount,
-        response.data.user.issues.totalCount,
-        response.data.user.pullRequests.totalCount,
+        userData.followers.totalCount,
+        userData.issues.totalCount,
+        userData.pullRequests.totalCount,
         totalStargazers,
-        response.data.user.repositories.totalCount,
-        response.data.user.repositoriesContributedTo.totalCount,
+        userData.repositories.totalCount,
+        userData.repositoriesContributedTo.totalCount,
         )
     return userInfo;
   }
