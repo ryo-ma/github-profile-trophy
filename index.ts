@@ -2,7 +2,9 @@ import { ServerRequest } from "./deps.ts";
 import { GithubAPIClient } from "./src/github_api_client.ts";
 import { Card } from "./src/card.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
+
 const client = new GithubAPIClient();
+const cacheMaxAge = 7200;
 
 export default async (req: ServerRequest) => {
   const username = new URLSearchParams(req.url.split("?")[1]).get("username");
@@ -12,7 +14,12 @@ export default async (req: ServerRequest) => {
     req.respond(
       {
         body: new Card().render(userInfo),
-        headers: new Headers({ "Content-Type": "image/svg+xml" }),
+        headers: new Headers(
+          {
+            "Content-Type": "image/svg+xml",
+            "Cache-Control": `public, max-age: ${cacheMaxAge}`,
+          },
+        ),
       },
     );
   } else {
