@@ -1,5 +1,5 @@
 import {soxa} from "../deps.ts";
-class UserInfo {
+export class UserInfo {
   constructor(
     public totalCommits: Number,
     public totalFollowers: Number,

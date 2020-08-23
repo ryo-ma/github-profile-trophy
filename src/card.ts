@@ -3,7 +3,11 @@ import {
   TotalStarTrophy,
   TotalCommitTrophy,
   TotalFollowerTrophy,
+  TotalIssueTrophy,
+  TotalPullRequestTrophy,
+  TotalRepositoryTrophy,
 } from "./trophies.ts";
+import {UserInfo} from "./github_api_client.ts";
 
 export class Card {
   private width = 0;
@@ -16,32 +20,15 @@ export class Card {
     this.width = panelSize * this.maxPanelWidthCount;
     this.height = panelSize * this.maxPanelHeightCount;
   }
-  render(): string {
-    const trophy1 = new TotalStarTrophy(0);
-    const trophy2 = new TotalStarTrophy(100);
-    const trophy3 = new TotalStarTrophy(500);
-    const trophy4 = new TotalStarTrophy(1000);
-    const trophy5 = new TotalCommitTrophy(1);
-    const trophy6 = new TotalCommitTrophy(200);
-    const trophy7 = new TotalCommitTrophy(1000);
-    const trophy8 = new TotalCommitTrophy(5000);
-    const trophy9 = new TotalFollowerTrophy(1);
-    const trophy10 = new TotalFollowerTrophy(50);
-    const trophy11 = new TotalFollowerTrophy(200);
-    const trophy12 = new TotalFollowerTrophy(500);
-    const trophyList = new Array<Trophy>();
-    trophyList.push(trophy1);
-    trophyList.push(trophy2);
-    trophyList.push(trophy3);
-    trophyList.push(trophy4);
-    trophyList.push(trophy5);
-    trophyList.push(trophy6);
-    trophyList.push(trophy7);
-    trophyList.push(trophy8);
-    trophyList.push(trophy9);
-    trophyList.push(trophy10);
-    trophyList.push(trophy11);
-    trophyList.push(trophy12);
+  render(userInfo: UserInfo): string {
+    const trophyList = new Array<Trophy>(
+      new TotalStarTrophy(userInfo.totalStargazers),
+      new TotalCommitTrophy(userInfo.totalCommits),
+      new TotalFollowerTrophy(userInfo.totalFollowers),
+      new TotalIssueTrophy(userInfo.totalIssues),
+      new TotalPullRequestTrophy(userInfo.totalPullRequests),
+      new TotalRepositoryTrophy(userInfo.totalRepositories),
+    );
     const renderdTrophy = trophyList.reduce(
       (sum: string, trophy: Trophy, i: number) => {
         let x = (this.panelSize * i);

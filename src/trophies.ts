@@ -41,22 +41,22 @@ export abstract class Trophy {
 export class TotalStarTrophy extends Trophy {
   constructor(private totalStartgazer: Number) {
     super();
-    this.title = "STAR";
+    this.title = "Star";
     this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 1000) {
+    if (this.totalStartgazer >= 200) {
       this.rank = "S";
       this.topMessage = "Super Star";
-      this.bottomMessage = "+1000";
-    } else if (this.totalStartgazer >= 500) {
+      this.bottomMessage = "+200";
+    } else if (this.totalStartgazer >= 100) {
       this.rank = "A";
       this.topMessage = "High Star";
-      this.bottomMessage = "+500";
-    } else if (this.totalStartgazer >= 100) {
+      this.bottomMessage = "+100";
+    } else if (this.totalStartgazer >= 10) {
       this.rank = "B";
       this.topMessage = "Middle Star";
-      this.bottomMessage = "+100";
+      this.bottomMessage = "+10";
     } else if (this.totalStartgazer >= 1) {
       this.rank = "C";
       this.topMessage = "First Star";
@@ -68,22 +68,22 @@ export class TotalStarTrophy extends Trophy {
 export class TotalCommitTrophy extends Trophy {
   constructor(private totalStartgazer: Number) {
     super();
-    this.title = "COMMIT";
+    this.title = "Commit";
     this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 5000) {
+    if (this.totalStartgazer >= 1000) {
       this.rank = "S";
       this.topMessage = "Super Commiter";
-      this.bottomMessage = "+5000";
-    } else if (this.totalStartgazer >= 1000) {
+      this.bottomMessage = "+1000";
+    } else if (this.totalStartgazer >= 500) {
       this.rank = "A";
       this.topMessage = "High Commiter";
-      this.bottomMessage = "+1000";
-    } else if (this.totalStartgazer >= 200) {
+      this.bottomMessage = "+500";
+    } else if (this.totalStartgazer >= 100) {
       this.rank = "B";
       this.topMessage = "Middle Commiter";
-      this.bottomMessage = "+200";
+      this.bottomMessage = "+100";
     } else if (this.totalStartgazer >= 1) {
       this.rank = "C";
       this.topMessage = "First Commit";
@@ -95,25 +95,105 @@ export class TotalCommitTrophy extends Trophy {
 export class TotalFollowerTrophy extends Trophy {
   constructor(private totalStartgazer: Number) {
     super();
-    this.title = "FOLLOWER";
+    this.title = "Follower";
     this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 500) {
+    if (this.totalStartgazer >= 100) {
       this.rank = "S";
       this.topMessage = "Celebrity";
-      this.bottomMessage = "+500";
-    } else if (this.totalStartgazer >= 200) {
+      this.bottomMessage = "+100";
+    } else if (this.totalStartgazer >= 20) {
       this.rank = "A";
       this.topMessage = "Famous User";
-      this.bottomMessage = "+200";
-    } else if (this.totalStartgazer >= 50) {
+      this.bottomMessage = "+20";
+    } else if (this.totalStartgazer >= 10) {
       this.rank = "B";
       this.topMessage = "Many Friends";
-      this.bottomMessage = "+50";
+      this.bottomMessage = "+10";
     } else if (this.totalStartgazer >= 1) {
       this.rank = "C";
       this.topMessage = "First Friend";
+      this.bottomMessage = "+1";
+    }
+  }
+}
+export class TotalIssueTrophy extends Trophy {
+  constructor(private totalStartgazer: Number) {
+    super();
+    this.title = "Issue";
+    this.setRank();
+  }
+  setRank() {
+    if (this.totalStartgazer >= 100) {
+      this.rank = "S";
+      this.topMessage = "Super Issuer";
+      this.bottomMessage = "+100";
+    } else if (this.totalStartgazer >= 20) {
+      this.rank = "A";
+      this.topMessage = "High Issuer";
+      this.bottomMessage = "+20";
+    } else if (this.totalStartgazer >= 10) {
+      this.rank = "B";
+      this.topMessage = "Middle Issuer";
+      this.bottomMessage = "+10";
+    } else if (this.totalStartgazer >= 1) {
+      this.rank = "C";
+      this.topMessage = "First Issue";
+      this.bottomMessage = "+1";
+    }
+  }
+}
+
+export class TotalPullRequestTrophy extends Trophy {
+  constructor(private totalStartgazer: Number) {
+    super();
+    this.title = "PR";
+    this.setRank();
+  }
+  setRank() {
+    if (this.totalStartgazer >= 100) {
+      this.rank = "S";
+      this.topMessage = "God PR User";
+      this.bottomMessage = "+100";
+    } else if (this.totalStartgazer >= 20) {
+      this.rank = "A";
+      this.topMessage = "High PR User";
+      this.bottomMessage = "+20";
+    } else if (this.totalStartgazer >= 10) {
+      this.rank = "B";
+      this.topMessage = "Many PRs";
+      this.bottomMessage = "+10";
+    } else if (this.totalStartgazer >= 1) {
+      this.rank = "C";
+      this.topMessage = "First PR";
+      this.bottomMessage = "+1";
+    }
+  }
+}
+
+export class TotalRepositoryTrophy extends Trophy {
+  constructor(private totalStartgazer: Number) {
+    super();
+    this.title = "Repo";
+    this.setRank();
+  }
+  setRank() {
+    if (this.totalStartgazer >= 100) {
+      this.rank = "S";
+      this.topMessage = "God Repo Creator";
+      this.bottomMessage = "+100";
+    } else if (this.totalStartgazer >= 20) {
+      this.rank = "A";
+      this.topMessage = "High Repo Creator";
+      this.bottomMessage = "+20";
+    } else if (this.totalStartgazer >= 10) {
+      this.rank = "B";
+      this.topMessage = "Many Repo";
+      this.bottomMessage = "+10";
+    } else if (this.totalStartgazer >= 1) {
+      this.rank = "C";
+      this.topMessage = "First Repository";
       this.bottomMessage = "+1";
     }
   }
