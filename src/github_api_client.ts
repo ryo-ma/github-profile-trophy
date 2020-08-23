@@ -15,7 +15,7 @@ class UserInfo {
 export class GithubAPIClient {
   constructor() {
   }
-  async requestUserData(username: string): Promise<UserInfo> {
+  async requestUserInfo(username: string): Promise<UserInfo> {
     const token = Deno.env.get('GITHUB_TOKEN');
     const variables = { username: username };
     const query = `
