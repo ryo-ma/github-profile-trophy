@@ -1,7 +1,7 @@
 import { TotalStarTrophy, TotalCommitTrophy, TotalFollowerTrophy } from "./trophies.ts";
 
 export class Card {
-  constructor(private width = 1000, private height = 200) {
+  constructor(private width = 800, private height = 200) {
   }
   render(): string {
     const trophy1 = new TotalStarTrophy(0);
