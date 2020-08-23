@@ -19,7 +19,7 @@ for await (const req of s) {
   } else {
     req.respond(
       {
-        body: "Can not find username",
+        body: "Can not find a query parameter: username",
         status: 404,
         headers: new Headers({ "Content-Type": "text" }),
       },
