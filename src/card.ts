@@ -1,7 +1,20 @@
-import { TotalStarTrophy, TotalCommitTrophy, TotalFollowerTrophy } from "./trophies.ts";
+import {
+  Trophy,
+  TotalStarTrophy,
+  TotalCommitTrophy,
+  TotalFollowerTrophy,
+} from "./trophies.ts";
 
 export class Card {
-  constructor(private width = 800, private height = 200) {
+  private width = 0;
+  private height = 0;
+  constructor(
+    private panelSize = 110,
+    private maxPanelWidthCount = 6,
+    private maxPanelHeightCount = 2,
+  ) {
+    this.width = panelSize * this.maxPanelWidthCount;
+    this.height = panelSize * this.maxPanelHeightCount;
   }
   render(): string {
     const trophy1 = new TotalStarTrophy(0);
@@ -16,6 +29,31 @@ export class Card {
     const trophy10 = new TotalFollowerTrophy(50);
     const trophy11 = new TotalFollowerTrophy(100);
     const trophy12 = new TotalFollowerTrophy(500);
+    const trophyList = new Array<Trophy>();
+    trophyList.push(trophy1);
+    trophyList.push(trophy2);
+    trophyList.push(trophy3);
+    trophyList.push(trophy4);
+    trophyList.push(trophy5);
+    trophyList.push(trophy6);
+    trophyList.push(trophy7);
+    trophyList.push(trophy8);
+    trophyList.push(trophy9);
+    trophyList.push(trophy10);
+    trophyList.push(trophy11);
+    trophyList.push(trophy12);
+    const renderdTrophy = trophyList.reduce(
+      (sum: string, trophy: Trophy, i: number) => {
+        let x = (this.panelSize * i);
+        let y = 0;
+        if (i >= this.maxPanelWidthCount) {
+          x = (this.panelSize * (i - this.maxPanelWidthCount));
+          y = this.panelSize;
+        }
+        return sum + trophy.render(x, y, this.panelSize);
+      },
+      "",
+    );
     return `
     <svg
       width="${this.width}"
@@ -35,18 +73,7 @@ export class Card {
         fill="#fff"
         stroke-opacity="1"
       />
-      ${trophy1.render()}
-      ${trophy2.render(100, 0)}
-      ${trophy3.render(0, 100)}
-      ${trophy4.render(100, 100)}
-      ${trophy5.render(200, 0)}
-      ${trophy6.render(300, 0)}
-      ${trophy7.render(200, 100)}
-      ${trophy8.render(300, 100)}
-      ${trophy9.render(400, 0)}
-      ${trophy10.render(500, 0)}
-      ${trophy11.render(400, 100)}
-      ${trophy12.render(500, 100)}
+      ${renderdTrophy}
     </svg>`;
   }
 }

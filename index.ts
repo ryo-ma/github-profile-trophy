@@ -6,9 +6,10 @@ const client = new GithubAPIClient();
 
 export default async (req: ServerRequest) => {
   const userInfo = await client.requestUserInfo("ryo-ma")
+  const cardSize = 110;
   req.respond(
     {
-      body: new Card().render(),
+      body: new Card(cardSize).render(),
       headers: new Headers({ "Content-Type": "image/svg+xml" }),
     },
   )

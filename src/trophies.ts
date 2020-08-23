@@ -1,19 +1,20 @@
 import { getTropyIcon } from "./icons.ts";
 
-abstract class Trophy {
+
+export abstract class Trophy {
   rank: string = "?";
   topMessage = "Unknown";
   bottomMessage = "+0";
   title = "";
   abstract setRank(): void;
-  render(x = 0, y = 0): string {
+  render(x = 0, y = 0, cardSize = 110): string {
     return `
         <svg
           x="${x}"
           y="${y}"
-          width="100"
-          height="100"
-          viewBox="0 0 100 100"
+          width="${cardSize}"
+          height="${cardSize}"
+          viewBox="0 0 ${cardSize} ${cardSize}"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -22,8 +23,8 @@ abstract class Trophy {
             x="0.5"
             y="0.5"
             rx="4.5"
-            width="99"
-            height="99"
+            width="${cardSize - 1}"
+            height="${cardSize - 1}"
             stroke="#E4E2E2"
             fill="#fff"
             stroke-opacity="1"
