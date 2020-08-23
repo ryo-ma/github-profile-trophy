@@ -36,7 +36,7 @@ export class Card {
     }
     this.height = this.panelSize * panelHeightCount;
 
-    const renderdTrophy = trophyList.reduce(
+    const renderedTrophy = trophyList.reduce(
       (sum: string, trophy: Trophy, i: number) => {
         const x = this.panelSize * (i % this.maxPanelWidthCount);
         const y = this.panelSize * Math.floor(i / this.maxPanelWidthCount);
@@ -52,7 +52,7 @@ export class Card {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      ${renderdTrophy}
+      ${renderedTrophy}
     </svg>`;
   }
 }
