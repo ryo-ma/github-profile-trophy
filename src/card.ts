@@ -27,7 +27,7 @@ export class Card {
     const trophy8 = new TotalCommitTrophy(5000);
     const trophy9 = new TotalFollowerTrophy(1);
     const trophy10 = new TotalFollowerTrophy(50);
-    const trophy11 = new TotalFollowerTrophy(100);
+    const trophy11 = new TotalFollowerTrophy(200);
     const trophy12 = new TotalFollowerTrophy(500);
     const trophyList = new Array<Trophy>();
     trophyList.push(trophy1);
@@ -62,17 +62,6 @@ export class Card {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect
-        data-testid="card-bg"
-        x="0.5"
-        y="0.5"
-        rx="4.5"
-        height="99%"
-        stroke="#E4E2E2"
-        width="${this.width - 1}"
-        fill="#fff"
-        stroke-opacity="1"
-      />
       ${renderdTrophy}
     </svg>`;
   }
