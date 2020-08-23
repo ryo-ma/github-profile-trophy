@@ -1,4 +1,4 @@
-import { TotalStarTrophy, TotalCommitTrophy } from "./trophies.ts";
+import { TotalStarTrophy, TotalCommitTrophy, TotalFollowerTrophy } from "./trophies.ts";
 
 export class Card {
   constructor(private width = 1000, private height = 200) {
@@ -12,6 +12,10 @@ export class Card {
     const trophy6 = new TotalCommitTrophy(200);
     const trophy7 = new TotalCommitTrophy(1000);
     const trophy8 = new TotalCommitTrophy(5000);
+    const trophy9 = new TotalFollowerTrophy(1);
+    const trophy10 = new TotalFollowerTrophy(50);
+    const trophy11 = new TotalFollowerTrophy(100);
+    const trophy12 = new TotalFollowerTrophy(500);
     return `
     <svg
       width="${this.width}"
@@ -39,6 +43,10 @@ export class Card {
       ${trophy6.render(300, 0)}
       ${trophy7.render(200, 100)}
       ${trophy8.render(300, 100)}
+      ${trophy9.render(400, 0)}
+      ${trophy10.render(500, 0)}
+      ${trophy11.render(400, 100)}
+      ${trophy12.render(500, 100)}
     </svg>`;
   }
 }
