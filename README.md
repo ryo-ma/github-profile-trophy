@@ -1,6 +1,6 @@
 # Github Profile Trophy
 
-Add dynamically generated GitHub Trophy on your readme
+🏆 Add dynamically generated GitHub Trophy on your readme
 
 # Demo
 
