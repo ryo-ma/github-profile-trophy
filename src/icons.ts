@@ -1,4 +1,4 @@
-export const icons = "icons";
+import { RANK } from "./utils.ts";
 
 const goldColor = "#FFD700";
 const silverColor = "#C0C0C0";
@@ -25,16 +25,16 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 <path d="M7249 1054 c-42 -7 -109 -25 -150 -40 -76 -27 -226 -101 -267 -133 l-24 -18 41 -66 c22 -37 36 -67 31 -67 -18 0 -11 -80 11 -121 11 -22 53 -73 92 -113 279 -282 682 -361 1251 -245 113 23 172 49 188 84 14 30 3 72 -20 77 -9 3 18 15 61 29 l78 24 -93 81 c-362 313 -622 460 -902 509 -106 18 -194 18 -297 -1z"/>
 </g>
 </svg>`
-export function getTropyIcon(rank = "?") {
+export function getTropyIcon(rank = RANK.UNKNOWN) {
   let color = "currentColor"
   let backgroundIcon =  "";
-  if (rank == "S") {
+  if (rank == RANK.S) {
     color = goldColor;
     backgroundIcon = leafIcon;
-  } else if (rank == "A") {
+  } else if (rank == RANK.A) {
     color = silverColor;
     backgroundIcon = leafIcon;
-  } else if (rank == "B") {
+  } else if (rank == RANK.B) {
     color = bronzeColor;
   }
   return `

@@ -8,16 +8,17 @@ import {
   TotalRepositoryTrophy,
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
+import { CONSTANTS } from "./utils.ts";
 
 export class Card {
   private width = 0;
   private height = 0;
   constructor(
-    private panelSize = 110,
-    private maxPanelWidthCount = 6,
-    private maxPanelHeightCount = 3,
+    private panelSize = CONSTANTS.DEFALT_PANEL_SIZE,
+    private maxColumn = CONSTANTS.DEFALT_MAX_COLUMN,
+    private maxRow = CONSTANTS.DEFALT_MAX_ROW,
   ) {
-    this.width = panelSize * this.maxPanelWidthCount;
+    this.width = panelSize * this.maxColumn;
   }
   render(userInfo: UserInfo): string {
     const trophyList = new Array<Trophy>(
@@ -29,17 +30,16 @@ export class Card {
       new TotalRepositoryTrophy(userInfo.totalRepositories),
     );
 
-    let panelHeightCount =
-      Math.floor((trophyList.length - 1) / this.maxPanelWidthCount) + 1;
-    if (panelHeightCount > this.maxPanelHeightCount) {
-      panelHeightCount = this.maxPanelHeightCount;
+    let row = Math.floor((trophyList.length - 1) / this.maxColumn) + 1;
+    if (row > this.maxRow) {
+      row = this.maxRow;
     }
-    this.height = this.panelSize * panelHeightCount;
+    this.height = this.panelSize * row;
 
     const renderedTrophy = trophyList.reduce(
       (sum: string, trophy: Trophy, i: number) => {
-        const x = this.panelSize * (i % this.maxPanelWidthCount);
-        const y = this.panelSize * Math.floor(i / this.maxPanelWidthCount);
+        const x = this.panelSize * (i % this.maxColumn);
+        const y = this.panelSize * Math.floor(i / this.maxColumn);
         return sum + trophy.render(x, y, this.panelSize);
       },
       "",
