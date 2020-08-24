@@ -1,13 +1,13 @@
 import {soxa} from "../deps.ts";
 export class UserInfo {
   constructor(
-    public totalCommits: Number,
-    public totalFollowers: Number,
-    public totalIssues: Number,
-    public totalPullRequests: Number,
-    public totalStargazers: Number,
-    public totalRepositories: Number,
-    public totalContributed: Number,
+    public totalCommits: number,
+    public totalFollowers: number,
+    public totalIssues: number,
+    public totalPullRequests: number,
+    public totalStargazers: number,
+    public totalRepositories: number,
+    public totalContributed: number,
   ) {
   }
 }
@@ -60,7 +60,7 @@ export class GithubAPIClient {
     );
     const userData = response.data.data.user;
     const totalCommits = userData.contributionsCollection.restrictedContributionsCount + userData.contributionsCollection.totalCommitContributions;
-    const totalStargazers = userData.repositories.nodes.reduce((prev: Number, node: any) => {
+    const totalStargazers = userData.repositories.nodes.reduce((prev: number, node: any) => {
         return prev + node.stargazers.totalCount;
       }, 0);
     const userInfo = new UserInfo(

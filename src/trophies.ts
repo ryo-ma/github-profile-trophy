@@ -1,11 +1,14 @@
 import { getTropyIcon } from "./icons.ts";
-import { CONSTANTS, RANK } from "./utils.ts";
+import { CONSTANTS, RANK, abridgeScore } from "./utils.ts";
 
 export abstract class Trophy {
   rank: RANK = RANK.UNKNOWN;
   topMessage = "Unknown";
   bottomMessage = "+0";
   title = "";
+  constructor() {
+    this.setRank();
+  }
   abstract setRank(): void;
   render(x = 0, y = 0, panelSize = CONSTANTS.DEFALT_PANEL_SIZE): string {
     return `
@@ -31,169 +34,145 @@ export abstract class Trophy {
           ${getTropyIcon(this.rank)}
           <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;" font-weight="bold" font-size="12" fill="#000">${this.title}</text>
           <text x="50%" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;" font-weight="bold" font-size="9.5" fill="#666">${this.topMessage}</text>
-          <text x="50%" y="97" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;" font-weight="bold" font-size="9" fill="#666">${this.bottomMessage}</text>
+          <text x="50%" y="99" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;" font-weight="bold" font-size="9" fill="#666">${this.bottomMessage}</text>
         </svg>
         `;
   }
 }
 
 export class TotalStarTrophy extends Trophy {
-  constructor(private totalStartgazer: Number) {
+  constructor(private score: number) {
     super();
     this.title = "Star";
-    this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 200) {
+    this.bottomMessage = abridgeScore(this.score);
+    if (this.score >= 200) {
       this.rank = RANK.S;
       this.topMessage = "Super Star";
-      this.bottomMessage = "+200";
-    } else if (this.totalStartgazer >= 100) {
+    } else if (this.score >= 100) {
       this.rank = RANK.A;
       this.topMessage = "High Star";
-      this.bottomMessage = "+100";
-    } else if (this.totalStartgazer >= 10) {
+    } else if (this.score >= 10) {
       this.rank = RANK.B;
       this.topMessage = "Middle Star";
-      this.bottomMessage = "+10";
-    } else if (this.totalStartgazer >= 1) {
+    } else if (this.score >= 1) {
       this.rank = RANK.C;
       this.topMessage = "First Star";
-      this.bottomMessage = "+1";
     }
   }
 }
 
 export class TotalCommitTrophy extends Trophy {
-  constructor(private totalStartgazer: Number) {
+  constructor(private score: number) {
     super();
     this.title = "Commit";
-    this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 1000) {
+    this.bottomMessage = abridgeScore(this.score);
+    if (this.score >= 1000) {
       this.rank = RANK.S;
       this.topMessage = "Super Commiter";
-      this.bottomMessage = "+1000";
-    } else if (this.totalStartgazer >= 500) {
+    } else if (this.score >= 500) {
       this.rank = RANK.A;
       this.topMessage = "High Commiter";
-      this.bottomMessage = "+500";
-    } else if (this.totalStartgazer >= 100) {
+    } else if (this.score >= 100) {
       this.rank = RANK.B;
       this.topMessage = "Middle Commiter";
-      this.bottomMessage = "+100";
-    } else if (this.totalStartgazer >= 1) {
+    } else if (this.score >= 1) {
       this.rank = RANK.C;
       this.topMessage = "First Commit";
-      this.bottomMessage = "+1";
     }
   }
 }
 
 export class TotalFollowerTrophy extends Trophy {
-  constructor(private totalStartgazer: Number) {
+  constructor(private score: number) {
     super();
     this.title = "Follower";
-    this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 100) {
+    this.bottomMessage = abridgeScore(this.score);
+    if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "Celebrity";
-      this.bottomMessage = "+100";
-    } else if (this.totalStartgazer >= 20) {
+    } else if (this.score >= 20) {
       this.rank = RANK.A;
       this.topMessage = "Famous User";
-      this.bottomMessage = "+20";
-    } else if (this.totalStartgazer >= 10) {
+    } else if (this.score >= 10) {
       this.rank = RANK.B;
       this.topMessage = "Many Friends";
-      this.bottomMessage = "+10";
-    } else if (this.totalStartgazer >= 1) {
+    } else if (this.score >= 1) {
       this.rank = RANK.C;
       this.topMessage = "First Friend";
-      this.bottomMessage = "+1";
     }
   }
 }
 export class TotalIssueTrophy extends Trophy {
-  constructor(private totalStartgazer: Number) {
+  constructor(private score: number) {
     super();
     this.title = "Issue";
-    this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 100) {
+    this.bottomMessage = abridgeScore(this.score);
+    if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "Super Issuer";
-      this.bottomMessage = "+100";
-    } else if (this.totalStartgazer >= 20) {
+    } else if (this.score >= 20) {
       this.rank = RANK.A;
       this.topMessage = "High Issuer";
-      this.bottomMessage = "+20";
-    } else if (this.totalStartgazer >= 10) {
+    } else if (this.score >= 10) {
       this.rank = RANK.B;
       this.topMessage = "Middle Issuer";
-      this.bottomMessage = "+10";
-    } else if (this.totalStartgazer >= 1) {
+    } else if (this.score >= 1) {
       this.rank = RANK.C;
       this.topMessage = "First Issue";
-      this.bottomMessage = "+1";
     }
   }
 }
 
 export class TotalPullRequestTrophy extends Trophy {
-  constructor(private totalStartgazer: Number) {
+  constructor(private score: number) {
     super();
     this.title = "PR";
-    this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 100) {
+    this.bottomMessage = abridgeScore(this.score);
+    if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "God PR User";
-      this.bottomMessage = "+100";
-    } else if (this.totalStartgazer >= 20) {
+    } else if (this.score >= 20) {
       this.rank = RANK.A;
       this.topMessage = "High PR User";
-      this.bottomMessage = "+20";
-    } else if (this.totalStartgazer >= 10) {
+    } else if (this.score >= 10) {
       this.rank = RANK.B;
       this.topMessage = "Many PRs";
-      this.bottomMessage = "+10";
-    } else if (this.totalStartgazer >= 1) {
+    } else if (this.score >= 1) {
       this.rank = RANK.C;
       this.topMessage = "First PR";
-      this.bottomMessage = "+1";
     }
   }
 }
 
 export class TotalRepositoryTrophy extends Trophy {
-  constructor(private totalStartgazer: Number) {
+  constructor(private score: number) {
     super();
     this.title = "Repo";
-    this.setRank();
   }
   setRank() {
-    if (this.totalStartgazer >= 100) {
+    this.bottomMessage = abridgeScore(this.score);
+    if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "God Repo Creator";
-      this.bottomMessage = "+100";
-    } else if (this.totalStartgazer >= 20) {
+    } else if (this.score >= 20) {
       this.rank = RANK.A;
       this.topMessage = "High Repo Creator";
-      this.bottomMessage = "+20";
-    } else if (this.totalStartgazer >= 10) {
+    } else if (this.score >= 10) {
       this.rank = RANK.B;
       this.topMessage = "Many Repo";
-      this.bottomMessage = "+10";
-    } else if (this.totalStartgazer >= 1) {
+    } else if (this.score >= 1) {
       this.rank = RANK.C;
       this.topMessage = "First Repository";
-      this.bottomMessage = "+1";
     }
   }
 }
