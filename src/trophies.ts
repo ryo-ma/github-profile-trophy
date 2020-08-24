@@ -6,9 +6,6 @@ export abstract class Trophy {
   topMessage = "Unknown";
   bottomMessage = "+0";
   title = "";
-  constructor() {
-    this.setRank();
-  }
   abstract setRank(): void;
   render(x = 0, y = 0, panelSize = CONSTANTS.DEFALT_PANEL_SIZE): string {
     return `
@@ -44,6 +41,7 @@ export class TotalStarTrophy extends Trophy {
   constructor(private score: number) {
     super();
     this.title = "Star";
+    this.setRank();
   }
   setRank() {
     this.bottomMessage = abridgeScore(this.score);
@@ -67,6 +65,7 @@ export class TotalCommitTrophy extends Trophy {
   constructor(private score: number) {
     super();
     this.title = "Commit";
+    this.setRank();
   }
   setRank() {
     this.bottomMessage = abridgeScore(this.score);
@@ -90,6 +89,7 @@ export class TotalFollowerTrophy extends Trophy {
   constructor(private score: number) {
     super();
     this.title = "Follower";
+    this.setRank();
   }
   setRank() {
     this.bottomMessage = abridgeScore(this.score);
@@ -112,6 +112,7 @@ export class TotalIssueTrophy extends Trophy {
   constructor(private score: number) {
     super();
     this.title = "Issue";
+    this.setRank();
   }
   setRank() {
     this.bottomMessage = abridgeScore(this.score);
@@ -135,6 +136,7 @@ export class TotalPullRequestTrophy extends Trophy {
   constructor(private score: number) {
     super();
     this.title = "PR";
+    this.setRank();
   }
   setRank() {
     this.bottomMessage = abridgeScore(this.score);
@@ -158,6 +160,7 @@ export class TotalRepositoryTrophy extends Trophy {
   constructor(private score: number) {
     super();
     this.title = "Repo";
+    this.setRank();
   }
   setRank() {
     this.bottomMessage = abridgeScore(this.score);
