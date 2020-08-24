@@ -4,7 +4,7 @@ import { CONSTANTS, RANK, abridgeScore } from "./utils.ts";
 export abstract class Trophy {
   rank: RANK = RANK.UNKNOWN;
   topMessage = "Unknown";
-  bottomMessage = "+0";
+  bottomMessage = "0";
   title = "";
   abstract setRank(): void;
   render(x = 0, y = 0, panelSize = CONSTANTS.DEFALT_PANEL_SIZE): string {

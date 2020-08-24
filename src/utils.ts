@@ -12,6 +12,9 @@ export function abridgeScore(score: number): string {
   if (score < 1) {
     return "unknown";
   }
+  if (score < 10) {
+    return score.toString() + "+"
+  }
   if (Math.abs(score) > 999){
     return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "k+"
 
