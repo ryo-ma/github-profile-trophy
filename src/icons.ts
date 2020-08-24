@@ -45,7 +45,6 @@ export function getTropyIcon(rank = RANK.UNKNOWN) {
   } else if (rank == RANK.S) {
     color = goldColor;
     backgroundIcon = leafIcon;
-    optionRankIcon = getPlusIcon(color);
   } else if (rank == RANK.AP) {
     color = silverColor;
     backgroundIcon = leafIcon;
