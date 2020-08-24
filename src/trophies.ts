@@ -116,9 +116,15 @@ export class TotalIssueTrophy extends Trophy {
   }
   setRank() {
     this.bottomMessage = abridgeScore(this.score);
-    if (this.score >= 100) {
+    if(this.score >= 300) {
+      this.rank = RANK.SP;
+      this.topMessage = "Deep Issuer";
+    } else if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "Super Issuer";
+    } else if (this.score >= 50) {
+      this.rank = RANK.AP;
+      this.topMessage = "Heavy Issuer";
     } else if (this.score >= 20) {
       this.rank = RANK.A;
       this.topMessage = "High Issuer";
@@ -143,6 +149,9 @@ export class TotalPullRequestTrophy extends Trophy {
     if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "God PR User";
+    } else if (this.score >= 50) {
+      this.rank = RANK.AP;
+      this.topMessage = "Heavy PR User";
     } else if (this.score >= 20) {
       this.rank = RANK.A;
       this.topMessage = "High PR User";

@@ -25,12 +25,25 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 <path d="M7249 1054 c-42 -7 -109 -25 -150 -40 -76 -27 -226 -101 -267 -133 l-24 -18 41 -66 c22 -37 36 -67 31 -67 -18 0 -11 -80 11 -121 11 -22 53 -73 92 -113 279 -282 682 -361 1251 -245 113 23 172 49 188 84 14 30 3 72 -20 77 -9 3 18 15 61 29 l78 24 -93 81 c-362 313 -622 460 -902 509 -106 18 -194 18 -297 -1z"/>
 </g>
 </svg>`
+const plusIcon = `
+  <text x="8.6" y="5.5" font-family="Verdana, Arial, Helvetica, sans-serif" fill="#fff" font-weight="bold" font-size="5">+</text>
+  <text x="9.4" y="5.0" font-family="Verdana, Arial, Helvetica, sans-serif" fill="#333" font-size="3.5">+</text>
+`;
 export function getTropyIcon(rank = RANK.UNKNOWN) {
   let color = "currentColor"
   let backgroundIcon =  "";
-  if (rank == RANK.S) {
+  let optionRankIcon = "";
+  if (rank == RANK.SP) {
     color = goldColor;
     backgroundIcon = leafIcon;
+    optionRankIcon = plusIcon;
+  }else if (rank == RANK.S) {
+    color = goldColor;
+    backgroundIcon = leafIcon;
+  } else if (rank == RANK.AP) {
+    color = silverColor;
+    backgroundIcon = leafIcon;
+    optionRankIcon = plusIcon;
   } else if (rank == RANK.A) {
     color = silverColor;
     backgroundIcon = leafIcon;
@@ -44,7 +57,8 @@ export function getTropyIcon(rank = RANK.UNKNOWN) {
     <path fill-rule="evenodd" d="M12.5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm-6-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0z"/>
     <path d="M7 10h2v4H7v-4z"/>
     <path d="M10 11c0 .552-.895 1-2 1s-2-.448-2-1 .895-1 2-1 2 .448 2 1z"/>
-    <circle cx="8" cy="6" r="3.5" fill="#fff" />
-    <text x="6" y="8" font-family="Courier, Monospace" font-size="7">${rank}</text>
+    <circle cx="8" cy="6" r="4" fill="#fff" />
+    ${optionRankIcon}
+    <text x="6" y="8" font-family="Courier, Monospace" font-size="7" fill="#333">${rank.replace("+", "")}</text>
   </svg>`;
 }
