@@ -9,7 +9,7 @@
 
 # Demo
 
-<img width="667" src="https://user-images.githubusercontent.com/6661165/91205106-0241a080-e740-11ea-85bb-bddd47caeac9.png">
+<img width="667" src="https://user-images.githubusercontent.com/6661165/91206530-4766d200-e742-11ea-961a-253e9f84c1c0.png">
 
 
 # Quick Start
