@@ -75,27 +75,27 @@ export class TotalStarTrophy extends Trophy {
       new RankCondition(
         RANK.SS,
         "High Stargazer",
-        (s) => s >= 1000,
+        (s) => s >= 700,
       ),
       new RankCondition(
         RANK.S,
         "Stargazer",
-        (s) => s >= 500,
+        (s) => s >= 200,
       ),
       new RankCondition(
         RANK.AAA,
         "Super Star",
-        (s) => s >= 200,
+        (s) => s >= 100,
       ),
       new RankCondition(
         RANK.AA,
         "High Star",
-        (s) => s >= 100,
+        (s) => s >= 50,
       ),
       new RankCondition(
         RANK.A,
         "You are Star",
-        (s) => s >= 50,
+        (s) => s >= 30,
       ),
       new RankCondition(
         RANK.B,

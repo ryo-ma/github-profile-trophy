@@ -28,8 +28,8 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 </svg>`;
 
 function getSmallTrophyIcon(icon: string, color: string, count: number): string {
-  const leftXPosition = 4;
-  const rightXPosition = 71;
+  const leftXPosition = 7;
+  const rightXPosition = 68;
   const getIcon = (x: number) => {
     return `<svg x="${x}" y="35" width="65" height="65" viewBox="0 0 30 30" class="bi bi-trophy" fill="${color}" xmlns="http://www.w3.org/2000/svg">
       ${icon}
