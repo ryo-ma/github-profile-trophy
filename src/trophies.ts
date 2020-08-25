@@ -1,4 +1,4 @@
-import { getTropyIcon } from "./icons.ts";
+import { getTrophyIcon } from "./icons.ts";
 import { CONSTANTS, RANK, abridgeScore } from "./utils.ts";
 
 export abstract class Trophy {
@@ -31,7 +31,7 @@ export abstract class Trophy {
             fill="#fff"
             stroke-opacity="1"
           />
-          ${getTropyIcon(this.rank)}
+          ${getTrophyIcon(this.rank)}
           <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;" font-weight="bold" font-size="12" fill="#000">${this.title}</text>
           <text x="50%" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;" font-weight="bold" font-size="9.5" fill="#666">${this.topMessage}</text>
           <text x="50%" y="99" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;" font-weight="bold" font-size="9" fill="#666">${this.bottomMessage}</text>

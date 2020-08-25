@@ -1,7 +1,7 @@
 import { RANK } from "./utils.ts";
 
-const goldColor = "#FFD700";
-const silverColor = "#C0C0C0";
+const goldColor = "#FAD200";
+const silverColor = "#B0B0B0";
 const bronzeColor = "#816D46";
 const leafIcon =
   `<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
@@ -27,11 +27,11 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 </g>
 </svg>`;
 
-function getSmallTropyIcon(icon: string, color: string, count: number): string {
-  const leftXPosition = 2;
-  const rightXPosition = 73;
+function getSmallTrophyIcon(icon: string, color: string, count: number): string {
+  const leftXPosition = 4;
+  const rightXPosition = 71;
   const getIcon = (x: number) => {
-    return `<svg x="${x}" y="30" width="65" height="65" viewBox="0 0 30 30" class="bi bi-trophy" fill="${color}" xmlns="http://www.w3.org/2000/svg">
+    return `<svg x="${x}" y="35" width="65" height="65" viewBox="0 0 30 30" class="bi bi-trophy" fill="${color}" xmlns="http://www.w3.org/2000/svg">
       ${icon}
     </svg>`
   };
@@ -46,7 +46,7 @@ function getSmallTropyIcon(icon: string, color: string, count: number): string {
   return ''
 
 }
-export function getTropyIcon(rank = RANK.UNKNOWN) {
+export function getTrophyIcon(rank = RANK.UNKNOWN) {
   const icon = `
     <path d="M3 1h10c-.495 3.467-.5 10-5 10S3.495 4.467 3 1zm0 15a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1H3zm2-1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1H5z"/>
     <path fill-rule="evenodd" d="M12.5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm-6-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0z"/>
@@ -67,7 +67,7 @@ export function getTropyIcon(rank = RANK.UNKNOWN) {
   } else if (rank === RANK.B) {
     color = bronzeColor;
   }
-  const optionRankIcon = getSmallTropyIcon(icon, color, rank.length - 1);
+  const optionRankIcon = getSmallTrophyIcon(icon, color, rank.length - 1);
   return `
   ${backgroundIcon}
   ${optionRankIcon}
