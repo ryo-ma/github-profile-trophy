@@ -14,7 +14,10 @@ export class Trophy {
   topMessage = "Unknown";
   bottomMessage = "0";
   title = "";
-  constructor(private score: number, private rankConditions: Array<RankCondition>) {
+  constructor(
+    private score: number,
+    private rankConditions: Array<RankCondition>,
+  ) {
     this.bottomMessage = abridgeScore(score);
     this.setRank();
   }
@@ -22,10 +25,13 @@ export class Trophy {
     const sortedRankConditions = this.rankConditions.sort((a, b) =>
       RANK_ORDER.indexOf(a.rank) - RANK_ORDER.indexOf(b.rank)
     );
-    const rankCondition  = sortedRankConditions.find(r => r.condition(this.score))
-    if (rankCondition != null){
+    // Set the rank that hit the first condition
+    const rankCondition = sortedRankConditions.find((r) =>
+      r.condition(this.score)
+    );
+    if (rankCondition != null) {
       this.rank = rankCondition.rank;
-      this.topMessage= rankCondition.message;
+      this.topMessage = rankCondition.message;
     }
   }
   render(x = 0, y = 0, panelSize = CONSTANTS.DEFALT_PANEL_SIZE): string {
