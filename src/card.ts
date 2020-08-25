@@ -8,7 +8,7 @@ import {
   TotalRepositoryTrophy,
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
-import { CONSTANTS } from "./utils.ts";
+import { CONSTANTS, RANK } from "./utils.ts";
 
 export class Card {
   private width = 0;
@@ -21,13 +21,19 @@ export class Card {
     this.width = panelSize * this.maxColumn;
   }
   render(userInfo: UserInfo): string {
-    const trophyList = new Array<Trophy>(
+    let trophyList = new Array<Trophy>(
       new TotalStarTrophy(userInfo.totalStargazers),
       new TotalCommitTrophy(userInfo.totalCommits),
       new TotalFollowerTrophy(userInfo.totalFollowers),
       new TotalIssueTrophy(userInfo.totalIssues),
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
+    );
+
+    // Sort by rank
+    const rankOrder = Object.values(RANK);
+    trophyList = trophyList.sort((a: Trophy, b: Trophy) =>
+      rankOrder.indexOf(a.rank) - rankOrder.indexOf(b.rank)
     );
 
     let row = Math.floor((trophyList.length - 1) / this.maxColumn) + 1;
