@@ -1,8 +1,11 @@
 import { RANK } from "./utils.ts";
 
 const goldColor = "#FAD200";
+const goldTextColor = "#886000";
 const silverColor = "#B0B0B0";
+const silverTextColor = "#505050";
 const bronzeColor = "#816D46";
+const bronzeTextColor = "#614D26";
 const leafIcon =
   `<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
 <metadata>
@@ -47,26 +50,30 @@ function getSmallTrophyIcon(icon: string, color: string, count: number): string 
 
 }
 export function getTrophyIcon(rank = RANK.UNKNOWN) {
+
+  let color = "currentColor";
+  let rankColor = "#333";
+  let backgroundIcon = "";
+  if (rank.slice(0, 1) === RANK.S) {
+    color = goldColor;
+    rankColor = goldTextColor;
+    backgroundIcon = leafIcon;
+  } else if (rank.slice(0, 1) === RANK.A) {
+    color = silverColor;
+    rankColor = silverTextColor;
+    backgroundIcon = leafIcon;
+  } else if (rank === RANK.B) {
+    color = bronzeColor;
+    rankColor = bronzeTextColor;
+  }
   const icon = `
     <path d="M3 1h10c-.495 3.467-.5 10-5 10S3.495 4.467 3 1zm0 15a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1H3zm2-1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1H5z"/>
     <path fill-rule="evenodd" d="M12.5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm-6-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0z"/>
     <path d="M7 10h2v4H7v-4z"/>
     <path d="M10 11c0 .552-.895 1-2 1s-2-.448-2-1 .895-1 2-1 2 .448 2 1z"/>
     <circle cx="8" cy="6" r="4" fill="#fff" />
-    <text x="6" y="8" font-family="Courier, Monospace" font-size="7" fill="#333">${rank.slice(0, 1)}</text>
+    <text x="6" y="8" font-family="Courier, Monospace" font-size="7" fill="${rankColor}">${rank.slice(0, 1)}</text>
   `;
-
-  let color = "currentColor";
-  let backgroundIcon = "";
-  if (rank.slice(0, 1) === RANK.S) {
-    color = goldColor;
-    backgroundIcon = leafIcon;
-  } else if (rank.slice(0, 1) === RANK.A) {
-    color = silverColor;
-    backgroundIcon = leafIcon;
-  } else if (rank === RANK.B) {
-    color = bronzeColor;
-  }
   const optionRankIcon = getSmallTrophyIcon(icon, color, rank.length - 1);
   return `
   ${backgroundIcon}
