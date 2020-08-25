@@ -42,3 +42,5 @@ export enum RANK {
   UNKNOWN = "?",
 
 }
+
+export const RANK_ORDER= Object.values(RANK);

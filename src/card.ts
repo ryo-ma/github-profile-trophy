@@ -8,7 +8,7 @@ import {
   TotalRepositoryTrophy,
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
-import { CONSTANTS, RANK } from "./utils.ts";
+import { CONSTANTS, RANK_ORDER } from "./utils.ts";
 
 export class Card {
   private width = 0;
@@ -31,17 +31,18 @@ export class Card {
     );
 
     // Sort by rank
-    const rankOrder = Object.values(RANK);
     trophyList = trophyList.sort((a: Trophy, b: Trophy) =>
-      rankOrder.indexOf(a.rank) - rankOrder.indexOf(b.rank)
+      RANK_ORDER.indexOf(a.rank) - RANK_ORDER.indexOf(b.rank)
     );
 
+    // Calculate the height of card from turns
     let row = Math.floor((trophyList.length - 1) / this.maxColumn) + 1;
     if (row > this.maxRow) {
       row = this.maxRow;
     }
     this.height = this.panelSize * row;
 
+    // Join all trophy
     const renderedTrophy = trophyList.reduce(
       (sum: string, trophy: Trophy, i: number) => {
         const x = this.panelSize * (i % this.maxColumn);

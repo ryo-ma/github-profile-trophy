@@ -1,15 +1,33 @@
 import { getTrophyIcon } from "./icons.ts";
-import { CONSTANTS, RANK, abridgeScore } from "./utils.ts";
+import { CONSTANTS, RANK, abridgeScore, RANK_ORDER } from "./utils.ts";
 
-export abstract class Trophy {
+class RankCondition {
+  constructor(
+    readonly rank: RANK,
+    readonly message: string,
+    readonly condition: (score: number) => boolean,
+  ) {}
+}
+
+export class Trophy {
   rank: RANK = RANK.UNKNOWN;
   topMessage = "Unknown";
   bottomMessage = "0";
   title = "";
-  constructor(score: number) {
+  constructor(private score: number, private rankConditions: Array<RankCondition>) {
     this.bottomMessage = abridgeScore(score);
+    this.setRank();
   }
-  abstract setRank(): void;
+  setRank() {
+    const sortedRankConditions = this.rankConditions.sort((a, b) =>
+      RANK_ORDER.indexOf(a.rank) - RANK_ORDER.indexOf(b.rank)
+    );
+    const rankCondition  = sortedRankConditions.find(r => r.condition(this.score))
+    if (rankCondition != null){
+      this.rank = rankCondition.rank;
+      this.topMessage= rankCondition.message;
+    }
+  }
   render(x = 0, y = 0, panelSize = CONSTANTS.DEFALT_PANEL_SIZE): string {
     return `
         <svg
@@ -41,159 +59,295 @@ export abstract class Trophy {
 }
 
 export class TotalStarTrophy extends Trophy {
-  constructor(private score: number) {
-    super(score);
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Super Stargazer",
+        (s) => s >= 2000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "High Stargazer",
+        (s) => s >= 1000,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Stargazer",
+        (s) => s >= 500,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Super Star",
+        (s) => s >= 200,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "High Star",
+        (s) => s >= 100,
+      ),
+      new RankCondition(
+        RANK.A,
+        "You are Star",
+        (s) => s >= 50,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Middle Star",
+        (s) => s >= 10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Star",
+        (s) => s >= 1,
+      ),
+    ];
+    super(score, rankConditions);
     this.title = "Star";
-    this.setRank();
-  }
-  setRank() {
-    if (this.score >= 200) {
-      this.rank = RANK.S;
-      this.topMessage = "Super Star";
-    } else if (this.score >= 100) {
-      this.rank = RANK.A;
-      this.topMessage = "High Star";
-    } else if (this.score >= 10) {
-      this.rank = RANK.B;
-      this.topMessage = "Middle Star";
-    } else if (this.score >= 1) {
-      this.rank = RANK.C;
-      this.topMessage = "First Star";
-    }
   }
 }
 
 export class TotalCommitTrophy extends Trophy {
-  constructor(private score: number) {
-    super(score);
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "God Committer",
+        (s) => s >= 4000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Deep Committer",
+        (s) => s >= 2000,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Super Committer",
+        (s) => s >= 1000,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Ultra Committer",
+        (s) => s >= 500,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Hyper Commiter",
+        (s) => s >= 200,
+      ),
+      new RankCondition(
+        RANK.A,
+        "High Committer",
+        (s) => s >= 100,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Middle Committer",
+        (s) => s >= 10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Commit",
+        (s) => s >= 1,
+      ),
+    ];
+    super(score, rankConditions);
     this.title = "Commit";
-    this.setRank();
-  }
-  setRank() {
-    if (this.score >= 1000) {
-      this.rank = RANK.S;
-      this.topMessage = "Super Commiter";
-    } else if (this.score >= 500) {
-      this.rank = RANK.AAA;
-      this.topMessage = "High Commiter";
-    } else if (this.score >= 300) {
-      this.rank = RANK.AA;
-      this.topMessage = "High Commiter";
-    } else if (this.score >= 200) {
-      this.rank = RANK.A;
-      this.topMessage = "High Commiter";
-    } else if (this.score >= 100) {
-      this.rank = RANK.B;
-      this.topMessage = "Middle Commiter";
-    } else if (this.score >= 1) {
-      this.rank = RANK.C;
-      this.topMessage = "First Commit";
-    }
   }
 }
 
 export class TotalFollowerTrophy extends Trophy {
-  constructor(private score: number) {
-    super(score);
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Super Celebrity",
+        (s) => s >= 1000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Ultra Celebrity",
+        (s) => s >= 400,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Hyper Celebrity",
+        (s) => s >= 200,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Famous User",
+        (s) => s >= 100,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Active User",
+        (s) => s >= 50,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Dynamic User",
+        (s) => s >= 20,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Many Frieds",
+        (s) => s >= 10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Friend",
+        (s) => s >= 1,
+      ),
+    ];
+    super(score, rankConditions);
     this.title = "Follower";
-    this.setRank();
-  }
-  setRank() {
-    if (this.score >= 100) {
-      this.rank = RANK.S;
-      this.topMessage = "Celebrity";
-    } else if (this.score >= 20) {
-      this.rank = RANK.A;
-      this.topMessage = "Famous User";
-    } else if (this.score >= 10) {
-      this.rank = RANK.B;
-      this.topMessage = "Many Friends";
-    } else if (this.score >= 1) {
-      this.rank = RANK.C;
-      this.topMessage = "First Friend";
-    }
   }
 }
+
 export class TotalIssueTrophy extends Trophy {
-  constructor(private score: number) {
-    super(score);
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "God Issuer",
+        (s) => s >= 1000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Deep Issuer",
+        (s) => s >= 500,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Super Issuer",
+        (s) => s >= 200,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Ultra Isuuer",
+        (s) => s >= 100,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Hyper Issuer",
+        (s) => s >= 50,
+      ),
+      new RankCondition(
+        RANK.A,
+        "High Issuer",
+        (s) => s >= 20,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Middle Issuer",
+        (s) => s >= 10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Issue",
+        (s) => s >= 1,
+      ),
+    ];
+    super(score, rankConditions);
     this.title = "Issue";
-    this.setRank();
-  }
-  setRank() {
-    if(this.score >= 300) {
-      this.rank = RANK.SS;
-      this.topMessage = "Deep Issuer";
-    } else if (this.score >= 100) {
-      this.rank = RANK.S;
-      this.topMessage = "Super Issuer";
-    } else if (this.score >= 50) {
-      this.rank = RANK.AA;
-      this.topMessage = "Heavy Issuer";
-    } else if (this.score >= 20) {
-      this.rank = RANK.A;
-      this.topMessage = "High Issuer";
-    } else if (this.score >= 10) {
-      this.rank = RANK.B;
-      this.topMessage = "Middle Issuer";
-    } else if (this.score >= 1) {
-      this.rank = RANK.C;
-      this.topMessage = "First Issue";
-    }
   }
 }
 
 export class TotalPullRequestTrophy extends Trophy {
-  constructor(private score: number) {
-    super(score);
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "God PR User",
+        (s) => s >= 1000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Deep PR User",
+        (s) => s >= 500,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Super PR User",
+        (s) => s >= 200,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Ultra PR User",
+        (s) => s >= 100,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Hyper PR User",
+        (s) => s >= 50,
+      ),
+      new RankCondition(
+        RANK.A,
+        "High PR User",
+        (s) => s >= 20,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Middle PR User",
+        (s) => s >= 10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First PR",
+        (s) => s >= 1,
+      ),
+    ];
+    super(score, rankConditions);
     this.title = "PR";
-    this.setRank();
-  }
-  setRank() {
-    if (this.score >= 100) {
-      this.rank = RANK.S;
-      this.topMessage = "God PR User";
-    } else if (this.score >= 50) {
-      this.rank = RANK.AA;
-      this.topMessage = "Heavy PR User";
-    } else if (this.score >= 20) {
-      this.rank = RANK.A;
-      this.topMessage = "High PR User";
-    } else if (this.score >= 10) {
-      this.rank = RANK.B;
-      this.topMessage = "Many PRs";
-    } else if (this.score >= 1) {
-      this.rank = RANK.C;
-      this.topMessage = "First PR";
-    }
   }
 }
 
 export class TotalRepositoryTrophy extends Trophy {
-  constructor(private score: number) {
-    super(score);
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "God Repo Creator",
+        (s) => s >= 200,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Deep Repo Creator",
+        (s) => s >= 100,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Super Repo Creator",
+        (s) => s >= 80,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Ultra Repo Creator",
+        (s) => s >= 50,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Hyper Repo Creator",
+        (s) => s >= 30,
+      ),
+      new RankCondition(
+        RANK.A,
+        "High Repo Creator",
+        (s) => s >= 20,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Middle Repo Creator",
+        (s) => s >= 10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Repository",
+        (s) => s >= 1,
+      ),
+    ];
+    super(score, rankConditions);
     this.title = "Repo";
-    this.setRank();
-  }
-  setRank() {
-    if (this.score >= 100) {
-      this.rank = RANK.S;
-      this.topMessage = "God Repo Creator";
-    } else if (this.score >= 50) {
-      this.rank = RANK.AAA;
-      this.topMessage = "High Repo Creator";
-    } else if (this.score >= 40) {
-      this.rank = RANK.AA;
-      this.topMessage = "High Repo Creator";
-    } else if (this.score >= 20) {
-      this.rank = RANK.A;
-      this.topMessage = "High Repo Creator";
-    } else if (this.score >= 10) {
-      this.rank = RANK.B;
-      this.topMessage = "Many Repo";
-    } else if (this.score >= 1) {
-      this.rank = RANK.C;
-      this.topMessage = "First Repository";
-    }
   }
 }
