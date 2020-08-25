@@ -6,6 +6,9 @@ export abstract class Trophy {
   topMessage = "Unknown";
   bottomMessage = "0";
   title = "";
+  constructor(score: number) {
+    this.bottomMessage = abridgeScore(score);
+  }
   abstract setRank(): void;
   render(x = 0, y = 0, panelSize = CONSTANTS.DEFALT_PANEL_SIZE): string {
     return `
@@ -39,12 +42,11 @@ export abstract class Trophy {
 
 export class TotalStarTrophy extends Trophy {
   constructor(private score: number) {
-    super();
+    super(score);
     this.title = "Star";
     this.setRank();
   }
   setRank() {
-    this.bottomMessage = abridgeScore(this.score);
     if (this.score >= 200) {
       this.rank = RANK.S;
       this.topMessage = "Super Star";
@@ -63,16 +65,21 @@ export class TotalStarTrophy extends Trophy {
 
 export class TotalCommitTrophy extends Trophy {
   constructor(private score: number) {
-    super();
+    super(score);
     this.title = "Commit";
     this.setRank();
   }
   setRank() {
-    this.bottomMessage = abridgeScore(this.score);
     if (this.score >= 1000) {
       this.rank = RANK.S;
       this.topMessage = "Super Commiter";
     } else if (this.score >= 500) {
+      this.rank = RANK.AAA;
+      this.topMessage = "High Commiter";
+    } else if (this.score >= 300) {
+      this.rank = RANK.AA;
+      this.topMessage = "High Commiter";
+    } else if (this.score >= 200) {
       this.rank = RANK.A;
       this.topMessage = "High Commiter";
     } else if (this.score >= 100) {
@@ -87,12 +94,11 @@ export class TotalCommitTrophy extends Trophy {
 
 export class TotalFollowerTrophy extends Trophy {
   constructor(private score: number) {
-    super();
+    super(score);
     this.title = "Follower";
     this.setRank();
   }
   setRank() {
-    this.bottomMessage = abridgeScore(this.score);
     if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "Celebrity";
@@ -110,20 +116,19 @@ export class TotalFollowerTrophy extends Trophy {
 }
 export class TotalIssueTrophy extends Trophy {
   constructor(private score: number) {
-    super();
+    super(score);
     this.title = "Issue";
     this.setRank();
   }
   setRank() {
-    this.bottomMessage = abridgeScore(this.score);
     if(this.score >= 300) {
-      this.rank = RANK.SP;
+      this.rank = RANK.SS;
       this.topMessage = "Deep Issuer";
     } else if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "Super Issuer";
     } else if (this.score >= 50) {
-      this.rank = RANK.AP;
+      this.rank = RANK.AA;
       this.topMessage = "Heavy Issuer";
     } else if (this.score >= 20) {
       this.rank = RANK.A;
@@ -140,17 +145,16 @@ export class TotalIssueTrophy extends Trophy {
 
 export class TotalPullRequestTrophy extends Trophy {
   constructor(private score: number) {
-    super();
+    super(score);
     this.title = "PR";
     this.setRank();
   }
   setRank() {
-    this.bottomMessage = abridgeScore(this.score);
     if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "God PR User";
     } else if (this.score >= 50) {
-      this.rank = RANK.AP;
+      this.rank = RANK.AA;
       this.topMessage = "Heavy PR User";
     } else if (this.score >= 20) {
       this.rank = RANK.A;
@@ -167,15 +171,20 @@ export class TotalPullRequestTrophy extends Trophy {
 
 export class TotalRepositoryTrophy extends Trophy {
   constructor(private score: number) {
-    super();
+    super(score);
     this.title = "Repo";
     this.setRank();
   }
   setRank() {
-    this.bottomMessage = abridgeScore(this.score);
     if (this.score >= 100) {
       this.rank = RANK.S;
       this.topMessage = "God Repo Creator";
+    } else if (this.score >= 50) {
+      this.rank = RANK.AAA;
+      this.topMessage = "High Repo Creator";
+    } else if (this.score >= 40) {
+      this.rank = RANK.AA;
+      this.topMessage = "High Repo Creator";
     } else if (this.score >= 20) {
       this.rank = RANK.A;
       this.topMessage = "High Repo Creator";

@@ -31,9 +31,11 @@ export const CONSTANTS = {
 };
 
 export enum RANK {
-  SP = "S+",
+  SSS = "SSS",
+  SS = "SS",
   S = "S",
-  AP = "A+",
+  AAA = "AAA",
+  AA = "AA",
   A = "A",
   B = "B",
   C = "C",
