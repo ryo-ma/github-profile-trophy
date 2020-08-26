@@ -11,6 +11,7 @@ export default async (req: ServerRequest) => {
   const username = params.get("username");
   let row = CONSTANTS.DEFAULT_MAX_ROW;
   let column = CONSTANTS.DEFAULT_MAX_COLUMN;
+  let titles: Array<string> = params.getAll("title");
   let ranks: Array<string> = params.getAll("rank");
   if (params.has("row")) {
     const param = params.get("row");
@@ -26,12 +27,11 @@ export default async (req: ServerRequest) => {
     }
   }
 
-
   if (username != null) {
     const userInfo = await client.requestUserInfo(username);
     req.respond(
       {
-        body: new Card(ranks, column, row).render(userInfo),
+        body: new Card(titles, ranks, column, row).render(userInfo),
         headers: new Headers(
           {
             "Content-Type": "image/svg+xml",

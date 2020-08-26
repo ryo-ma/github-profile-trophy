@@ -14,6 +14,7 @@ export class Card {
   private width = 0;
   private height = 0;
   constructor(
+    private titles: Array<string>,
     private ranks: Array<string>,
     private maxColumn = CONSTANTS.DEFAULT_MAX_COLUMN,
     private maxRow = CONSTANTS.DEFAULT_MAX_ROW,
@@ -30,6 +31,11 @@ export class Card {
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
     );
+
+    // Filter by titles
+    if (this.titles.length != 0) {
+      trophyList = trophyList.filter((trophy) => this.titles.includes(trophy.title))
+    }
 
     // Filter by ranks
     if (this.ranks.length != 0) {
