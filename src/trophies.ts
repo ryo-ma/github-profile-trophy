@@ -34,7 +34,7 @@ export class Trophy {
       this.topMessage = rankCondition.message;
     }
   }
-  render(x = 0, y = 0, panelSize = CONSTANTS.DEFALT_PANEL_SIZE): string {
+  render(x = 0, y = 0, panelSize = CONSTANTS.DEFAULT_PANEL_SIZE): string {
     return `
         <svg
           x="${x}"

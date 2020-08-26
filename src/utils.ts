@@ -9,10 +9,10 @@ export function parseParams(req: ServerRequest): URLSearchParams {
 }
 
 export function abridgeScore(score: number): string {
-  if (score < 1) {
+  if (Math.abs(score) < 1) {
     return "unknown";
   }
-  if (score < 10) {
+  if (Math.abs(score) < 10) {
     return score.toString() + "+"
   }
   if (Math.abs(score) > 999){
@@ -25,9 +25,9 @@ export function abridgeScore(score: number): string {
 
 export const CONSTANTS = {
   CACHE_MAX_AGE: 7200,
-  DEFALT_PANEL_SIZE: 110,
-  DEFALT_MAX_COLUMN: 6,
-  DEFALT_MAX_ROW: 3,
+  DEFAULT_PANEL_SIZE: 110,
+  DEFAULT_MAX_COLUMN: 6,
+  DEFAULT_MAX_ROW: 3,
 };
 
 export enum RANK {

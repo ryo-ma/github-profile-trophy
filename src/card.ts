@@ -14,9 +14,10 @@ export class Card {
   private width = 0;
   private height = 0;
   constructor(
-    private panelSize = CONSTANTS.DEFALT_PANEL_SIZE,
-    private maxColumn = CONSTANTS.DEFALT_MAX_COLUMN,
-    private maxRow = CONSTANTS.DEFALT_MAX_ROW,
+    private ranks: Array<string>,
+    private maxColumn = CONSTANTS.DEFAULT_MAX_COLUMN,
+    private maxRow = CONSTANTS.DEFAULT_MAX_ROW,
+    private panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,
   ) {
     this.width = panelSize * this.maxColumn;
   }
@@ -29,6 +30,11 @@ export class Card {
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
     );
+
+    // Filter by ranks
+    if (this.ranks.length != 0) {
+      trophyList = trophyList.filter((trophy) => this.ranks.includes(trophy.rank))
+    }
 
     // Sort by rank
     trophyList = trophyList.sort((a: Trophy, b: Trophy) =>

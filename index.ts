@@ -7,13 +7,31 @@ import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 const client = new GithubAPIClient();
 
 export default async (req: ServerRequest) => {
-  const username = parseParams(req).get("username");
+  const params = parseParams(req);
+  const username = params.get("username");
+  let row = CONSTANTS.DEFAULT_MAX_ROW;
+  let column = CONSTANTS.DEFAULT_MAX_COLUMN;
+  let ranks: Array<string> = params.getAll("rank");
+  if (params.has("row")) {
+    const param = params.get("row");
+    if (param != null) {
+      row = parseInt(param);
+    }
+  }
+
+  if (params.has("column")) {
+    const param = params.get("column");
+    if (param != null) {
+      column = parseInt(param);
+    }
+  }
+
 
   if (username != null) {
     const userInfo = await client.requestUserInfo(username);
     req.respond(
       {
-        body: new Card().render(userInfo),
+        body: new Card(ranks, column, row).render(userInfo),
         headers: new Headers(
           {
             "Content-Type": "image/svg+xml",
