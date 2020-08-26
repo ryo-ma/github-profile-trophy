@@ -20,3 +20,32 @@ Change the ***?username=*** value to your GitHub's username.
 ```
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
 ```
+
+# Optional Request Parameters
+
+* [rank](##filter-by-ranks)
+* column
+* row
+
+
+## Filter by ranks
+
+You can filter the display by specifying the ranks.
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S
+```
+
+If You want to specify multiple ranks.
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S&rank=AAA
+```
+
+## Specify the maximum row & column size
+
+You can specify the maximum row and column size.
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=2
+```
