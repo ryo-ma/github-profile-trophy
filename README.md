@@ -38,7 +38,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Follower
 
 <img width="110" src="https://user-images.githubusercontent.com/6661165/91331077-45197c00-e805-11ea-85fc-37785abee37c.png">
 
-If You want to specify multiple ranks.
+If You want to specify multiple titles.
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Star&title=Follower
