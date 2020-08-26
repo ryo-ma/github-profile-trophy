@@ -15,7 +15,7 @@
 # Quick Start
 
 Add following code to your readme.  
-Change the ***?username=*** value to your GitHub's username.
+Change the `?username=` value to your GitHub's username.
 
 ```
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
@@ -30,7 +30,8 @@ Change the ***?username=*** value to your GitHub's username.
 
 ## Filter by ranks
 
-You can filter the display by specifying the ranks.
+You can filter the display by specifying the ranks.  
+`Available values: SSS SS S AAA AA A B C`
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S
