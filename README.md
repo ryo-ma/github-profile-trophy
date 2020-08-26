@@ -47,7 +47,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Star&title=Follo
 ## Filter by ranks
 
 You can filter the display by specifying the ranks.  
-`Available values: SSS SS S AAA AA A B C`
+`Available values: SECRET SSS SS S AAA AA A B C`
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S
