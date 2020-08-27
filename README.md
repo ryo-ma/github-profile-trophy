@@ -66,6 +66,17 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S&rank=AAA
 
 You can specify the maximum row and column size.
 
+Restrict only row
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2
+```
+
+Restrict only column
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&column=2
+```
+
+Restrict row & column
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=2
 ```
