@@ -30,27 +30,66 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 </g>
 </svg>`;
 
-function getSmallTrophyIcon(icon: string, color: string, count: number): string {
+export const getNextRankBar = (title: string, color: string, percentage: number): string => {
+  const maxWidht = 80;
+  return `
+    <style>
+    @keyframes ${title}RankAnimation {
+      from {
+        width: 0px;
+      }
+      to {
+        width: ${maxWidht * percentage}px;
+      }
+    }
+    #${title}-rank-progress{
+      animation: ${title}RankAnimation 1s forwards ease-in-out;
+    }
+    </style>
+    <rect
+      x="15"
+      y="101"
+      rx="1"
+      width="${maxWidht}"
+      height="3.2"
+      opacity="0.3"
+      fill="${color}"
+    />
+    <rect
+      id="${title}-rank-progress"
+      x="15"
+      y="101"
+      rx="1"
+      opacity="0.7"
+      height="3.2"
+      fill="${color}"
+    />
+  `;
+};
+
+const getSmallTrophyIcon = (
+  icon: string,
+  color: string,
+  count: number,
+): string => {
   const leftXPosition = 7;
   const rightXPosition = 68;
   const getIcon = (x: number) => {
     return `<svg x="${x}" y="35" width="65" height="65" viewBox="0 0 30 30" class="bi bi-trophy" fill="${color}" xmlns="http://www.w3.org/2000/svg">
       ${icon}
-    </svg>`
+    </svg>`;
   };
   if (count == 1) {
     // Double Rank
     return getIcon(rightXPosition);
-  } else if (count == 2){
+  } else if (count == 2) {
     // Triple Rank
-    return `${getIcon(leftXPosition)}${getIcon(rightXPosition)}`
+    return `${getIcon(leftXPosition)}${getIcon(rightXPosition)}`;
   }
   // Single Rank
-  return ''
-
-}
-export function getTrophyIcon(rank = RANK.UNKNOWN) {
-
+  return "";
+};
+export const getTrophyIcon = (rank = RANK.UNKNOWN) => {
   let color = "currentColor";
   let rankColor = "#333";
   let backgroundIcon = "";
@@ -80,5 +119,6 @@ export function getTrophyIcon(rank = RANK.UNKNOWN) {
   ${optionRankIcon}
   <svg x="28" y="20" width="100" height="100" viewBox="0 0 30 30" class="bi bi-trophy" fill="${color}" xmlns="http://www.w3.org/2000/svg">
     ${icon}
-  </svg>`;
-}
+  </svg>
+  `;
+};
