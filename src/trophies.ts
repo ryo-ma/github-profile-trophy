@@ -9,12 +9,14 @@ class RankCondition {
   ) {}
 }
 
+
 export class Trophy {
   rankCondition: RankCondition | null = null;
   rank: RANK = RANK.UNKNOWN;
   topMessage = "Unknown";
   bottomMessage = "0";
   title = "";
+  hidden = false;
   constructor(
     private score: number,
     private rankConditions: Array<RankCondition>,
@@ -38,7 +40,8 @@ export class Trophy {
   }
   private calculateNextRankPercentage() {
     const nextRankIndex = RANK_ORDER.indexOf(this.rank) - 1;
-    if (nextRankIndex < 0) {
+    // When got the max rank
+    if (nextRankIndex < 0 || this.rank === RANK.SSS) {
       return 1;
     }
     const nextRank = RANK_ORDER[nextRankIndex];
@@ -85,6 +88,22 @@ export class Trophy {
         </svg>
         `;
   }
+}
+
+export class MultipleLangTrophy extends Trophy{
+  constructor(score: number){
+    const rankConditions = [
+      new RankCondition(
+        RANK.SECRET,
+        "Rainbow Lang User",
+        7,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "MultipleLang";
+    this.hidden = true;
+  }
+
 }
 
 export class TotalStarTrophy extends Trophy {

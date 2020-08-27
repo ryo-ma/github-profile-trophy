@@ -28,6 +28,7 @@ export const CONSTANTS = {
 };
 
 export enum RANK {
+  SECRET = "SECRET",
   SSS = "SSS",
   SS = "SS",
   S = "S",
