@@ -100,7 +100,11 @@ export const getTrophyIcon = (rank = RANK.UNKNOWN) => {
   let color = "currentColor";
   let rankColor = "#333";
   let backgroundIcon = "";
-  let gradationColor = "";
+  let gradationColor = `
+      <stop offset="0%" stop-color="#333"/>
+      <stop offset="50%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#000"/>
+  `;
   if (rank === RANK.SECRET) {
     rankColor = "fuchsia";
     gradationColor = `
