@@ -6,9 +6,10 @@ import {
   TotalIssueTrophy,
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
+  MultipleLangTrophy
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
-import { CONSTANTS, RANK_ORDER } from "./utils.ts";
+import { CONSTANTS, RANK_ORDER, RANK } from "./utils.ts";
 
 export class Card {
   private width = 0;
@@ -30,7 +31,11 @@ export class Card {
       new TotalIssueTrophy(userInfo.totalIssues),
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
+      new MultipleLangTrophy(userInfo.languageCount),
     );
+
+    // Filter by hidden
+    trophyList = trophyList.filter((trophy) => !trophy.hidden || trophy.rank !== RANK.UNKNOWN);
 
     // Filter by titles
     if (this.titles.length != 0) {

@@ -8,6 +8,7 @@ export class UserInfo {
     public totalStargazers: number,
     public totalRepositories: number,
     public totalContributed: number,
+    public languageCount: number
   ) {
   }
 }
@@ -42,6 +43,11 @@ export class GithubAPIClient {
             repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {direction: DESC, field: STARGAZERS}) {
               totalCount
               nodes {
+                languages(first: 1, orderBy: {direction:DESC, field: SIZE}) {
+                  nodes {
+                    name
+                  }
+                }
                 stargazers {
                   totalCount
                 }
@@ -63,6 +69,13 @@ export class GithubAPIClient {
     const totalStargazers = userData.repositories.nodes.reduce((prev: number, node: any) => {
         return prev + node.stargazers.totalCount;
       }, 0);
+
+    const languages = new Set<string>();
+    userData.repositories.nodes.forEach((node: any)=> {
+      if (node.languages.nodes[0] != undefined) {
+        languages.add(node.languages.nodes[0].name)
+      }
+    });
     const userInfo = new UserInfo(
         totalCommits,
         userData.followers.totalCount,
@@ -71,6 +84,7 @@ export class GithubAPIClient {
         totalStargazers,
         userData.repositories.totalCount,
         userData.repositoriesContributedTo.totalCount,
+        languages.size
         )
     return userInfo;
   }

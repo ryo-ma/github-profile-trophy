@@ -57,7 +57,7 @@ export class Trophy {
   render(x = 0, y = 0, panelSize = CONSTANTS.DEFAULT_PANEL_SIZE): string {
     const nextRankBar = getNextRankBar(
       this.title,
-      "#0336A6",
+      "#0366d6",
       this.calculateNextRankPercentage(),
     );
     return `
@@ -96,7 +96,7 @@ export class MultipleLangTrophy extends Trophy{
       new RankCondition(
         RANK.SECRET,
         "Rainbow Lang User",
-        7,
+        10,
       ),
     ];
     super(score, rankConditions);
@@ -357,12 +357,12 @@ export class TotalRepositoryTrophy extends Trophy {
       new RankCondition(
         RANK.SSS,
         "God Repo Creator",
-        200,
+        100,
       ),
       new RankCondition(
         RANK.SS,
         "Deep Repo Creator",
-        100,
+        90,
       ),
       new RankCondition(
         RANK.S,
