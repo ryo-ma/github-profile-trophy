@@ -21,11 +21,11 @@ Change the `?username=` value to your GitHub's username.
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
 ```
 
-# About rank
+# About Rank
 
 Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 
-|  RANK  |  description  |
+|  Rank  |  Description  |
 | ---- | ---- |
 |  SSS, SS, S  | You are hard to reach rank. You can brag.  |
 |  AAA, AA, A  | You can reach it if you do your best. Let's aim here first.  |
