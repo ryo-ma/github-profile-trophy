@@ -21,6 +21,18 @@ Change the `?username=` value to your GitHub's username.
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
 ```
 
+# About rank
+
+Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
+
+|  RANK  |  description  |
+| ---- | ---- |
+|  SSS ~ S  | You are hard to reach rank. You can brag.  |
+|  AAA ~ A  | You can reach it if you do your best. Let's aim here first.  |
+|  B, C  | You are a growing process.  |
+| UNKOWN | You have not yet taken action. Let's act first. |
+| SECRET | The rank is very rare. The trophy will not be displayed until the conditions are met. |
+
 # Optional Request Parameters
 
 * [title](#filter-by-titles)
@@ -41,7 +53,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Follower
 If You want to specify multiple titles.
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Star&title=Follower
+https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Star,Follower
 ```
 
 ## Filter by ranks
@@ -58,7 +70,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S
 If You want to specify multiple ranks.
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S&rank=AAA
+https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S,AAA
 ```
 
 
