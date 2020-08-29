@@ -40,7 +40,7 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 2. Current Rank.
 3. Title according to rank.
 4. Target aggregation result.
-5. Next Rank Bar. From the current rank to the next rank.
+5. Next Rank Bar. The road from the current rank to the next rank.
 
 
 # Optional Request Parameters
