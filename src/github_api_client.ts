@@ -8,7 +8,9 @@ export class UserInfo {
     public totalStargazers: number,
     public totalRepositories: number,
     public totalContributed: number,
-    public languageCount: number
+    public languageCount: number,
+    public durationYear: number,
+    public acientAccount:number
   ) {
   }
 }
@@ -24,6 +26,7 @@ export class GithubAPIClient {
           user(login: $username) {
             name
             login
+            createdAt
             contributionsCollection {
               totalCommitContributions
               restrictedContributionsCount
@@ -76,6 +79,9 @@ export class GithubAPIClient {
         languages.add(node.languages.nodes[0].name)
       }
     });
+    const durationTime = new Date().getTime() - new Date(userData.createdAt).getTime();
+    const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
+    const acientAccount = new Date(userData.createdAt).getFullYear() <= 2010 ? 1:0;
     const userInfo = new UserInfo(
         totalCommits,
         userData.followers.totalCount,
@@ -84,7 +90,9 @@ export class GithubAPIClient {
         totalStargazers,
         userData.repositories.totalCount,
         userData.repositoriesContributedTo.totalCount,
-        languages.size
+        languages.size,
+        durationYear,
+        acientAccount
         )
     return userInfo;
   }

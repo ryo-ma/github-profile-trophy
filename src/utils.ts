@@ -1,8 +1,8 @@
 import { ServerRequest } from ".././deps.ts";
 
 export function parseParams(req: ServerRequest): URLSearchParams {
-  const splitedURL = req.url.split("?")
-  if (splitedURL.length < 2){
+  const splitedURL = req.url.split("?");
+  if (splitedURL.length < 2) {
     return new URLSearchParams();
   }
   return new URLSearchParams(splitedURL[1]);
@@ -12,12 +12,10 @@ export function abridgeScore(score: number): string {
   if (Math.abs(score) < 1) {
     return "unknown";
   }
-  if (Math.abs(score) > 999){
-    return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "pt"
-
+  if (Math.abs(score) > 999) {
+    return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "pt";
   }
   return (Math.sign(score) * Math.abs(score)).toString() + "pt";
-
 }
 
 export const CONSTANTS = {
@@ -38,7 +36,26 @@ export enum RANK {
   B = "B",
   C = "C",
   UNKNOWN = "?",
-
 }
 
-export const RANK_ORDER= Object.values(RANK);
+export const COLORS = {
+  SECRET_RANK_1: "red",
+  SECRET_RANK_2: "fuchsia",
+  SECRET_RANK_3: "blue",
+  SECRET_RANK_TEXT: "fuchsia",
+  S_RANK_BASE: "#FAD200",
+  S_RANK_SHADOW: "#C8A090",
+  S_RANK_TEXT: "#886000",
+  A_RANK_BASE: "#B0B0B0",
+  A_RANK_SHADOW: "#9090C0",
+  A_RAKN_TEXT: "#505050",
+  B_RANK_BASE: "#A18D66",
+  B_RANK_SHADOW: "#816D96",
+  B_RANK_TEXT: "#412D06",
+  DEFAULT_RANK_BASE: "#777",
+  DEFAULT_RANK_SHADOW: "#333",
+  DEFAULT_RANK_TEXT: "#333",
+  NEXT_RANK_BAR: "#0366d6",
+};
+
+export const RANK_ORDER = Object.values(RANK);

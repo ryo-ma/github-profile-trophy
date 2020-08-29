@@ -6,7 +6,10 @@ import {
   TotalIssueTrophy,
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
-  MultipleLangTrophy
+  MultipleLangTrophy,
+  LongTimeAccountTrophy,
+  AncientAccountTrophy
+
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
 import { CONSTANTS, RANK_ORDER, RANK } from "./utils.ts";
@@ -32,6 +35,8 @@ export class Card {
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
       new MultipleLangTrophy(userInfo.languageCount),
+      new LongTimeAccountTrophy(userInfo.durationYear),
+      new AncientAccountTrophy(userInfo.acientAccount),
     );
 
     // Filter by hidden

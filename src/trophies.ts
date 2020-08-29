@@ -1,5 +1,5 @@
 import { getTrophyIcon, getNextRankBar } from "./icons.ts";
-import { CONSTANTS, RANK, abridgeScore, RANK_ORDER } from "./utils.ts";
+import { CONSTANTS, RANK, abridgeScore, RANK_ORDER, COLORS } from "./utils.ts";
 
 class RankCondition {
   constructor(
@@ -57,7 +57,6 @@ export class Trophy {
   render(x = 0, y = 0, panelSize = CONSTANTS.DEFAULT_PANEL_SIZE): string {
     const nextRankBar = getNextRankBar(
       this.title,
-      "#0366d6",
       this.calculateNextRankPercentage(),
     );
     return `
@@ -103,7 +102,36 @@ export class MultipleLangTrophy extends Trophy{
     this.title = "MultipleLang";
     this.hidden = true;
   }
+}
 
+export class AncientAccountTrophy extends Trophy{
+  constructor(score: number){
+    const rankConditions = [
+      new RankCondition(
+        RANK.SECRET,
+        "Ancient User",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "AncientUser";
+    this.bottomMessage = "Before 2010"
+    this.hidden = true;
+  }
+}
+export class LongTimeAccountTrophy extends Trophy{
+  constructor(score: number){
+    const rankConditions = [
+      new RankCondition(
+        RANK.SECRET,
+        "Village Elder",
+        10,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "LongTimeUser";
+    this.hidden = true;
+  }
 }
 
 export class TotalStarTrophy extends Trophy {

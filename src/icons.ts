@@ -1,14 +1,5 @@
-import { RANK } from "./utils.ts";
+import { RANK, COLORS } from "./utils.ts";
 
-const goldColor = "#FAD200";
-const goldShadowColor = "#C8A090";
-const goldTextColor = "#886000";
-const silverColor = "#B0B0B0";
-const sliverShadowColor = "#9090C0";
-const silverTextColor = "#505050";
-const bronzeColor = "#A18D66";
-const bronzeShadowColor = "#816D96";
-const bronzeTextColor = "#412D06";
 const leafIcon =
   `<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
 <metadata>
@@ -35,7 +26,6 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 
 export const getNextRankBar = (
   title: string,
-  color: string,
   percentage: number,
 ): string => {
   const maxWidht = 80;
@@ -60,7 +50,7 @@ export const getNextRankBar = (
       width="${maxWidht}"
       height="3.2"
       opacity="0.3"
-      fill="${color}"
+      fill="${COLORS.NEXT_RANK_BAR}"
     />
     <rect
       id="${title}-rank-progress"
@@ -69,7 +59,7 @@ export const getNextRankBar = (
       rx="1"
       opacity="0.7"
       height="3.2"
-      fill="${color}"
+      fill="${COLORS.NEXT_RANK_BAR}"
     />
   `;
 };
@@ -82,7 +72,7 @@ const getSmallTrophyIcon = (
   const leftXPosition = 7;
   const rightXPosition = 68;
   const getIcon = (x: number) => {
-    return `<svg x="${x}" y="35" width="65" height="65" viewBox="0 0 30 30" class="bi bi-trophy" fill="${color}" xmlns="http://www.w3.org/2000/svg">
+    return `<svg x="${x}" y="35" width="65" height="65" viewBox="0 0 30 30" fill="${color}" xmlns="http://www.w3.org/2000/svg">
       ${icon}
     </svg>`;
   };
@@ -97,46 +87,46 @@ const getSmallTrophyIcon = (
   return "";
 };
 export const getTrophyIcon = (rank = RANK.UNKNOWN) => {
-  let color = "currentColor";
-  let rankColor = "#333";
+  let color = COLORS.DEFAULT_RANK_BASE;
+  let rankColor = COLORS.DEFAULT_RANK_TEXT;
   let backgroundIcon = "";
   let gradationColor = `
-      <stop offset="0%" stop-color="#777"/>
-      <stop offset="50%" stop-color="#777"/>
-      <stop offset="100%" stop-color="#333"/>
+      <stop offset="0%" stop-color="${COLORS.DEFAULT_RANK_BASE}"/>
+      <stop offset="50%" stop-color="${COLORS.DEFAULT_RANK_BASE}"/>
+      <stop offset="100%" stop-color="${COLORS.DEFAULT_RANK_SHADOW}"/>
   `;
   if (rank === RANK.SECRET) {
-    rankColor = "fuchsia";
+    rankColor = COLORS.SECRET_RANK_TEXT;
     gradationColor = `
-      <stop offset="0%" stop-color="red"/>
-      <stop offset="50%" stop-color="fuchsia"/>
-      <stop offset="100%" stop-color="blue"/>
-      `;
+    <stop offset="0%" stop-color="${COLORS.SECRET_RANK_1}"/>
+    <stop offset="50%" stop-color="${COLORS.SECRET_RANK_2}"/>
+    <stop offset="100%" stop-color="${COLORS.SECRET_RANK_3}"/>
+    `;
   } else if (rank.slice(0, 1) === RANK.S) {
-    color = goldColor;
-    rankColor = goldTextColor;
+    color = COLORS.S_RANK_BASE;
+    rankColor = COLORS.S_RANK_TEXT;
     backgroundIcon = leafIcon;
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${goldShadowColor}"/>
+    <stop offset="100%" stop-color="${COLORS.S_RANK_SHADOW}"/>
     `;
   } else if (rank.slice(0, 1) === RANK.A) {
-    color = silverColor;
-    rankColor = silverTextColor;
+    color = COLORS.A_RANK_BASE;
+    rankColor = COLORS.A_RAKN_TEXT;
     backgroundIcon = leafIcon;
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${sliverShadowColor}"/>
+    <stop offset="100%" stop-color="${COLORS.A_RANK_SHADOW}"/>
     `;
   } else if (rank === RANK.B) {
-    color = bronzeColor;
-    rankColor = bronzeTextColor;
+    color = COLORS.B_RANK_BASE;
+    rankColor = COLORS.B_RANK_TEXT;
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${bronzeShadowColor}"/>
+    <stop offset="100%" stop-color="${COLORS.B_RANK_SHADOW}"/>
     `;
   }
   const icon = `
