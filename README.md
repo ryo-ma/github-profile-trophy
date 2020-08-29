@@ -33,7 +33,7 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 | SECRET | The rank is very rare. The trophy will not be displayed until the conditions are met. |
 
 ## Secret Rank
-The acquisition condition is secret, but you can understand it by reading this code.
+The acquisition condition is secret, but you can understand the condition by reading this code.
 
 <img width="110" src="https://user-images.githubusercontent.com/6661165/91643641-28cd4780-ea70-11ea-94a9-a51885252700.png">
 
