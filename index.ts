@@ -11,8 +11,11 @@ export default async (req: ServerRequest) => {
   const username = params.get("username");
   let row = CONSTANTS.DEFAULT_MAX_ROW;
   let column = CONSTANTS.DEFAULT_MAX_COLUMN;
-  let titles: Array<string> = params.getAll("title");
-  let ranks: Array<string> = params.getAll("rank");
+  let titles: Array<string> = params.getAll("title").flatMap((r) =>
+    r.split(",")
+  ).map((r) => r.trim());
+  let ranks: Array<string> = params.getAll("rank").flatMap((r) => r.split(","))
+    .map((r) => r.trim());
   if (params.has("row")) {
     const param = params.get("row");
     if (param != null) {
