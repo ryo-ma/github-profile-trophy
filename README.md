@@ -32,6 +32,17 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 | UNKOWN | You have not yet taken action. Let's act first. |
 | SECRET | The rank is very rare. The trophy will not be displayed until the conditions are met. |
 
+# About Display details
+
+<img width="220" src="https://user-images.githubusercontent.com/6661165/91642962-6333e600-ea6a-11ea-83af-e371e996bfa6.png">
+
+1. Title name of aggregation target.
+2. Current Rank.
+3. Title according to rank.
+4. Target aggregation result.
+5. Next Rank Bar. From the current rank to the next rank.
+
+
 # Optional Request Parameters
 
 * [title](#filter-by-titles)
