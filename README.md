@@ -9,8 +9,7 @@
 
 # Demo
 
-<img width="667" src="https://user-images.githubusercontent.com/6661165/91206530-4766d200-e742-11ea-961a-253e9f84c1c0.png">
-
+<img width="665" src="https://user-images.githubusercontent.com/6661165/91642602-ab9dd480-ea67-11ea-9c9b-e59169b41c81.png">
 
 # Quick Start
 
@@ -47,8 +46,7 @@ You can filter the display by specifying the titles of trophy.
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Follower
 ```
-
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91331077-45197c00-e805-11ea-85fc-37785abee37c.png">
+<img width="110" src="https://user-images.githubusercontent.com/6661165/91642632-e3a51780-ea67-11ea-9b38-06f24a2ee692.png">
 
 If You want to specify multiple titles.
 
@@ -65,7 +63,7 @@ You can filter the display by specifying the ranks.
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S
 ```
 
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91327681-d20e0680-e800-11ea-8b59-bdd6a64076a2.png">
+<img width="110" src="https://user-images.githubusercontent.com/6661165/91642657-1cdd8780-ea68-11ea-994b-4568a55cd22a.png">
 
 If You want to specify multiple ranks.
 
@@ -76,7 +74,9 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S,AAA
 
 ## Specify the maximum row & column size
 
-You can specify the maximum row and column size.
+You can specify the maximum row and column size.  
+`Available value: number`  
+`Default: column=6 row=3`
 
 Restrict only row
 ```
@@ -90,7 +90,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&column=2
 
 Restrict row & column
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=2
+https://github-profile-trophy.vercel.app/?username=ryo-ma&row=3&column=2
 ```
 
-<img width="220" src="https://user-images.githubusercontent.com/6661165/91328030-48126d80-e801-11ea-8547-d2633de85b75.png">
+<img width="330" src="https://user-images.githubusercontent.com/6661165/91642701-780f7a00-ea68-11ea-8190-c3b2c7b70e7e.png">
