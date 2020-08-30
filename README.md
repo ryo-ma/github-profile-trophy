@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="140" src="https://user-images.githubusercontent.com/6661165/91657958-61b4fd00-eb00-11ea-9def-dc7ef5367e34.png">  
+  <img width="140" src="https://user-images.githubusercontent.com/6661165/91657958-61b4fd00-eb00-11ea-9def-dc7ef5367e34.png" />  
   <h2 align="center">Github Profile Trophy</h2>
   <p align="center">🏆 Add dynamically generated GitHub Trophy on your readme</p>
 </p>
@@ -21,7 +21,7 @@
 
 # Demo
 
-<img width="665" src="https://user-images.githubusercontent.com/6661165/91642602-ab9dd480-ea67-11ea-9c9b-e59169b41c81.png">
+<img width="665" src="https://user-images.githubusercontent.com/6661165/91642602-ab9dd480-ea67-11ea-9c9b-e59169b41c81.png" />
 
 # Quick Start
 
@@ -31,6 +31,8 @@ Change the `?username=` value to your GitHub's username.
 ```
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
 ```
+
+<img src="https://github-profile-trophy.vercel.app/?username=ryo-ma&column=7&rank=SSS,SS,S,AAA,AA,A,B,C" />
 
 # About Rank
 
@@ -47,7 +49,7 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 ## Secret Rank
 The acquisition condition is secret, but you can know the condition by reading this code.
 
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91643641-28cd4780-ea70-11ea-94a9-a51885252700.png">
+<img width="110" src="https://user-images.githubusercontent.com/6661165/91643641-28cd4780-ea70-11ea-94a9-a51885252700.png" />
 
 
 There are still few secret trophies.  
@@ -55,7 +57,7 @@ Therefore, if you come up with interesting conditions, I am waiting for contribu
 
 # About Display details
 
-<img width="220" src="https://user-images.githubusercontent.com/6661165/91642962-6333e600-ea6a-11ea-83af-e371e996bfa6.png">
+<img width="220" src="https://user-images.githubusercontent.com/6661165/91642962-6333e600-ea6a-11ea-83af-e371e996bfa6.png" />
 
 1. Title name of aggregation target.
 2. Current Rank.
@@ -78,7 +80,7 @@ You can filter the display by specifying the titles of trophy.
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Follower
 ```
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91642632-e3a51780-ea67-11ea-9b38-06f24a2ee692.png">
+<img width="110" src="https://user-images.githubusercontent.com/6661165/91642632-e3a51780-ea67-11ea-9b38-06f24a2ee692.png" />
 
 If You want to specify multiple titles.
 
@@ -95,7 +97,7 @@ You can filter the display by specifying the ranks.
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S
 ```
 
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91642657-1cdd8780-ea68-11ea-994b-4568a55cd22a.png">
+<img width="110" src="https://user-images.githubusercontent.com/6661165/91642657-1cdd8780-ea68-11ea-994b-4568a55cd22a.png" />
 
 If You want to specify multiple ranks.
 
@@ -125,4 +127,4 @@ Restrict row & column
 https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=3
 ```
 
-<img width="330" src="https://user-images.githubusercontent.com/6661165/91642701-780f7a00-ea68-11ea-8190-c3b2c7b70e7e.png">
+<img width="330" src="https://user-images.githubusercontent.com/6661165/91642701-780f7a00-ea68-11ea-8190-c3b2c7b70e7e.png" />
