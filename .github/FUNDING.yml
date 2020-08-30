@@ -1,5 +1,4 @@
 # These are supported funding model platforms
 
-github: ryo-ma
-patreon:ryo-ma
-custom
+github: [ryo-ma]
+patreon: ryo-ma
