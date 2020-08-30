@@ -21,7 +21,7 @@
 
 # Demo
 
-<img width="665" src="https://user-images.githubusercontent.com/6661165/91642602-ab9dd480-ea67-11ea-9c9b-e59169b41c81.png" />
+<img width="665" src="https://user-images.githubusercontent.com/6661165/91659339-ed7f5700-eb09-11ea-9d6f-75bd16baf454.png">
 
 # Quick Start
 
