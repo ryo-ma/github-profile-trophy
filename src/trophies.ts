@@ -39,6 +39,9 @@ export class Trophy {
     }
   }
   private calculateNextRankPercentage() {
+    if (this.rank === RANK.UNKNOWN) {
+      return 0;
+    }
     const nextRankIndex = RANK_ORDER.indexOf(this.rank) - 1;
     // When got the max rank
     if (nextRankIndex < 0 || this.rank === RANK.SSS) {

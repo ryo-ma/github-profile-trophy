@@ -10,7 +10,7 @@ export function parseParams(req: ServerRequest): URLSearchParams {
 
 export function abridgeScore(score: number): string {
   if (Math.abs(score) < 1) {
-    return "unknown";
+    return "0pt";
   }
   if (Math.abs(score) > 999) {
     return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "pt";
