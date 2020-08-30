@@ -211,7 +211,7 @@ export class TotalCommitTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.AA,
-        "Hyper Commiter",
+        "Hyper Committer",
         200,
       ),
       new RankCondition(
