@@ -270,7 +270,7 @@ export class TotalFollowerTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.B,
-        "Many Frieds",
+        "Many Friends",
         10,
       ),
       new RankCondition(
