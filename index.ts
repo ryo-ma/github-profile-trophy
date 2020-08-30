@@ -32,17 +32,27 @@ export default async (req: ServerRequest) => {
 
   if (username != null) {
     const userInfo = await client.requestUserInfo(username);
-    req.respond(
-      {
-        body: new Card(titles, ranks, column, row).render(userInfo),
-        headers: new Headers(
-          {
-            "Content-Type": "image/svg+xml",
-            "Cache-Control": `public, max-age: ${CONSTANTS.CACHE_MAX_AGE}`,
-          },
-        ),
-      },
-    );
+    if (userInfo !== null) {
+      req.respond(
+        {
+          body: new Card(titles, ranks, column, row).render(userInfo),
+          headers: new Headers(
+            {
+              "Content-Type": "image/svg+xml",
+              "Cache-Control": `public, max-age: ${CONSTANTS.CACHE_MAX_AGE}`,
+            },
+          ),
+        },
+      );
+    } else {
+      req.respond(
+        {
+          body: "Can not find a user",
+          status: 404,
+          headers: new Headers({ "Content-Type": "text" }),
+        },
+      );
+    }
   } else {
     req.respond(
       {

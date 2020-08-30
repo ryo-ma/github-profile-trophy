@@ -1,4 +1,4 @@
-import {soxa} from "../deps.ts";
+import { soxa } from "../deps.ts";
 export class UserInfo {
   constructor(
     public totalCommits: number,
@@ -10,7 +10,7 @@ export class UserInfo {
     public totalContributed: number,
     public languageCount: number,
     public durationYear: number,
-    public acientAccount:number
+    public acientAccount: number,
   ) {
   }
 }
@@ -18,8 +18,8 @@ export class UserInfo {
 export class GithubAPIClient {
   constructor() {
   }
-  async requestUserInfo(username: string): Promise<UserInfo> {
-    const token = Deno.env.get('GITHUB_TOKEN');
+  async requestUserInfo(username: string): Promise<UserInfo | null> {
+    const token = Deno.env.get("GITHUB_TOKEN");
     const variables = { username: username };
     const query = `
         query userInfo($username: String!) {
@@ -68,32 +68,43 @@ export class GithubAPIClient {
       },
     );
     const userData = response.data.data.user;
-    const totalCommits = userData.contributionsCollection.restrictedContributionsCount + userData.contributionsCollection.totalCommitContributions;
-    const totalStargazers = userData.repositories.nodes.reduce((prev: number, node: any) => {
+    if (userData === null) {
+      return null;
+    }
+    const totalCommits =
+      userData.contributionsCollection.restrictedContributionsCount +
+      userData.contributionsCollection.totalCommitContributions;
+    const totalStargazers = userData.repositories.nodes.reduce(
+      (prev: number, node: any) => {
         return prev + node.stargazers.totalCount;
-      }, 0);
+      },
+      0,
+    );
 
     const languages = new Set<string>();
-    userData.repositories.nodes.forEach((node: any)=> {
+    userData.repositories.nodes.forEach((node: any) => {
       if (node.languages.nodes[0] != undefined) {
-        languages.add(node.languages.nodes[0].name)
+        languages.add(node.languages.nodes[0].name);
       }
     });
-    const durationTime = new Date().getTime() - new Date(userData.createdAt).getTime();
+    const durationTime = new Date().getTime() -
+      new Date(userData.createdAt).getTime();
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
-    const acientAccount = new Date(userData.createdAt).getFullYear() <= 2010 ? 1:0;
+    const acientAccount = new Date(userData.createdAt).getFullYear() <= 2010
+      ? 1
+      : 0;
     const userInfo = new UserInfo(
-        totalCommits,
-        userData.followers.totalCount,
-        userData.issues.totalCount,
-        userData.pullRequests.totalCount,
-        totalStargazers,
-        userData.repositories.totalCount,
-        userData.repositoriesContributedTo.totalCount,
-        languages.size,
-        durationYear,
-        acientAccount
-        )
+      totalCommits,
+      userData.followers.totalCount,
+      userData.issues.totalCount,
+      userData.pullRequests.totalCount,
+      totalStargazers,
+      userData.repositories.totalCount,
+      userData.repositoriesContributedTo.totalCount,
+      languages.size,
+      durationYear,
+      acientAccount,
+    );
     return userInfo;
   }
 }
