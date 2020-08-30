@@ -80,7 +80,8 @@ You can filter the display by specifying the titles of trophy.
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Follower
 ```
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91642632-e3a51780-ea67-11ea-9b38-06f24a2ee692.png" />
+<img width="110" src="https://user-images.githubusercontent.com/6661165/91659424-5535a200-eb0a-11ea-869f-29c83cb4e3c4.png">
+
 
 If You want to specify multiple titles.
 
