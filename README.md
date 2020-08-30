@@ -127,5 +127,5 @@ Restrict row & column
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=3
 ```
+<img width="330" src="https://user-images.githubusercontent.com/6661165/91659474-c07f7400-eb0a-11ea-84f2-eb6b42547829.png">
 
-<img width="330" src="https://user-images.githubusercontent.com/6661165/91642701-780f7a00-ea68-11ea-8190-c3b2c7b70e7e.png" />
