@@ -304,7 +304,7 @@ export class TotalIssueTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.AAA,
-        "Ultra Isuuer",
+        "Ultra Issuer",
         100,
       ),
       new RankCondition(
