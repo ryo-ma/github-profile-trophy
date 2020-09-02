@@ -55,7 +55,14 @@ export const COLORS = {
   DEFAULT_RANK_BASE: "#777",
   DEFAULT_RANK_SHADOW: "#333",
   DEFAULT_RANK_TEXT: "#333",
-  NEXT_RANK_BAR: "#0366d6",
+  default: {
+    BACKGROUND: "#FFF",
+    NEXT_RANK_BAR: "#0366d6",
+  },
+  gruvbox: {
+    BACKGROUND: "#282828",
+    NEXT_RANK_BAR: "#d79921",
+  }
 };
 
 export const RANK_ORDER = Object.values(RANK);
