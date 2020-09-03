@@ -57,10 +57,16 @@ export class Trophy {
     const result = progress / distance;
     return result;
   }
-  render(x = 0, y = 0, panelSize = CONSTANTS.DEFAULT_PANEL_SIZE): string {
+  render(theme: { PRIMARY: string, NEXT_RANK_BAR: string },
+    x = 0,
+    y = 0,
+    panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,
+  ): string {
+    const { PRIMARY, NEXT_RANK_BAR } = theme;
     const nextRankBar = getNextRankBar(
       this.title,
       this.calculateNextRankPercentage(),
+      NEXT_RANK_BAR,
     );
     return `
         <svg
@@ -79,7 +85,7 @@ export class Trophy {
             width="${panelSize - 1}"
             height="${panelSize - 1}"
             stroke="#e1e4e8"
-            fill="#fff"
+            fill="${PRIMARY}"
             stroke-opacity="1"
           />
           ${getTrophyIcon(this.rank)}

@@ -56,11 +56,11 @@ export const COLORS = {
   DEFAULT_RANK_SHADOW: "#333",
   DEFAULT_RANK_TEXT: "#333",
   default: {
-    BACKGROUND: "#FFF",
+    PRIMARY: "#FFF",
     NEXT_RANK_BAR: "#0366d6",
   },
   gruvbox: {
-    BACKGROUND: "#282828",
+    PRIMARY: "#282828",
     NEXT_RANK_BAR: "#d79921",
   }
 };

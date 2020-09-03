@@ -26,7 +26,10 @@ export class Card {
   ) {
     this.width = panelSize * this.maxColumn;
   }
-  render(userInfo: UserInfo): string {
+  render(
+    userInfo: UserInfo,
+    theme: { PRIMARY: string, NEXT_RANK_BAR: string },
+  ): string {
     let trophyList = new Array<Trophy>(
       new TotalStarTrophy(userInfo.totalStargazers),
       new TotalCommitTrophy(userInfo.totalCommits),
@@ -69,7 +72,7 @@ export class Card {
       (sum: string, trophy: Trophy, i: number) => {
         const x = this.panelSize * (i % this.maxColumn);
         const y = this.panelSize * Math.floor(i / this.maxColumn);
-        return sum + trophy.render(x, y, this.panelSize);
+        return sum + trophy.render(theme, x, y, this.panelSize);
       },
       "",
     );

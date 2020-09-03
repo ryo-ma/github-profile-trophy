@@ -27,6 +27,7 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 export const getNextRankBar = (
   title: string,
   percentage: number,
+  color: string,
 ): string => {
   const maxWidht = 80;
   return `
@@ -50,7 +51,7 @@ export const getNextRankBar = (
       width="${maxWidht}"
       height="3.2"
       opacity="0.3"
-      fill="${COLORS.NEXT_RANK_BAR}"
+      fill="${color}"
     />
     <rect
       id="${title}-rank-progress"
@@ -59,7 +60,7 @@ export const getNextRankBar = (
       rx="1"
       opacity="0.7"
       height="3.2"
-      fill="${COLORS.NEXT_RANK_BAR}"
+      fill="${color}"
     />
   `;
 };
