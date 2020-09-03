@@ -64,7 +64,7 @@ export const COLORS = {
   gruvbox: {
     PRIMARY: "#282828",
     SECONDARY: "#ebdbb2",
-    GRAY: "#666",
+    GRAY: "#a89984",
     NEXT_RANK_BAR: "#d79921",
   }
 };
