@@ -58,11 +58,13 @@ export const COLORS = {
   default: {
     PRIMARY: "#FFF",
     SECONDARY: "#000",
+    GRAY: "#666",
     NEXT_RANK_BAR: "#0366d6",
   },
   gruvbox: {
     PRIMARY: "#282828",
     SECONDARY: "#ebdbb2",
+    GRAY: "#666",
     NEXT_RANK_BAR: "#d79921",
   }
 };
@@ -70,6 +72,7 @@ export const COLORS = {
 export interface Theme {
   PRIMARY: string;
   SECONDARY: string;
+  GRAY: string,
   NEXT_RANK_BAR: string;
 };
 
