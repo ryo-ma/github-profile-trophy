@@ -62,7 +62,7 @@ export class Trophy {
     y = 0,
     panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,
   ): string {
-    const { PRIMARY, NEXT_RANK_BAR } = theme;
+    const { PRIMARY, SECONDARY, NEXT_RANK_BAR } = theme;
     const nextRankBar = getNextRankBar(
       this.title,
       this.calculateNextRankPercentage(),
@@ -89,7 +89,7 @@ export class Trophy {
             stroke-opacity="1"
           />
           ${getTrophyIcon(this.rank)}
-          <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="13" fill="#000">${this.title}</text>
+          <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="13" fill="${SECONDARY}">${this.title}</text>
           <text x="50%" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10.5" fill="#666">${this.topMessage}</text>
           <text x="50%" y="97" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10" fill="#666">${this.bottomMessage}</text>
           ${nextRankBar}

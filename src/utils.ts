@@ -57,10 +57,12 @@ export const COLORS = {
   DEFAULT_RANK_TEXT: "#333",
   default: {
     PRIMARY: "#FFF",
+    SECONDARY: "#000",
     NEXT_RANK_BAR: "#0366d6",
   },
   gruvbox: {
     PRIMARY: "#282828",
+    SECONDARY: "#ebdbb2",
     NEXT_RANK_BAR: "#d79921",
   }
 };
