@@ -67,4 +67,10 @@ export const COLORS = {
   }
 };
 
+export interface Theme {
+  PRIMARY: string;
+  SECONDARY: string;
+  NEXT_RANK_BAR: string;
+};
+
 export const RANK_ORDER = Object.values(RANK);

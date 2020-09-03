@@ -1,5 +1,5 @@
 import { getTrophyIcon, getNextRankBar } from "./icons.ts";
-import { CONSTANTS, RANK, abridgeScore, RANK_ORDER, COLORS } from "./utils.ts";
+import { CONSTANTS, RANK, abridgeScore, RANK_ORDER, COLORS, Theme } from "./utils.ts";
 
 class RankCondition {
   constructor(
@@ -57,7 +57,7 @@ export class Trophy {
     const result = progress / distance;
     return result;
   }
-  render(theme: { PRIMARY: string, NEXT_RANK_BAR: string },
+  render(theme: Theme,
     x = 0,
     y = 0,
     panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,

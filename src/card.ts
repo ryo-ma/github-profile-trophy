@@ -12,7 +12,7 @@ import {
 
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
-import { CONSTANTS, RANK_ORDER, RANK } from "./utils.ts";
+import { CONSTANTS, RANK_ORDER, RANK, Theme } from "./utils.ts";
 
 export class Card {
   private width = 0;
@@ -28,7 +28,7 @@ export class Card {
   }
   render(
     userInfo: UserInfo,
-    theme: { PRIMARY: string, NEXT_RANK_BAR: string },
+    theme: Theme,
   ): string {
     let trophyList = new Array<Trophy>(
       new TotalStarTrophy(userInfo.totalStargazers),
