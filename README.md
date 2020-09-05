@@ -105,7 +105,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S,AAA
 ## Specify the maximum row & column size
 
 You can specify the maximum row and column size.  
-Trophy out of limits will not be displayed.
+Trophy will be hidden if it exceeds the range of both row and column.
 
 `Available value: number type`  
 `Default: column=6 row=3`
@@ -126,3 +126,42 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=3
 ```
 <img width="330" src="https://user-images.githubusercontent.com/6661165/91659474-c07f7400-eb0a-11ea-84f2-eb6b42547829.png">
 
+
+# Contribution Guide
+
+## Environment
+
+* Deno >= v1.3.0
+* typescript == 3.9.7
+* [Vercel](https://vercel.com/)
+* GitHub API v4
+
+## Local Run
+
+Create `.env` file to project root directory, and write your GitHub token to the `.env` file.
+
+```
+GITHUB_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+Run local server.
+
+```
+deno run --allow-net --allow-read --allow-env debug.ts
+```
+
+Open localhost from your browser.
+
+http://localhost:8080/?username=ryo-ma
+
+## Editor config
+
+Read the [.editorconfig](./.editorconfig)
+
+## Run deno lint
+
+If you want to contribute to my project, you should check the lint with the following command.
+
+```
+deno lint --unstable
+```

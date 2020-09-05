@@ -14,6 +14,13 @@ export class UserInfo {
   ) {
   }
 }
+type Language = { name: string };
+type Stargazers = { totalCount: number };
+
+type Repository = {
+  languages: { nodes: Language[] };
+  stargazers: Stargazers;
+};
 
 export class GithubAPIClient {
   constructor() {
@@ -75,14 +82,14 @@ export class GithubAPIClient {
       userData.contributionsCollection.restrictedContributionsCount +
       userData.contributionsCollection.totalCommitContributions;
     const totalStargazers = userData.repositories.nodes.reduce(
-      (prev: number, node: any) => {
+      (prev: number, node: Repository) => {
         return prev + node.stargazers.totalCount;
       },
       0,
     );
 
     const languages = new Set<string>();
-    userData.repositories.nodes.forEach((node: any) => {
+    userData.repositories.nodes.forEach((node: Repository) => {
       if (node.languages.nodes[0] != undefined) {
         languages.add(node.languages.nodes[0].name);
       }
