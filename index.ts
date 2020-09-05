@@ -62,13 +62,12 @@ export default async (req: ServerRequest) => {
       body: new Card(
         titles,
         ranks,
-        theme,
         column,
         row,
         CONSTANTS.DEFAULT_PANEL_SIZE,
         paddingWidth,
         paddingHeight,
-      ).render(userInfo),
+      ).render(userInfo, theme),
       headers: new Headers(
         {
           "Content-Type": "image/svg+xml",
