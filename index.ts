@@ -11,38 +11,22 @@ export default async (req: ServerRequest) => {
   const username = params.get("username");
   const row = params.getNumberValue("row", CONSTANTS.DEFAULT_MAX_ROW);
   const column = params.getNumberValue("column", CONSTANTS.DEFAULT_MAX_COLUMN);
-  const paddingWidth = params.getNumberValue("padding-w", CONSTANTS.DEFAULT_PADDING_W);
-  const paddingHeight = params.getNumberValue("padding-h", CONSTANTS.DEFAULT_PADDING_H);
+  const paddingWidth = params.getNumberValue(
+    "padding-w",
+    CONSTANTS.DEFAULT_PADDING_W,
+  );
+  const paddingHeight = params.getNumberValue(
+    "padding-h",
+    CONSTANTS.DEFAULT_PADDING_H,
+  );
   const titles: Array<string> = params.getAll("title").flatMap((r) =>
     r.split(",")
   ).map((r) => r.trim());
-  const ranks: Array<string> = params.getAll("rank").flatMap((r) => r.split(","))
-    .map((r) => r.trim());
+  const ranks: Array<string> = params.getAll("rank").flatMap((r) =>
+    r.split(",")
+  ).map((r) => r.trim());
 
-  if (username != null) {
-    const userInfo = await client.requestUserInfo(username);
-    if (userInfo !== null) {
-      req.respond(
-        {
-          body: new Card(titles, ranks, column, row, CONSTANTS.DEFAULT_PANEL_SIZE, paddingWidth, paddingHeight).render(userInfo),
-          headers: new Headers(
-            {
-              "Content-Type": "image/svg+xml",
-              "Cache-Control": `public, max-age: ${CONSTANTS.CACHE_MAX_AGE}`,
-            },
-          ),
-        },
-      );
-    } else {
-      req.respond(
-        {
-          body: "Can not find a user",
-          status: 404,
-          headers: new Headers({ "Content-Type": "text" }),
-        },
-      );
-    }
-  } else {
+  if (username === null) {
     req.respond(
       {
         body: "Can not find a query parameter: username",
@@ -50,5 +34,37 @@ export default async (req: ServerRequest) => {
         headers: new Headers({ "Content-Type": "text" }),
       },
     );
+    return;
   }
+  const userInfo = await client.requestUserInfo(username);
+  if (userInfo === null) {
+    req.respond(
+      {
+        body: "Can not find a user",
+        status: 404,
+        headers: new Headers({ "Content-Type": "text" }),
+      },
+    );
+    return;
+  }
+  // Success Response
+  req.respond(
+    {
+      body: new Card(
+        titles,
+        ranks,
+        column,
+        row,
+        CONSTANTS.DEFAULT_PANEL_SIZE,
+        paddingWidth,
+        paddingHeight,
+      ).render(userInfo),
+      headers: new Headers(
+        {
+          "Content-Type": "image/svg+xml",
+          "Cache-Control": `public, max-age: ${CONSTANTS.CACHE_MAX_AGE}`,
+        },
+      ),
+    },
+  );
 };
