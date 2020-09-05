@@ -13,10 +13,10 @@ export default async (req: ServerRequest) => {
   const column = params.getNumberValue("column", CONSTANTS.DEFAULT_MAX_COLUMN);
   const paddingWidth = params.getNumberValue("padding-w", CONSTANTS.DEFAULT_PADDING_W);
   const paddingHeight = params.getNumberValue("padding-h", CONSTANTS.DEFAULT_PADDING_H);
-  let titles: Array<string> = params.getAll("title").flatMap((r) =>
+  const titles: Array<string> = params.getAll("title").flatMap((r) =>
     r.split(",")
   ).map((r) => r.trim());
-  let ranks: Array<string> = params.getAll("rank").flatMap((r) => r.split(","))
+  const ranks: Array<string> = params.getAll("rank").flatMap((r) => r.split(","))
     .map((r) => r.trim());
 
   if (username != null) {
