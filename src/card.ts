@@ -8,8 +8,7 @@ import {
   TotalRepositoryTrophy,
   MultipleLangTrophy,
   LongTimeAccountTrophy,
-  AncientAccountTrophy
-
+  AncientAccountTrophy,
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
 import { CONSTANTS, RANK_ORDER, RANK } from "./utils.ts";
@@ -24,7 +23,7 @@ export class Card {
     private maxRow: number,
     private panelSize: number,
     private paddingWidth: number,
-    private paddingHight: number
+    private paddingHight: number,
   ) {
     this.width = panelSize * this.maxColumn;
   }
@@ -42,16 +41,22 @@ export class Card {
     );
 
     // Filter by hidden
-    trophyList = trophyList.filter((trophy) => !trophy.hidden || trophy.rank !== RANK.UNKNOWN);
+    trophyList = trophyList.filter((trophy) =>
+      !trophy.hidden || trophy.rank !== RANK.UNKNOWN
+    );
 
     // Filter by titles
     if (this.titles.length != 0) {
-      trophyList = trophyList.filter((trophy) => this.titles.includes(trophy.title))
+      trophyList = trophyList.filter((trophy) => {
+        return trophy.filterTitles.some((title) => this.titles.includes(title))
+      });
     }
 
     // Filter by ranks
     if (this.ranks.length != 0) {
-      trophyList = trophyList.filter((trophy) => this.ranks.includes(trophy.rank))
+      trophyList = trophyList.filter((trophy) =>
+        this.ranks.includes(trophy.rank)
+      );
     }
 
     // Sort by rank

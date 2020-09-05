@@ -16,6 +16,7 @@ export class Trophy {
   topMessage = "Unknown";
   bottomMessage = "0";
   title = "";
+  filterTitles: Array<string> = [];
   hidden = false;
   constructor(
     private score: number,
@@ -102,7 +103,8 @@ export class MultipleLangTrophy extends Trophy{
       ),
     ];
     super(score, rankConditions);
-    this.title = "MultipleLang";
+    this.title = "MultiLanguage";
+    this.filterTitles = ["MultipleLang", "MultiLanguage"];
     this.hidden = true;
   }
 }
@@ -118,6 +120,7 @@ export class AncientAccountTrophy extends Trophy{
     ];
     super(score, rankConditions);
     this.title = "AncientUser";
+    this.filterTitles = ["AncientUser"];
     this.bottomMessage = "Before 2010"
     this.hidden = true;
   }
@@ -133,6 +136,7 @@ export class LongTimeAccountTrophy extends Trophy{
     ];
     super(score, rankConditions);
     this.title = "LongTimeUser";
+    this.filterTitles = ["LongTimeUser"];
     this.hidden = true;
   }
 }
@@ -182,7 +186,8 @@ export class TotalStarTrophy extends Trophy {
       ),
     ];
     super(score, rankConditions);
-    this.title = "Star";
+    this.title = "Stars";
+    this.filterTitles = ["Star", "Stars"];
   }
 }
 
@@ -232,6 +237,7 @@ export class TotalCommitTrophy extends Trophy {
     ];
     super(score, rankConditions);
     this.title = "Commit";
+    this.filterTitles = ["Commit"];
   }
 }
 
@@ -280,7 +286,8 @@ export class TotalFollowerTrophy extends Trophy {
       ),
     ];
     super(score, rankConditions);
-    this.title = "Follower";
+    this.title = "Followers";
+    this.filterTitles = ["Follower", "Followers"];
   }
 }
 
@@ -329,7 +336,8 @@ export class TotalIssueTrophy extends Trophy {
       ),
     ];
     super(score, rankConditions);
-    this.title = "Issue";
+    this.title = "Issues";
+    this.filterTitles = ["Issue", "Issues"];
   }
 }
 
@@ -378,7 +386,8 @@ export class TotalPullRequestTrophy extends Trophy {
       ),
     ];
     super(score, rankConditions);
-    this.title = "PR";
+    this.title = "PullRequest";
+    this.filterTitles = ["PR", "PullRequest"];
   }
 }
 
@@ -427,6 +436,7 @@ export class TotalRepositoryTrophy extends Trophy {
       ),
     ];
     super(score, rankConditions);
-    this.title = "Repo";
+    this.title = "Repositories";
+    this.filterTitles = ["Repo", "Repository", "Repositories"];
   }
 }
