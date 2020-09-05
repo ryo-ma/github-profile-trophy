@@ -68,16 +68,16 @@ export enum RANK {
 }
 
 export const COLORS = {
-  SECRET_RANK_1: "red",
-  SECRET_RANK_2: "fuchsia",
-  SECRET_RANK_3: "blue",
-  SECRET_RANK_TEXT: "fuchsia",
   default: {
     PRIMARY: "#FFF",
     SECONDARY: "#000",
     ICON_CIRCLE: "#FFF",
     TEXT: "#666",
     LAUREL: "#009366",
+    SECRET_RANK_1: "red",
+    SECRET_RANK_2: "fuchsia",
+    SECRET_RANK_3: "blue",
+    SECRET_RANK_TEXT: "fuchsia",
     NEXT_RANK_BAR: "#0366d6",
     S_RANK_BASE: "#FAD200",
     S_RANK_SHADOW: "#C8A090",
@@ -98,6 +98,10 @@ export const COLORS = {
     ICON_CIRCLE: "#ebdbb2",
     TEXT: "#98971a",
     LAUREL: "#8ec07c",
+    SECRET_RANK_1: "#fb4934",
+    SECRET_RANK_2: "#d3869b",
+    SECRET_RANK_3: "#458588",
+    SECRET_RANK_TEXT: "#d3869b",
     NEXT_RANK_BAR: "#d79921",
     S_RANK_BASE: "#fabd2f",
     S_RANK_SHADOW: "#fabd2f",
@@ -120,6 +124,10 @@ export interface Theme {
   ICON_CIRCLE: string;
   TEXT: string;
   LAUREL: string;
+  SECRET_RANK_1: string;
+  SECRET_RANK_2: string;
+  SECRET_RANK_3: string;
+  SECRET_RANK_TEXT: string;
   NEXT_RANK_BAR: string;
   S_RANK_BASE: string;
   S_RANK_SHADOW: string;

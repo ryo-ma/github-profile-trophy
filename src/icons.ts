@@ -99,11 +99,11 @@ export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN) => {
   `;
   const { ICON_CIRCLE } = theme;
   if (rank === RANK.SECRET) {
-    rankColor = COLORS.SECRET_RANK_TEXT;
+    rankColor = theme.SECRET_RANK_TEXT;
     gradationColor = `
-    <stop offset="0%" stop-color="${COLORS.SECRET_RANK_1}"/>
-    <stop offset="50%" stop-color="${COLORS.SECRET_RANK_2}"/>
-    <stop offset="100%" stop-color="${COLORS.SECRET_RANK_3}"/>
+    <stop offset="0%" stop-color="${theme.SECRET_RANK_1}"/>
+    <stop offset="50%" stop-color="${theme.SECRET_RANK_2}"/>
+    <stop offset="100%" stop-color="${theme.SECRET_RANK_3}"/>
     `;
   } else if (rank.slice(0, 1) === RANK.S) {
     color = theme.S_RANK_BASE;
