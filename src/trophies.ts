@@ -63,7 +63,7 @@ export class Trophy {
     y = 0,
     panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,
   ): string {
-    const { PRIMARY, SECONDARY, GRAY, NEXT_RANK_BAR } = theme;
+    const { PRIMARY, SECONDARY, TEXT, NEXT_RANK_BAR } = theme;
     const nextRankBar = getNextRankBar(
       this.title,
       this.calculateNextRankPercentage(),
@@ -91,8 +91,8 @@ export class Trophy {
           />
           ${getTrophyIcon(this.rank)}
           <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="13" fill="${SECONDARY}">${this.title}</text>
-          <text x="50%" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10.5" fill="${GRAY}">${this.topMessage}</text>
-          <text x="50%" y="97" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10" fill="${GRAY}">${this.bottomMessage}</text>
+          <text x="50%" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10.5" fill="${TEXT}">${this.topMessage}</text>
+          <text x="50%" y="97" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10" fill="${TEXT}">${this.bottomMessage}</text>
           ${nextRankBar}
         </svg>
         `;
