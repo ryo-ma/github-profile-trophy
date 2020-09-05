@@ -1,11 +1,12 @@
 import { ServerRequest } from ".././deps.ts";
 
-
 export class CustomURLSearchParams extends URLSearchParams {
-  constructor(init?: string[][] | Record<string, string> | string | URLSearchParams,) {
+  constructor(
+    init?: string[][] | Record<string, string> | string | URLSearchParams,
+  ) {
     super(init);
   }
-  getStringValue(key: string, defaultValue: string): string{
+  getStringValue(key: string, defaultValue: string): string {
     let value: string = defaultValue;
     if (super.has(key)) {
       const param = super.get(key);
@@ -97,12 +98,12 @@ export const COLORS = {
     SECONDARY: "#ebdbb2",
     ICON_CIRCLE: "#ebdbb2",
     TEXT: "#98971a",
-    LAUREL: "#8ec07c",
+    LAUREL: "#689d6a",
     SECRET_RANK_1: "#fb4934",
     SECRET_RANK_2: "#d3869b",
     SECRET_RANK_3: "#458588",
-    SECRET_RANK_TEXT: "#d3869b",
-    NEXT_RANK_BAR: "#d79921",
+    SECRET_RANK_TEXT: "#b16286",
+    NEXT_RANK_BAR: "#fabd26",
     S_RANK_BASE: "#fabd2f",
     S_RANK_SHADOW: "#fabd2f",
     S_RANK_TEXT: "#322301",
@@ -115,7 +116,7 @@ export const COLORS = {
     DEFAULT_RANK_BASE: "#928374",
     DEFAULT_RANK_SHADOW: "#928374",
     DEFAULT_RANK_TEXT: "#282828",
-  }
+  },
 };
 
 export interface Theme {
@@ -141,6 +142,6 @@ export interface Theme {
   DEFAULT_RANK_BASE: string;
   DEFAULT_RANK_SHADOW: string;
   DEFAULT_RANK_TEXT: string;
-};
+}
 
 export const RANK_ORDER = Object.values(RANK);

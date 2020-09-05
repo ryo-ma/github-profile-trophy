@@ -59,7 +59,6 @@ export const getNextRankBar = (
       x="15"
       y="101"
       rx="1"
-      opacity="0.7"
       height="3.2"
       fill="${color}"
     />
