@@ -87,12 +87,14 @@ export const COLORS = {
   default: {
     PRIMARY: "#FFF",
     SECONDARY: "#000",
+    ICON_CIRCLE: "#FFF",
     TEXT: "#666",
     NEXT_RANK_BAR: "#0366d6",
   },
   gruvbox: {
     PRIMARY: "#282828",
     SECONDARY: "#ebdbb2",
+    ICON_CIRCLE: "#ebdbb2",
     TEXT: "#98971a",
     NEXT_RANK_BAR: "#d79921",
   }
@@ -101,6 +103,7 @@ export const COLORS = {
 export interface Theme {
   PRIMARY: string;
   SECONDARY: string;
+  ICON_CIRCLE: string;
   TEXT: string,
   NEXT_RANK_BAR: string;
 };
