@@ -150,6 +150,10 @@ Run local server.
 deno run --allow-net --allow-read --allow-env debug.ts
 ```
 
+Open localhost from your browser.
+
+http://localhost:8080/?username=ryo-ma
+
 ## Editor config
 
 Read the [.editorconfig](./.editorconfig)
