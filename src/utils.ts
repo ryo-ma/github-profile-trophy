@@ -1,11 +1,38 @@
 import { ServerRequest } from ".././deps.ts";
 
-export function parseParams(req: ServerRequest): URLSearchParams {
+
+export class CustomURLSearchParams extends URLSearchParams {
+  constructor(init?: string[][] | Record<string, string> | string | URLSearchParams,) {
+    super(init);
+  }
+  getStringValue(key: string, defaultValue: string): string{
+    let value: string = defaultValue;
+    if (super.has(key)) {
+      const param = super.get(key);
+      if (param !== null) {
+        return param.toString();
+      }
+    }
+    return value.toString();
+  }
+  getNumberValue(key: string, defaultValue: number): number {
+    let value: number = defaultValue;
+    if (super.has(key)) {
+      const param = super.get(key);
+      if (param !== null) {
+        return parseInt(param);
+      }
+    }
+    return value;
+  }
+}
+
+export function parseParams(req: ServerRequest): CustomURLSearchParams {
   const splitedURL = req.url.split("?");
   if (splitedURL.length < 2) {
-    return new URLSearchParams();
+    return new CustomURLSearchParams();
   }
-  return new URLSearchParams(splitedURL[1]);
+  return new CustomURLSearchParams(splitedURL[1]);
 }
 
 export function abridgeScore(score: number): string {
@@ -23,6 +50,8 @@ export const CONSTANTS = {
   DEFAULT_PANEL_SIZE: 110,
   DEFAULT_MAX_COLUMN: 6,
   DEFAULT_MAX_ROW: 3,
+  DEFAULT_PADDING_W: 0,
+  DEFAULT_PADDING_H: 0,
 };
 
 export enum RANK {

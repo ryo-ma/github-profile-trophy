@@ -20,9 +20,11 @@ export class Card {
   constructor(
     private titles: Array<string>,
     private ranks: Array<string>,
-    private maxColumn = CONSTANTS.DEFAULT_MAX_COLUMN,
-    private maxRow = CONSTANTS.DEFAULT_MAX_ROW,
-    private panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,
+    private maxColumn: number,
+    private maxRow: number,
+    private panelSize: number,
+    private paddingWidth: number,
+    private paddingHight: number
   ) {
     this.width = panelSize * this.maxColumn;
   }
