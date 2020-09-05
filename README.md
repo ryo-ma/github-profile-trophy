@@ -133,7 +133,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=3
 
 * Deno >= v1.3.0
 * typescript >= 3.9.7
-* ![Vercel](https://vercel.com/)
+* [Vercel](https://vercel.com/)
 * GitHub API v4
 
 ## Local Run
@@ -152,7 +152,7 @@ deno run --allow-net --allow-read --allow-env debug.ts
 
 ## Editor config
 
-Read the ![.editorconfig](./.editorconfig)
+Read the [.editorconfig](./.editorconfig)
 
 ## Run deno lint
 
