@@ -105,7 +105,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S,AAA
 ## Specify the maximum row & column size
 
 You can specify the maximum row and column size.  
-Trophy out of limits will not be displayed.
+Trophy will be hidden if it exceeds the range of both row and column.
 
 `Available value: number type`  
 `Default: column=6 row=3`
