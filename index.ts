@@ -11,7 +11,7 @@ export default async (req: ServerRequest) => {
   const username = params.get("username");
   const row = params.getNumberValue("row", CONSTANTS.DEFAULT_MAX_ROW);
   const column = params.getNumberValue("column", CONSTANTS.DEFAULT_MAX_COLUMN);
-  const themeParam: string = params.has("theme") ? params.get("theme") || "default" : "default";
+  const themeParam: string = params.getStringValue("theme", "default");
   let theme;
   switch (themeParam) {
     case "gruvbox":
