@@ -1,7 +1,7 @@
 import { ServerRequest } from "./deps.ts";
 import { GithubAPIClient } from "./src/github_api_client.ts";
 import { Card } from "./src/card.ts";
-import { parseParams, CONSTANTS } from "./src/utils.ts";
+import { parseParams, COLORS, CONSTANTS } from "./src/utils.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 
 const client = new GithubAPIClient();
@@ -11,6 +11,15 @@ export default async (req: ServerRequest) => {
   const username = params.get("username");
   const row = params.getNumberValue("row", CONSTANTS.DEFAULT_MAX_ROW);
   const column = params.getNumberValue("column", CONSTANTS.DEFAULT_MAX_COLUMN);
+  const themeParam: string = params.getStringValue("theme", "default");
+  let theme;
+  switch (themeParam) {
+    case "gruvbox":
+      theme = COLORS.gruvbox;
+      break;
+    default:
+      theme = COLORS.default;
+  }
   const paddingWidth = params.getNumberValue(
     "padding-w",
     CONSTANTS.DEFAULT_PADDING_W,
@@ -58,7 +67,7 @@ export default async (req: ServerRequest) => {
         CONSTANTS.DEFAULT_PANEL_SIZE,
         paddingWidth,
         paddingHeight,
-      ).render(userInfo),
+      ).render(userInfo, theme),
       headers: new Headers(
         {
           "Content-Type": "image/svg+xml",

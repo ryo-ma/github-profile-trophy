@@ -1,11 +1,11 @@
-import { RANK, COLORS } from "./utils.ts";
+import { RANK, Theme } from "./utils.ts";
 
-const leafIcon =
-  `<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+const leafIcon = (laurel: string): string => {
+  return  `<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
 <metadata>
 Created by potrace 1.15, written by Peter Selinger 2001-2017
 </metadata>
-<g transform="translate(20.000000,60.000000) scale(0.00400000,-0.00400000)" fill="#009366" stroke="none">
+<g transform="translate(20.000000,60.000000) scale(0.00400000,-0.00400000)" fill="${laurel}" stroke="none">
 <path d="M200 5103 c0 -2 18 -40 41 -84 47 -95 62 -132 50 -125 -15 10 -18 -39 -6 -87 31 -121 265 -468 412 -608 124 -119 281 -222 383 -251 36 -10 49 -16 30 -13 -19 3 -78 12 -130 20 -117 17 -353 35 -477 35 l-93 0 53 -82 c72 -112 72 -112 59 -104 -18 11 -26 -41 -13 -84 25 -84 261 -376 404 -502 95 -83 222 -168 304 -205 98 -43 194 -73 242 -74 l46 -1 -45 -8 c-25 -5 -124 -21 -220 -36 -96 -15 -177 -29 -180 -31 -2 -2 0 -7 5 -11 27 -19 138 -144 123 -139 -18 6 -28 -10 -28 -47 0 -38 53 -108 141 -187 349 -313 631 -450 939 -453 63 0 131 2 150 7 19 4 -35 -17 -120 -46 -236 -82 -310 -110 -310 -117 0 -3 29 -28 65 -54 55 -40 102 -84 67 -62 -13 8 -32 -24 -32 -54 0 -99 486 -361 790 -426 125 -27 327 -25 444 4 113 28 261 98 309 145 39 40 56 92 38 124 -8 17 -4 24 29 49 22 16 40 32 40 36 0 4 -26 40 -58 80 -162 203 -368 328 -608 369 -89 15 -368 6 -474 -15 -131 -26 -147 -26 -59 -3 51 13 102 34 122 50 38 29 61 84 51 123 -5 18 1 26 25 39 17 8 31 19 31 23 0 4 -16 38 -35 75 -163 317 -424 501 -781 548 -113 15 -127 19 -91 30 51 14 84 58 89 118 1 20 9 33 20 37 23 7 23 6 -12 114 -108 329 -305 534 -640 662 -41 15 -59 25 -40 21 19 -5 82 -8 140 -8 81 0 113 4 142 18 39 20 73 76 65 107 -3 12 2 20 14 23 23 6 23 21 4 124 -61 320 -249 568 -544 718 -157 79 -394 147 -666 190 -88 13 -170 26 -182 29 -13 2 -23 2 -23 -1z"/>
 <path d="M12550 5099 c-232 -36 -334 -55 -445 -84 -484 -122 -761 -346 -880 -712 -26 -79 -57 -242 -48 -255 2 -5 14 -8 26 -9 12 0 16 -3 10 -6 -17 -6 -16 -38 2 -72 25 -49 75 -66 200 -66 61 0 124 4 140 8 17 5 -13 -9 -66 -31 -136 -55 -250 -126 -341 -211 -128 -120 -217 -263 -272 -439 -32 -101 -32 -110 -3 -122 12 -5 17 -9 11 -9 -8 -1 -9 -12 -5 -34 15 -66 41 -95 94 -107 31 -7 31 -7 7 -12 -14 -3 -72 -13 -130 -22 -322 -51 -553 -206 -714 -479 -25 -42 -52 -92 -60 -111 -14 -33 -14 -33 23 -54 20 -12 31 -22 26 -22 -15 0 -17 -39 -4 -78 14 -42 76 -88 130 -97 22 -4 39 -9 36 -11 -2 -2 -55 3 -118 12 -154 22 -395 15 -494 -13 -216 -62 -391 -184 -545 -380 l-41 -52 40 -32 c34 -27 39 -35 30 -51 -17 -33 -1 -85 38 -125 48 -47 196 -117 309 -145 117 -29 319 -31 444 -4 300 64 790 328 790 425 0 29 -18 63 -31 56 -5 -4 -9 -4 -9 -2 0 3 34 29 75 59 41 29 75 56 75 59 0 3 -21 13 -47 22 -349 120 -422 146 -388 140 59 -12 241 -8 310 6 208 43 437 158 636 322 241 199 314 293 265 342 -13 12 -6 24 51 86 36 40 64 73 62 75 -4 2 -107 20 -359 60 -70 12 -77 14 -39 15 48 1 144 31 241 74 139 62 318 202 451 352 104 117 225 279 249 333 21 47 21 99 0 94 -16 -3 -10 9 58 116 l50 77 -72 3 c-91 4 -362 -14 -488 -33 -179 -26 -179 -26 -116 -9 93 26 244 120 365 230 193 174 467 605 443 696 -2 10 -8 15 -13 12 -12 -7 3 30 51 126 23 45 40 85 38 89 -2 4 -23 4 -48 0z m-933 -1185 c-3 -3 -12 -4 -19 -1 -8 3 -5 6 6 6 11 1 17 -2 13 -5z m-1290 -1860 c-3 -3 -12 -4 -19 -1 -8 3 -5 6 6 6 11 1 17 -2 13 -5z m40 -10 c-3 -3 -12 -4 -19 -1 -8 3 -5 6 6 6 11 1 17 -2 13 -5z"/>
 <path d="M10242 4632 c-46 -140 -92 -319 -118 -457 -18 -94 -28 -519 -12 -509 4 3 5 -8 2 -25 -8 -40 21 -179 58 -274 75 -195 297 -437 400 -437 57 0 124 70 177 185 53 112 67 224 65 510 -1 120 -5 166 -23 233 -66 252 -206 515 -423 795 -39 51 -74 95 -77 99 -4 4 -26 -50 -49 -120z"/>
@@ -23,10 +23,12 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 <path d="M7249 1054 c-42 -7 -109 -25 -150 -40 -76 -27 -226 -101 -267 -133 l-24 -18 41 -66 c22 -37 36 -67 31 -67 -18 0 -11 -80 11 -121 11 -22 53 -73 92 -113 279 -282 682 -361 1251 -245 113 23 172 49 188 84 14 30 3 72 -20 77 -9 3 18 15 61 29 l78 24 -93 81 c-362 313 -622 460 -902 509 -106 18 -194 18 -297 -1z"/>
 </g>
 </svg>`;
+};
 
 export const getNextRankBar = (
   title: string,
   percentage: number,
+  color: string,
 ): string => {
   const maxWidht = 80;
   return `
@@ -50,7 +52,7 @@ export const getNextRankBar = (
       width="${maxWidht}"
       height="3.2"
       opacity="0.3"
-      fill="${COLORS.NEXT_RANK_BAR}"
+      fill="${color}"
     />
     <rect
       id="${title}-rank-progress"
@@ -59,7 +61,7 @@ export const getNextRankBar = (
       rx="1"
       opacity="0.7"
       height="3.2"
-      fill="${COLORS.NEXT_RANK_BAR}"
+      fill="${color}"
     />
   `;
 };
@@ -86,47 +88,48 @@ const getSmallTrophyIcon = (
   // Single Rank
   return "";
 };
-export const getTrophyIcon = (rank = RANK.UNKNOWN) => {
-  let color = COLORS.DEFAULT_RANK_BASE;
-  let rankColor = COLORS.DEFAULT_RANK_TEXT;
+export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN) => {
+  let color = theme.DEFAULT_RANK_BASE;
+  let rankColor = theme.DEFAULT_RANK_TEXT;
   let backgroundIcon = "";
   let gradationColor = `
-      <stop offset="0%" stop-color="${COLORS.DEFAULT_RANK_BASE}"/>
-      <stop offset="50%" stop-color="${COLORS.DEFAULT_RANK_BASE}"/>
-      <stop offset="100%" stop-color="${COLORS.DEFAULT_RANK_SHADOW}"/>
+      <stop offset="0%" stop-color="${theme.DEFAULT_RANK_BASE}"/>
+      <stop offset="50%" stop-color="${theme.DEFAULT_RANK_BASE}"/>
+      <stop offset="100%" stop-color="${theme.DEFAULT_RANK_SHADOW}"/>
   `;
+  const { ICON_CIRCLE } = theme;
   if (rank === RANK.SECRET) {
-    rankColor = COLORS.SECRET_RANK_TEXT;
+    rankColor = theme.SECRET_RANK_TEXT;
     gradationColor = `
-    <stop offset="0%" stop-color="${COLORS.SECRET_RANK_1}"/>
-    <stop offset="50%" stop-color="${COLORS.SECRET_RANK_2}"/>
-    <stop offset="100%" stop-color="${COLORS.SECRET_RANK_3}"/>
+    <stop offset="0%" stop-color="${theme.SECRET_RANK_1}"/>
+    <stop offset="50%" stop-color="${theme.SECRET_RANK_2}"/>
+    <stop offset="100%" stop-color="${theme.SECRET_RANK_3}"/>
     `;
   } else if (rank.slice(0, 1) === RANK.S) {
-    color = COLORS.S_RANK_BASE;
-    rankColor = COLORS.S_RANK_TEXT;
-    backgroundIcon = leafIcon;
+    color = theme.S_RANK_BASE;
+    rankColor = theme.S_RANK_TEXT;
+    backgroundIcon = leafIcon(theme.LAUREL);
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${COLORS.S_RANK_SHADOW}"/>
+    <stop offset="100%" stop-color="${theme.S_RANK_SHADOW}"/>
     `;
   } else if (rank.slice(0, 1) === RANK.A) {
-    color = COLORS.A_RANK_BASE;
-    rankColor = COLORS.A_RAKN_TEXT;
-    backgroundIcon = leafIcon;
+    color = theme.A_RANK_BASE;
+    rankColor = theme.A_RAKN_TEXT;
+    backgroundIcon = leafIcon(theme.LAUREL);
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${COLORS.A_RANK_SHADOW}"/>
+    <stop offset="100%" stop-color="${theme.A_RANK_SHADOW}"/>
     `;
   } else if (rank === RANK.B) {
-    color = COLORS.B_RANK_BASE;
-    rankColor = COLORS.B_RANK_TEXT;
+    color = theme.B_RANK_BASE;
+    rankColor = theme.B_RANK_TEXT;
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${COLORS.B_RANK_SHADOW}"/>
+    <stop offset="100%" stop-color="${theme.B_RANK_SHADOW}"/>
     `;
   }
   const icon = `
@@ -134,7 +137,7 @@ export const getTrophyIcon = (rank = RANK.UNKNOWN) => {
     <path d="M10 11c0 .552-.895 1-2 1s-2-.448-2-1 .895-1 2-1 2 .448 2 1z"/>
     <path fill-rule="evenodd" d="M12.5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm-6-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0z"/>
     <path d="M3 1h10c-.495 3.467-.5 10-5 10S3.495 4.467 3 1zm0 15a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1H3zm2-1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1H5z"/>
-    <circle cx="8" cy="6" r="4" fill="#fff" />
+    <circle cx="8" cy="6" r="4" fill="${ICON_CIRCLE}" />
     <text x="6" y="8" font-family="Courier, Monospace" font-size="7" fill="${rankColor}">${
     rank.slice(0, 1)
   }</text>

@@ -11,7 +11,7 @@ import {
   AncientAccountTrophy,
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
-import { CONSTANTS, RANK_ORDER, RANK } from "./utils.ts";
+import { CONSTANTS, RANK_ORDER, RANK, Theme } from "./utils.ts";
 
 export class Card {
   private width = 0;
@@ -27,7 +27,10 @@ export class Card {
   ) {
     this.width = panelSize * this.maxColumn;
   }
-  render(userInfo: UserInfo): string {
+  render(
+    userInfo: UserInfo,
+    theme: Theme,
+  ): string {
     let trophyList = new Array<Trophy>(
       new TotalStarTrophy(userInfo.totalStargazers),
       new TotalCommitTrophy(userInfo.totalCommits),
@@ -76,7 +79,7 @@ export class Card {
       (sum: string, trophy: Trophy, i: number) => {
         const x = this.panelSize * (i % this.maxColumn);
         const y = this.panelSize * Math.floor(i / this.maxColumn);
-        return sum + trophy.render(x, y, this.panelSize);
+        return sum + trophy.render(theme, x, y, this.panelSize);
       },
       "",
     );
