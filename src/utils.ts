@@ -77,6 +77,7 @@ export const COLORS = {
     SECONDARY: "#000",
     ICON_CIRCLE: "#FFF",
     TEXT: "#666",
+    LAUREL: "#009366",
     NEXT_RANK_BAR: "#0366d6",
     S_RANK_BASE: "#FAD200",
     S_RANK_SHADOW: "#C8A090",
@@ -96,6 +97,7 @@ export const COLORS = {
     SECONDARY: "#ebdbb2",
     ICON_CIRCLE: "#ebdbb2",
     TEXT: "#98971a",
+    LAUREL: "#8ec07c",
     NEXT_RANK_BAR: "#d79921",
     S_RANK_BASE: "#FAD200",
     S_RANK_SHADOW: "#C8A090",
@@ -116,7 +118,8 @@ export interface Theme {
   PRIMARY: string;
   SECONDARY: string;
   ICON_CIRCLE: string;
-  TEXT: string,
+  TEXT: string;
+  LAUREL: string;
   NEXT_RANK_BAR: string;
   S_RANK_BASE: string;
   S_RANK_SHADOW: string;
