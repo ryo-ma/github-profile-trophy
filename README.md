@@ -29,6 +29,17 @@ Change the `?username=` value to your GitHub's username.
 
 <img src="https://github-profile-trophy.vercel.app/?username=ryo-ma&column=7&rank=SSS,SS,S,AAA,AA,A,B,C" />
 
+## Use theme
+
+Add [optional parameter of theme](#apply-theme).
+
+```
+[![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox)](https://github.com/ryo-ma/github-profile-trophy)
+```
+
+<img width="660" src="https://user-images.githubusercontent.com/6661165/92315152-e9c56600-f01c-11ea-9536-1bfbb158cfcb.png">
+
+
 # About Rank
 
 Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
@@ -67,6 +78,7 @@ Therefore, if you come up with interesting conditions, I am waiting for contribu
 * [rank](#filter-by-ranks)
 * [column](#specify-the-maximum-row--column-size)
 * [row](#specify-the-maximum-row--column-size)
+* [theme](#apply-theme)
 
 ## Filter by titles
 
@@ -101,7 +113,6 @@ If You want to specify multiple ranks.
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S,AAA
 ```
 
-
 ## Specify the maximum row & column size
 
 You can specify the maximum row and column size.  
@@ -126,6 +137,19 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=3
 ```
 <img width="330" src="https://user-images.githubusercontent.com/6661165/91659474-c07f7400-eb0a-11ea-84f2-eb6b42547829.png">
 
+## Apply theme
+
+Available themes.
+
+|  theme  |
+| ---- |
+| gruvbox |
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox
+```
+
+<img width="660" src="https://user-images.githubusercontent.com/6661165/92315152-e9c56600-f01c-11ea-9536-1bfbb158cfcb.png">
 
 # Contribution Guide
 
