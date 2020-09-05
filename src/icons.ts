@@ -88,13 +88,13 @@ const getSmallTrophyIcon = (
   return "";
 };
 export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN) => {
-  let color = COLORS.DEFAULT_RANK_BASE;
-  let rankColor = COLORS.DEFAULT_RANK_TEXT;
+  let color = theme.DEFAULT_RANK_BASE;
+  let rankColor = theme.DEFAULT_RANK_TEXT;
   let backgroundIcon = "";
   let gradationColor = `
-      <stop offset="0%" stop-color="${COLORS.DEFAULT_RANK_BASE}"/>
-      <stop offset="50%" stop-color="${COLORS.DEFAULT_RANK_BASE}"/>
-      <stop offset="100%" stop-color="${COLORS.DEFAULT_RANK_SHADOW}"/>
+      <stop offset="0%" stop-color="${theme.DEFAULT_RANK_BASE}"/>
+      <stop offset="50%" stop-color="${theme.DEFAULT_RANK_BASE}"/>
+      <stop offset="100%" stop-color="${theme.DEFAULT_RANK_SHADOW}"/>
   `;
   const { ICON_CIRCLE } = theme;
   if (rank === RANK.SECRET) {
@@ -105,30 +105,30 @@ export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN) => {
     <stop offset="100%" stop-color="${COLORS.SECRET_RANK_3}"/>
     `;
   } else if (rank.slice(0, 1) === RANK.S) {
-    color = COLORS.S_RANK_BASE;
-    rankColor = COLORS.S_RANK_TEXT;
+    color = theme.S_RANK_BASE;
+    rankColor = theme.S_RANK_TEXT;
     backgroundIcon = leafIcon;
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${COLORS.S_RANK_SHADOW}"/>
+    <stop offset="100%" stop-color="${theme.S_RANK_SHADOW}"/>
     `;
   } else if (rank.slice(0, 1) === RANK.A) {
-    color = COLORS.A_RANK_BASE;
-    rankColor = COLORS.A_RAKN_TEXT;
+    color = theme.A_RANK_BASE;
+    rankColor = theme.A_RAKN_TEXT;
     backgroundIcon = leafIcon;
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${COLORS.A_RANK_SHADOW}"/>
+    <stop offset="100%" stop-color="${theme.A_RANK_SHADOW}"/>
     `;
   } else if (rank === RANK.B) {
-    color = COLORS.B_RANK_BASE;
-    rankColor = COLORS.B_RANK_TEXT;
+    color = theme.B_RANK_BASE;
+    rankColor = theme.B_RANK_TEXT;
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
     <stop offset="70%" stop-color="${color}"/>
-    <stop offset="100%" stop-color="${COLORS.B_RANK_SHADOW}"/>
+    <stop offset="100%" stop-color="${theme.B_RANK_SHADOW}"/>
     `;
   }
   const icon = `

@@ -72,24 +72,24 @@ export const COLORS = {
   SECRET_RANK_2: "fuchsia",
   SECRET_RANK_3: "blue",
   SECRET_RANK_TEXT: "fuchsia",
-  S_RANK_BASE: "#FAD200",
-  S_RANK_SHADOW: "#C8A090",
-  S_RANK_TEXT: "#886000",
-  A_RANK_BASE: "#B0B0B0",
-  A_RANK_SHADOW: "#9090C0",
-  A_RAKN_TEXT: "#505050",
-  B_RANK_BASE: "#A18D66",
-  B_RANK_SHADOW: "#816D96",
-  B_RANK_TEXT: "#412D06",
-  DEFAULT_RANK_BASE: "#777",
-  DEFAULT_RANK_SHADOW: "#333",
-  DEFAULT_RANK_TEXT: "#333",
   default: {
     PRIMARY: "#FFF",
     SECONDARY: "#000",
     ICON_CIRCLE: "#FFF",
     TEXT: "#666",
     NEXT_RANK_BAR: "#0366d6",
+    S_RANK_BASE: "#FAD200",
+    S_RANK_SHADOW: "#C8A090",
+    S_RANK_TEXT: "#886000",
+    A_RANK_BASE: "#B0B0B0",
+    A_RANK_SHADOW: "#9090C0",
+    A_RAKN_TEXT: "#505050",
+    B_RANK_BASE: "#A18D66",
+    B_RANK_SHADOW: "#816D96",
+    B_RANK_TEXT: "#412D06",
+    DEFAULT_RANK_BASE: "#777",
+    DEFAULT_RANK_SHADOW: "#333",
+    DEFAULT_RANK_TEXT: "#333",
   },
   gruvbox: {
     PRIMARY: "#282828",
@@ -97,6 +97,18 @@ export const COLORS = {
     ICON_CIRCLE: "#ebdbb2",
     TEXT: "#98971a",
     NEXT_RANK_BAR: "#d79921",
+    S_RANK_BASE: "#FAD200",
+    S_RANK_SHADOW: "#C8A090",
+    S_RANK_TEXT: "#886000",
+    A_RANK_BASE: "#B0B0B0",
+    A_RANK_SHADOW: "#9090C0",
+    A_RAKN_TEXT: "#505050",
+    B_RANK_BASE: "#A18D66",
+    B_RANK_SHADOW: "#816D96",
+    B_RANK_TEXT: "#412D06",
+    DEFAULT_RANK_BASE: "#777",
+    DEFAULT_RANK_SHADOW: "#333",
+    DEFAULT_RANK_TEXT: "#333",
   }
 };
 
@@ -106,6 +118,18 @@ export interface Theme {
   ICON_CIRCLE: string;
   TEXT: string,
   NEXT_RANK_BAR: string;
+  S_RANK_BASE: string;
+  S_RANK_SHADOW: string;
+  S_RANK_TEXT: string;
+  A_RANK_BASE: string;
+  A_RANK_SHADOW: string;
+  A_RAKN_TEXT: string;
+  B_RANK_BASE: string;
+  B_RANK_SHADOW: string;
+  B_RANK_TEXT: string;
+  DEFAULT_RANK_BASE: string;
+  DEFAULT_RANK_SHADOW: string;
+  DEFAULT_RANK_TEXT: string;
 };
 
 export const RANK_ORDER = Object.values(RANK);
