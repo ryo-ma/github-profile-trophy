@@ -1,4 +1,5 @@
-import { RANK, Theme } from "./utils.ts";
+import { RANK } from "./utils.ts";
+import { Theme } from "./theme.ts";
 
 const leafIcon = (laurel: string): string => {
   return  `<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">

@@ -11,7 +11,8 @@ import {
   AncientAccountTrophy,
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
-import { CONSTANTS, RANK_ORDER, RANK, Theme } from "./utils.ts";
+import { RANK_ORDER, RANK } from "./utils.ts";
+import { Theme } from "./theme.ts";
 
 export class Card {
   private width = 0;
