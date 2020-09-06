@@ -1,4 +1,4 @@
-export const COLORS = {
+export const COLORS: {[name: string]: Theme} = {
   default: {
     PRIMARY: "#FFF",
     SECONDARY: "#000",
@@ -21,6 +21,30 @@ export const COLORS = {
     B_RANK_TEXT: "#412D06",
     DEFAULT_RANK_BASE: "#777",
     DEFAULT_RANK_SHADOW: "#333",
+    DEFAULT_RANK_TEXT: "#333",
+  },
+  flat: {
+    PRIMARY: "#FFF",
+    SECONDARY: "#000",
+    ICON_CIRCLE: "#FFF",
+    TEXT: "#666",
+    LAUREL: "#009366",
+    SECRET_RANK_1: "red",
+    SECRET_RANK_2: "fuchsia",
+    SECRET_RANK_3: "blue",
+    SECRET_RANK_TEXT: "fuchsia",
+    NEXT_RANK_BAR: "#0366d6",
+    S_RANK_BASE: "#eac200",
+    S_RANK_SHADOW: "#eac200",
+    S_RANK_TEXT: "#886000",
+    A_RANK_BASE: "#B0B0B0",
+    A_RANK_SHADOW: "#B0B0B0",
+    A_RAKN_TEXT: "#505050",
+    B_RANK_BASE: "#A18D66",
+    B_RANK_SHADOW: "#A18D66",
+    B_RANK_TEXT: "#412D06",
+    DEFAULT_RANK_BASE: "#777",
+    DEFAULT_RANK_SHADOW: "#777",
     DEFAULT_RANK_TEXT: "#333",
   },
   gruvbox: {

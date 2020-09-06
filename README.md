@@ -143,6 +143,7 @@ Available themes.
 
 |  theme  |
 | ---- |
+| flat |
 | gruvbox |
 
 ```
