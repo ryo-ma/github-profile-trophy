@@ -163,6 +163,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox
 ## Local Run
 
 Create `.env` file to project root directory, and write your GitHub token to the `.env` file.
+Please select the authority of `repo` when creating token.
 
 ```
 GITHUB_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
