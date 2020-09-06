@@ -146,6 +146,16 @@ Available themes.
 | flat |
 | gruvbox |
 
+### flat
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=flat
+```
+
+<img width="660" src="https://user-images.githubusercontent.com/6661165/92325601-039b9300-f087-11ea-983a-fce8133549ee.png">
+
+### gruvbox
+
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox
 ```
