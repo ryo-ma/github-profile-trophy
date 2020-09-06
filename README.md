@@ -34,10 +34,11 @@ Change the `?username=` value to your GitHub's username.
 Add optional parameter of theme.
 
 ```
-[![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox)](https://github.com/ryo-ma/github-profile-trophy)
+[![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onedark)](https://github.com/ryo-ma/github-profile-trophy)
 ```
 
-<img width="660" src="https://user-images.githubusercontent.com/6661165/92315152-e9c56600-f01c-11ea-9536-1bfbb158cfcb.png">
+<img width="660" src="https://user-images.githubusercontent.com/6661165/92327052-d99b9e00-f091-11ea-9a24-c7ec86982370.png">
+
 
 **[More detail](#apply-theme)**
 
@@ -156,11 +157,13 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=flat
 
 <img width="660" src="https://user-images.githubusercontent.com/6661165/92325601-039b9300-f087-11ea-983a-fce8133549ee.png">
 
-### flat
+### onedark
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onedark
 ```
+
+<img width="660" src="https://user-images.githubusercontent.com/6661165/92327052-d99b9e00-f091-11ea-9a24-c7ec86982370.png">
 
 ### gruvbox
 
