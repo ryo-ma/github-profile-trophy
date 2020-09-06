@@ -85,15 +85,15 @@ Therefore, if you come up with interesting conditions, I am waiting for contribu
 You can filter the display by specifying the titles of trophy.  
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Follower
+https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Followers
 ```
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91659424-5535a200-eb0a-11ea-869f-29c83cb4e3c4.png">
+<img width="110" src="https://user-images.githubusercontent.com/6661165/92317141-80ebe700-f038-11ea-8501-4015bfbb2cf4.png">
 
 
 If You want to specify multiple titles.
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Star,Follower
+https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Stars,Followers
 ```
 
 ## Filter by ranks
