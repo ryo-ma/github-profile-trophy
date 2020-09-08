@@ -180,7 +180,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dracula
 ```
 
-<img width="660" src="https://user-images.githubusercontent.com/6661165/92489957-56ae4b00-f22b-11ea-9bec-a4ceb8d96475.png">
+<img width="660" src="https://user-images.githubusercontent.com/6661165/92490273-c91f2b00-f22b-11ea-9481-b5daae4d7bc3.png">
 
 
 # Contribution Guide
