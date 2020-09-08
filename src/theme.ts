@@ -15,7 +15,7 @@ export const COLORS: {[name: string]: Theme} = {
     S_RANK_TEXT: "#886000",
     A_RANK_BASE: "#B0B0B0",
     A_RANK_SHADOW: "#9090C0",
-    A_RAKN_TEXT: "#505050",
+    A_RANK_TEXT: "#505050",
     B_RANK_BASE: "#A18D66",
     B_RANK_SHADOW: "#816D96",
     B_RANK_TEXT: "#412D06",
@@ -39,7 +39,7 @@ export const COLORS: {[name: string]: Theme} = {
     S_RANK_TEXT: "#886000",
     A_RANK_BASE: "#B0B0B0",
     A_RANK_SHADOW: "#B0B0B0",
-    A_RAKN_TEXT: "#505050",
+    A_RANK_TEXT: "#505050",
     B_RANK_BASE: "#A18D66",
     B_RANK_SHADOW: "#A18D66",
     B_RANK_TEXT: "#412D06",
@@ -63,7 +63,7 @@ export const COLORS: {[name: string]: Theme} = {
     S_RANK_TEXT: "#282c34",
     A_RANK_BASE: "#56b6c2",
     A_RANK_SHADOW: "#56b6c2",
-    A_RAKN_TEXT: "#282c34",
+    A_RANK_TEXT: "#282c34",
     B_RANK_BASE: "#c678dd",
     B_RANK_SHADOW: "#c678dd",
     B_RANK_TEXT: "#282c34",
@@ -87,7 +87,7 @@ export const COLORS: {[name: string]: Theme} = {
     S_RANK_TEXT: "#322301",
     A_RANK_BASE: "#83a598",
     A_RANK_SHADOW: "#83a598",
-    A_RAKN_TEXT: "#151e1a",
+    A_RANK_TEXT: "#151e1a",
     B_RANK_BASE: "#d65d0e",
     B_RANK_SHADOW: "#d65d0e",
     B_RANK_TEXT: "#301503",
@@ -113,7 +113,7 @@ export interface Theme {
   S_RANK_TEXT: string;
   A_RANK_BASE: string;
   A_RANK_SHADOW: string;
-  A_RAKN_TEXT: string;
+  A_RANK_TEXT: string;
   B_RANK_BASE: string;
   B_RANK_SHADOW: string;
   B_RANK_TEXT: string;

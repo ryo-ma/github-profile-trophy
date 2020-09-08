@@ -116,7 +116,7 @@ export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN) => {
     `;
   } else if (rank.slice(0, 1) === RANK.A) {
     color = theme.A_RANK_BASE;
-    rankColor = theme.A_RAKN_TEXT;
+    rankColor = theme.A_RANK_TEXT;
     backgroundIcon = leafIcon(theme.LAUREL);
     gradationColor = `
     <stop offset="0%" stop-color="${color}"/>
