@@ -68,7 +68,7 @@ export default async (req: ServerRequest) => {
       headers: new Headers(
         {
           "Content-Type": "image/svg+xml",
-          "Cache-Control": `public, max-age: ${CONSTANTS.CACHE_MAX_AGE}`,
+          "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`,
         },
       ),
     },
