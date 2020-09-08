@@ -145,9 +145,10 @@ Available themes.
 
 |  theme  |
 | ---- |
-| flat |
-| onedark |
-| gruvbox |
+| [flat](#flat) |
+| [onedark](#onedark) |
+| [gruvbox](#gruvbox) |
+| [dracula](#dracula) |
 
 ### flat
 
@@ -172,6 +173,15 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox
 ```
 
 <img width="660" src="https://user-images.githubusercontent.com/6661165/92315152-e9c56600-f01c-11ea-9536-1bfbb158cfcb.png">
+
+### dracula
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dracula
+```
+
+<img width="660" src="https://user-images.githubusercontent.com/6661165/92489957-56ae4b00-f22b-11ea-9bec-a4ceb8d96475.png">
+
 
 # Contribution Guide
 
