@@ -39,7 +39,7 @@ export const COLORS: {[name: string]: Theme} = {
     S_RANK_TEXT: "#6272a4",
     A_RANK_BASE: "#8be9fd",
     A_RANK_SHADOW: "#8be9fd",
-    A_RAKN_TEXT: "#6272a4",
+    A_RANK_TEXT: "#6272a4",
     B_RANK_BASE: "#ff5555",
     B_RANK_SHADOW: "#ff5555",
     B_RANK_TEXT: "#6272a4",
