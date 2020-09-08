@@ -7,7 +7,6 @@ export class UserInfo {
     public totalPullRequests: number,
     public totalStargazers: number,
     public totalRepositories: number,
-    public totalContributed: number,
     public languageCount: number,
     public durationYear: number,
     public acientAccount: number,
@@ -31,15 +30,10 @@ export class GithubAPIClient {
     const query = `
         query userInfo($username: String!) {
           user(login: $username) {
-            name
-            login
             createdAt
             contributionsCollection {
               totalCommitContributions
               restrictedContributionsCount
-            }
-            repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
-              totalCount
             }
             pullRequests(first: 1) {
               totalCount
@@ -47,7 +41,7 @@ export class GithubAPIClient {
             issues(first: 1) {
               totalCount
             }
-            followers {
+            followers(first: 1) {
               totalCount
             }
             repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {direction: DESC, field: STARGAZERS}) {
@@ -107,7 +101,6 @@ export class GithubAPIClient {
       userData.pullRequests.totalCount,
       totalStargazers,
       userData.repositories.totalCount,
-      userData.repositoriesContributedTo.totalCount,
       languages.size,
       durationYear,
       acientAccount,
