@@ -16,7 +16,13 @@
     <a href="https://github.com/ryo-ma/github-profile-trophy/LICENSE">
     <img src="https://img.shields.io/github/license/ryo-ma/github-profile-trophy"/> 
   </a>
+  </a>
+    <a href="https://twitter.com/intent/tweet?text=Add%20dynamically%20generated%20GitHub%20Trophy%20on%20your%20readme&url=https%3A%2F%2Fgithub.com%2Fryo-ma%2Fgithub-profile-trophy">
+    <img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fryo-ma%2Fgithub-profile-trophy"/> 
+  </a>
 </p>
+
+
 
 # Quick Start
 
