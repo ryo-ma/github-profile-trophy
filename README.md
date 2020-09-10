@@ -56,9 +56,9 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 
 |  Rank  |  Description  |
 | ---- | ---- |
-|  SSS, SS, S  | You are hard to reach the rank. You can brag.  |
+|  SSS, SS, S  | You are at a hard to reach rank. You can brag.  |
 |  AAA, AA, A  | You can reach the rank if you do your best. Let's aim here first.  |
-|  B, C  | You are a growing process.  |
+|  B, C  | You are in a growing process.  |
 | UNKOWN | You have not yet taken action. Let's act first. |
 | SECRET | The rank is very rare. The trophy will not be displayed until the conditions are met. |
 
@@ -117,7 +117,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S
 
 <img width="110" src="https://user-images.githubusercontent.com/6661165/91642657-1cdd8780-ea68-11ea-994b-4568a55cd22a.png" />
 
-If You want to specify multiple ranks.
+If you want to specify multiple ranks.
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S,AAA
