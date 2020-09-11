@@ -10,6 +10,7 @@ export class UserInfo {
     public languageCount: number,
     public durationYear: number,
     public acientAccount: number,
+    public joined2020: number,
   ) {
   }
 }
@@ -94,6 +95,9 @@ export class GithubAPIClient {
     const acientAccount = new Date(userData.createdAt).getFullYear() <= 2010
       ? 1
       : 0;
+    const joined2020 = new Date(userData.createdAt).getFullYear() == 2020
+      ? 1
+      : 0;
     const userInfo = new UserInfo(
       totalCommits,
       userData.followers.totalCount,
@@ -104,6 +108,7 @@ export class GithubAPIClient {
       languages.size,
       durationYear,
       acientAccount,
+      joined2020
     );
     return userInfo;
   }

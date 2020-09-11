@@ -9,6 +9,7 @@ import {
   MultipleLangTrophy,
   LongTimeAccountTrophy,
   AncientAccountTrophy,
+  Joined2020Trophy,
 } from "./trophies.ts";
 import { UserInfo } from "./github_api_client.ts";
 import { RANK_ORDER, RANK } from "./utils.ts";
@@ -42,6 +43,7 @@ export class Card {
       new MultipleLangTrophy(userInfo.languageCount),
       new LongTimeAccountTrophy(userInfo.durationYear),
       new AncientAccountTrophy(userInfo.acientAccount),
+      new Joined2020Trophy(userInfo.joined2020),
     );
 
     // Filter by hidden
