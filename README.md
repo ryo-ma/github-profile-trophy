@@ -34,9 +34,9 @@ Change the `?username=` value to your GitHub's username.
 ```
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
 ```
-
-<img src="https://github-profile-trophy.vercel.app/?username=ryo-ma&column=7&rank=SSS,SS,S,AAA,AA,A,B,C" />
-
+<p align="center">
+  <img alig src="https://github-profile-trophy.vercel.app/?username=ryo-ma&column=7&rank=SSS,SS,S,AAA,AA,A,B,C" />
+</p>
 ## Use theme
 
 Add optional parameter of theme.
@@ -44,9 +44,9 @@ Add optional parameter of theme.
 ```
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onedark)](https://github.com/ryo-ma/github-profile-trophy)
 ```
-
-<img width="660" src="https://user-images.githubusercontent.com/6661165/92327052-d99b9e00-f091-11ea-9a24-c7ec86982370.png">
-
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/92327052-d99b9e00-f091-11ea-9a24-c7ec86982370.png">
+</p>
 
 **[More detail](#apply-theme)**
 
@@ -65,15 +65,18 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 ## Secret Rank
 The acquisition condition is secret, but you can know the condition by reading this code.
 
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91643641-28cd4780-ea70-11ea-94a9-a51885252700.png" />
-
+<p align="center">
+  <img width="110" src="https://user-images.githubusercontent.com/6661165/91643641-28cd4780-ea70-11ea-94a9-a51885252700.png" />
+</p>
 
 There are still few secret trophies.  
 Therefore, if you come up with interesting conditions, I am waiting for contributions.
 
 # About Display details
 
-<img width="220" src="https://user-images.githubusercontent.com/6661165/91642962-6333e600-ea6a-11ea-83af-e371e996bfa6.png" />
+<p align="center">
+  <img width="220" src="https://user-images.githubusercontent.com/6661165/91642962-6333e600-ea6a-11ea-83af-e371e996bfa6.png" />
+</p>
 
 1. Title name of aggregation target.
 2. Current Rank.
@@ -97,8 +100,10 @@ You can filter the display by specifying the titles of trophy.
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Followers
 ```
-<img width="110" src="https://user-images.githubusercontent.com/6661165/92317141-80ebe700-f038-11ea-8501-4015bfbb2cf4.png">
 
+<p align="center">
+  <img width="110" src="https://user-images.githubusercontent.com/6661165/92317141-80ebe700-f038-11ea-8501-4015bfbb2cf4.png">
+</p>
 
 If You want to specify multiple titles.
 
@@ -114,8 +119,9 @@ You can filter the display by specifying the ranks.
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S
 ```
-
-<img width="110" src="https://user-images.githubusercontent.com/6661165/91642657-1cdd8780-ea68-11ea-994b-4568a55cd22a.png" />
+<p align="center">
+  <img width="110" src="https://user-images.githubusercontent.com/6661165/91642657-1cdd8780-ea68-11ea-994b-4568a55cd22a.png" />
+</p>
 
 If you want to specify multiple ranks.
 
@@ -145,7 +151,10 @@ Restrict row & column
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=3
 ```
-<img width="330" src="https://user-images.githubusercontent.com/6661165/91659474-c07f7400-eb0a-11ea-84f2-eb6b42547829.png">
+
+<p align="center">
+  <img width="330" src="https://user-images.githubusercontent.com/6661165/91659474-c07f7400-eb0a-11ea-84f2-eb6b42547829.png">
+</p>
 
 ## Apply theme
 
@@ -163,8 +172,9 @@ Available themes.
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=flat
 ```
-
-<img width="660" src="https://user-images.githubusercontent.com/6661165/92325601-039b9300-f087-11ea-983a-fce8133549ee.png">
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/92325601-039b9300-f087-11ea-983a-fce8133549ee.png">
+</p>
 
 ### onedark
 
@@ -172,7 +182,9 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=flat
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onedark
 ```
 
-<img width="660" src="https://user-images.githubusercontent.com/6661165/92327052-d99b9e00-f091-11ea-9a24-c7ec86982370.png">
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/92327052-d99b9e00-f091-11ea-9a24-c7ec86982370.png">
+</p>
 
 ### gruvbox
 
@@ -180,7 +192,9 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onedark
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox
 ```
 
-<img width="660" src="https://user-images.githubusercontent.com/6661165/92315152-e9c56600-f01c-11ea-9536-1bfbb158cfcb.png">
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/92315152-e9c56600-f01c-11ea-9536-1bfbb158cfcb.png">
+</p>
 
 ### dracula
 
@@ -188,8 +202,9 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dracula
 ```
 
-<img width="660" src="https://user-images.githubusercontent.com/6661165/92490273-c91f2b00-f22b-11ea-9481-b5daae4d7bc3.png">
-
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/92490273-c91f2b00-f22b-11ea-9481-b5daae4d7bc3.png">
+</p>
 
 # Contribution Guide
 
