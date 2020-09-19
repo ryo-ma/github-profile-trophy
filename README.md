@@ -213,8 +213,9 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dracula
 
 ## Margin Width
 
-You can put a margin in the width between trophies.
+You can put a margin in the width between trophies.  
 `Available value: number type`  
+`Default: margin-w=0`
 
 ```
 http://localhost:8080/?username=ryo-ma&margin-w=15
@@ -226,8 +227,9 @@ http://localhost:8080/?username=ryo-ma&margin-w=15
 
 ## Margin Height
 
-You can put a margin in the height between trophies.
+You can put a margin in the height between trophies.  
 `Available value: number type`  
+`Default: margin-h=0`
 
 ```
 http://localhost:8080/?username=ryo-ma&column=3&margin-h=15
