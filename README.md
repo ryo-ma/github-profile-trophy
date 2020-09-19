@@ -94,6 +94,9 @@ Therefore, if you come up with interesting conditions, I am waiting for contribu
 * [column](#specify-the-maximum-row--column-size)
 * [row](#specify-the-maximum-row--column-size)
 * [theme](#apply-theme)
+* [margin-w](#margin-width)
+* [margin-h](#margin-height)
+
 
 ## Filter by titles
 
@@ -204,9 +207,42 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gruvbox
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dracula
 ```
 
-<p align="center">
+c
   <img width="660" src="https://user-images.githubusercontent.com/6661165/92490273-c91f2b00-f22b-11ea-9481-b5daae4d7bc3.png">
 </p>
+
+## Margin Width
+
+You can put a margin in the width between trophies.
+`Available value: number type`  
+
+```
+http://localhost:8080/?username=ryo-ma&margin-w=15
+```
+
+<p align="center">
+  <img width="735" src="https://user-images.githubusercontent.com/6661165/93668661-e0ca9f00-fac8-11ea-9bec-325454f49fb4.png">
+</p>
+
+## Margin Height
+
+You can put a margin in the height between trophies.
+`Available value: number type`  
+
+```
+http://localhost:8080/?username=ryo-ma&column=3&margin-h=15
+```
+
+## Example layout
+
+```
+http://localhost:8080/?username=ryo-ma&column=3&margin-w=15&margin-h=15
+```
+
+<p align="center">
+  <img width="360" src="https://user-images.githubusercontent.com/6661165/93668677-ff309a80-fac8-11ea-8ae3-3e3e8adbef39.png">
+</p>
+
 
 # Contribution Guide
 
