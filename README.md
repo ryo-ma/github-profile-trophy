@@ -232,7 +232,7 @@ You can put a margin in the height between trophies.
 `Default: margin-h=0`
 
 ```
-http://localhost:8080/?username=ryo-ma&column=3&margin-h=15
+http://localhost:8080/?username=ryo-ma&margin-h=15
 ```
 
 ## Example layout
