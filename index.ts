@@ -17,13 +17,13 @@ export default async (req: ServerRequest) => {
   if (Object.keys(COLORS).includes(themeParam)) {
     theme = COLORS[themeParam]
   }
-  const paddingWidth = params.getNumberValue(
-    "padding-w",
-    CONSTANTS.DEFAULT_PADDING_W,
+  const marginWidth = params.getNumberValue(
+    "margin-w",
+    CONSTANTS.DEFAULT_MARGIN_W,
   );
   const paddingHeight = params.getNumberValue(
-    "padding-h",
-    CONSTANTS.DEFAULT_PADDING_H,
+    "margin-h",
+    CONSTANTS.DEFAULT_MARGIN_H,
   );
   const titles: Array<string> = params.getAll("title").flatMap((r) =>
     r.split(",")
@@ -62,7 +62,7 @@ export default async (req: ServerRequest) => {
         column,
         row,
         CONSTANTS.DEFAULT_PANEL_SIZE,
-        paddingWidth,
+        marginWidth,
         paddingHeight,
       ).render(userInfo, theme),
       headers: new Headers(
