@@ -211,6 +211,17 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dracula
   <img width="660" src="https://user-images.githubusercontent.com/6661165/92490273-c91f2b00-f22b-11ea-9481-b5daae4d7bc3.png">
 </p>
 
+### monokai
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=monokai
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/93725426-2c289e80-fbea-11ea-96a4-f6490ccf2126.png">
+</p>
+
+
 ## Margin Width
 
 You can put a margin in the width between trophies.  
