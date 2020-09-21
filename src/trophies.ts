@@ -64,7 +64,7 @@ export class Trophy {
     y = 0,
     panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,
   ): string {
-    const { PRIMARY, SECONDARY, TEXT, NEXT_RANK_BAR } = theme;
+    const { BACKGROUND: PRIMARY, TITLE: SECONDARY, TEXT, NEXT_RANK_BAR } = theme;
     const nextRankBar = getNextRankBar(
       this.title,
       this.calculateNextRankPercentage(),

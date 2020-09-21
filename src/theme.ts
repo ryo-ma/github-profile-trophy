@@ -1,7 +1,7 @@
 export const COLORS: {[name: string]: Theme} = {
   default: {
-    PRIMARY: "#FFF",
-    SECONDARY: "#000",
+    BACKGROUND: "#FFF",
+    TITLE: "#000",
     ICON_CIRCLE: "#FFF",
     TEXT: "#666",
     LAUREL: "#009366",
@@ -24,8 +24,8 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_TEXT: "#333",
   },
   dracula: {
-    PRIMARY: "#282a36",
-    SECONDARY: "#ff79c6",
+    BACKGROUND: "#282a36",
+    TITLE: "#ff79c6",
     ICON_CIRCLE: "#f8f8f2",
     TEXT: "#f8f8f2",
     LAUREL: "#50fa7b",
@@ -48,8 +48,8 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_TEXT: "#6272a4",
   },
   flat: {
-    PRIMARY: "#FFF",
-    SECONDARY: "#000",
+    BACKGROUND: "#FFF",
+    TITLE: "#000",
     ICON_CIRCLE: "#FFF",
     TEXT: "#666",
     LAUREL: "#009366",
@@ -72,8 +72,8 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_TEXT: "#333",
   },
   onedark: {
-    PRIMARY: "#282c34",
-    SECONDARY: "#e5c07b",
+    BACKGROUND: "#282c34",
+    TITLE: "#e5c07b",
     ICON_CIRCLE: "#FFF",
     TEXT: "#e06c75",
     LAUREL: "#98c379",
@@ -96,8 +96,8 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_TEXT: "#282c34",
   },
   gruvbox: {
-    PRIMARY: "#282828",
-    SECONDARY: "#ebdbb2",
+    BACKGROUND: "#282828",
+    TITLE: "#ebdbb2",
     ICON_CIRCLE: "#ebdbb2",
     TEXT: "#98971a",
     LAUREL: "#689d6a",
@@ -119,11 +119,35 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#928374",
     DEFAULT_RANK_TEXT: "#282828",
   },
+  monokai: {
+    BACKGROUND: "#272822",
+    TITLE: "#f92672",
+    ICON_CIRCLE: "#fff",
+    TEXT: "#fff",
+    LAUREL: "#a6e22e",
+    SECRET_RANK_1: "#f92672",
+    SECRET_RANK_2: "#ae81ff",
+    SECRET_RANK_3: "#66d9ef",
+    SECRET_RANK_TEXT: "#b16286",
+    NEXT_RANK_BAR: "#f92672",
+    S_RANK_BASE: "#e6db74",
+    S_RANK_SHADOW: "#e6db74",
+    S_RANK_TEXT: "#272822",
+    A_RANK_BASE: "#66d9ef",
+    A_RANK_SHADOW: "#66d9ef",
+    A_RANK_TEXT: "#272822",
+    B_RANK_BASE: "#fd971f",
+    B_RANK_SHADOW: "#fd971f",
+    B_RANK_TEXT: "#272822",
+    DEFAULT_RANK_BASE: "#75715e",
+    DEFAULT_RANK_SHADOW: "#75715e",
+    DEFAULT_RANK_TEXT: "#282828",
+  },
 };
 
 export interface Theme {
-  PRIMARY: string;
-  SECONDARY: string;
+  BACKGROUND: string;
+  TITLE: string;
   ICON_CIRCLE: string;
   TEXT: string;
   LAUREL: string;
