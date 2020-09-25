@@ -171,6 +171,7 @@ Available themes.
 | [onedark](#onedark) |
 | [gruvbox](#gruvbox) |
 | [dracula](#dracula) |
+| [monokai](#monokai) |
 
 ### flat
 
@@ -211,6 +212,17 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dracula
   <img width="660" src="https://user-images.githubusercontent.com/6661165/92490273-c91f2b00-f22b-11ea-9481-b5daae4d7bc3.png">
 </p>
 
+### monokai
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=monokai
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/93725426-2c289e80-fbea-11ea-96a4-f6490ccf2126.png">
+</p>
+
+
 ## Margin Width
 
 You can put a margin in the width between trophies.  
@@ -218,7 +230,7 @@ You can put a margin in the width between trophies.
 `Default: margin-w=0`
 
 ```
-http://localhost:8080/?username=ryo-ma&margin-w=15
+https://github-profile-trophy.vercel.app/?username=ryo-ma&margin-w=15
 ```
 
 <p align="center">
@@ -232,13 +244,13 @@ You can put a margin in the height between trophies.
 `Default: margin-h=0`
 
 ```
-http://localhost:8080/?username=ryo-ma&margin-h=15
+https://github-profile-trophy.vercel.app/?username=ryo-ma&margin-h=15
 ```
 
 ## Example layout
 
 ```
-http://localhost:8080/?username=ryo-ma&column=3&margin-w=15&margin-h=15
+https://github-profile-trophy.vercel.app/?username=ryo-ma&column=3&margin-w=15&margin-h=15
 ```
 
 <p align="center">
