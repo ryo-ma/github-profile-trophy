@@ -172,6 +172,7 @@ Available themes.
 | [gruvbox](#gruvbox) |
 | [dracula](#dracula) |
 | [monokai](#monokai) |
+| [chalk](#chalk) |
 
 ### flat
 
@@ -222,6 +223,15 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=monokai
   <img width="660" src="https://user-images.githubusercontent.com/6661165/93725426-2c289e80-fbea-11ea-96a4-f6490ccf2126.png">
 </p>
 
+### chalk
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=chalk
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/94294003-1de7d300-ff9a-11ea-91d1-60417a4d919b.png">
+</p>
 
 ## Margin Width
 
