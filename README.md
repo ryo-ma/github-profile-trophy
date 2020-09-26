@@ -173,6 +173,7 @@ Available themes.
 | [dracula](#dracula) |
 | [monokai](#monokai) |
 | [chalk](#chalk) |
+| [nord](#nord) |
 
 ### flat
 
@@ -232,6 +233,17 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=chalk
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/94294003-1de7d300-ff9a-11ea-91d1-60417a4d919b.png">
 </p>
+
+### nord
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=nord
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/94346857-7ab2be80-006a-11eb-9082-36d377ae2531.png">
+</p>
+
 
 ## Margin Width
 
