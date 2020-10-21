@@ -46,7 +46,7 @@ export default async (req: ServerRequest) => {
   if (userInfo === null) {
     req.respond(
       {
-        body: "Can not find a user",
+        body: "Can not find a user with userID: "+username,
         status: 404,
         headers: new Headers({ "Content-Type": "text" }),
       },
