@@ -174,6 +174,7 @@ Available themes.
 | [monokai](#monokai) |
 | [chalk](#chalk) |
 | [nord](#nord) |
+| [alduin](#alduin) |
 
 ### flat
 
@@ -244,6 +245,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=nord
   <img width="660" src="https://user-images.githubusercontent.com/6661165/94346857-7ab2be80-006a-11eb-9082-36d377ae2531.png">
 </p>
 
+
+### alduin
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=alduin
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/99085932-2a88bf00-260c-11eb-9b26-d2f125773831.png">
+</p>
 
 ## Margin Width
 
