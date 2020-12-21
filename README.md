@@ -175,6 +175,7 @@ Available themes.
 | [chalk](#chalk) |
 | [nord](#nord) |
 | [alduin](#alduin) |
+| [dark-hub](#dark-hub) |
 
 ### flat
 
@@ -255,6 +256,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=alduin
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/99085932-2a88bf00-260c-11eb-9b26-d2f125773831.png">
 </p>
+
+### dark-hub
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dark-hub
+```
+
+<!--p align="center">
+  <img width="660" src="">
+</p-->
 
 ## Margin Width
 
