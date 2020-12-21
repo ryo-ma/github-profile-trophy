@@ -175,7 +175,7 @@ Available themes.
 | [chalk](#chalk) |
 | [nord](#nord) |
 | [alduin](#alduin) |
-| [dark-hub](#dark-hub) |
+| [darkhub](#darkhub) |
 
 ### flat
 
@@ -257,10 +257,10 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=alduin
   <img width="660" src="https://user-images.githubusercontent.com/6661165/99085932-2a88bf00-260c-11eb-9b26-d2f125773831.png">
 </p>
 
-### dark-hub
+### darkhub
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dark-hub
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=darkhub
 ```
 
 <!--p align="center">

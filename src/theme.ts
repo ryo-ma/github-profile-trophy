@@ -215,7 +215,7 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#75715e",
     DEFAULT_RANK_TEXT: "#2d2d2d",
   },
-  dark_hub: {
+  darkhub: {
     BACKGROUND: "#0d1117",
     TITLE: "#c9d1d9",
     ICON_CIRCLE: "#8b949e",
