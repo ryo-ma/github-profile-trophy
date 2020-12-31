@@ -9,7 +9,7 @@ export class UserInfo {
     public totalRepositories: number,
     public languageCount: number,
     public durationYear: number,
-    public acientAccount: number,
+    public ancientAccount: number,
     public joined2020: number,
   ) {
   }
@@ -92,7 +92,7 @@ export class GithubAPIClient {
     const durationTime = new Date().getTime() -
       new Date(userData.createdAt).getTime();
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
-    const acientAccount = new Date(userData.createdAt).getFullYear() <= 2010
+    const ancientAccount = new Date(userData.createdAt).getFullYear() <= 2010
       ? 1
       : 0;
     const joined2020 = new Date(userData.createdAt).getFullYear() == 2020
@@ -107,7 +107,7 @@ export class GithubAPIClient {
       userData.repositories.totalCount,
       languages.size,
       durationYear,
-      acientAccount,
+      ancientAccount,
       joined2020
     );
     return userInfo;
