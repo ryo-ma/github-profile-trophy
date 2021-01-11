@@ -28,6 +28,13 @@ export class CustomURLSearchParams extends URLSearchParams {
     }
     return defaultValue;
   }
+  getBooleanValue(key: string, defaultValue: boolean): boolean {
+    if (super.has(key)) {
+      const param = super.get(key);
+      return param !== null && param.toString() === 'true';
+    }
+    return defaultValue;
+  }
 }
 
 export function parseParams(req: ServerRequest): CustomURLSearchParams {
