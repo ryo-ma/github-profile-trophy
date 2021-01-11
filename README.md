@@ -305,8 +305,8 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&column=3&margin-w=15&m
 
 ## Transpalent background
 
-You can turn the background transparent.
-`Available value: boolean type (true or false)`
+You can turn the background transparent.  
+`Available value: boolean type (true or false)`  
 `Default: no-bg=false`
 
 ```
@@ -315,8 +315,8 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&no-bg=true
 
 ## Hide frames
 
-You can hide the frames around the trophies.
-`Available value: boolean type (true or false)`
+You can hide the frames around the trophies.  
+`Available value: boolean type (true or false)`  
 `Default: no-frame=false`
 
 ```
