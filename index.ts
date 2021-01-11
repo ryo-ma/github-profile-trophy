@@ -25,6 +25,14 @@ export default async (req: ServerRequest) => {
     "margin-h",
     CONSTANTS.DEFAULT_MARGIN_H,
   );
+  const noBackground = params.getBooleanValue(
+    "no-bg",
+    CONSTANTS.DEFAULT_NO_BACKGROUND,
+  );
+  const noFrame = params.getBooleanValue(
+    "no-frame",
+    CONSTANTS.DEFAULT_NO_FRAME,
+  );
   const titles: Array<string> = params.getAll("title").flatMap((r) =>
     r.split(",")
   ).map((r) => r.trim());
@@ -64,6 +72,8 @@ export default async (req: ServerRequest) => {
         CONSTANTS.DEFAULT_PANEL_SIZE,
         marginWidth,
         paddingHeight,
+        noBackground,
+        noFrame,
       ).render(userInfo, theme),
       headers: new Headers(
         {

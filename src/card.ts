@@ -27,6 +27,8 @@ export class Card {
     private panelSize: number,
     private marginWidth: number,
     private marginHight: number,
+    private noBackground: boolean,
+    private noFrame: boolean,
   ) {
     this.width = panelSize * this.maxColumn + this.marginWidth * (this.maxColumn - 1);
   }
@@ -92,7 +94,7 @@ export class Card {
         const currentRow = Math.floor(i / this.maxColumn);
         const x = this.panelSize * currentColumn + this.marginWidth * currentColumn;
         const y = this.panelSize * currentRow + this.marginHight * currentRow;
-        return sum + trophy.render(theme, x, y, this.panelSize);
+        return sum + trophy.render(theme, x, y, this.panelSize, this.noBackground, this.noFrame);
       },
       "",
     );
