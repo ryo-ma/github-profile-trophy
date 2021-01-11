@@ -62,6 +62,8 @@ export const CONSTANTS = {
   DEFAULT_MAX_ROW: 3,
   DEFAULT_MARGIN_W: 0,
   DEFAULT_MARGIN_H: 0,
+  DEFAULT_NO_BACKGROUND: false,
+  DEFAULT_NO_FRAME: false,
 };
 
 export enum RANK {
