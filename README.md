@@ -176,6 +176,7 @@ Available themes.
 | [nord](#nord) |
 | [alduin](#alduin) |
 | [darkhub](#darkhub) |
+| [adsJuicyFresh](#adsJuicyFresh) |
 
 ### flat
 
@@ -265,6 +266,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=darkhub
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/102801126-249ab080-43f8-11eb-91c8-f56f94c35777.png">
+</p>
+
+### adsJuicyFresh
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=adsJuicyFresh
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/37553901/104757255-6a486000-578f-11eb-954c-4695bcd9ccaa.png">
 </p>
 
 ## Margin Width
