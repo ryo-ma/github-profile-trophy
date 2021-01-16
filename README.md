@@ -324,6 +324,12 @@ You can turn the background transparent.
 https://github-profile-trophy.vercel.app/?username=ryo-ma&no-bg=true
 ```
 
+<p align="center">
+  <img width=660 src="https://user-images.githubusercontent.com/6661165/104810864-ed72c000-583a-11eb-863b-04acffb705ea.png">
+</p>
+
+
+
 ## Hide frames
 
 You can hide the frames around the trophies.  
@@ -333,6 +339,11 @@ You can hide the frames around the trophies.
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&no-frame=true
 ```
+
+<p align="center">
+  <img width=660 src="https://user-images.githubusercontent.com/6661165/104810887-1d21c800-583b-11eb-8f0d-785c1640dc5d.png">
+</p>
+
 
 # Contribution Guide
 
