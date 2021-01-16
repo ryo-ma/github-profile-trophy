@@ -239,7 +239,7 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#6272a4",
     DEFAULT_RANK_TEXT: "#0d1117",
   },
-  adsJuicyFresh: {
+  juicyfresh: {
     BACKGROUND: "#0d0c15",
     TITLE: "#f7d745",
     ICON_CIRCLE: "#FFF",
