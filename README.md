@@ -275,7 +275,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=juicyfresh
 ```
 
 <p align="center">
-  <img width="660" src="https://user-images.githubusercontent.com/37553901/104757255-6a486000-578f-11eb-954c-4695bcd9ccaa.png">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/104810094-edbc8c80-5835-11eb-8c20-a76192a00728.png">
 </p>
 
 ## Margin Width
