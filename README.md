@@ -97,7 +97,7 @@ Therefore, if you come up with interesting conditions, I am waiting for contribu
 * [margin-w](#margin-width)
 * [margin-h](#margin-height)
 * [no-bg](#transpalent-background)
-* [no-frame](#hide-frame)
+* [no-frame](#hide-frames)
 
 
 ## Filter by titles
