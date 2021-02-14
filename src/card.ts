@@ -26,7 +26,7 @@ export class Card {
     private maxRow: number,
     private panelSize: number,
     private marginWidth: number,
-    private marginHight: number,
+    private marginHeight: number,
     private noBackground: boolean,
     private noFrame: boolean,
   ) {
@@ -85,7 +85,7 @@ export class Card {
     if (row > this.maxRow) {
       row = this.maxRow;
     }
-    this.height = this.panelSize * row + this.marginHight * (row - 1);
+    this.height = this.panelSize * row + this.marginHeight * (row - 1);
 
     // Join all trophy
     const renderedTrophy = trophyList.reduce(
@@ -93,7 +93,7 @@ export class Card {
         const currentColumn = i % this.maxColumn;
         const currentRow = Math.floor(i / this.maxColumn);
         const x = this.panelSize * currentColumn + this.marginWidth * currentColumn;
-        const y = this.panelSize * currentRow + this.marginHight * currentRow;
+        const y = this.panelSize * currentRow + this.marginHeight * currentRow;
         return sum + trophy.render(theme, x, y, this.panelSize, this.noBackground, this.noFrame);
       },
       "",
