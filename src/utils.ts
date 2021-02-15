@@ -38,11 +38,11 @@ export class CustomURLSearchParams extends URLSearchParams {
 }
 
 export function parseParams(req: ServerRequest): CustomURLSearchParams {
-  const splitedURL = req.url.split("?");
-  if (splitedURL.length < 2) {
+  const splittedURL = req.url.split("?");
+  if (splittedURL.length < 2) {
     return new CustomURLSearchParams();
   }
-  return new CustomURLSearchParams(splitedURL[1]);
+  return new CustomURLSearchParams(splittedURL[1]);
 }
 
 export function abridgeScore(score: number): string {

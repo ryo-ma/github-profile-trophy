@@ -2,7 +2,7 @@ import { RANK } from "./utils.ts";
 import { Theme } from "./theme.ts";
 
 const leafIcon = (laurel: string): string => {
-  return  `<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+  return  `<svg xmlns="http://www.w3.org/2000/svg" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
 <metadata>
 Created by potrace 1.15, written by Peter Selinger 2001-2017
 </metadata>
@@ -31,7 +31,7 @@ export const getNextRankBar = (
   percentage: number,
   color: string,
 ): string => {
-  const maxWidht = 80;
+  const maxWidth = 80;
   return `
     <style>
     @keyframes ${title}RankAnimation {
@@ -39,7 +39,7 @@ export const getNextRankBar = (
         width: 0px;
       }
       to {
-        width: ${maxWidht * percentage}px;
+        width: ${maxWidth * percentage}px;
       }
     }
     #${title}-rank-progress{
@@ -50,7 +50,7 @@ export const getNextRankBar = (
       x="15"
       y="101"
       rx="1"
-      width="${maxWidht}"
+      width="${maxWidth}"
       height="3.2"
       opacity="0.3"
       fill="${color}"
