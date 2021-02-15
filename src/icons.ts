@@ -31,7 +31,7 @@ export const getNextRankBar = (
   percentage: number,
   color: string,
 ): string => {
-  const maxWidht = 80;
+  const maxWidth = 80;
   return `
     <style>
     @keyframes ${title}RankAnimation {
@@ -39,7 +39,7 @@ export const getNextRankBar = (
         width: 0px;
       }
       to {
-        width: ${maxWidht * percentage}px;
+        width: ${maxWidth * percentage}px;
       }
     }
     #${title}-rank-progress{
@@ -50,7 +50,7 @@ export const getNextRankBar = (
       x="15"
       y="101"
       rx="1"
-      width="${maxWidht}"
+      width="${maxWidth}"
       height="3.2"
       opacity="0.3"
       fill="${color}"
