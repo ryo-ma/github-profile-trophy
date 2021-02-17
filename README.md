@@ -96,7 +96,7 @@ Therefore, if you come up with interesting conditions, I am waiting for contribu
 * [theme](#apply-theme)
 * [margin-w](#margin-width)
 * [margin-h](#margin-height)
-* [no-bg](#transpalent-background)
+* [no-bg](#transparent-background)
 * [no-frame](#hide-frames)
 
 
@@ -314,7 +314,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&column=3&margin-w=15&m
   <img width="360" src="https://user-images.githubusercontent.com/6661165/93668677-ff309a80-fac8-11ea-8ae3-3e3e8adbef39.png">
 </p>
 
-## Transpalent background
+## Transparent background
 
 You can turn the background transparent.  
 `Available value: boolean type (true or false)`  
