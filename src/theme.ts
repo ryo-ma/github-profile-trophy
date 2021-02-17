@@ -1,6 +1,6 @@
 export const COLORS: {[name: string]: Theme} = {
   default: {
-    BACKGROUND: "#FFF",
+    BACKGROUND: "transparent",
     TITLE: "#000",
     ICON_CIRCLE: "#FFF",
     TEXT: "#666",
