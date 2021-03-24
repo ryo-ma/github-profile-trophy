@@ -263,7 +263,7 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#f58867",
     DEFAULT_RANK_TEXT: "#ff5700",
   },
-  Buddhism: {
+  buddhism: {
     BACKGROUND: "#ffc20e",
     TITLE: "#FFF",
     ICON_CIRCLE: "#FFF",
