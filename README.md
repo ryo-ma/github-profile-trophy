@@ -61,7 +61,7 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 |  SSS, SS, S  | You are at a hard to reach rank. You can brag.  |
 |  AAA, AA, A  | You can reach the rank if you do your best. Let's aim here first.  |
 |  B, C  | You are in a growing process.  |
-| UNKOWN | You have not yet taken action. Let's act first. |
+| UNKNOWN | You have not yet taken action. Let's act first. |
 | SECRET | The rank is very rare. The trophy will not be displayed until the conditions are met. |
 
 ## Secret Rank
