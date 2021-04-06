@@ -179,6 +179,8 @@ Available themes.
 | [alduin](#alduin) |
 | [darkhub](#darkhub) |
 | [juicyfresh](#juicyfresh) |
+| [buddhism](#buddhism) |
+
 
 ### flat
 
@@ -278,6 +280,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=juicyfresh
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/104810094-edbc8c80-5835-11eb-8c20-a76192a00728.png">
+</p>
+
+### buddhism
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=buddhism
+```
+
+<p align="center">
+  <img width="660" src="https://camo.githubusercontent.com/f39e9493f1c12797d84716eed599426057770b2705b43b00458edc84e261c2f1/68747470733a2f2f6769746875622d70726f66696c652d74726f7068792e76657263656c2e6170702f3f757365726e616d653d72796f2d6d61267468656d653d627564646869736d">
 </p>
 
 ## Margin Width
