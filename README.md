@@ -180,6 +180,7 @@ Available themes.
 | [darkhub](#darkhub) |
 | [juicyfresh](#juicyfresh) |
 | [buddhism](#buddhism) |
+| [oldie](#oldie) |
 
 
 ### flat
@@ -291,6 +292,17 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=buddhism
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/113709167-2412f500-971d-11eb-9ee5-0ab292cf8b4c.png">
 </p>
+
+### oldie
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=oldie
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/113709581-a0a5d380-971d-11eb-8583-770dc4091ebf.png">
+</p>
+
 
 ## Margin Width
 
