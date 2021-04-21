@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+<!--Introduction-->
+<h1>Facts About the Earth</h1>
+<img src="Earth.jpg" alt="Blue Marble">
+<p>The Blue Marble by the crew of Apollo 17 (1972) from wikimedia.org</p>
+<!--Facts-->
+<ul>
+<li>It is the 3rd planted from the Sun</li>
+<li>Earth Is the 5th largest planet in our Solar System</li>
+<li>Earth is not flat but not perfectly round either</li>
+<li>Earth's gravity isn't uniform</li>
+</ul>
+</body
+</html>
