@@ -331,9 +331,9 @@ export const COLORS: {[name: string]: Theme} = {
     B_RANK_BASE: "#00006c",
     B_RANK_SHADOW: "#00006c",
     B_RANK_TEXT: "#f8d847",
-    DEFAULT_BASE: "#8be9fd",
-    DEFAULT_SHADOW: "#8be9fd",
-    DEFAULT_TEXT: "#f8d847",
+    DEFAULT_RANK_BASE: "#8be9fd",
+    DEFAULT_RANK_SHADOW: "#8be9fd",
+    DEFAULT_RANK_TEXT: "#f8d847",
   },
 };
 
