@@ -181,7 +181,7 @@ Available themes.
 | [juicyfresh](#juicyfresh) |
 | [buddhism](#buddhism) |
 | [oldie](#oldie) |
-
+| [radical](#radical) |
 
 ### flat
 
@@ -301,6 +301,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=oldie
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/113709581-a0a5d380-971d-11eb-8583-770dc4091ebf.png">
+</p>
+
+### radical
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=radical
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/116633521-adbc8800-a994-11eb-97c4-e45a32721491.png">
 </p>
 
 
