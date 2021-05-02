@@ -48,7 +48,7 @@ export class GithubAPIClient {
             repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {direction: DESC, field: STARGAZERS}) {
               totalCount
               nodes {
-                languages(first: 1, orderBy: {direction:DESC, field: SIZE}) {
+                languages(first: 3, orderBy: {direction:DESC, field: SIZE}) {
                   nodes {
                     name
                   }
@@ -85,8 +85,12 @@ export class GithubAPIClient {
 
     const languages = new Set<string>();
     userData.repositories.nodes.forEach((node: Repository) => {
-      if (node.languages.nodes[0] != undefined) {
-        languages.add(node.languages.nodes[0].name);
+      if (node.languages.nodes != undefined) {
+        node.languages.nodes.forEach((node: Language) => {
+          if (node != undefined) {
+            languages.add(node.name);
+          }
+        });
       }
     });
     const durationTime = new Date().getTime() -
@@ -108,7 +112,7 @@ export class GithubAPIClient {
       languages.size,
       durationYear,
       ancientAccount,
-      joined2020
+      joined2020,
     );
     return userInfo;
   }
