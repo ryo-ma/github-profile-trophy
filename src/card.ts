@@ -12,7 +12,7 @@ import {
   Joined2020Trophy,
   AllSuperRankTrophy,
 } from "./trophies.ts";
-import { UserInfo } from "./github_api_client.ts";
+import { UserInfo } from "./user_info.ts";
 import { RANK_ORDER, RANK } from "./utils.ts";
 import { Theme } from "./theme.ts";
 

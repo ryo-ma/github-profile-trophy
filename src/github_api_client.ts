@@ -1,26 +1,6 @@
 import { soxa } from "../deps.ts";
-export class UserInfo {
-  constructor(
-    public totalCommits: number,
-    public totalFollowers: number,
-    public totalIssues: number,
-    public totalPullRequests: number,
-    public totalStargazers: number,
-    public totalRepositories: number,
-    public languageCount: number,
-    public durationYear: number,
-    public ancientAccount: number,
-    public joined2020: number,
-  ) {
-  }
-}
-type Language = { name: string };
-type Stargazers = { totalCount: number };
-
-type Repository = {
-  languages: { nodes: Language[] };
-  stargazers: Stargazers;
-};
+import { UserInfo } from "./user_info.ts"
+import type { GitHubUserData } from "./user_info.ts";
 
 export class GithubAPIClient {
   constructor() {
@@ -69,51 +49,10 @@ export class GithubAPIClient {
         headers: { Authorization: `bearer ${token}` },
       },
     );
-    const userData = response.data.data.user;
-    if (userData === null) {
-      return null;
+    if (response.status != 200) {
+      throw new Error(response)
     }
-    const totalCommits =
-      userData.contributionsCollection.restrictedContributionsCount +
-      userData.contributionsCollection.totalCommitContributions;
-    const totalStargazers = userData.repositories.nodes.reduce(
-      (prev: number, node: Repository) => {
-        return prev + node.stargazers.totalCount;
-      },
-      0,
-    );
-
-    const languages = new Set<string>();
-    userData.repositories.nodes.forEach((node: Repository) => {
-      if (node.languages.nodes != undefined) {
-        node.languages.nodes.forEach((node: Language) => {
-          if (node != undefined) {
-            languages.add(node.name);
-          }
-        });
-      }
-    });
-    const durationTime = new Date().getTime() -
-      new Date(userData.createdAt).getTime();
-    const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
-    const ancientAccount = new Date(userData.createdAt).getFullYear() <= 2010
-      ? 1
-      : 0;
-    const joined2020 = new Date(userData.createdAt).getFullYear() == 2020
-      ? 1
-      : 0;
-    const userInfo = new UserInfo(
-      totalCommits,
-      userData.followers.totalCount,
-      userData.issues.totalCount,
-      userData.pullRequests.totalCount,
-      totalStargazers,
-      userData.repositories.totalCount,
-      languages.size,
-      durationYear,
-      ancientAccount,
-      joined2020,
-    );
-    return userInfo;
+    const userData: GitHubUserData = response.data.data.user;
+    return new UserInfo(userData);
   }
 }
