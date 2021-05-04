@@ -383,8 +383,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&no-frame=true
 
 ## Environment
 
-* Deno >= v1.3.0
-* typescript == 3.9.7
+* Deno >= v1.9.2
 * [Vercel](https://vercel.com/)
 * GitHub API v4
 
