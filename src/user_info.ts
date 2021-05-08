@@ -16,6 +16,9 @@ export type GitHubUserData = {
   issues: {
     totalCount: number;
   };
+  organizations: {
+    totalCount: number;
+  };
   followers: {
     totalCount: number;
   };
@@ -28,6 +31,7 @@ export class UserInfo {
   public readonly totalCommits: number;
   public readonly totalFollowers: number;
   public readonly totalIssues: number;
+  public readonly totalOrganizations: number;
   public readonly totalPullRequests: number;
   public readonly totalStargazers: number;
   public readonly totalRepositories: number;
@@ -70,6 +74,7 @@ export class UserInfo {
     this.totalCommits = totalCommits;
     this.totalFollowers = userData.followers.totalCount;
     this.totalIssues = userData.issues.totalCount;
+    this.totalOrganizations = userData.organizations.totalCount;
     this.totalPullRequests = userData.pullRequests.totalCount;
     this.totalStargazers = totalStargazers;
     this.totalRepositories = userData.repositories.totalCount;

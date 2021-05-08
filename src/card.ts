@@ -11,6 +11,7 @@ import {
   AncientAccountTrophy,
   Joined2020Trophy,
   AllSuperRankTrophy,
+  MultipleOrganizationsTrophy,
 } from "./trophies.ts";
 import { UserInfo } from "./user_info.ts";
 import { RANK_ORDER, RANK } from "./utils.ts";
@@ -54,6 +55,7 @@ export class Card {
       new AncientAccountTrophy(userInfo.ancientAccount),
       new Joined2020Trophy(userInfo.joined2020),
       new AllSuperRankTrophy(isAllSRank),
+      new MultipleOrganizationsTrophy(userInfo.totalOrganizations),
     );
 
     // Filter by hidden

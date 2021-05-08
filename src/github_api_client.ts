@@ -22,6 +22,9 @@ export class GithubAPIClient {
             issues(first: 1) {
               totalCount
             }
+            organizations(first: 1) {
+              totalCount
+            }
             followers(first: 1) {
               totalCount
             }

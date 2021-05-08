@@ -182,6 +182,21 @@ export class LongTimeAccountTrophy extends Trophy{
     this.hidden = true;
   }
 }
+export class MultipleOrganizationsTrophy extends Trophy{
+  constructor(score: number){
+    const rankConditions = [
+      new RankCondition(
+        RANK.SECRET,
+        "Multiple Jobs",
+        2,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "Organizations";
+    this.filterTitles = ["Organizations"];
+    this.hidden = true;
+  }
+}
 
 export class TotalStarTrophy extends Trophy {
   constructor(score: number) {
