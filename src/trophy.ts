@@ -187,13 +187,14 @@ export class MultipleOrganizationsTrophy extends Trophy{
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
-        "Multiple Jobs",
-        2,
+        // or if this doesn't render well: "Factorum"
+        "Jack of all Trades",
+        3,
       ),
     ];
     super(score, rankConditions);
     this.title = "Organizations";
-    this.filterTitles = ["Organizations"];
+    this.filterTitles = ["Organizations", "Orgs", "Teams"];
     this.hidden = true;
   }
 }
