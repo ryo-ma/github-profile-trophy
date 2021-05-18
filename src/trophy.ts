@@ -404,48 +404,48 @@ export class TotalPullRequestTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "God PR User",
+        "God Puller",
         1000,
       ),
       new RankCondition(
         RANK.SS,
-        "Deep PR User",
+        "Deep Puller",
         500,
       ),
       new RankCondition(
         RANK.S,
-        "Super PR User",
+        "Super Puller",
         200,
       ),
       new RankCondition(
         RANK.AAA,
-        "Ultra PR User",
+        "Ultra Puller",
         100,
       ),
       new RankCondition(
         RANK.AA,
-        "Hyper PR User",
+        "Hyper Puller",
         50,
       ),
       new RankCondition(
         RANK.A,
-        "High PR User",
+        "High Puller",
         20,
       ),
       new RankCondition(
         RANK.B,
-        "Middle PR User",
+        "Middle Puller",
         10,
       ),
       new RankCondition(
         RANK.C,
-        "First PR",
+        "First Pull",
         1,
       ),
     ];
     super(score, rankConditions);
     this.title = "PullRequest";
-    this.filterTitles = ["PR", "PullRequest"];
+    this.filterTitles = ["PR", "PullRequest", "Pulls", "Puller"];
   }
 }
 
