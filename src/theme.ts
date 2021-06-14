@@ -168,7 +168,7 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_TEXT: "#3B4252",
   },
   discord: {
-    BACKGROUND: "#2C2F33",
+    BACKGROUND: "#23272A",
     TITLE: "#7289DA",
     ICON_CIRCLE: "#FFFFFF",
     TEXT: "#FFFFFF",
