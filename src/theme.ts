@@ -335,6 +335,30 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#1E65F5",
     DEFAULT_RANK_TEXT: "#3A3A3A",
   },
+  onestar: {
+    BACKGROUND: "#0d1117",
+    ICON_CIRCLE: "#EEEEEE",
+    TITLE: "#EEEEEE",
+    TEXT: "#c7c7c7",
+    LAUREL: "#0dbc79",
+    SECRET_RANK_1: "#ff5555",
+    SECRET_RANK_2: "#d861d8",
+    SECRET_RANK_3: "#3b8eea",
+    SECRET_RANK_TEXT: "#ff61c6",
+    NEXT_RANK_BAR: "#9e9e9e",
+    S_RANK_BASE: "#FFD54F",
+    S_RANK_SHADOW: "#FFE082",
+    S_RANK_TEXT: "#CB8A30",
+    A_RANK_BASE: "#23d18b",
+    A_RANK_SHADOW: "#8DF7B5",
+    A_RANK_TEXT: "#3A3A3A",
+    B_RANK_BASE: "#d13b3b",
+    B_RANK_SHADOW: "#fa4b4b",
+    B_RANK_TEXT: "#3A3A3A",
+    DEFAULT_RANK_BASE: "#2472c8",
+    DEFAULT_RANK_SHADOW: "#3b8eea",
+    DEFAULT_RANK_TEXT: "#3A3A3A",
+  },
 };
 
 export interface Theme {
@@ -361,3 +385,4 @@ export interface Theme {
   DEFAULT_RANK_SHADOW: string;
   DEFAULT_RANK_TEXT: string;
 }
+
