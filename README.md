@@ -319,7 +319,6 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=radical
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onestar
-
 ```
 
 <p align="center">
@@ -330,7 +329,6 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onestar
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=discord
-
 ```
 
 <p align="center">
