@@ -182,6 +182,8 @@ Available themes.
 | [buddhism](#buddhism) |
 | [oldie](#oldie) |
 | [radical](#radical) |
+| [onestar](#onestar) |
+| [discord](#discord) |
 
 ### flat
 
@@ -313,6 +315,27 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=radical
   <img width="660" src="https://user-images.githubusercontent.com/6661165/116633521-adbc8800-a994-11eb-97c4-e45a32721491.png">
 </p>
 
+### onestar
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onestar
+
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/122048400-2af46d00-ce1c-11eb-94e0-c2c6ddaf6819.png">
+</p>
+
+### discord
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=discord
+
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/122048628-7dce2480-ce1c-11eb-9792-1e600b384c4d.png">
+</p>
 
 ## Margin Width
 
