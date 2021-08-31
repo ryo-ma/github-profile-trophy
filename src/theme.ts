@@ -429,7 +429,7 @@ export const COLORS: { [name: string]: Theme } = {
     B_RANK_TEXT: "#752b69",
     DEFAULT_RANK_BASE: "#5c75c3",
     DEFAULT_RANK_SHADOW: "#6272a4",
-    DEFAULT_RANK_TEXT: "#0d1117",
+    DEFAULT_RANK_TEXT: "#0d1118",
   }
 };
 
