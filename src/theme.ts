@@ -1,4 +1,4 @@
-export const COLORS: { [name: string]: Theme } = {
+export const COLORS: {[name: string]: Theme} = {
   default: {
     BACKGROUND: "#FFF",
     TITLE: "#000",
@@ -407,7 +407,7 @@ export const COLORS: { [name: string]: Theme } = {
     DEFAULT_RANK_SHADOW: "#6272a4",
     DEFAULT_RANK_TEXT: "#0d1117",
   },
-  github: {
+  gitdimmed: {
     BACKGROUND: "#333",
     TITLE: "#f0f6fb",
     ICON_CIRCLE: "#f0f6fb",
