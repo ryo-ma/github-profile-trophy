@@ -322,7 +322,8 @@ export const COLORS: {[name: string]: Theme} = {
     SECRET_RANK_3: "#fff",
     SECRET_RANK_TEXT: "#f73155",
     NEXT_RANK_BAR: "#f73155",
-    S_RANK_BASE: "#ff8400",
+    S_RANK_BASE: "#ff8400",heme 
+
     S_RANK_SHADOW: "#ff8400",
     S_RANK_TEXT: "#ffc20e",
     A_RANK_BASE: "#fff",
@@ -407,7 +408,7 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#6272a4",
     DEFAULT_RANK_TEXT: "#0d1117",
   },
-  github: {
+  gitdimmed: {
     BACKGROUND: "#333",
     TITLE: "#f0f6fb",
     ICON_CIRCLE: "#f0f6fb",
