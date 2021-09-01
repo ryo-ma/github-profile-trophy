@@ -184,6 +184,7 @@ Available themes.
 | [radical](#radical) |
 | [onestar](#onestar) |
 | [discord](#discord) |
+| [gitdimmed](#gitdimmed)
 
 ### flat
 
@@ -334,6 +335,14 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=discord
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/122048628-7dce2480-ce1c-11eb-9792-1e600b384c4d.png">
 </p>
+
+### gitdimmed
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gitdimmed
+```
+
+<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=MrBlueBird2&row=2&column=6&theme=gitdimmed&column=8&no-frame=false&no-bg=false" alt="MrBlueBird2"></a></p>
 
 ## Margin Width
 
