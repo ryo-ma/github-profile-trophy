@@ -407,6 +407,30 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#6272a4",
     DEFAULT_RANK_TEXT: "#0d1117",
   },
+  gitdimmed: {
+    BACKGROUND: "#333",
+    TITLE: "#f0f6fb",
+    ICON_CIRCLE: "#f0f6fb",
+    TEXT: "#FFF",
+    LAUREL: "#178600",
+    SECRET_RANK_1: "#ff5555",
+    SECRET_RANK_2: "#ff79c6",
+    SECRET_RANK_3: "#388bfd",
+    SECRET_RANK_TEXT: "#ff79c6",
+    NEXT_RANK_BAR: "#00aeff",
+    S_RANK_BASE: "#ffb86c",
+    S_RANK_SHADOW: "#ffb86c",
+    S_RANK_TEXT: "#0d1117",
+    A_RANK_BASE: "#2dde98",
+    A_RANK_TEXT: "#0d1117",
+    A_RANK_SHADOW: "#2dde98",
+    B_RANK_BASE: "#8be9fd",
+    B_RANK_SHADOW: "#8be9fd",
+    B_RANK_TEXT: "#0d1117",
+    DEFAULT_RANK_BASE: "#5c75c3",
+    DEFAULT_RANK_SHADOW: "#6272a4",
+    DEFAULT_RANK_TEXT: "#0d1117",
+  }
 };
 
 export interface Theme {
