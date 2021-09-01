@@ -322,8 +322,7 @@ export const COLORS: {[name: string]: Theme} = {
     SECRET_RANK_3: "#fff",
     SECRET_RANK_TEXT: "#f73155",
     NEXT_RANK_BAR: "#f73155",
-    S_RANK_BASE: "#ff8400",heme 
-
+    S_RANK_BASE: "#ff8400",
     S_RANK_SHADOW: "#ff8400",
     S_RANK_TEXT: "#ffc20e",
     A_RANK_BASE: "#fff",
