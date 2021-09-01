@@ -1,4 +1,4 @@
-export const COLORS: { [name: string]: Theme } = {
+export const COLORS: {[name: string]: Theme} = {
   default: {
     BACKGROUND: "#FFF",
     TITLE: "#000",
