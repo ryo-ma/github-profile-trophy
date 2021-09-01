@@ -184,6 +184,9 @@ Available themes.
 | [radical](#radical) |
 | [onestar](#onestar) |
 | [discord](#discord) |
+| [algolia](#algolia) |
+| [gitdimmed](#gitdimmed) |
+
 
 ### flat
 
@@ -333,6 +336,26 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=discord
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/122048628-7dce2480-ce1c-11eb-9792-1e600b384c4d.png">
+</p>
+
+### algolia
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=algolia
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/131685203-92a31101-2d93-4d18-b24a-d81a8bb012c5.png">
+</p>
+
+### gitdimmed
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gitdimme
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/131685406-799a864f-2691-4840-bb71-1db9c087a507.png">
 </p>
 
 ## Margin Width
