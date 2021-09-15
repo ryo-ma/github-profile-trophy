@@ -229,7 +229,7 @@ export class TotalStarTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "You are Star",
+        "You are a Star",
         30,
       ),
       new RankCondition(
