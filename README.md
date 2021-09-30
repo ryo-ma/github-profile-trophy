@@ -186,6 +186,7 @@ Available themes.
 | [discord](#discord) |
 | [algolia](#algolia) |
 | [gitdimmed](#gitdimmed) |
+| [tokyonight](#tokyonight) |
 
 
 ### flat
@@ -356,6 +357,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gitdimme
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/131685406-799a864f-2691-4840-bb71-1db9c087a507.png">
+</p>
+
+### tokyonight
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=tokyonight
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/135481587-3547e153-5648-41c5-a35f-9956353c110f.png">
 </p>
 
 ## Margin Width
