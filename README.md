@@ -366,7 +366,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=tokyonight
 ```
 
 <p align="center">
-  <img width="600" src="https://user-images.githubusercontent.com/6661165/135482087-27764d6f-53b4-4c2a-8473-32431d12660c.png">  
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/135482087-27764d6f-53b4-4c2a-8473-32431d12660c.png">  
 </p>
 
 ## Margin Width
