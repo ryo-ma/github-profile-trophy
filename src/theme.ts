@@ -407,7 +407,6 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#6272a4",
     DEFAULT_RANK_TEXT: "#0d1117",
   },
-  
   gitdimmed: {
     BACKGROUND: "#333",
     TITLE: "#f0f6fb",
