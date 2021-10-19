@@ -26,12 +26,16 @@ export type GitHubUserData = {
     totalCount: number;
     nodes: Repository[];
   };
+  codeReviews: {
+    totalCount: number;
+  }
 };
 export class UserInfo {
   public readonly totalCommits: number;
   public readonly totalFollowers: number;
   public readonly totalIssues: number;
   public readonly totalOrganizations: number;
+  public readonly totalCodeReviews: number;
   public readonly totalPullRequests: number;
   public readonly totalStargazers: number;
   public readonly totalRepositories: number;
@@ -76,6 +80,7 @@ export class UserInfo {
     this.totalIssues = userData.issues.totalCount;
     this.totalOrganizations = userData.organizations.totalCount;
     this.totalPullRequests = userData.pullRequests.totalCount;
+    this.totalCodeReview = userData.codeReviews.totalCount;
     this.totalStargazers = totalStargazers;
     this.totalRepositories = userData.repositories.totalCount;
     this.languageCount = languages.size;
