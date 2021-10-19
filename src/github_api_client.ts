@@ -28,7 +28,7 @@ export class GithubAPIClient {
             followers(first: 1) {
               totalCount
             }
-            repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {direction: DESC, field: STARGAZERS}) {
+            repositories(first: 100, ownerAffiliations: OWNER, isFork: true, orderBy: {direction: DESC, field: STARGAZERS}) {
               totalCount
               nodes {
                 languages(first: 3, orderBy: {direction:DESC, field: SIZE}) {
