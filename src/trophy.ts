@@ -299,6 +299,56 @@ export class TotalCommitTrophy extends Trophy {
   }
 }
 
+export class CodeReview extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Super Reviewer",
+        1000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Ultra Reviewer",
+        400,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Hyper Reviewer",
+        200,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Code Reviewer",
+        100,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Lagend Reviewer",
+        50,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Star Reviewer",
+        20,
+      ),
+      new RankCondition(
+        RANK.B,
+        "New Reviewer",
+        10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Review",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "CodeReviews";
+    this.filterTitles = ["CodeReview", "CodeReviews"];
+  }
+}
+
 export class TotalFollowerTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
