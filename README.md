@@ -1,6 +1,6 @@
 <p align="center">
   <img width="140" src="https://user-images.githubusercontent.com/6661165/91657958-61b4fd00-eb00-11ea-9def-dc7ef5367e34.png" />  
-  <h2 align="center">Github Profile Trophy</h2>
+  <h2 align="center">GitHub Profile Trophy</h2>
   <p align="center">🏆 Add dynamically generated GitHub Stat Trophies on your readme</p>
 </p>
 <p align="center">
@@ -184,6 +184,10 @@ Available themes.
 | [radical](#radical) |
 | [onestar](#onestar) |
 | [discord](#discord) |
+| [algolia](#algolia) |
+| [gitdimmed](#gitdimmed) |
+| [tokyonight](#tokyonight) |
+
 
 ### flat
 
@@ -333,6 +337,36 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=discord
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/122048628-7dce2480-ce1c-11eb-9792-1e600b384c4d.png">
+</p>
+
+### algolia
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=algolia
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/131685203-92a31101-2d93-4d18-b24a-d81a8bb012c5.png">
+</p>
+
+### gitdimmed
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gitdimme
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/131685406-799a864f-2691-4840-bb71-1db9c087a507.png">
+</p>
+
+### tokyonight
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=tokyonight
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/6661165/135482087-27764d6f-53b4-4c2a-8473-32431d12660c.png">  
 </p>
 
 ## Margin Width

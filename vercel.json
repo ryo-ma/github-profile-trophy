@@ -1,6 +1,7 @@
 {
     "builds":[{
         "src": "**/index.ts",
-        "use": "vercel-deno@0.7.10"}],
+        "use": "vercel-deno@0.7.10"
+    }],
     "routes": [{ "src": "/.*", "dest": "/" }]
 }
