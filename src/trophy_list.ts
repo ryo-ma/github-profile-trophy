@@ -12,6 +12,7 @@ import {
   Joined2020Trophy,
   AllSuperRankTrophy,
   MultipleOrganizationsTrophy,
+  CodeReview
 } from "./trophy.ts";
 import { UserInfo } from "./user_info.ts";
 import { RANK_ORDER, RANK } from "./utils.ts";
@@ -27,6 +28,7 @@ export class TrophyList {
       new TotalIssueTrophy(userInfo.totalIssues),
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
+      new CodeReviewTrophy(userInfo.totalCodeReviews),
     );
     // Secret trophies
     this.trophies.push(
