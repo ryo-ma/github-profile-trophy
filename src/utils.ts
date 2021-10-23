@@ -56,7 +56,7 @@ export function abridgeScore(score: number): string {
 }
 
 export const CONSTANTS = {
-  CACHE_MAX_AGE: 7200,
+  CACHE_MAX_AGE: 14400,
   DEFAULT_PANEL_SIZE: 110,
   DEFAULT_MAX_COLUMN: 6,
   DEFAULT_MAX_ROW: 3,
