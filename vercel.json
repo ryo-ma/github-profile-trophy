@@ -1,7 +1,9 @@
 {
-    "builds":[{
-        "src": "**/index.ts",
-        "use": "vercel-deno@0.7.10"
-    }],
+    "functions": {
+        "**/index.ts": {
+            "memory": 128,
+            "maxDuration": 30
+        }
+    },
     "routes": [{ "src": "/.*", "dest": "/" }]
 }
