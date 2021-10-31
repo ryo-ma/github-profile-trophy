@@ -53,7 +53,10 @@ export class GithubAPIClient {
     const query = `
         query userInfo($username: String!) {
           user(login: $username) {
-            issues(first: 1) {
+            openIssues: issues(states: OPEN) {
+              totalCount
+            }
+            closedIssues: issues(states: CLOSED) {
               totalCount
             }
           }

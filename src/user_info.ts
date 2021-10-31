@@ -12,7 +12,10 @@ export type GitHubUserRepository = {
 };
 
 export type GitHubUserIssue = {
-  issues: {
+  openIssues: {
+    totalCount: number;
+  };
+  closedIssues: {
     totalCount: number;
   };
 };
@@ -84,7 +87,7 @@ export class UserInfo {
       : 0;
     this.totalCommits = totalCommits;
     this.totalFollowers = userActivity.followers.totalCount;
-    this.totalIssues = userIssue.issues.totalCount;
+    this.totalIssues = userIssue.openIssues.totalCount + userIssue.closedIssues.totalCount;
     this.totalOrganizations = userActivity.organizations.totalCount;
     this.totalPullRequests = userPullRequest.pullRequests.totalCount;
     this.totalStargazers = totalStargazers;
