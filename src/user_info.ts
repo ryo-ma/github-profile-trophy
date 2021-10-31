@@ -4,27 +4,36 @@ type Repository = {
   languages: { nodes: Language[] };
   stargazers: Stargazers;
 };
-export type GitHubUserData = {
+export type GitHubUserRepository = {
+  repositories: {
+    totalCount: number;
+    nodes: Repository[];
+  };
+};
+
+export type GitHubUserIssue = {
+  issues: {
+    totalCount: number;
+  };
+};
+
+export type GitHubUserPullRequest = {
+  pullRequests: {
+    totalCount: number;
+  };
+};
+
+export type GitHubUserActivity = {
   createdAt: string;
   contributionsCollection: {
     totalCommitContributions: number;
     restrictedContributionsCount: number;
-  };
-  pullRequests: {
-    totalCount: number;
-  };
-  issues: {
-    totalCount: number;
   };
   organizations: {
     totalCount: number;
   };
   followers: {
     totalCount: number;
-  };
-  repositories: {
-    totalCount: number;
-    nodes: Repository[];
   };
 };
 export class UserInfo {
@@ -40,12 +49,15 @@ export class UserInfo {
   public readonly ancientAccount: number;
   public readonly joined2020: number;
   constructor(
-    userData: GitHubUserData,
+    userActivity: GitHubUserActivity,
+    userIssue: GitHubUserIssue,
+    userPullRequest: GitHubUserPullRequest,
+    userRepository: GitHubUserRepository,
   ) {
     const totalCommits =
-      userData.contributionsCollection.restrictedContributionsCount +
-      userData.contributionsCollection.totalCommitContributions;
-    const totalStargazers = userData.repositories.nodes.reduce(
+      userActivity.contributionsCollection.restrictedContributionsCount +
+      userActivity.contributionsCollection.totalCommitContributions;
+    const totalStargazers = userRepository.repositories.nodes.reduce(
       (prev: number, node: Repository) => {
         return prev + node.stargazers.totalCount;
       },
@@ -53,7 +65,7 @@ export class UserInfo {
     );
 
     const languages = new Set<string>();
-    userData.repositories.nodes.forEach((node: Repository) => {
+    userRepository.repositories.nodes.forEach((node: Repository) => {
       if (node.languages.nodes != undefined) {
         node.languages.nodes.forEach((node: Language) => {
           if (node != undefined) {
@@ -63,21 +75,20 @@ export class UserInfo {
       }
     });
     const durationTime = new Date().getTime() -
-      new Date(userData.createdAt).getTime();
+      new Date(userActivity.createdAt).getTime();
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
-    const ancientAccount = new Date(userData.createdAt).getFullYear() <= 2010
-      ? 1
-      : 0;
-    const joined2020 = new Date(userData.createdAt).getFullYear() == 2020
+    const ancientAccount =
+      new Date(userActivity.createdAt).getFullYear() <= 2010 ? 1 : 0;
+    const joined2020 = new Date(userActivity.createdAt).getFullYear() == 2020
       ? 1
       : 0;
     this.totalCommits = totalCommits;
-    this.totalFollowers = userData.followers.totalCount;
-    this.totalIssues = userData.issues.totalCount;
-    this.totalOrganizations = userData.organizations.totalCount;
-    this.totalPullRequests = userData.pullRequests.totalCount;
+    this.totalFollowers = userActivity.followers.totalCount;
+    this.totalIssues = userIssue.issues.totalCount;
+    this.totalOrganizations = userActivity.organizations.totalCount;
+    this.totalPullRequests = userPullRequest.pullRequests.totalCount;
     this.totalStargazers = totalStargazers;
-    this.totalRepositories = userData.repositories.totalCount;
+    this.totalRepositories = userRepository.repositories.totalCount;
     this.languageCount = languages.size;
     this.durationYear = durationYear;
     this.ancientAccount = ancientAccount;

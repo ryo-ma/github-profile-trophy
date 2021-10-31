@@ -50,7 +50,8 @@ export default async (req: ServerRequest) => {
     );
     return;
   }
-  const userInfo = await client.requestUserInfo(username);
+  const token = Deno.env.get("GITHUB_TOKEN");
+  const userInfo = await client.requestUserInfo(token, username);
   if (userInfo === null) {
     req.respond(
       {

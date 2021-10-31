@@ -1,13 +1,32 @@
 import { soxa } from "../deps.ts";
-import { UserInfo } from "./user_info.ts"
-import type { GitHubUserData } from "./user_info.ts";
+import { UserInfo } from "./user_info.ts";
+import type {
+  GitHubUserActivity,
+  GitHubUserIssue,
+  GitHubUserPullRequest,
+  GitHubUserRepository,
+} from "./user_info.ts";
 
 export class GithubAPIClient {
   constructor() {
   }
-  async requestUserInfo(username: string): Promise<UserInfo | null> {
-    const token = Deno.env.get("GITHUB_TOKEN");
-    const variables = { username: username };
+  async requestUserInfo(
+    token: string | undefined,
+    username: string,
+  ): Promise<UserInfo | null> {
+    // Avoid timeout for the Github API
+    const results = await Promise.all([
+      this.requestUserActivity(token, username),
+      this.requestUserIssue(token, username),
+      this.requestUserPullRequest(token, username),
+      this.requestUserRepository(token, username),
+    ]);
+    return new UserInfo(results[0]!, results[1]!, results[2]!, results[3]!);
+  }
+  private async requestUserActivity(
+    token: string | undefined,
+    username: string,
+  ): Promise<GitHubUserActivity | null> {
     const query = `
         query userInfo($username: String!) {
           user(login: $username) {
@@ -16,18 +35,54 @@ export class GithubAPIClient {
               totalCommitContributions
               restrictedContributionsCount
             }
-            pullRequests(first: 1) {
-              totalCount
-            }
-            issues(first: 1) {
-              totalCount
-            }
             organizations(first: 1) {
               totalCount
             }
             followers(first: 1) {
               totalCount
             }
+          }
+        }
+        `;
+    return await this.request(query, token, username);
+  }
+  private async requestUserIssue(
+    token: string | undefined,
+    username: string,
+  ): Promise<GitHubUserIssue | null> {
+    const query = `
+        query userInfo($username: String!) {
+          user(login: $username) {
+            issues(first: 1) {
+              totalCount
+            }
+          }
+        }
+        `;
+    return await this.request(query, token, username);
+  }
+  private async requestUserPullRequest(
+    token: string | undefined,
+    username: string,
+  ): Promise<GitHubUserPullRequest | null> {
+    const query = `
+        query userInfo($username: String!) {
+          user(login: $username) {
+            pullRequests(first: 1) {
+              totalCount
+            }
+          }
+        }
+        `;
+    return await this.request(query, token, username);
+  }
+  private async requestUserRepository(
+    token: string | undefined,
+    username: string,
+  ): Promise<GitHubUserRepository | null> {
+    const query = `
+        query userInfo($username: String!) {
+          user(login: $username) {
             repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {direction: DESC, field: STARGAZERS}) {
               totalCount
               nodes {
@@ -44,6 +99,14 @@ export class GithubAPIClient {
           }
         }
         `;
+    return await this.request(query, token, username);
+  }
+  private async request(
+    query: string,
+    token: string | undefined,
+    username: string,
+  ) {
+    const variables = { username: username };
     const response = await soxa.post(
       "https://api.github.com/graphql",
       {},
@@ -51,11 +114,13 @@ export class GithubAPIClient {
         data: { query: query, variables },
         headers: { Authorization: `bearer ${token}` },
       },
-    );
+    ).catch((error) => {
+      console.error(error.response.data.errors[0].message);
+    });
     if (response.status != 200) {
-      throw new Error(response)
+      console.error(`Status code: ${response.status}`);
+      console.error(response.data);
     }
-    const userData: GitHubUserData = response.data.data.user;
-    return new UserInfo(userData);
+    return response.data.data.user;
   }
 }
