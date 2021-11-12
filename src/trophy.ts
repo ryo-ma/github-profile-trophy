@@ -294,8 +294,8 @@ export class TotalCommitTrophy extends Trophy {
       ),
     ];
     super(score, rankConditions);
-    this.title = "Commit";
-    this.filterTitles = ["Commit"];
+    this.title = "Commits";
+    this.filterTitles = ["Commit", "Commits"];
   }
 }
 
