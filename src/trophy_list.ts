@@ -9,7 +9,7 @@ import {
   MultipleLangTrophy,
   LongTimeAccountTrophy,
   AncientAccountTrophy,
-  Joined2020Trophy,
+  NewAccountTrophy,
   AllSuperRankTrophy,
   MultipleOrganizationsTrophy,
 } from "./trophy.ts";
@@ -34,7 +34,7 @@ export class TrophyList {
       new MultipleLangTrophy(userInfo.languageCount),
       new LongTimeAccountTrophy(userInfo.durationYear),
       new AncientAccountTrophy(userInfo.ancientAccount),
-      new Joined2020Trophy(userInfo.joined2020),
+      new NewAccountTrophy(userInfo.newAccount),
       new MultipleOrganizationsTrophy(userInfo.totalOrganizations),
     );
   }
