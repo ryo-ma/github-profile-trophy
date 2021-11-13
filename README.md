@@ -192,6 +192,7 @@ Available themes.
 | [algolia](#algolia) |
 | [gitdimmed](#gitdimmed) |
 | [tokyonight](#tokyonight) |
+| [matrix](#matrix) |
 
 
 ### flat
@@ -372,6 +373,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=tokyonight
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/6661165/135482087-27764d6f-53b4-4c2a-8473-32431d12660c.png">  
+</p>
+
+### matrix
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=matrix
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/31789752/141647414-15cfe279-af12-4746-a886-f494c25c096d.png">  
 </p>
 
 ## Margin Width
