@@ -67,7 +67,7 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 |  AAA, AA, A  | You will reach this rank if you do your best. Let's aim here first.  |
 |  B, C  | You are currently making good process. Let's aim a bit higher.  |
 | UNKNOWN | You have not taken action yet. Let's act first. |
-| SECRET | This rank is very rare. The trophy will not be displayed until the conditions are met. |
+| SECRET | This rank is very rare. The trophy will not be displayed until certain conditions are met. |
 
 ## Secret Rank
 The acquisition condition is secret, but you can know the condition by reading this code.
