@@ -33,8 +33,7 @@
 
 # Quick Start
 
-Add the following code to your readme.  
-Change the `?username=` value to your GitHub's username.
+Add the following code to your readme. When pasting the code into your profile's readme, change the `?username=` value to your GitHub's username.
 
 ```
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
@@ -46,7 +45,7 @@ Change the `?username=` value to your GitHub's username.
 
 ## Use theme
 
-Add optional parameter of theme.
+Add optional parameter of the theme.
 
 ```
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onedark)](https://github.com/ryo-ma/github-profile-trophy)
