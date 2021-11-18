@@ -33,7 +33,7 @@
 
 # Quick Start
 
-Add following code to your readme.  
+Add the following code to your readme.  
 Change the `?username=` value to your GitHub's username.
 
 ```
@@ -64,10 +64,10 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 |  Rank  |  Description  |
 | ---- | ---- |
 |  SSS, SS, S  | You are at a hard to reach rank. You can brag.  |
-|  AAA, AA, A  | You will reach the rank if you do your best. Let's aim here first.  |
-|  B, C  | You are in a growing process.  |
-| UNKNOWN | You have not yet taken action. Let's act first. |
-| SECRET | The rank is very rare. The trophy will not be displayed until the conditions are met. |
+|  AAA, AA, A  | You will reach this rank if you do your best. Let's aim here first.  |
+|  B, C  | You are currently making good process. Let's aim a bit higher.  |
+| UNKNOWN | You have not taken action yet. Let's act first. |
+| SECRET | This rank is very rare. The trophy will not be displayed until the conditions are met. |
 
 ## Secret Rank
 The acquisition condition is secret, but you can know the condition by reading this code.
@@ -117,7 +117,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Followers
   <img width="110" src="https://user-images.githubusercontent.com/6661165/92317141-80ebe700-f038-11ea-8501-4015bfbb2cf4.png">
 </p>
 
-If You want to specify multiple titles.
+If you want to specify multiple titles.
 
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Stars,Followers
