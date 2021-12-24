@@ -193,6 +193,7 @@ Available themes.
 | [tokyonight](#tokyonight) |
 | [matrix](#matrix) |
 | [apprentice](#apprentice) |
+| [dark_dimmed](#dark_dimmed) |
 
 
 ### flat
@@ -394,6 +395,12 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=apprentice
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/31789752/144701036-285cdd4b-d687-4ddc-95c2-7ccae9e25a1f.png">  
 </p>
+
+### dark_dimmed
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dark_dimmed
+```
 
 ## Margin Width
 
