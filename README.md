@@ -27,8 +27,7 @@
   You can use this service for free. I'm looking for sponsors to help us keep up with this service❤️
 </p>
 <p align="center">
-  </a>
-    <a href="https://github.com/sponsors/ryo-ma">
+  <a href="https://github.com/sponsors/ryo-ma">
     <img src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=ff69b4"/> 
   </a>
 </p>
