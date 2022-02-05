@@ -540,7 +540,7 @@ export const COLORS: {[name: string]: Theme} = {
     NEXT_RANK_BAR: "coral",
     S_RANK_BASE: "#f2c635",
     S_RANK_SHADOW: "#e0d7b8",
-    S_RANK_TEXT: "white",
+    S_RANK_TEXT: "f2c635",
     A_RANK_BASE: "#f25755",
     A_RANK_SHADOW: "#e69493",
     A_RANK_TEXT: "#f25755",
