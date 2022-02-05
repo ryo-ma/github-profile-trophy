@@ -12,7 +12,7 @@ export const COLORS: {[name: string]: Theme} = {
     NEXT_RANK_BAR: "#0366d6",
     S_RANK_BASE: "#FAD200",
     S_RANK_SHADOW: "#C8A090",
-    S_RANK_TEXT: "#FAD200",
+    S_RANK_TEXT: "#886000",
     A_RANK_BASE: "#B0B0B0",
     A_RANK_SHADOW: "#9090C0",
     A_RANK_TEXT: "#505050",
