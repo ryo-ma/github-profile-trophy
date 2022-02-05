@@ -531,7 +531,7 @@ export const COLORS: {[name: string]: Theme} = {
     BACKGROUND: "#0d0d0d",
     TITLE: "#e8aa64",
     ICON_CIRCLE: "white",
-    TEXT: "#171717",
+    TEXT: "#e8aa64",
     LAUREL: "#e86464",
     SECRET_RANK_1: "coral",
     SECRET_RANK_2: "white",
