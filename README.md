@@ -195,6 +195,7 @@ Available themes.
 | [matrix](#matrix) |
 | [apprentice](#apprentice) |
 | [dark_dimmed](#dark_dimmed) |
+| [dark_lover](#dark_lover) |
 
 
 ### flat
@@ -405,6 +406,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dark_dimmed
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/31789752/147340893-655b9fa5-138f-4f29-91ec-2a17c93822d1.png">  
+</p>
+
+### dark_lover
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dark_lover
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/31789752/152659041-de5b23cb-1be8-4e6b-b07b-726127ab8c3a.png">  
 </p>
 
 ## Margin Width
