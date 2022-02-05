@@ -528,7 +528,7 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_TEXT: "#333",
   },
   dark_lover: {
-    BACKGROUND: "#171717",
+    BACKGROUND: "#0d0d0d",
     TITLE: "#e8aa64",
     ICON_CIRCLE: "white",
     TEXT: "#171717",
