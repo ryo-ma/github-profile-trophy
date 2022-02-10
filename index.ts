@@ -43,7 +43,7 @@ export default async (req: Request) => {
   if (username === null) {
     const [base] = req.url.split("?");
     const error = new Error400(
-      `<h2><code>username</code> is a required query parameter</h2>
+      `<h2>"username" is a required query parameter</h2>
 <p>The URL should look like <code>${base}?username=USERNAME</code>, where
 <code>USERNAME</code> is <em>your GitHub username.</em>`,
     );
