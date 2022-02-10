@@ -11,7 +11,7 @@ abstract class BaseError {
 
 export class Error400 extends BaseError {
   readonly status = 400;
-  readonly message = "Bad Reuquest";
+  readonly message = "Bad Request";
 }
 
 export class Error404 extends BaseError {
