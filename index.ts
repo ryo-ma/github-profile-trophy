@@ -2,7 +2,7 @@ import { GithubAPIClient } from "./src/github_api_client.ts";
 import { Card } from "./src/card.ts";
 import { CONSTANTS, parseParams } from "./src/utils.ts";
 import { COLORS, Theme } from "./src/theme.ts";
-import { Error400 } from "./src/error_page.ts";
+import { Error400, Error404 } from "./src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 
 const client = new GithubAPIClient();
@@ -58,10 +58,13 @@ export default async (req: Request) => {
   const token = Deno.env.get("GITHUB_TOKEN");
   const userInfo = await client.requestUserInfo(token, username);
   if (userInfo === null) {
+    const error = new Error404(
+      "Can not find a user with username: " + username,
+    );
     return new Response(
-      "Can not find a user with userID: " + username,
+      error.render(),
       {
-        status: 404,
+        status: error.status,
         headers: new Headers({ "Content-Type": "text" }),
       },
     );
