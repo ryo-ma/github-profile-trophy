@@ -1,5 +1,3 @@
-import { ServerRequest } from ".././deps.ts";
-
 export class CustomURLSearchParams extends URLSearchParams {
   constructor(
     init?: string[][] | Record<string, string> | string | URLSearchParams,
@@ -31,13 +29,13 @@ export class CustomURLSearchParams extends URLSearchParams {
   getBooleanValue(key: string, defaultValue: boolean): boolean {
     if (super.has(key)) {
       const param = super.get(key);
-      return param !== null && param.toString() === 'true';
+      return param !== null && param.toString() === "true";
     }
     return defaultValue;
   }
 }
 
-export function parseParams(req: ServerRequest): CustomURLSearchParams {
+export function parseParams(req: Request): CustomURLSearchParams {
   const splittedURL = req.url.split("?");
   if (splittedURL.length < 2) {
     return new CustomURLSearchParams();
