@@ -21,6 +21,9 @@ export class GithubAPIClient {
       this.requestUserPullRequest(token, username),
       this.requestUserRepository(token, username),
     ]);
+    if (results.some((r) => r == null)) {
+      return null;
+    }
     return new UserInfo(results[0]!, results[1]!, results[2]!, results[3]!);
   }
   private async requestUserActivity(

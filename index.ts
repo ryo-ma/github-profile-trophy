@@ -1,13 +1,13 @@
-import { ServerRequest } from "./deps.ts";
 import { GithubAPIClient } from "./src/github_api_client.ts";
 import { Card } from "./src/card.ts";
 import { CONSTANTS, parseParams } from "./src/utils.ts";
 import { COLORS, Theme } from "./src/theme.ts";
+import { Error400, Error404 } from "./src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 
 const client = new GithubAPIClient();
 
-export default async (req: ServerRequest) => {
+export default async (req: Request) => {
   const params = parseParams(req);
   const username = params.get("username");
   const row = params.getNumberValue("row", CONSTANTS.DEFAULT_MAX_ROW);
@@ -41,41 +41,48 @@ export default async (req: ServerRequest) => {
   ).map((r) => r.trim());
 
   if (username === null) {
-    req.respond(
+    const [base] = req.url.split("?");
+    const error = new Error400(
+      `<h2>"username" is a required query parameter</h2>
+<p>The URL should look like <code>${base}?username=USERNAME</code>, where
+<code>USERNAME</code> is <em>your GitHub username.</em>`,
+    );
+    return new Response(
+      error.render(),
       {
-        body: "Can not find a query parameter: username",
-        status: 404,
+        status: error.status,
         headers: new Headers({ "Content-Type": "text" }),
       },
     );
-    return;
   }
   const token = Deno.env.get("GITHUB_TOKEN");
   const userInfo = await client.requestUserInfo(token, username);
   if (userInfo === null) {
-    req.respond(
+    const error = new Error404(
+      "Can not find a user with username: " + username,
+    );
+    return new Response(
+      error.render(),
       {
-        body: "Can not find a user with userID: " + username,
-        status: 404,
+        status: error.status,
         headers: new Headers({ "Content-Type": "text" }),
       },
     );
-    return;
   }
   // Success Response
-  req.respond(
+  return new Response(
+    new Card(
+      titles,
+      ranks,
+      column,
+      row,
+      CONSTANTS.DEFAULT_PANEL_SIZE,
+      marginWidth,
+      paddingHeight,
+      noBackground,
+      noFrame,
+    ).render(userInfo, theme),
     {
-      body: new Card(
-        titles,
-        ranks,
-        column,
-        row,
-        CONSTANTS.DEFAULT_PANEL_SIZE,
-        marginWidth,
-        paddingHeight,
-        noBackground,
-        noFrame,
-      ).render(userInfo, theme),
       headers: new Headers(
         {
           "Content-Type": "image/svg+xml",
