@@ -168,6 +168,13 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&row=2&column=3
   <img width="330" src="https://user-images.githubusercontent.com/6661165/91659474-c07f7400-eb0a-11ea-84f2-eb6b42547829.png">
 </p>
 
+Adaptive column
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&column=-1
+```
+
+You can set `columns` to `-1` to adapt the width to the number of trophies, the parameter `row` will be ignored.
+
 ## Apply theme
 
 Available themes.
