@@ -38,6 +38,12 @@ export class Card {
 
     trophyList.sortByRank();
 
+    if (this.maxColumn == -1) {
+      this.maxColumn = trophyList.length;
+      this.width = this.panelSize * this.maxColumn +
+        this.marginWidth * (this.maxColumn - 1);
+    }
+
     const row = this.getRow(trophyList);
     this.height = this.getHeight(row);
 
