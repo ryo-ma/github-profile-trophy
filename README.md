@@ -173,7 +173,7 @@ Adaptive column
 https://github-profile-trophy.vercel.app/?username=ryo-ma&column=-1
 ```
 
-You can set `columns` to `-1` to adapt the width to the number of trophys, the parameter `row` will be ignored.
+You can set `columns` to `-1` to adapt the width to the number of trophies, the parameter `row` will be ignored.
 
 ## Apply theme
 
