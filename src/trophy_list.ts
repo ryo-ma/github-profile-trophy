@@ -58,6 +58,12 @@ export class TrophyList {
     });
   }
   filterByRanks(ranks: Array<string>) {
+    if (ranks.filter((rank) => rank.includes("-")).length !== 0) {
+      this.trophies = this.trophies.filter((trophy) =>
+        !ranks.map(rank => rank.substring(1)).includes(trophy.rank)
+      )
+      return
+    }
     this.trophies = this.trophies.filter((trophy) =>
       ranks.includes(trophy.rank)
     );
