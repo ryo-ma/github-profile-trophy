@@ -140,6 +140,13 @@ If you want to specify multiple ranks.
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=S,AAA
 ```
 
+You can also exclude ranks.
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=-C,-B
+```
+
+
 ## Specify the maximum row & column size
 
 You can specify the maximum row and column size.  
