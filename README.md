@@ -374,7 +374,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=algolia
 ### gitdimmed
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gitdimme
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gitdimmed
 ```
 
 <p align="center">
