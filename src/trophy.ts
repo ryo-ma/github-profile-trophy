@@ -314,7 +314,7 @@ export class TotalFollowerTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.S,
-        "Hyper Celebrity",
+        "Celebrity",
         200,
       ),
       new RankCondition(
@@ -354,37 +354,37 @@ export class TotalIssueTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "Godly Issuer",
+        "Godly Reporter",
         1000,
       ),
       new RankCondition(
         RANK.SS,
-        "Omega Issuer",
+        "Omega Reporter",
         500,
       ),
       new RankCondition(
         RANK.S,
-        "Super Issuer",
+        "Super Reporter",
         200,
       ),
       new RankCondition(
         RANK.AAA,
-        "Ultra Issuer",
+        "Ultra Reporter",
         100,
       ),
       new RankCondition(
         RANK.AA,
-        "Hyper Issuer",
+        "Hyper Reporter",
         50,
       ),
       new RankCondition(
         RANK.A,
-        "Advanced Issuer",
+        "Advanced Reporter",
         20,
       ),
       new RankCondition(
         RANK.B,
-        "Beginner Issuer",
+        "Beginner Reporter",
         10,
       ),
       new RankCondition(
