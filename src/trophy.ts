@@ -219,22 +219,22 @@ export class TotalStarTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.AAA,
-        "Super Star",
+        "Little Stargazer",
         100,
       ),
       new RankCondition(
         RANK.AA,
-        "High Star",
+        "Numerous Stars",
         50,
       ),
       new RankCondition(
         RANK.A,
-        "Advanced Star",
+        "Many Stars",
         30,
       ),
       new RankCondition(
         RANK.B,
-        "Beginner Star",
+        "Multiple Stars",
         10,
       ),
       new RankCondition(
@@ -254,12 +254,12 @@ export class TotalCommitTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "God Committer",
+        "Godly Committer",
         4000,
       ),
       new RankCondition(
         RANK.SS,
-        "Deep Committer",
+        "Omega Committer",
         2000,
       ),
       new RankCondition(
@@ -354,12 +354,12 @@ export class TotalIssueTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "God Issuer",
+        "Godly Issuer",
         1000,
       ),
       new RankCondition(
         RANK.SS,
-        "Deep Issuer",
+        "Omega Issuer",
         500,
       ),
       new RankCondition(
@@ -404,12 +404,12 @@ export class TotalPullRequestTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "God Puller",
+        "Godly Puller",
         1000,
       ),
       new RankCondition(
         RANK.SS,
-        "Deep Puller",
+        "Omega Puller",
         500,
       ),
       new RankCondition(
@@ -439,7 +439,7 @@ export class TotalPullRequestTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.C,
-        "First Pull",
+        "First Pull Request",
         1,
       ),
     ];
