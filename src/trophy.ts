@@ -229,12 +229,12 @@ export class TotalStarTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "You are a Star",
+        "Advanced Star",
         30,
       ),
       new RankCondition(
         RANK.B,
-        "Middle Star",
+        "Beginner Star",
         10,
       ),
       new RankCondition(
@@ -279,12 +279,12 @@ export class TotalCommitTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "High Committer",
+        "Advanced Committer",
         100,
       ),
       new RankCondition(
         RANK.B,
-        "Middle Committer",
+        "Beginner Committer",
         10,
       ),
       new RankCondition(
@@ -329,17 +329,17 @@ export class TotalFollowerTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "Dynamic User",
+        "Advanced User",
         20,
       ),
       new RankCondition(
         RANK.B,
-        "Many Friends",
+        "Beginner User",
         10,
       ),
       new RankCondition(
         RANK.C,
-        "First Friend",
+        "First Follower",
         1,
       ),
     ];
@@ -379,12 +379,12 @@ export class TotalIssueTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "High Issuer",
+        "Advanced Issuer",
         20,
       ),
       new RankCondition(
         RANK.B,
-        "Middle Issuer",
+        "Beginner Issuer",
         10,
       ),
       new RankCondition(
@@ -429,12 +429,12 @@ export class TotalPullRequestTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "High Puller",
+        "Advanced Puller",
         20,
       ),
       new RankCondition(
         RANK.B,
-        "Middle Puller",
+        "Beginner Puller",
         10,
       ),
       new RankCondition(
@@ -479,12 +479,12 @@ export class TotalRepositoryTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "High Repo Creator",
+        "Advanced Repo Creator",
         20,
       ),
       new RankCondition(
         RANK.B,
-        "Middle Repo Creator",
+        "Beginner Repo Creator",
         10,
       ),
       new RankCondition(
