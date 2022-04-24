@@ -113,8 +113,8 @@ export class MultipleLangTrophy extends Trophy{
       ),
     ];
     super(score, rankConditions);
-    this.title = "MultiLanguage";
-    this.filterTitles = ["MultipleLang", "MultiLanguage"];
+    this.title = "Multi-Languages";
+    this.filterTitles = ["MultipleLang", "Multi-Languages"];
     this.hidden = true;
   }
 }
@@ -129,8 +129,8 @@ export class AllSuperRankTrophy extends Trophy{
       ),
     ];
     super(score, rankConditions);
-    this.title = "AllSuperRank";
-    this.filterTitles = ["AllSuperRank"];
+    this.title = "All Super Rank";
+    this.filterTitles = ["All Super Rank"];
     this.bottomMessage = "All S Rank"
     this.hidden = true;
   }
@@ -145,8 +145,8 @@ export class Joined2020Trophy extends Trophy{
       ),
     ];
     super(score, rankConditions);
-    this.title = "Joined2020";
-    this.filterTitles = ["Joined2020"];
+    this.title = "Joined 2020";
+    this.filterTitles = ["Joined 2020"];
     this.bottomMessage = "Joined 2020"
     this.hidden = true;
   }
@@ -161,8 +161,8 @@ export class AncientAccountTrophy extends Trophy{
       ),
     ];
     super(score, rankConditions);
-    this.title = "AncientUser";
-    this.filterTitles = ["AncientUser"];
+    this.title = "Ancient User";
+    this.filterTitles = ["Ancient User"];
     this.bottomMessage = "Before 2010"
     this.hidden = true;
   }
@@ -177,8 +177,8 @@ export class LongTimeAccountTrophy extends Trophy{
       ),
     ];
     super(score, rankConditions);
-    this.title = "LongTimeUser";
-    this.filterTitles = ["LongTimeUser"];
+    this.title = "Long Time User";
+    this.filterTitles = ["Long Time User"];
     this.hidden = true;
   }
 }
@@ -444,8 +444,8 @@ export class TotalPullRequestTrophy extends Trophy {
       ),
     ];
     super(score, rankConditions);
-    this.title = "PullRequest";
-    this.filterTitles = ["PR", "PullRequest", "Pulls", "Puller"];
+    this.title = "Pull Requests";
+    this.filterTitles = ["PR", "Pull Requests", "Pulls", "Puller"];
   }
 }
 
