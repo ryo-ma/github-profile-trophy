@@ -108,7 +108,7 @@ export class MultipleLangTrophy extends Trophy{
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
-        "Rainbow Lang User",
+        "Rainbow Lang",
         10,
       ),
     ];
