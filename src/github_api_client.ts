@@ -1,5 +1,6 @@
 import { soxa } from "../deps.ts";
 import { UserInfo } from "./user_info.ts";
+import { CONSTANTS } from "./utils.ts";
 import type {
   GitHubUserActivity,
   GitHubUserIssue,
@@ -8,7 +9,9 @@ import type {
 } from "./user_info.ts";
 
 export class GithubAPIClient {
-  constructor() {
+  constructor(
+    private apiEndpoint: string = CONSTANTS.DEFAULT_GITHUB_API,
+  ) {
   }
   async requestUserInfo(
     token: string | undefined,
@@ -114,7 +117,7 @@ export class GithubAPIClient {
   ) {
     const variables = { username: username };
     const response = await soxa.post(
-      "https://api.github.com/graphql",
+      this.apiEndpoint,
       {},
       {
         data: { query: query, variables },
