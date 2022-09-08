@@ -551,29 +551,101 @@ export const COLORS: {[name: string]: Theme} = {
     DEFAULT_RANK_SHADOW: "#a598ed",
     DEFAULT_RANK_TEXT: "#7f6ceb",
   },
-  catppuccin: {
-    BACKGROUND: "#161320",
-    TITLE: "#96CDFB",
-    ICON_CIRCLE: "#161320",
-    TEXT: "#D9E0EE",
-    LAUREL: "#ABE9B3",
-    SECRET_RANK_1: "#F28FAD",
-    SECRET_RANK_2: "#F28FAD",
-    SECRET_RANK_3: "#F28FAD",
-    SECRET_RANK_TEXT: "#96CDFB",
-    NEXT_RANK_BAR: "#96CDFB",
-    S_RANK_BASE: "#FAE3B0",
-    S_RANK_SHADOW: "#FAE3B0",
-    S_RANK_TEXT: "#96CDFB",
-    A_RANK_BASE: "#89DCEB",
-    A_RANK_SHADOW: "#89DCEB",
-    A_RANK_TEXT: "#96CDFB",
-    B_RANK_BASE: "#F5C2E7",
-    B_RANK_SHADOW: "#F5C2E7",
-    B_RANK_TEXT: "#96CDFB",
-    DEFAULT_RANK_BASE: "#C3BAC6",
-    DEFAULT_RANK_SHADOW: "#C3BAC6",
-    DEFAULT_RANK_TEXT: "#96CDFB",
+  catppuccin_latte: {
+    BACKGROUND: "#eff1f5", // Base
+    TITLE: "#179299", // Teal
+    ICON_CIRCLE: "#eff1f5", // Base
+    TEXT: "#4c4f69", // Text
+    LAUREL: "#40a02b", // Green
+    SECRET_RANK_1: "#d20f39", // Red
+    SECRET_RANK_2: "#d20f39", // Red
+    SECRET_RANK_3: "#d20f39", // Red
+    SECRET_RANK_TEXT: "#4c4f69", // Text
+    NEXT_RANK_BAR: "#179299", // Teal
+    S_RANK_BASE: "#df8e1d", // Yellow
+    S_RANK_SHADOW: "#df8e1d", // Yellow
+    S_RANK_TEXT: "#4c4f69", // Text
+    A_RANK_BASE: "#209fb5", // Sapphire
+    A_RANK_SHADOW: "#209fb5", // Sapphire
+    A_RANK_TEXT: "#4c4f69", // Text
+    B_RANK_BASE: "#ea76cb", // Pink
+    B_RANK_SHADOW: "#ea76cb", // Pink
+    B_RANK_TEXT: "#4c4f69", // Text
+    DEFAULT_RANK_BASE: "#fe640b", // Peach
+    DEFAULT_RANK_SHADOW: "#fe640b", // Peach
+    DEFAULT_RANK_TEXT: "#4c4f69", // Text
+  },
+  catppuccin_frappe: {
+    BACKGROUND: "#303446", // Base
+    TITLE: "#81c8be", // Teal
+    ICON_CIRCLE: "#303446", // Base
+    TEXT: "#c6d0f5", // Text
+    LAUREL: "#a6d189", // Green
+    SECRET_RANK_1: "#e78284", // Red
+    SECRET_RANK_2: "#e78284", // Red
+    SECRET_RANK_3: "#e78284", // Red
+    SECRET_RANK_TEXT: "#c6d0f5", // Text
+    NEXT_RANK_BAR: "#81c8be", // Teal
+    S_RANK_BASE: "#e5c890", // Yellow
+    S_RANK_SHADOW: "#e5c890", // Yellow
+    S_RANK_TEXT: "#c6d0f5", // Text
+    A_RANK_BASE: "#85c1dc", // Sapphire
+    A_RANK_SHADOW: "#85c1dc", // Sapphire
+    A_RANK_TEXT: "#c6d0f5", // Text
+    B_RANK_BASE: "#f4b8e4", // Pink
+    B_RANK_SHADOW: "#f4b8e4", // Pink
+    B_RANK_TEXT: "#c6d0f5", // Text
+    DEFAULT_RANK_BASE: "#ef9f76", // Peach
+    DEFAULT_RANK_SHADOW: "#ef9f76", // Peach
+    DEFAULT_RANK_TEXT: "#c6d0f5", // Text
+  },
+  catppuccin_macchiato: {
+    BACKGROUND: "#24273a", // Base
+    TITLE: "#8bd5ca", // Teal
+    ICON_CIRCLE: "#24273a", // Base
+    TEXT: "#cad3f5", // Text
+    LAUREL: "#a6da95", // Green
+    SECRET_RANK_1: "#ed8796", // Red
+    SECRET_RANK_2: "#ed8796", // Red
+    SECRET_RANK_3: "#ed8796", // Red
+    SECRET_RANK_TEXT: "#cad3f5", // Text
+    NEXT_RANK_BAR: "#8bd5ca", // Teal
+    S_RANK_BASE: "#eed49f", // Yellow
+    S_RANK_SHADOW: "#eed49f", // Yellow
+    S_RANK_TEXT: "#cad3f5", // Text
+    A_RANK_BASE: "#7dc4e4", // Sapphire
+    A_RANK_SHADOW: "#7dc4e4", // Sapphire
+    A_RANK_TEXT: "#cad3f5", // Text
+    B_RANK_BASE: "#f5bde6", // Pink
+    B_RANK_SHADOW: "#f5bde6", // Pink
+    B_RANK_TEXT: "#cad3f5", // Text
+    DEFAULT_RANK_BASE: "#f5a97f", // Peach
+    DEFAULT_RANK_SHADOW: "#f5a97f", // Peach
+    DEFAULT_RANK_TEXT: "#cad3f5", // Text
+  },
+  catppuccin_mocha: {
+    BACKGROUND: "#1e1e2e", // Base
+    TITLE: "#94e2d5", // Teal
+    ICON_CIRCLE: "#1e1e2e", // Base
+    TEXT: "#cdd6f4", // Text
+    LAUREL: "#a6e3a1", // Green
+    SECRET_RANK_1: "#f38ba8", // Red
+    SECRET_RANK_2: "#f38ba8", // Red
+    SECRET_RANK_3: "#f38ba8", // Red
+    SECRET_RANK_TEXT: "#cdd6f4", // Text
+    NEXT_RANK_BAR: "#94e2d5", // Teal
+    S_RANK_BASE: "#f9e2af", // Yellow
+    S_RANK_SHADOW: "#f9e2af", // Yellow
+    S_RANK_TEXT: "#cdd6f4", // Text
+    A_RANK_BASE: "#74c7ec", // Sapphire
+    A_RANK_SHADOW: "#74c7ec", // Sapphire
+    A_RANK_TEXT: "#cdd6f4", // Text
+    B_RANK_BASE: "#f5c2e7", // Pink
+    B_RANK_SHADOW: "#f5c2e7", // Pink
+    B_RANK_TEXT: "#cdd6f4", // Text
+    DEFAULT_RANK_BASE: "#fab387", // Peach
+    DEFAULT_RANK_SHADOW: "#fab387", // Peach
+    DEFAULT_RANK_TEXT: "#cdd6f4", // Text
   }
 };
 
