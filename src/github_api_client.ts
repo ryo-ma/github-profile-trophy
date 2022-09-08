@@ -14,15 +14,14 @@ export class GithubAPIClient {
   ) {
   }
   async requestUserInfo(
-    token: string | undefined,
     username: string,
   ): Promise<UserInfo | null> {
     // Avoid timeout for the Github API
     const results = await Promise.all([
-      this.requestUserActivity(token, username),
-      this.requestUserIssue(token, username),
-      this.requestUserPullRequest(token, username),
-      this.requestUserRepository(token, username),
+      this.requestUserActivity(username),
+      this.requestUserIssue(username),
+      this.requestUserPullRequest(username),
+      this.requestUserRepository(username),
     ]);
     if (results.some((r) => r == null)) {
       return null;
@@ -30,7 +29,6 @@ export class GithubAPIClient {
     return new UserInfo(results[0]!, results[1]!, results[2]!, results[3]!);
   }
   private async requestUserActivity(
-    token: string | undefined,
     username: string,
   ): Promise<GitHubUserActivity | null> {
     const query = `
@@ -50,10 +48,9 @@ export class GithubAPIClient {
           }
         }
         `;
-    return await this.request(query, token, username);
+    return await this.request(query, username);
   }
   private async requestUserIssue(
-    token: string | undefined,
     username: string,
   ): Promise<GitHubUserIssue | null> {
     const query = `
@@ -68,10 +65,9 @@ export class GithubAPIClient {
           }
         }
         `;
-    return await this.request(query, token, username);
+    return await this.request(query, username);
   }
   private async requestUserPullRequest(
-    token: string | undefined,
     username: string,
   ): Promise<GitHubUserPullRequest | null> {
     const query = `
@@ -83,10 +79,9 @@ export class GithubAPIClient {
           }
         }
         `;
-    return await this.request(query, token, username);
+    return await this.request(query, username);
   }
   private async requestUserRepository(
-    token: string | undefined,
     username: string,
   ): Promise<GitHubUserRepository | null> {
     const query = `
@@ -108,27 +103,35 @@ export class GithubAPIClient {
           }
         }
         `;
-    return await this.request(query, token, username);
+    return await this.request(query, username);
   }
   private async request(
     query: string,
-    token: string | undefined,
     username: string,
   ) {
+    const tokens = [
+      Deno.env.get("GITHUB_TOKEN1"),
+      Deno.env.get("GITHUB_TOKEN2"),
+    ];
     const variables = { username: username };
-    const response = await soxa.post(
-      this.apiEndpoint,
-      {},
-      {
-        data: { query: query, variables },
-        headers: { Authorization: `bearer ${token}` },
-      },
-    ).catch((error) => {
-      console.error(error.response.data.errors[0].message);
-    });
-    if (response.status != 200) {
-      console.error(`Status code: ${response.status}`);
-      console.error(response.data);
+    let response;
+    for (const token of tokens) {
+      response = await soxa.post(
+        this.apiEndpoint,
+        {},
+        {
+          data: { query: query, variables },
+          headers: { Authorization: `bearer ${token}` },
+        },
+      ).catch((error) => {
+        console.error(error.response.data.errors[0].message);
+      });
+      if (response.status === 200) {
+        break;
+      } else {
+        console.error(`Status code: ${response.status}`);
+        console.error(response.data);
+      }
     }
     return response.data.data.user;
   }

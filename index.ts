@@ -56,8 +56,7 @@ export default async (req: Request) => {
       },
     );
   }
-  const token = Deno.env.get("GITHUB_TOKEN");
-  const userInfo = await client.requestUserInfo(token, username);
+  const userInfo = await client.requestUserInfo(username);
   if (userInfo === null) {
     const error = new Error404(
       "Can not find a user with username: " + username,
