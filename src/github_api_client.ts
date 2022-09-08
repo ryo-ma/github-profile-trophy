@@ -124,13 +124,10 @@ export class GithubAPIClient {
           headers: { Authorization: `bearer ${token}` },
         },
       ).catch((error) => {
-        console.error(error.response.data.errors[0].message);
+        console.error(error.response.data);
       });
-      if (response.status === 200) {
+      if (response.data.data !== undefined) {
         break;
-      } else {
-        console.error(`Status code: ${response.status}`);
-        console.error(response.data);
       }
     }
     return response.data.data.user;
