@@ -137,7 +137,7 @@ export class AllSuperRankTrophy extends Trophy{
 }
 export class Joined2020Trophy extends Trophy{
   constructor(score: number){
-    const rankConditions = [
+    const rankConditions = [ 
       new RankCondition(
         RANK.SECRET,
         "Everything started...",
@@ -149,6 +149,8 @@ export class Joined2020Trophy extends Trophy{
     this.filterTitles = ["Joined2020"];
     this.bottomMessage = "Joined 2020"
     this.hidden = true;
+    // question, why are you only awarded for making an account in 2020? i made an account in 2017~ so shouldn't it be based on how many years?
+    // example: milestone every 2-3 years 
   }
 }
 export class AncientAccountTrophy extends Trophy{
@@ -156,14 +158,14 @@ export class AncientAccountTrophy extends Trophy{
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
-        "Ancient User",
+        "Veteran",
         1,
       ),
     ];
     super(score, rankConditions);
     this.title = "AncientUser";
     this.filterTitles = ["AncientUser"];
-    this.bottomMessage = "Before 2010"
+    this.bottomMessage = "Joined GitHub Before 2010"
     this.hidden = true;
   }
 }
@@ -352,7 +354,7 @@ export class TotalFollowerTrophy extends Trophy {
 export class TotalIssueTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
-      new RankCondition(
+      new RankCondition( // note: will definitely change grammar for this
         RANK.SSS,
         "Godly Reporter",
         1000,
