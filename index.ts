@@ -5,7 +5,8 @@ import { COLORS, Theme } from "./src/theme.ts";
 import { Error400, Error404 } from "./src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 
-const client = new GithubAPIClient();
+const apiEndpoint = Deno.env.get("GITHUB_API") || CONSTANTS.DEFAULT_GITHUB_API;
+const client = new GithubAPIClient(apiEndpoint);
 
 export default async (req: Request) => {
   const params = parseParams(req);
@@ -55,8 +56,7 @@ export default async (req: Request) => {
       },
     );
   }
-  const token = Deno.env.get("GITHUB_TOKEN");
-  const userInfo = await client.requestUserInfo(token, username);
+  const userInfo = await client.requestUserInfo(username);
   if (userInfo === null) {
     const error = new Error404(
       "Can not find a user with username: " + username,
