@@ -9,6 +9,7 @@ import {
   MultipleLangTrophy,
   LongTimeAccountTrophy,
   AncientAccountTrophy,
+  OGAccountTrophy,
   Joined2020Trophy,
   AllSuperRankTrophy,
   MultipleOrganizationsTrophy,
