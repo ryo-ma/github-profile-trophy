@@ -399,6 +399,56 @@ export class TotalIssueTrophy extends Trophy {
   }
 }
 
+export class TotalCodeReviewTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Master Reviewer",
+        1000,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Super Reviewer",
+        500,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Ultra Reviewer",
+        200,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Mega Reviewer",
+        100,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Top Reviewer",
+        50,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Active Reviewer",
+        20,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Middle Reviewer",
+        10,
+      ),
+      new RankCondition(
+        RANK.C,
+        "First Review",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "Code Reviews";
+    this.filterTitles = ["Review", "Reviews"];
+  }
+}
+
 export class TotalPullRequestTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
