@@ -20,6 +20,11 @@ export type GitHubUserIssue = {
   };
 };
 
+export type GitHubUserCodeReview = {
+  codeReviews: {
+    totalCount: number;
+  };
+
 export type GitHubUserPullRequest = {
   pullRequests: {
     totalCount: number;
@@ -42,6 +47,7 @@ export type GitHubUserActivity = {
 export class UserInfo {
   public readonly totalCommits: number;
   public readonly totalFollowers: number;
+  public readonly totalcodeReviews: number;
   public readonly totalIssues: number;
   public readonly totalOrganizations: number;
   public readonly totalPullRequests: number;
@@ -87,6 +93,7 @@ export class UserInfo {
       : 0;
     this.totalCommits = totalCommits;
     this.totalFollowers = userActivity.followers.totalCount;
+    this.totalCodeReviews = totalCodeReview;
     this.totalIssues = userIssue.openIssues.totalCount + userIssue.closedIssues.totalCount;
     this.totalOrganizations = userActivity.organizations.totalCount;
     this.totalPullRequests = userPullRequest.pullRequests.totalCount;
