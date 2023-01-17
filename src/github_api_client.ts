@@ -4,6 +4,7 @@ import { CONSTANTS } from "./utils.ts";
 import type {
   GitHubUserActivity,
   GitHubUserIssue,
+  GitHubUserCodeReview,
   GitHubUserPullRequest,
   GitHubUserRepository,
 } from "./user_info.ts";
@@ -20,13 +21,14 @@ export class GithubAPIClient {
     const results = await Promise.all([
       this.requestUserActivity(username),
       this.requestUserIssue(username),
+      this.requestUserCodeReview(username),
       this.requestUserPullRequest(username),
       this.requestUserRepository(username),
     ]);
     if (results.some((r) => r == null)) {
       return null;
     }
-    return new UserInfo(results[0]!, results[1]!, results[2]!, results[3]!);
+    return new UserInfo(results[0]!, results[1]!, results[2]!, results[3]!, results[4]!);
   }
   private async requestUserActivity(
     username: string,
