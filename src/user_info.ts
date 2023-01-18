@@ -51,6 +51,7 @@ export class UserInfo {
   public readonly durationYear: number;
   public readonly ancientAccount: number;
   public readonly joined2020: number;
+  public readonly ogAccount: number;
   constructor(
     userActivity: GitHubUserActivity,
     userIssue: GitHubUserIssue,
@@ -83,6 +84,7 @@ export class UserInfo {
     const ancientAccount =
       new Date(userActivity.createdAt).getFullYear() <= 2010 ? 1 : 0;
     const joined2020 = new Date(userActivity.createdAt).getFullYear() == 2020
+    const ogAccount = new Date(userActivity.createdAt).getFullYear() == 2008
       ? 1
       : 0;
     this.totalCommits = totalCommits;
@@ -96,5 +98,6 @@ export class UserInfo {
     this.durationYear = durationYear;
     this.ancientAccount = ancientAccount;
     this.joined2020 = joined2020;
+    this.ogAccount = ogAccount;
   }
 }
