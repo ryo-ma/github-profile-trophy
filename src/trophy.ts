@@ -199,6 +199,23 @@ export class MultipleOrganizationsTrophy extends Trophy{
   }
 }
 
+export class OGAccountTrophy extends Trophy{
+  constructor(score: number){
+    const rankConditions = [
+      new RankCondition(
+        RANK.SECRET,
+        "OG User",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "OGUser";
+    this.filterTitles = ["OGUser"];
+    this.bottomMessage = "Joined 2008"
+    this.hidden = true;
+  }
+}
+
 export class TotalStarTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
