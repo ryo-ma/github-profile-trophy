@@ -52,6 +52,10 @@ export class UserInfo {
   public readonly ancientAccount: number;
   public readonly joined2020: number;
   public readonly ogAccount: number;
+  // Adding this because instead of having 3 different things for what year they joined, you just have to check if the join date was in 1 year.
+  // Or even better, a trophy for how many years you've been on github for.
+  public readonly accountYear: number; // Getting the current account year.
+  
   constructor(
     userActivity: GitHubUserActivity,
     userIssue: GitHubUserIssue,
@@ -88,6 +92,10 @@ export class UserInfo {
       : 0;
     const ogAccount =
       new Date(userActivity.createdAt).getFullYear() <= 2008 ? 1 : 0;
+      
+     const accountYear =
+      new Date(userActivity.createdAt).getFullYear(); // This might work? Unsure
+
 
     this.totalCommits = totalCommits;
     this.totalFollowers = userActivity.followers.totalCount;
@@ -101,5 +109,6 @@ export class UserInfo {
     this.ancientAccount = ancientAccount;
     this.joined2020 = joined2020;
     this.ogAccount = ogAccount;
+    this.accountYear = accountYear;
   }
 }

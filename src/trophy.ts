@@ -14,7 +14,7 @@ class RankCondition {
 export class Trophy {
   rankCondition: RankCondition | null = null;
   rank: RANK = RANK.UNKNOWN;
-  topMessage = "Unknown";
+  topMessage = "Special"; // TBD if it's broken ill change back, just testing.
   bottomMessage = "0";
   title = "";
   filterTitles: Array<string> = [];
@@ -114,7 +114,7 @@ export class MultipleLangTrophy extends Trophy{
     ];
     super(score, rankConditions);
     this.title = "MultiLanguage";
-    this.filterTitles = ["MultipleLang", "MultiLanguage"];
+    this.filterTitles = ["MultiLang", "MultiLanguage"];
     this.hidden = true;
   }
 }
@@ -131,10 +131,12 @@ export class AllSuperRankTrophy extends Trophy{
     super(score, rankConditions);
     this.title = "AllSuperRank";
     this.filterTitles = ["AllSuperRank"];
-    this.bottomMessage = "All S Rank"
+    this.bottomMessage = "All S Ranked Trophies"
     this.hidden = true;
   }
 }
+
+// TODO: Change this.
 export class Joined2020Trophy extends Trophy{
   constructor(score: number){
     const rankConditions = [ 
@@ -147,7 +149,7 @@ export class Joined2020Trophy extends Trophy{
     super(score, rankConditions);
     this.title = "Joined2020";
     this.filterTitles = ["Joined2020"];
-    this.bottomMessage = "Joined 2020"
+    this.bottomMessage = "Joined in 2020"
     this.hidden = true;
     // question, why are you only awarded for making an account in 2020? i made an account in 2017~ so shouldn't it be based on how many years?
     // example: milestone every 2-3 years 
@@ -164,11 +166,13 @@ export class AncientAccountTrophy extends Trophy{
     ];
     super(score, rankConditions);
     this.title = "AncientUser";
-    this.filterTitles = ["AncientUser"];
+    this.filterTitles = ["AncientUser", "Veteran"];
     this.bottomMessage = "Joined GitHub Before 2010"
     this.hidden = true;
   }
 }
+
+// There is no description on how to get this trophy?
 export class LongTimeAccountTrophy extends Trophy{
   constructor(score: number){
     const rankConditions = [
@@ -213,7 +217,7 @@ export class OGAccountTrophy extends Trophy{
     super(score, rankConditions);
     this.title = "OGUser";
     this.filterTitles = ["OGUser"];
-    this.bottomMessage = "Joined 2008"
+    this.bottomMessage = "Joined GitHub in 2008"
     this.hidden = true;
   }
 }
@@ -223,12 +227,12 @@ export class TotalStarTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "Super Stargazer",
+        "Stargazer",
         2000,
       ),
       new RankCondition(
         RANK.SS,
-        "High Stargazer",
+        "Senior Stargazer",
         700,
       ),
       new RankCondition(
@@ -238,22 +242,22 @@ export class TotalStarTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.AAA,
-        "Little Stargazer",
+        "Junior Stargazer", // Junior < Stargazer < Senior Stargazer
         100,
       ),
       new RankCondition(
         RANK.AA,
-        "Numerous Stars",
+        "Star Collector",
         50,
       ),
       new RankCondition(
         RANK.A,
-        "Many Stars",
+        "Star Spotter",  // confused on this? since the theme is about collecting stars / stargazing, star spotter means you "spot" stars in the sky
         30,
       ),
       new RankCondition(
         RANK.B,
-        "Multiple Stars",
+        "Novice Stargazer", // Novice: a person new to or inexperienced in a field or situation.
         10,
       ),
       new RankCondition(
@@ -268,24 +272,36 @@ export class TotalStarTrophy extends Trophy {
   }
 }
 
+// NOTE: I feel like that commiting can be easy if you dedicate yourself enough, so this shouldn't have as many tiers.
+// Because of this I balanced out how many commits you need to advance.
+// C -> B: 99
+// B -> A: 350
+// A -> S: 3550
+// S -> SSS: 6000 (Might be too extreme?)
 export class TotalCommitTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
+      
       new RankCondition(
         RANK.SSS,
-        "Godly Committer",
-        4000,
+        "Commiting King",
+        10000,
       ),
+      
+      /*
       new RankCondition(
         RANK.SS,
-        "Omega Committer",
+        "",
         2000,
       ),
+      */
+      
       new RankCondition(
         RANK.S,
-        "Super Committer",
-        1000,
+        "Expert Committer",
+        4000,
       ),
+      /*
       new RankCondition(
         RANK.AAA,
         "Ultra Committer",
@@ -296,19 +312,20 @@ export class TotalCommitTrophy extends Trophy {
         "Hyper Committer",
         200,
       ),
+      */
       new RankCondition(
         RANK.A,
-        "Advanced Committer",
-        100,
+        "Pro Committer",
+        450,
       ),
       new RankCondition(
         RANK.B,
-        "Beginner Committer",
-        10,
+        "Novice Commiter",
+        100,
       ),
       new RankCondition(
         RANK.C,
-        "First Commit",
+        "First Commits",
         1,
       ),
     ];
@@ -318,24 +335,27 @@ export class TotalCommitTrophy extends Trophy {
   }
 }
 
+// Instead of calling them a "user", we can drop the title to make it easier.
+// Decided to make more balances
 export class TotalFollowerTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "Super Celebrity",
+        "Famous Celebrity", // might be counterintuitive
         1000,
       ),
       new RankCondition(
         RANK.SS,
-        "Ultra Celebrity",
+        "Celebrity",
         400,
       ),
       new RankCondition(
         RANK.S,
-        "Celebrity",
+        "Well Known",
         200,
       ),
+      /*
       new RankCondition(
         RANK.AAA,
         "Famous User",
@@ -346,14 +366,15 @@ export class TotalFollowerTrophy extends Trophy {
         "Active User",
         50,
       ),
+      */
       new RankCondition(
         RANK.A,
-        "Advanced User",
-        20,
+        "NAME TBD",  //TODO: Think of a name.
+        30,
       ),
       new RankCondition(
         RANK.B,
-        "Beginner User",
+        "NAME TBD", //TODO: Think of a name.
         10,
       ),
       new RankCondition(
@@ -368,12 +389,13 @@ export class TotalFollowerTrophy extends Trophy {
   }
 }
 
+// TODO: Think of a better gramatical term for this.
 export class TotalIssueTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
-      new RankCondition( // note: will definitely change grammar for this
+      new RankCondition(
         RANK.SSS,
-        "Godly Reporter",
+        "Reporter",
         1000,
       ),
       new RankCondition(
@@ -403,7 +425,7 @@ export class TotalIssueTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.B,
-        "Beginner Reporter",
+        "Novice Reporting",
         10,
       ),
       new RankCondition(
@@ -414,7 +436,7 @@ export class TotalIssueTrophy extends Trophy {
     ];
     super(score, rankConditions);
     this.title = "Issues";
-    this.filterTitles = ["Issue", "Issues"];
+    this.filterTitles = ["Issue", "Issues", "Reports"];
   }
 }
 
@@ -423,27 +445,27 @@ export class TotalPullRequestTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "Godly Puller",
+        "Godly Puller", //TODO: Think of a name
         1000,
       ),
       new RankCondition(
         RANK.SS,
-        "Omega Puller",
+        "Omega Puller",  //TODO: Think of a name.
         500,
       ),
       new RankCondition(
         RANK.S,
-        "Super Puller",
+        "Super Puller",  //TODO: Think of a name.
         200,
       ),
       new RankCondition(
         RANK.AAA,
-        "Ultra Puller",
+        "Experienced Puller",
         100,
       ),
       new RankCondition(
         RANK.AA,
-        "Hyper Puller",
+        "Hyper Puller",  //TODO: Think of a name.
         50,
       ),
       new RankCondition(
@@ -453,12 +475,12 @@ export class TotalPullRequestTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.B,
-        "Beginner Puller",
+        "Novice Puller",
         10,
       ),
       new RankCondition(
         RANK.C,
-        "First Pull Request",
+        "First Pull",
         1,
       ),
     ];
@@ -473,22 +495,22 @@ export class TotalRepositoryTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "God Repo Creator",
+        "Expert Repo Creator",
         100,
       ),
       new RankCondition(
         RANK.SS,
-        "Deep Repo Creator",
+        "Deep Repo Creator",  //TODO: Think of a name.
         90,
       ),
       new RankCondition(
         RANK.S,
-        "Super Repo Creator",
+        "Super Repo Creator",  //TODO: Think of a name.
         80,
       ),
       new RankCondition(
         RANK.AAA,
-        "Ultra Repo Creator",
+        "Ultra Repo Creator",  //TODO: Think of a name.
         50,
       ),
       new RankCondition(
@@ -498,12 +520,12 @@ export class TotalRepositoryTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "Advanced Repo Creator",
+        "Advanced Repo Creator",  //TODO: Think of a name.
         20,
       ),
       new RankCondition(
         RANK.B,
-        "Beginner Repo Creator",
+        "Repo Creator",
         10,
       ),
       new RankCondition(
