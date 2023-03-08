@@ -14,7 +14,7 @@ class RankCondition {
 export class Trophy {
   rankCondition: RankCondition | null = null;
   rank: RANK = RANK.UNKNOWN;
-  topMessage = "Special"; // TBD if it's broken ill change back, just testing.
+  topMessage = "?";
   bottomMessage = "0";
   title = "";
   filterTitles: Array<string> = [];
@@ -135,6 +135,26 @@ export class AllSuperRankTrophy extends Trophy{
     this.hidden = true;
   }
 }
+
+
+export class AccountYearTrophy extends Trophy{
+  constructor(score: number){
+    const rankConditions = [ 
+      new RankCondition(
+        RANK.SECRET,
+        "How many years since you've joined.",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "AccountYear";
+    this.filterTitles = ["AccountAge", "AccountYear", "Years"];
+    this.bottomMessage = "TBD years on GitHub." // TBD = number of years, if above a certain amount of years, the message changes. (such as joining in 2008)
+    this.hidden = true;
+  }
+}
+
+
 
 // TODO: Change this.
 export class Joined2020Trophy extends Trophy{
