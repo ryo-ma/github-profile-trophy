@@ -7,13 +7,13 @@ import {
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
   MultipleLangTrophy,
-  LongTimeAccountTrophy,
-  AncientAccountTrophy,
-  OGAccountTrophy,
-  Joined2020Trophy,
+  LongTimeAccountTrophy, // AccountYear will replace this
+  AncientAccountTrophy, // AccountYear will replace this
+  OGAccountTrophy, // AccountYear will replace this
+  Joined2020Trophy, // AccountYear will replace this
   AllSuperRankTrophy,
   MultipleOrganizationsTrophy,
-  // TotalYearTrophy,
+  AccountYearTrophy,
 } from "./trophy.ts";
 import { UserInfo } from "./user_info.ts";
 import { RANK_ORDER, RANK } from "./utils.ts";
@@ -35,12 +35,12 @@ export class TrophyList {
     this.trophies.push(
       new AllSuperRankTrophy(this.isAllSRank),
       new MultipleLangTrophy(userInfo.languageCount),
-      new LongTimeAccountTrophy(userInfo.durationYear),
-      new AncientAccountTrophy(userInfo.ancientAccount),
-      new OGAccountTrophy(userInfo.ogAccount),
-      new Joined2020Trophy(userInfo.joined2020),
+      new LongTimeAccountTrophy(userInfo.durationYear), // AccountYear will replace this
+      new AncientAccountTrophy(userInfo.ancientAccount), // AccountYear will replace this
+      new OGAccountTrophy(userInfo.ogAccount), // AccountYear will replace this
+      new Joined2020Trophy(userInfo.joined2020), // AccountYear will replace this
       new MultipleOrganizationsTrophy(userInfo.totalOrganizations),
-    //new TotalYearTrophy(userInfo.accountYear),
+      new AccountYearTrophy(userInfo.accountYear),
     );
     
   }
