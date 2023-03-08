@@ -13,6 +13,7 @@ import {
   Joined2020Trophy,
   AllSuperRankTrophy,
   MultipleOrganizationsTrophy,
+  // TotalYearTrophy,
 } from "./trophy.ts";
 import { UserInfo } from "./user_info.ts";
 import { RANK_ORDER, RANK } from "./utils.ts";
@@ -20,7 +21,7 @@ import { RANK_ORDER, RANK } from "./utils.ts";
 export class TrophyList {
   private trophies = new Array<Trophy>();
   constructor(userInfo: UserInfo) {
-    // Base trophies
+    // Base Trophies
     this.trophies.push(
       new TotalStarTrophy(userInfo.totalStargazers),
       new TotalCommitTrophy(userInfo.totalCommits),
@@ -29,7 +30,8 @@ export class TrophyList {
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
     );
-    // Secret trophies
+    
+    // Secret/Unknown Trophies
     this.trophies.push(
       new AllSuperRankTrophy(this.isAllSRank),
       new MultipleLangTrophy(userInfo.languageCount),
@@ -38,7 +40,9 @@ export class TrophyList {
       new OGAccountTrophy(userInfo.ogAccount),
       new Joined2020Trophy(userInfo.joined2020),
       new MultipleOrganizationsTrophy(userInfo.totalOrganizations),
+    //new TotalYearTrophy(userInfo.accountYear),
     );
+    
   }
   get length() {
     return this.trophies.length;
