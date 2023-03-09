@@ -242,12 +242,13 @@ export class OGAccountTrophy extends Trophy{
   }
 }
 
+// Note to self: I finished updating this
 export class TotalStarTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "Stargazer",
+        "Super Stargazer",
         2000,
       ),
       new RankCondition(
@@ -304,7 +305,7 @@ export class TotalCommitTrophy extends Trophy {
       
       new RankCondition(
         RANK.SSS,
-        "Commiting King",
+        "King Committer",
         10000,
       ),
       
@@ -389,17 +390,17 @@ export class TotalFollowerTrophy extends Trophy {
       */
       new RankCondition(
         RANK.A,
-        "NAME TBD",  //TODO: Think of a name.
+        "Community Builder",  //TODO: Doesn't sound good, I'll think of a better name.
         30,
       ),
       new RankCondition(
         RANK.B,
-        "NAME TBD", //TODO: Think of a name.
+        "New (TBD)", //TODO: Think of a name.
         10,
       ),
       new RankCondition(
         RANK.C,
-        "First Follower",
+        "First Followers",
         1,
       ),
     ];
@@ -420,12 +421,12 @@ export class TotalIssueTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.SS,
-        "Omega Reporter",
+        "Platnium Bug Hunter",
         500,
       ),
       new RankCondition(
         RANK.S,
-        "Super Reporter",
+        "Bug Hunter", // bugs in the code / issues
         200,
       ),
       new RankCondition(
@@ -440,17 +441,17 @@ export class TotalIssueTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "Advanced Reporter",
-        20,
+        "(TBD) Reporter",
+        30,
       ),
       new RankCondition(
         RANK.B,
-        "Novice Reporting",
+        "Novice Reporter",
         10,
       ),
       new RankCondition(
         RANK.C,
-        "First Issue",
+        "First Issues",
         1,
       ),
     ];
@@ -500,7 +501,7 @@ export class TotalPullRequestTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.C,
-        "First Pull",
+        "First Pulls",
         1,
       ),
     ];
@@ -515,7 +516,7 @@ export class TotalRepositoryTrophy extends Trophy {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "Expert Repo Creator",
+        "Repo Legend",
         100,
       ),
       new RankCondition(
