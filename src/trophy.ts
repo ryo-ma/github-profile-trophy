@@ -40,7 +40,7 @@ export class Trophy {
       this.topMessage = rankCondition.message;
     }
   }
-  private calculateNextRankPercentage() {
+  private calculateNextRankPercentage() {Rai
     if (this.rank === RANK.UNKNOWN) {
       return 0;
     }
@@ -151,6 +151,7 @@ export class AccountYearTrophy extends Trophy{
     this.filterTitles = ["AccountAge", "AccountYear", "Years"];
     this.bottomMessage = "TBD years on GitHub." // TBD = number of years, if above a certain amount of years, the message changes. (such as joining in 2008)
     this.hidden = true;
+    // There should also be prestiges for example: S -> 1 - 3 years. S+ -> 4 - 8 years. S++ -> 9 - 12 years.
   }
 }
 
@@ -242,7 +243,7 @@ export class OGAccountTrophy extends Trophy{
   }
 }
 
-// Note to self: I finished updating this
+//DONE
 export class TotalStarTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
@@ -322,12 +323,13 @@ export class TotalCommitTrophy extends Trophy {
         "Expert Committer",
         4000,
       ),
-      /*
+      
       new RankCondition(
         RANK.AAA,
-        "Ultra Committer",
+        "Ultra Committer", // i like this one
         500,
       ),
+      /*
       new RankCondition(
         RANK.AA,
         "Hyper Committer",
@@ -336,7 +338,7 @@ export class TotalCommitTrophy extends Trophy {
       */
       new RankCondition(
         RANK.A,
-        "Pro Committer",
+        "Advanced Committer",
         450,
       ),
       new RankCondition(
@@ -382,12 +384,13 @@ export class TotalFollowerTrophy extends Trophy {
         "Famous User",
         100,
       ),
+      */
       new RankCondition(
         RANK.AA,
         "Active User",
         50,
       ),
-      */
+      
       new RankCondition(
         RANK.A,
         "Community Builder",  //TODO: Doesn't sound good, I'll think of a better name.
@@ -395,7 +398,7 @@ export class TotalFollowerTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.B,
-        "New (TBD)", //TODO: Think of a name.
+        "New User",
         10,
       ),
       new RankCondition(
@@ -410,28 +413,28 @@ export class TotalFollowerTrophy extends Trophy {
   }
 }
 
-// TODO: Think of a better gramatical term for this.
+// DONE
 export class TotalIssueTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "Reporter",
+        "Senior Bug Hunter",
         1000,
       ),
       new RankCondition(
         RANK.SS,
-        "Platnium Bug Hunter",
+        "Bug Hunter",
         500,
       ),
       new RankCondition(
         RANK.S,
-        "Bug Hunter", // bugs in the code / issues
+        "Junior Bug Hunter", // bugs in the code / issues
         200,
       ),
       new RankCondition(
         RANK.AAA,
-        "Ultra Reporter",
+        "Professional Reporter",
         100,
       ),
       new RankCondition(
@@ -441,7 +444,7 @@ export class TotalIssueTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.A,
-        "(TBD) Reporter",
+        "Reporter",
         30,
       ),
       new RankCondition(
@@ -511,47 +514,48 @@ export class TotalPullRequestTrophy extends Trophy {
   }
 }
 
+// MOSTLY DONE
 export class TotalRepositoryTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
-        "Repo Legend",
+        "Creative Legend",
         100,
       ),
       new RankCondition(
         RANK.SS,
-        "Deep Repo Creator",  //TODO: Think of a name.
+        "Creative",
         90,
       ),
       new RankCondition(
         RANK.S,
-        "Super Repo Creator",  //TODO: Think of a name.
+        "TBD Creator",  //TODO: Think of a name.
         80,
       ),
       new RankCondition(
         RANK.AAA,
-        "Ultra Repo Creator",  //TODO: Think of a name.
+        "Experienced Creator",
         50,
       ),
       new RankCondition(
         RANK.AA,
-        "Hyper Repo Creator",
+        "Advanced Creator",
         30,
       ),
       new RankCondition(
         RANK.A,
-        "Advanced Repo Creator",  //TODO: Think of a name.
+        "Creator",
         20,
       ),
       new RankCondition(
         RANK.B,
-        "Repo Creator",
+        "Novice Creator",
         10,
       ),
       new RankCondition(
         RANK.C,
-        "First Repository",
+        "First Repositories",
         1,
       ),
     ];
