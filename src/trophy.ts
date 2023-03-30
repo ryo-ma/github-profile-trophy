@@ -40,7 +40,7 @@ export class Trophy {
       this.topMessage = rankCondition.message;
     }
   }
-  private calculateNextRankPercentage() {Rai
+  private calculateNextRankPercentage() {
     if (this.rank === RANK.UNKNOWN) {
       return 0;
     }
@@ -130,8 +130,8 @@ export class AllSuperRankTrophy extends Trophy{
     ];
     super(score, rankConditions);
     this.title = "AllSuperRank";
-    this.filterTitles = ["AllSuperRank"];
-    this.bottomMessage = "All S Ranked Trophies"
+    this.filterTitles = ["AllSuperRank", "AllSRank"];
+    this.bottomMessage = "All S Rank Trophies"
     this.hidden = true;
   }
 }
@@ -358,8 +358,7 @@ export class TotalCommitTrophy extends Trophy {
   }
 }
 
-// Instead of calling them a "user", we can drop the title to make it easier.
-// Decided to make more balances
+// DONE, NEEDS REVIEW.
 export class TotalFollowerTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
@@ -378,13 +377,12 @@ export class TotalFollowerTrophy extends Trophy {
         "Well Known",
         200,
       ),
-      /*
       new RankCondition(
         RANK.AAA,
         "Famous User",
         100,
       ),
-      */
+      
       new RankCondition(
         RANK.AA,
         "Active User",
@@ -393,7 +391,7 @@ export class TotalFollowerTrophy extends Trophy {
       
       new RankCondition(
         RANK.A,
-        "Community Builder",  //TODO: Doesn't sound good, I'll think of a better name.
+        "Popular User",
         30,
       ),
       new RankCondition(
@@ -530,7 +528,7 @@ export class TotalRepositoryTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.S,
-        "TBD Creator",  //TODO: Think of a name.
+        "Expert Creator",  //name still isn't good but its good enough for review
         80,
       ),
       new RankCondition(
