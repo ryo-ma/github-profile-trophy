@@ -209,6 +209,7 @@ Available themes.
 | [apprentice](#apprentice) |
 | [dark_dimmed](#dark_dimmed) |
 | [dark_lover](#dark_lover) |
+| [gotham](#gotham) |
 
 
 ### flat
@@ -429,6 +430,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dark_lover
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/31789752/152659041-de5b23cb-1be8-4e6b-b07b-726127ab8c3a.png">  
+</p>
+
+### gotham
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gotham
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/36790357/235058874-9e145e79-e6b1-4cc8-ad0d-7ae0fda8df7b.png">  
 </p>
 
 ## Margin Width
