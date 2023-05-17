@@ -31,6 +31,7 @@ export type GitHubUserActivity = {
   contributionsCollection: {
     totalCommitContributions: number;
     restrictedContributionsCount: number;
+    totalPullRequestReviewContributions: number;
   };
   organizations: {
     totalCount: number;
@@ -45,6 +46,7 @@ export class UserInfo {
   public readonly totalIssues: number;
   public readonly totalOrganizations: number;
   public readonly totalPullRequests: number;
+  public readonly totalReviews: number;
   public readonly totalStargazers: number;
   public readonly totalRepositories: number;
   public readonly languageCount: number;
@@ -94,6 +96,7 @@ export class UserInfo {
     this.totalIssues = userIssue.openIssues.totalCount + userIssue.closedIssues.totalCount;
     this.totalOrganizations = userActivity.organizations.totalCount;
     this.totalPullRequests = userPullRequest.pullRequests.totalCount;
+    this.totalReviews = userActivity.contributionsCollection.totalPullRequestReviewContributions;
     this.totalStargazers = totalStargazers;
     this.totalRepositories = userRepository.repositories.totalCount;
     this.languageCount = languages.size;

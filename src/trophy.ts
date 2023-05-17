@@ -216,6 +216,56 @@ export class OGAccountTrophy extends Trophy{
   }
 }
 
+export class TotalReviewsTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "God Reviewer",
+        70,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Deep Reviewer",
+        57,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Super Reviewer",
+        45,
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Ultra Reviewer",
+        30,
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Hyper Reviewer",
+        20,
+      ),
+      new RankCondition(
+        RANK.A,
+        "Active Reviewer",
+        8,
+      ),
+      new RankCondition(
+        RANK.B,
+        "Intermediate Reviewer",
+        3,
+      ),
+      new RankCondition(
+        RANK.C,
+        "New Reviewer",
+        1,
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "Reviews";
+    this.filterTitles = ["Review", "Reviews"];
+  }
+}
+
 export class TotalStarTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [
