@@ -50,7 +50,7 @@ export class UserInfo {
   public readonly languageCount: number;
   public readonly durationYear: number;
   public readonly ancientAccount: number;
-  public readonly joined2020: number;
+  public readonly joinedThisYear: number;
   public readonly ogAccount: number;
   constructor(
     userActivity: GitHubUserActivity,
@@ -83,7 +83,7 @@ export class UserInfo {
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
     const ancientAccount =
       new Date(userActivity.createdAt).getFullYear() <= 2010 ? 1 : 0;
-    const joined2020 = new Date(userActivity.createdAt).getFullYear() == 2020
+    const joinedThisYear = new Date(userActivity.createdAt).getFullYear() == new Date().getUTCFullYear()
       ? 1
       : 0;
     const ogAccount =
@@ -99,7 +99,7 @@ export class UserInfo {
     this.languageCount = languages.size;
     this.durationYear = durationYear;
     this.ancientAccount = ancientAccount;
-    this.joined2020 = joined2020;
+    this.joinedThisYear = joinedThisYear;
     this.ogAccount = ogAccount;
   }
 }

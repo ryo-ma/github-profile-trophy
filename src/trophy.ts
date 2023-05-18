@@ -135,7 +135,7 @@ export class AllSuperRankTrophy extends Trophy{
     this.hidden = true;
   }
 }
-export class Joined2020Trophy extends Trophy{
+export class JoinedThisYearTrophy extends Trophy{
   constructor(score: number){
     const rankConditions = [
       new RankCondition(
@@ -145,9 +145,9 @@ export class Joined2020Trophy extends Trophy{
       ),
     ];
     super(score, rankConditions);
-    this.title = "Joined2020";
-    this.filterTitles = ["Joined2020"];
-    this.bottomMessage = "Joined 2020"
+    this.title = "New Joinee";
+    this.filterTitles = ["New", "JoinedThisYear"];
+    this.bottomMessage = `Joined ${new Date().getUTCFullYear()}`
     this.hidden = true;
   }
 }
