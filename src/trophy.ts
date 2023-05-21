@@ -7,7 +7,7 @@ class RankCondition {
     readonly rank: RANK,
     readonly message: string,
     readonly requiredScore: number,
-  ) {}
+  ) { }
 }
 
 
@@ -103,8 +103,8 @@ export class Trophy {
   }
 }
 
-export class MultipleLangTrophy extends Trophy{
-  constructor(score: number){
+export class MultipleLangTrophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
@@ -119,8 +119,8 @@ export class MultipleLangTrophy extends Trophy{
   }
 }
 
-export class AllSuperRankTrophy extends Trophy{
-  constructor(score: number){
+export class AllSuperRankTrophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
@@ -135,8 +135,8 @@ export class AllSuperRankTrophy extends Trophy{
     this.hidden = true;
   }
 }
-export class Joined2020Trophy extends Trophy{
-  constructor(score: number){
+export class Joined2020Trophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
@@ -151,8 +151,8 @@ export class Joined2020Trophy extends Trophy{
     this.hidden = true;
   }
 }
-export class AncientAccountTrophy extends Trophy{
-  constructor(score: number){
+export class AncientAccountTrophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
@@ -167,8 +167,8 @@ export class AncientAccountTrophy extends Trophy{
     this.hidden = true;
   }
 }
-export class LongTimeAccountTrophy extends Trophy{
-  constructor(score: number){
+export class LongTimeAccountTrophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
@@ -182,8 +182,8 @@ export class LongTimeAccountTrophy extends Trophy{
     this.hidden = true;
   }
 }
-export class MultipleOrganizationsTrophy extends Trophy{
-  constructor(score: number){
+export class MultipleOrganizationsTrophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
@@ -199,8 +199,8 @@ export class MultipleOrganizationsTrophy extends Trophy{
   }
 }
 
-export class OGAccountTrophy extends Trophy{
-  constructor(score: number){
+export class OGAccountTrophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
@@ -266,8 +266,8 @@ export class TotalReviewsTrophy extends Trophy {
   }
 }
 
-export class AccountDurationTrophy extends Trophy{
-  constructor(score: number){
+export class AccountDurationTrophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SSS,
