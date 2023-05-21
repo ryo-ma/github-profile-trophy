@@ -14,6 +14,7 @@ import {
   Joined2020Trophy,
   AllSuperRankTrophy,
   MultipleOrganizationsTrophy,
+  AccountDurationTrophy,
 } from "./trophy.ts";
 import { UserInfo } from "./user_info.ts";
 import { RANK_ORDER, RANK } from "./utils.ts";
@@ -40,6 +41,7 @@ export class TrophyList {
       new OGAccountTrophy(userInfo.ogAccount),
       new Joined2020Trophy(userInfo.joined2020),
       new MultipleOrganizationsTrophy(userInfo.totalOrganizations),
+      new AccountDurationTrophy(userInfo.durationDays),
     );
   }
   get length() {
