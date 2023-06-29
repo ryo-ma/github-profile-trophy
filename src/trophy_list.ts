@@ -6,7 +6,6 @@ import {
   TotalIssueTrophy,
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
-  TotalReviewsTrophy,
   MultipleLangTrophy,
   LongTimeAccountTrophy,
   AncientAccountTrophy,
@@ -29,7 +28,6 @@ export class TrophyList {
       new TotalIssueTrophy(userInfo.totalIssues),
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
-      new TotalReviewsTrophy(userInfo.totalReviews),
     );
     // Secret trophies
     this.trophies.push(

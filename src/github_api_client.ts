@@ -38,7 +38,6 @@ export class GithubAPIClient {
             contributionsCollection {
               totalCommitContributions
               restrictedContributionsCount
-              totalPullRequestReviewContributions
             }
             organizations(first: 1) {
               totalCount
