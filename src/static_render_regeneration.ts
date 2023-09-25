@@ -17,6 +17,14 @@ function getUrl(request: Request) {
     }
 }
 
+function readCache(cacheFilePath: string): Uint8Array | null {
+    try {
+        return Deno.readFileSync(cacheFilePath)
+    } catch {
+        return null
+    }
+}
+
 export async function staticRenderRegeneration(request: Request, options: StaticRegenerationOptions, render: (request: Request) => Promise<Response>) {
     // avoid TypeError: Invalid URL at deno:core
     const url = getUrl(request)
@@ -30,9 +38,12 @@ export async function staticRenderRegeneration(request: Request, options: Static
     const cacheManager = new CacheManager(options.revalidate ?? 0, cacheFile);
 
     if (cacheManager.isCacheValid) {
-        return new Response(Deno.readFileSync(cacheManager.cacheFilePath), {
-            headers: options.headers ?? new Headers({}),
-        });
+        const cache = readCache(cacheManager.cacheFilePath)
+        if(cache !== null) {
+            return new Response(cache, {
+                headers: options.headers ?? new Headers({}),
+            });
+        }
     }
     
     const response = await render(request)
