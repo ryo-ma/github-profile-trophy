@@ -23,7 +23,7 @@ GITHUB_API=https://github.example.com/api/graphql
 Run local server.
 
 ```sh
-deno run --allow-net --allow-read --allow-env debug.ts
+deno run --allow-net --allow-read --allow-env --allow-write debug.ts
 ```
 
 Open localhost from your browser.
