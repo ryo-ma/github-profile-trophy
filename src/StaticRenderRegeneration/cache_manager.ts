@@ -1,26 +1,4 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
-export async function generateUUID(message: string): Promise<string> {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(message);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-    return hashHex;
-
-}
-
-const existsSync = (filename: string): boolean => {
-    try {
-      Deno.statSync(filename);
-      // successful, file or directory must exist
-      return true;
-    } catch {
-        return false;
-    }
-  };
-  
+import { existsSync } from './utils.ts'
 
 export class CacheManager {
     constructor(private revalidateTime: number, private cacheFile: string) {}

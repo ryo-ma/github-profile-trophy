@@ -1,29 +1,6 @@
-import { CacheManager, generateUUID } from "./cache_manager.ts";
-
-interface StaticRegenerationOptions {
-    // The number of milliseconds before the page should be revalidated
-    revalidate?: number
-    headers?: Headers
-}
-
-function getUrl(request: Request) {
-    try {
-        return new URL(request.url)
-    } catch {
-        return {
-            pathname: request.url,
-            search: request.url
-        }
-    }
-}
-
-function readCache(cacheFilePath: string): Uint8Array | null {
-    try {
-        return Deno.readFileSync(cacheFilePath)
-    } catch {
-        return null
-    }
-}
+import { CacheManager } from "./cache_manager.ts";
+import { StaticRegenerationOptions } from "./types.ts";
+import { getUrl, readCache, generateUUID } from "./utils.ts";
 
 export async function staticRenderRegeneration(request: Request, options: StaticRegenerationOptions, render: (request: Request) => Promise<Response>) {
     // avoid TypeError: Invalid URL at deno:core
