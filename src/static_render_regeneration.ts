@@ -36,7 +36,6 @@ export async function staticRenderRegeneration(request: Request, options: Static
 
     const cacheFile = await generateUUID(url.pathname + (url.search ?? ""));
     const cacheManager = new CacheManager(options.revalidate ?? 0, cacheFile);
-
     if (cacheManager.isCacheValid) {
         const cache = readCache(cacheManager.cacheFilePath)
         if(cache !== null) {
@@ -47,6 +46,7 @@ export async function staticRenderRegeneration(request: Request, options: Static
     }
     
     const response = await render(request)
-    await cacheManager.save(response)
+    cacheManager.save(response)
+
     return response
 }

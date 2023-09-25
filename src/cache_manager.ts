@@ -58,17 +58,14 @@ export class CacheManager {
         return currentTime - this.cacheFileLastModifiedGetTime < this.revalidateTime;
     }
 
-    async save (response: Response) {
+    async save (response: Response): Promise<void> {
         if(response === null) return
-
         // Prevent TypeError: ReadableStream is locked
-        try {
-            const text = await response.text()
-            const data = new TextEncoder().encode(text)
+        const text = await response.clone().text()
+        const data = new TextEncoder().encode(text)
         
-            Deno.writeFileSync(this.cacheFilePath, data, { create: true });
-        } catch {
+        Deno.writeFile(this.cacheFilePath, data, { create: true }).catch(() => {
             console.warn("Failed to save cache file")
-        }
+        });
     }
 }
