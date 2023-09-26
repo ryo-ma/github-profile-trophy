@@ -53,6 +53,8 @@ export function abridgeScore(score: number): string {
   return (Math.sign(score) * Math.abs(score)).toString() + "pt";
 }
 
+const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
+
 export const CONSTANTS = {
   CACHE_MAX_AGE: 7200,
   DEFAULT_PANEL_SIZE: 110,
@@ -63,6 +65,7 @@ export const CONSTANTS = {
   DEFAULT_NO_BACKGROUND: false,
   DEFAULT_NO_FRAME: false,
   DEFAULT_GITHUB_API: "https://api.github.com/graphql",
+  REVALIDATE_TIME: HOUR_IN_MILLISECONDS,
 };
 
 export enum RANK {

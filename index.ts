@@ -4,11 +4,25 @@ import { CONSTANTS, parseParams } from "./src/utils.ts";
 import { COLORS, Theme } from "./src/theme.ts";
 import { Error400, Error404 } from "./src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
-
+import {staticRenderRegeneration} from "./src/StaticRenderRegeneration/index.ts";
 const apiEndpoint = Deno.env.get("GITHUB_API") || CONSTANTS.DEFAULT_GITHUB_API;
 const client = new GithubAPIClient(apiEndpoint);
 
-export default async (req: Request) => {
+const defaultHeaders = new Headers(
+  {
+    "Content-Type": "image/svg+xml",
+    "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`,
+  },
+)
+
+export default (request: Request) => staticRenderRegeneration(request, {
+  revalidate: CONSTANTS.REVALIDATE_TIME,
+  headers: defaultHeaders
+}, function (req: Request) {
+  return app(req);
+});
+
+async function app (req: Request): Promise<Response>{
   const params = parseParams(req);
   const username = params.get("username");
   const row = params.getNumberValue("row", CONSTANTS.DEFAULT_MAX_ROW);
@@ -69,6 +83,7 @@ export default async (req: Request) => {
       },
     );
   }
+  
   // Success Response
   return new Response(
     new Card(
@@ -83,12 +98,7 @@ export default async (req: Request) => {
       noFrame,
     ).render(userInfo, theme),
     {
-      headers: new Headers(
-        {
-          "Content-Type": "image/svg+xml",
-          "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`,
-        },
-      ),
+      headers: defaultHeaders,
     },
   );
 };
