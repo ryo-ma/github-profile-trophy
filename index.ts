@@ -101,4 +101,4 @@ async function app (req: Request): Promise<Response>{
       headers: defaultHeaders,
     },
   );
-};
+}

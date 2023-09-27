@@ -24,6 +24,7 @@ export class GithubAPIClient {
       this.requestUserRepository(username),
     ]);
     if (results.some((r) => r == null)) {
+      console.error(`Can not find a user with username:'${username}'`);
       return null;
     }
     return new UserInfo(results[0]!, results[1]!, results[2]!, results[3]!);
@@ -109,28 +110,50 @@ export class GithubAPIClient {
   private async request(
     query: string,
     username: string,
+    retryDelay = CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
   ) {
     const tokens = [
       Deno.env.get("GITHUB_TOKEN1"),
       Deno.env.get("GITHUB_TOKEN2"),
     ];
+    const maxRetries = tokens.length;
+
     const variables = { username: username };
     let response;
-    for (const token of tokens) {
-      response = await soxa.post(
-        this.apiEndpoint,
-        {},
-        {
-          data: { query: query, variables },
-          headers: { Authorization: `bearer ${token}` },
-        },
-      ).catch((error) => {
-        console.error(error.response.data);
-      });
-      if (response.data.data !== undefined) {
-        break;
+
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        response = await soxa.post(
+          this.apiEndpoint,
+          {},
+          {
+            data: { query: query, variables },
+            headers: { Authorization: `bearer ${tokens[attempt]}` },
+          },
+        );
+        if (response.data.errors !== undefined) {
+          throw new Error(
+            response.data.errors.map((e: { message: string; type: string }) =>
+              e.message
+            ).join("\n"),
+          );
+        }
+        if (response.data.data !== undefined) {
+          return response.data.data.user;
+        } else {
+          return null;
+        }
+      } catch (error) {
+        console.error(
+          `Attempt ${attempt} failed with GITHUB_TOKEN${attempt + 1}:`,
+          error,
+        );
       }
+
+      console.log(`Retrying in ${retryDelay / 1000} seconds...`);
+      await new Promise((resolve) => setTimeout(resolve, retryDelay));
     }
-    return response.data.data.user;
+
+    throw new Error(`Max retries (${maxRetries}) exceeded.`);
   }
 }
