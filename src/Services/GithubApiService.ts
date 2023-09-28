@@ -89,7 +89,7 @@ export class GithubApiService extends GithubRepository {
           Authorization: `bearer ${tokens[attempt]}`,
         },
       });
-    }) as QueryDefaultResponse<T>;
+    }) as QueryDefaultResponse<{ user: T }>;
 
     return response?.data?.data?.user ?? null;
   }
