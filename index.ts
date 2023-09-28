@@ -1,12 +1,14 @@
-import { GithubAPIClient } from "./src/github_api_client.ts";
 import { Card } from "./src/card.ts";
 import { CONSTANTS, parseParams } from "./src/utils.ts";
 import { COLORS, Theme } from "./src/theme.ts";
 import { Error400, Error404 } from "./src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 import {staticRenderRegeneration} from "./src/StaticRenderRegeneration/index.ts";
-const apiEndpoint = Deno.env.get("GITHUB_API") || CONSTANTS.DEFAULT_GITHUB_API;
-const client = new GithubAPIClient(apiEndpoint);
+import { GithubRepositoryService } from "./src/Repository/GithubRepository.ts";
+import { GithubApiService } from "./src/Services/GithubApiService.ts";
+
+const serviceProvider = new GithubApiService()
+const client = new GithubRepositoryService(serviceProvider).repository;
 
 const defaultHeaders = new Headers(
   {
