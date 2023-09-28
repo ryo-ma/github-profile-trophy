@@ -28,7 +28,7 @@ export const queryUserIssue = `
       }
     }
   }
-`
+`;
 
 export const queryUserPullRequest = `
   query userInfo($username: String!) {
@@ -38,7 +38,7 @@ export const queryUserPullRequest = `
       }
     }
   }
-`
+`;
 
 export const queryUserRepository = `
   query userInfo($username: String!) {
@@ -58,4 +58,4 @@ export const queryUserRepository = `
       }
     }
   }
-`
+`;
