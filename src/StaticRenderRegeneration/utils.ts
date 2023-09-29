@@ -18,7 +18,7 @@ export function readCache(cacheFilePath: string): Uint8Array | null {
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
-export async function generateUUID(message: string): Promise<string> {
+export async function hashString(message: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(message);
   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
