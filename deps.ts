@@ -11,7 +11,12 @@ import {
 
 import { CONSTANTS } from "./src/utils.ts";
 
-const baseURL = Deno.env.get("GITHUB_API") || CONSTANTS.DEFAULT_GITHUB_API;
+const api = new Map([
+  ["github", Deno.env.get("GITHUB_API")],
+  ["azure", Deno.env.get("AZURE_API_URL")],
+]);
+
+const baseURL = api.get(CONSTANTS.DEFAULT_PROVIDER);
 
 const soxa = new ServiceProvider({
   ...defaults,

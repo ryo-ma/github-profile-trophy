@@ -92,7 +92,7 @@ export class GithubAzureService extends GithubRepository {
       TOKENS.length,
       CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
     );
-
+    console.log("HIT");
     try {
       const response = await retry.fetch<Promise<T>>(async () => {
         return await soxa.post("", {}, {
