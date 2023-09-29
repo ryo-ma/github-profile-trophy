@@ -1,12 +1,10 @@
+import { Retry } from "../Retry.ts";
 import {
   assertEquals,
   assertRejects,
-} from "https://deno.land/std@0.202.0/assert/mod.ts";
-import { Retry } from "../Retry.ts";
-import {
   assertSpyCalls,
   spy,
-} from "https://deno.land/std@0.203.0/testing/mock.ts";
+} from "../../../deps.ts";
 
 type MockResponse = {
   value: number;
@@ -36,6 +34,29 @@ Deno.test("Should retry", async () => {
   await assertRejects(
     () => {
       return retryInstance.fetch<MockResponse>(callbackError);
+    },
+    Error,
+    `Max retries (${retries}) exceeded.`,
+  );
+
+  assertEquals(countErrors, 3);
+});
+
+Deno.test("Should retry the asyncronous callback", async () => {
+  let countErrors = 0;
+
+  const callbackError = async () => {
+    countErrors++;
+    // Mock request in callback
+    await new Promise((_, reject) => setTimeout(reject, 100));
+  };
+
+  const retries = 3;
+  const retryInstance = new Retry(retries);
+
+  await assertRejects(
+    () => {
+      return retryInstance.fetch(callbackError);
     },
     Error,
     `Max retries (${retries}) exceeded.`,

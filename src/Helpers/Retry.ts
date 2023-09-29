@@ -2,19 +2,40 @@ export type RetryCallbackProps = {
   attempt: number;
 };
 
+type callbackType<T = unknown> = (data: RetryCallbackProps) => Promise<T> | T;
+
+async function* createAsyncIterable<T>(
+  callback: callbackType<T>,
+  retries: number,
+  delay: number,
+) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const data = await callback({ attempt: i });
+      yield data;
+      return;
+    } catch (e) {
+      yield null;
+      console.error(e);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+}
+
 export class Retry {
   constructor(private maxRetries = 2, private retryDelay = 1000) {}
-
   async fetch<T = unknown>(
-    callback: (data: RetryCallbackProps) => Promise<T> | T,
+    callback: callbackType<T>,
   ) {
-    for (let attempt = 0; attempt < this.maxRetries; attempt++) {
-      try {
-        const data = callback({ attempt });
-        return data;
-      } catch {
-        console.log(`Retrying in ${this.retryDelay / 1000} seconds...`);
-        await new Promise((resolve) => setTimeout(resolve, this.retryDelay));
+    for await (
+      const callbackResult of createAsyncIterable<T>(
+        callback,
+        this.maxRetries,
+        this.retryDelay,
+      )
+    ) {
+      if (callbackResult) {
+        return callbackResult as T;
       }
     }
 

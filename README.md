@@ -502,5 +502,5 @@ Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
 # Testing
 
 ```bash
-deno test
+deno test --allow-env
 ```

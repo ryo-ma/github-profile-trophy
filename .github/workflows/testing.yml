@@ -19,4 +19,4 @@ jobs:
         with:
           deno-version: "1.37.0"
       - name: Run tests
-        run: deno test
+        run: deno test --allow-env

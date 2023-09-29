@@ -15,8 +15,10 @@ import {
 import { soxa } from "../../deps.ts";
 import { Retry } from "../Helpers/Retry.ts";
 import { QueryDefaultResponse } from "../Types/index.ts";
+import { CONSTANTS } from "../utils.ts";
 
-const tokens = [
+// Need to be here - Exporting from another file makes array of null
+export const TOKENS = [
   Deno.env.get("GITHUB_TOKEN1"),
   Deno.env.get("GITHUB_TOKEN2"),
 ];
@@ -50,15 +52,17 @@ export class GithubApiService extends GithubRepository {
     );
   }
   async requestUserInfo(username: string): Promise<UserInfo | null> {
+    // Avoid to call others if one of them is null
+    const repository = await this.requestUserRepository(username);
+    if (repository === null) return null;
+
     const promises = Promise.allSettled([
-      this.requestUserRepository(username),
       this.requestUserActivity(username),
       this.requestUserIssue(username),
       this.requestUserPullRequest(username),
     ]);
-    const [repository, activity, issue, pullRequest] = await promises;
+    const [activity, issue, pullRequest] = await promises;
     const status = [
-      repository.status,
       activity.status,
       issue.status,
       pullRequest.status,
@@ -73,7 +77,7 @@ export class GithubApiService extends GithubRepository {
       (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
-      (repository as PromiseFulfilledResult<GitHubUserRepository>).value,
+      repository,
     );
   }
 
@@ -81,16 +85,36 @@ export class GithubApiService extends GithubRepository {
     query: string,
     variables: { [key: string]: string },
   ) {
-    const retry = new Retry();
-    const response = await retry.fetch<Promise<T>>(async ({ attempt }) => {
-      return await soxa.post("", {}, {
-        data: { query: query, variables },
-        headers: {
-          Authorization: `bearer ${tokens[attempt]}`,
-        },
-      });
-    }) as QueryDefaultResponse<{ user: T }>;
+    try {
+      const retry = new Retry(
+        TOKENS.length,
+        CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
+      );
+      const response = await retry.fetch<Promise<T>>(async ({ attempt }) => {
+        return await soxa.post("", {}, {
+          data: { query: query, variables },
+          headers: {
+            Authorization: `bearer ${TOKENS[attempt]}`,
+          },
+        });
+      }) as QueryDefaultResponse<{ user: T; errors?: unknown[] }>;
 
-    return response?.data?.data?.user ?? null;
+      if (response.data.data.errors) {
+        throw new Error("Error from Github API", {
+          cause: response.data.data.errors,
+        });
+      }
+
+      return response?.data?.data?.user ?? null;
+    } catch (error) {
+      // TODO: Move this to a logger instance later
+      if (error instanceof Error && error.cause) {
+        console.error(JSON.stringify(error.cause, null, 2));
+      } else {
+        console.error(error);
+      }
+
+      return null;
+    }
   }
 }
