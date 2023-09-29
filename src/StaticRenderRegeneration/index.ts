@@ -28,7 +28,7 @@ export async function staticRenderRegeneration(
 
   const response = await render(request);
 
-  if (response.status !== 419) {
+  if (response.status >= 200 && response.status < 300) {
     cacheManager.save(response);
   }
 
