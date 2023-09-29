@@ -5,9 +5,9 @@ import { Error400, Error404 } from "../src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 import { staticRenderRegeneration } from "../src/StaticRenderRegeneration/index.ts";
 import { GithubRepositoryService } from "../src/Repository/GithubRepository.ts";
-import { GithubApiService } from "../src/Services/GithubApiService.ts";
+import { GithubAzureService } from "../src/Services/GithubAzureService.ts";
 
-const serviceProvider = new GithubApiService();
+const serviceProvider = new GithubAzureService();
 const client = new GithubRepositoryService(serviceProvider).repository;
 
 const defaultHeaders = new Headers(
