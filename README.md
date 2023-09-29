@@ -498,3 +498,9 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&no-frame=true
 
 # Contribution Guide
 Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
+
+# Testing
+
+```bash
+deno test --allow-env
+```
