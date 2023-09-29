@@ -19,7 +19,9 @@ jobs:
         uses: denolib/setup-deno@v2
         with:
           deno-version: ${{ matrix.deno-version }}
-      - name: Lint Deno Module
+      - name: Deno format check
         run: deno fmt --check
+      - name: Deno lint check
+        run: deno task lint
       - name: Test Deno Module
         run: deno task test
