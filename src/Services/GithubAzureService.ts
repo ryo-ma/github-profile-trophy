@@ -14,39 +14,41 @@ import {
 } from "../Schemas/index.ts";
 import { soxa } from "../../deps.ts";
 import { Retry } from "../Helpers/Retry.ts";
-import { GithubError, QueryDefaultResponse } from "../Types/index.ts";
+import {
+  EServiceKindError,
+  QueryDefaultResponse,
+  ServiceError,
+} from "../Types/index.ts";
 import { CONSTANTS } from "../utils.ts";
-import { EServiceKindError } from "../Types/EServiceKindError.ts";
-import { ServiceError } from "../Types/ServiceError.ts";
-import { Logger } from "../Helpers/Logger.ts";
 
-// Need to be here - Exporting from another file makes array of null
+const authentication = Deno.env.get("X_API_KEY");
+
 export const TOKENS = [
   Deno.env.get("GITHUB_TOKEN1"),
   Deno.env.get("GITHUB_TOKEN2"),
 ];
 
-export class GithubApiService extends GithubRepository {
+export class GithubAzureService extends GithubRepository {
   async requestUserRepository(
     username: string,
   ): Promise<GitHubUserRepository | ServiceError> {
     return await this.executeQuery<GitHubUserRepository>(queryUserRepository, {
       username,
-    });
+    }, "userRepository");
   }
   async requestUserActivity(
     username: string,
   ): Promise<GitHubUserActivity | ServiceError> {
     return await this.executeQuery<GitHubUserActivity>(queryUserActivity, {
       username,
-    });
+    }, "userActivity");
   }
   async requestUserIssue(
     username: string,
   ): Promise<GitHubUserIssue | ServiceError> {
     return await this.executeQuery<GitHubUserIssue>(queryUserIssue, {
       username,
-    });
+    }, "userIssue");
   }
   async requestUserPullRequest(
     username: string,
@@ -54,14 +56,14 @@ export class GithubApiService extends GithubRepository {
     return await this.executeQuery<GitHubUserPullRequest>(
       queryUserPullRequest,
       { username },
+      "userPullRequest",
     );
   }
   async requestUserInfo(username: string): Promise<UserInfo | ServiceError> {
     // Avoid to call others if one of them is null
     const repository = await this.requestUserRepository(username);
-    if (repository instanceof ServiceError) {
-      Logger.error(repository);
-      return repository;
+    if (repository === null) {
+      return new ServiceError("not found", EServiceKindError.NOT_FOUND);
     }
 
     const promises = Promise.allSettled([
@@ -77,7 +79,7 @@ export class GithubApiService extends GithubRepository {
     ];
 
     if (status.includes("rejected")) {
-      Logger.error(`Can not find a user with username:' ${username}'`);
+      console.error(`Can not find a user with username:' ${username}'`);
       return new ServiceError("not found", EServiceKindError.NOT_FOUND);
     }
 
@@ -89,55 +91,35 @@ export class GithubApiService extends GithubRepository {
     );
   }
 
-  private handleError(responseErrors: GithubError[]): ServiceError {
-    const errors = responseErrors ?? [];
-    const isRateLimitExceeded = (errors ?? []).some((error) => {
-      error.type.includes(EServiceKindError.RATE_LIMIT);
-    });
-
-    if (isRateLimitExceeded) {
-      throw new ServiceError(
-        "Rate limit exceeded",
-        EServiceKindError.RATE_LIMIT,
-      );
-    }
-
-    throw new ServiceError(
-      "unknown error",
-      EServiceKindError.NOT_FOUND,
-    );
-  }
-
   async executeQuery<T = unknown>(
     query: string,
     variables: { [key: string]: string },
+    cache_ns?: string,
   ) {
+    const retry = new Retry(
+      TOKENS.length,
+      CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
+    );
+    console.log("HIT");
     try {
-      const retry = new Retry(
-        TOKENS.length,
-        CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
-      );
-      const response = await retry.fetch<Promise<T>>(async ({ attempt }) => {
+      const response = await retry.fetch<Promise<T>>(async () => {
         return await soxa.post("", {}, {
           data: { query: query, variables },
           headers: {
-            Authorization: `bearer ${TOKENS[attempt]}`,
+            cache_ns,
+            "x_api_key": authentication,
           },
         });
-      }) as QueryDefaultResponse<{ user: T }>;
+      }) as QueryDefaultResponse<{ data: { user: T } }>;
 
-      if (response?.data?.errors) {
-        return this.handleError(response?.data?.errors);
-      }
-
-      return response?.data?.data?.user ??
+      return response?.data?.data?.data?.user ??
         new ServiceError("not found", EServiceKindError.NOT_FOUND);
     } catch (error) {
       // TODO: Move this to a logger instance later
       if (error instanceof Error && error.cause) {
-        Logger.error(JSON.stringify(error.cause, null, 2));
+        console.error(JSON.stringify(error.cause, null, 2));
       } else {
-        Logger.error(error);
+        console.error(error);
       }
 
       return new ServiceError("not found", EServiceKindError.NOT_FOUND);

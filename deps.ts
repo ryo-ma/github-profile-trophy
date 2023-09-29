@@ -9,9 +9,14 @@ import {
   spy,
 } from "https://deno.land/std@0.203.0/testing/mock.ts";
 
-import { CONSTANTS } from "./src/utils.ts";
+const api = new Map([
+  ["github", Deno.env.get("GITHUB_API")],
+  ["azure", Deno.env.get("AZURE_API_URL")],
+]);
 
-const baseURL = Deno.env.get("GITHUB_API") || CONSTANTS.DEFAULT_GITHUB_API;
+const DEFAULT_PROVIDER = Deno.env.get("provider") ?? "github";
+
+const baseURL = api.get(DEFAULT_PROVIDER);
 
 const soxa = new ServiceProvider({
   ...defaults,

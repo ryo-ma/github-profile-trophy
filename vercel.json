@@ -1,14 +1,14 @@
 {
-    "public": true,
-    "functions": {
-        "api/**/*.[jt]s": {
-            "runtime": "vercel-deno@3.0.4"
-        }
-    },
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/api/$1"
-        }
-    ]
+  "public": true,
+  "functions": {
+    "api/**/*.[jt]s": {
+      "runtime": "vercel-deno@3.0.4"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
 }

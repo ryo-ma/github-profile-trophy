@@ -44,7 +44,6 @@ Deno.test("Should retry", async () => {
 
 Deno.test("Should retry the asyncronous callback", async () => {
   let countErrors = 0;
-
   const callbackError = async () => {
     countErrors++;
     // Mock request in callback
