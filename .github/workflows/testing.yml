@@ -7,16 +7,21 @@ on:
 jobs:
   install-dependencies:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        deno-version: [1.36.1]
+
     steps:
-      - name: Check if PR is in draft mode
-        run: |
-          if [ "${{ github.event.pull_request.draft }}" == "true" ]; then
-            echo "PR is in draft mode, skipping workflow"
-            exit 78
-          fi
-      - name: Set up Deno
+      - name: Git Checkout Deno Module
+        uses: actions/checkout@v2
+      - name: Use Deno Version ${{ matrix.deno-version }}
         uses: denolib/setup-deno@v2
         with:
-          deno-version: "1.37.0"
-      - name: Run tests
-        run: deno test --allow-env
+          deno-version: ${{ matrix.deno-version }}
+      - name: Deno format check
+        run: deno fmt --check
+      - name: Deno lint check
+        run: deno task lint
+      - name: Test Deno Module
+        run: deno task test

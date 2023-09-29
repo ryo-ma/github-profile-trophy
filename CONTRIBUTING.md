@@ -2,14 +2,14 @@
 
 ## Environment
 
-* Deno >= v1.9.2
-* [Vercel](https://vercel.com/)
-* GitHub API v4
+- Deno >= v1.9.2
+- [Vercel](https://vercel.com/)
+- GitHub API v4
 
 ## Local Run
 
-Create `.env` file to project root directory, and write your GitHub token to the `.env` file.
-Please select the authority of `repo` when creating token.
+Create `.env` file to project root directory, and write your GitHub token to the
+`.env` file. Please select the authority of `repo` when creating token.
 
 ```properties
 GITHUB_TOKEN1=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -23,7 +23,7 @@ GITHUB_API=https://github.example.com/api/graphql
 Run local server.
 
 ```sh
-deno run --allow-net --allow-read --allow-env --allow-write debug.ts
+deno task start
 ```
 
 Open localhost from your browser.
@@ -36,7 +36,8 @@ Read the [.editorconfig](./.editorconfig)
 
 ## Run deno lint
 
-If you want to contribute to my project, you should check the lint with the following command.
+If you want to contribute to my project, you should check the lint with the
+following command.
 
 ```sh
 deno lint --unstable
