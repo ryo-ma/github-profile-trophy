@@ -1,3 +1,4 @@
+import { Logger } from "../Helpers/Logger.ts";
 import { existsSync } from "./utils.ts";
 
 export class CacheManager {
@@ -44,7 +45,7 @@ export class CacheManager {
     const data = new TextEncoder().encode(text);
 
     Deno.writeFile(this.cacheFilePath, data, { create: true }).catch(() => {
-      console.warn("Failed to save cache file");
+      Logger.warn("Failed to save cache file");
     });
   }
 }
