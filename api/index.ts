@@ -1,14 +1,12 @@
 import { Card } from "../src/card.ts";
 import { CONSTANTS, parseParams } from "../src/utils.ts";
 import { COLORS, Theme } from "../src/theme.ts";
-import { Error400, Error404 } from "../src/error_page.ts";
+import { Error400 } from "../src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 import { staticRenderRegeneration } from "../src/StaticRenderRegeneration/index.ts";
-import { GithubRepositoryService } from "../src/Repository/GithubRepository.ts";
-import { GithubApiService } from "../src/Services/GithubApiService.ts";
-
-const serviceProvider = new GithubApiService();
-const client = new GithubRepositoryService(serviceProvider).repository;
+import { ServiceError } from "../src/Types/index.ts";
+import { ErrorPage } from "../src/pages/Error.ts";
+import { client } from "../src/Services/index.ts";
 
 const defaultHeaders = new Headers(
   {
@@ -74,14 +72,11 @@ async function app(req: Request): Promise<Response> {
     );
   }
   const userInfo = await client.requestUserInfo(username);
-  if (userInfo === null) {
-    const error = new Error404(
-      "Can not find a user with username: " + username,
-    );
+  if (userInfo instanceof ServiceError) {
     return new Response(
-      error.render(),
+      ErrorPage({ error: userInfo, username }).render(),
       {
-        status: error.status,
+        status: userInfo.code,
         headers: new Headers({ "Content-Type": "text" }),
       },
     );

@@ -1,3 +1,5 @@
+import { Logger } from "./Logger.ts";
+
 export type RetryCallbackProps = {
   attempt: number;
 };
@@ -16,7 +18,7 @@ async function* createAsyncIterable<T>(
       return;
     } catch (e) {
       yield null;
-      console.error(e);
+      Logger.error(e);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
