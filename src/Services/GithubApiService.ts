@@ -91,9 +91,11 @@ export class GithubApiService extends GithubRepository {
 
   private handleError(responseErrors: GithubError[]): ServiceError {
     const errors = responseErrors ?? [];
-    const isRateLimitExceeded = (errors ?? []).some((error) => {
-      error.type.includes(EServiceKindError.RATE_LIMIT);
-    });
+
+    const isRateLimitExceeded = errors.some((error) =>
+      error.type.includes(EServiceKindError.RATE_LIMIT) ||
+      error.message.includes("rate limit")
+    );
 
     if (isRateLimitExceeded) {
       throw new ServiceError(
@@ -133,6 +135,10 @@ export class GithubApiService extends GithubRepository {
       return response?.data?.data?.user ??
         new ServiceError("not found", EServiceKindError.NOT_FOUND);
     } catch (error) {
+      if (error instanceof ServiceError) {
+        Logger.error(error);
+        return error;
+      }
       // TODO: Move this to a logger instance later
       if (error instanceof Error && error.cause) {
         Logger.error(JSON.stringify(error.cause, null, 2));
