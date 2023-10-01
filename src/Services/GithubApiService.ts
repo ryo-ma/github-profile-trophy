@@ -120,17 +120,17 @@ export class GithubApiService extends GithubRepository {
         CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
       );
       const response = await retry.fetch<Promise<T>>(async ({ attempt }) => {
-        return await soxa.post("", {}, {
+        const res = await soxa.post("", {}, {
           data: { query: query, variables },
           headers: {
             Authorization: `bearer ${TOKENS[attempt]}`,
           },
         });
+        if (res?.data?.errors) {
+          return this.handleError(res?.data?.errors);
+        }
+        return res;
       }) as QueryDefaultResponse<{ user: T }>;
-
-      if (response?.data?.errors) {
-        return this.handleError(response?.data?.errors);
-      }
 
       return response?.data?.data?.user ??
         new ServiceError("not found", EServiceKindError.NOT_FOUND);
@@ -146,7 +146,7 @@ export class GithubApiService extends GithubRepository {
         Logger.error(error);
       }
 
-      return new ServiceError("not found", EServiceKindError.NOT_FOUND);
+      return new ServiceError("Rate limit exceeded", EServiceKindError.RATE_LIMIT);
     }
   }
 }
