@@ -118,10 +118,7 @@ export class GithubApiService extends GithubRepository {
         Logger.error(error);
       }
 
-      return new ServiceError(
-        "Rate limit exceeded",
-        EServiceKindError.RATE_LIMIT,
-      );
+      return new ServiceError("not found", EServiceKindError.NOT_FOUND);
     }
   }
 }
