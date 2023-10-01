@@ -1,3 +1,4 @@
+import { ServiceError } from "../Types/index.ts";
 import { Logger } from "./Logger.ts";
 
 export type RetryCallbackProps = {
@@ -17,6 +18,11 @@ async function* createAsyncIterable<T>(
       yield data;
       return;
     } catch (e) {
+      if (e instanceof ServiceError && i < (retries - 1)) {
+        yield e;
+        return;
+      }
+
       yield null;
       Logger.error(e);
       await new Promise((resolve) => setTimeout(resolve, delay));

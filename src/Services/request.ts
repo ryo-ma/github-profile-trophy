@@ -1,7 +1,8 @@
 import { soxa } from "../../deps.ts";
 import {
   EServiceKindError,
-  GithubError,
+  GithubErrorResponse,
+  GithubExceedError,
   QueryDefaultResponse,
   ServiceError,
 } from "../Types/index.ts";
@@ -11,31 +12,45 @@ export async function requestGithubData<T = unknown>(
   variables: { [key: string]: string },
   token = "",
 ) {
-  const data = await soxa.post("", {}, {
+  const response = await soxa.post("", {}, {
     data: { query, variables },
     headers: {
       Authorization: `bearer ${token}`,
     },
   }) as QueryDefaultResponse<{ user: T }>;
+  const responseData = response.data;
 
-  if (data?.data?.errors) {
-    throw handleError(data?.data?.errors);
+  if (!responseData?.data?.user) {
+    throw handleError(
+      responseData as unknown as GithubErrorResponse | GithubExceedError,
+    );
   }
 
-  if (data?.data?.data?.user) {
-    return data.data.data.user;
+  if (responseData.data.user) {
+    return responseData.data.user;
   }
 
   throw new ServiceError("not found", EServiceKindError.NOT_FOUND);
 }
 
-function handleError(responseErrors: GithubError[]): ServiceError {
-  const errors = responseErrors ?? [];
+function handleError(
+  reponseErrors: GithubErrorResponse | GithubExceedError,
+): ServiceError {
+  let isRateLimitExceeded = false;
+  const arrayErrors = (reponseErrors as GithubErrorResponse)?.errors || [];
+  const objectError = (reponseErrors as GithubExceedError) || {};
 
-  const isRateLimitExceeded = errors.some((error) =>
-    error.type.includes(EServiceKindError.RATE_LIMIT) ||
-    error.message.includes("rate limit")
-  );
+  if (Array.isArray(arrayErrors)) {
+    isRateLimitExceeded = arrayErrors.some((error) =>
+      error.type.includes(EServiceKindError.RATE_LIMIT)
+    );
+  }
+
+  if (objectError?.message) {
+    isRateLimitExceeded = objectError?.message.includes(
+      "rate limit",
+    );
+  }
 
   if (isRateLimitExceeded) {
     throw new ServiceError(

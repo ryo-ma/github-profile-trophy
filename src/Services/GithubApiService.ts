@@ -58,6 +58,7 @@ export class GithubApiService extends GithubRepository {
   async requestUserInfo(username: string): Promise<UserInfo | ServiceError> {
     // Avoid to call others if one of them is null
     const repository = await this.requestUserRepository(username);
+
     if (repository instanceof ServiceError) {
       Logger.error(repository);
       return repository;
@@ -98,7 +99,11 @@ export class GithubApiService extends GithubRepository {
         CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
       );
       const response = await retry.fetch<Promise<T>>(async ({ attempt }) => {
-        return await requestGithubData(query, variables, TOKENS[attempt]);
+        return await requestGithubData(
+          query,
+          variables,
+          TOKENS[attempt],
+        );
       });
 
       return response;
@@ -107,7 +112,6 @@ export class GithubApiService extends GithubRepository {
         Logger.error(error);
         return error;
       }
-      // TODO: Move this to a logger instance later
       if (error instanceof Error && error.cause) {
         Logger.error(JSON.stringify(error.cause, null, 2));
       } else {
