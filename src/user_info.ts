@@ -84,7 +84,9 @@ export class UserInfo {
     const durationTime = new Date().getTime() -
       new Date(userActivity.createdAt).getTime();
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
-    const durationDays = Math.floor((durationTime) / (1000 * 60 * 60 * 24) / 100);
+    const durationDays = Math.floor(
+      durationTime / (1000 * 60 * 60 * 24) / 100,
+    );
     const ancientAccount =
       new Date(userActivity.createdAt).getFullYear() <= 2010 ? 1 : 0;
     const joined2020 = new Date(userActivity.createdAt).getFullYear() == 2020

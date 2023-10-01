@@ -1,4 +1,5 @@
 import {
+  AccountDurationTrophy,
   AllSuperRankTrophy,
   AncientAccountTrophy,
   Joined2020Trophy,
@@ -12,7 +13,6 @@ import {
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
   TotalReviewsTrophy,
-  AccountDurationTrophy,
   TotalStarTrophy,
   Trophy,
 } from "./trophy.ts";

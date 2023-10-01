@@ -7,7 +7,7 @@ class RankCondition {
     readonly rank: RANK,
     readonly message: string,
     readonly requiredScore: number,
-  ) { }
+  ) {}
 }
 
 export class Trophy {
@@ -273,7 +273,7 @@ export class AccountDurationTrophy extends Trophy {
       new RankCondition(
         RANK.SSS,
         "Seasoned Veteran",
-        70, // 20 years 
+        70, // 20 years
       ),
       new RankCondition(
         RANK.SS,
