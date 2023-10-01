@@ -1,5 +1,5 @@
-import { getTrophyIcon, getNextRankBar } from "./icons.ts";
-import { CONSTANTS, RANK, abridgeScore, RANK_ORDER } from "./utils.ts";
+import { getNextRankBar, getTrophyIcon } from "./icons.ts";
+import { abridgeScore, CONSTANTS, RANK, RANK_ORDER } from "./utils.ts";
 import { Theme } from "./theme.ts";
 
 class RankCondition {
@@ -9,7 +9,6 @@ class RankCondition {
     readonly requiredScore: number,
   ) { }
 }
-
 
 export class Trophy {
   rankCondition: RankCondition | null = null;
@@ -59,14 +58,16 @@ export class Trophy {
     const result = progress / distance;
     return result;
   }
-  render(theme: Theme,
+  render(
+    theme: Theme,
     x = 0,
     y = 0,
     panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,
     noBackground = CONSTANTS.DEFAULT_NO_BACKGROUND,
     noFrame = CONSTANTS.DEFAULT_NO_FRAME,
   ): string {
-    const { BACKGROUND: PRIMARY, TITLE: SECONDARY, TEXT, NEXT_RANK_BAR } = theme;
+    const { BACKGROUND: PRIMARY, TITLE: SECONDARY, TEXT, NEXT_RANK_BAR } =
+      theme;
     const nextRankBar = getNextRankBar(
       this.title,
       this.calculateNextRankPercentage(),
@@ -90,8 +91,8 @@ export class Trophy {
             height="${panelSize - 1}"
             stroke="#e1e4e8"
             fill="${PRIMARY}"
-            stroke-opacity="${noFrame ? '0' : '1'}"
-            fill-opacity="${noBackground ? '0' : '1'}"
+            stroke-opacity="${noFrame ? "0" : "1"}"
+            fill-opacity="${noBackground ? "0" : "1"}"
           />
           ${getTrophyIcon(theme, this.rank)}
           <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="13" fill="${SECONDARY}">${this.title}</text>
@@ -131,7 +132,7 @@ export class AllSuperRankTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "AllSuperRank";
     this.filterTitles = ["AllSuperRank"];
-    this.bottomMessage = "All S Rank"
+    this.bottomMessage = "All S Rank";
     this.hidden = true;
   }
 }
@@ -147,7 +148,7 @@ export class Joined2020Trophy extends Trophy {
     super(score, rankConditions);
     this.title = "Joined2020";
     this.filterTitles = ["Joined2020"];
-    this.bottomMessage = "Joined 2020"
+    this.bottomMessage = "Joined 2020";
     this.hidden = true;
   }
 }
@@ -163,7 +164,7 @@ export class AncientAccountTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "AncientUser";
     this.filterTitles = ["AncientUser"];
-    this.bottomMessage = "Before 2010"
+    this.bottomMessage = "Before 2010";
     this.hidden = true;
   }
 }
@@ -211,7 +212,7 @@ export class OGAccountTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "OGUser";
     this.filterTitles = ["OGUser"];
-    this.bottomMessage = "Joined 2008"
+    this.bottomMessage = "Joined 2008";
     this.hidden = true;
   }
 }
