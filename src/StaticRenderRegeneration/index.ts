@@ -1,6 +1,6 @@
 import { CacheManager } from "./cache_manager.ts";
 import { StaticRegenerationOptions } from "./types.ts";
-import { getUrl, hashString, readCache } from "./utils.ts";
+import { generateUUID, getUrl, readCache } from "./utils.ts";
 
 export async function staticRenderRegeneration(
   request: Request,
@@ -15,7 +15,7 @@ export async function staticRenderRegeneration(
     return await render(request);
   }
 
-  const cacheFile = await hashString(url.pathname + (url.search ?? ""));
+  const cacheFile = await generateUUID(url.pathname + (url.search ?? ""));
   const cacheManager = new CacheManager(options.revalidate ?? 0, cacheFile);
   if (cacheManager.isCacheValid) {
     const cache = readCache(cacheManager.cacheFilePath);
