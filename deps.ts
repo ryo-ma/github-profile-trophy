@@ -6,7 +6,9 @@ import {
 } from "https://deno.land/std@0.203.0/assert/mod.ts";
 import {
   assertSpyCalls,
+  returnsNext,
   spy,
+  stub,
 } from "https://deno.land/std@0.203.0/testing/mock.ts";
 
 const api = new Map([
@@ -23,4 +25,12 @@ const soxa = new ServiceProvider({
   baseURL,
 });
 
-export { assertEquals, assertRejects, assertSpyCalls, soxa, spy };
+export {
+  assertEquals,
+  assertRejects,
+  assertSpyCalls,
+  returnsNext,
+  soxa,
+  spy,
+  stub,
+};
