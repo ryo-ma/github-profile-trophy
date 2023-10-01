@@ -1,14 +1,33 @@
-import { GithubAPIClient } from "./src/github_api_client.ts";
-import { Card } from "./src/card.ts";
-import { CONSTANTS, parseParams } from "./src/utils.ts";
-import { COLORS, Theme } from "./src/theme.ts";
-import { Error400, Error404 } from "./src/error_page.ts";
+import { Card } from "../src/card.ts";
+import { CONSTANTS, parseParams } from "../src/utils.ts";
+import { COLORS, Theme } from "../src/theme.ts";
+import { Error400 } from "../src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
+import { staticRenderRegeneration } from "../src/StaticRenderRegeneration/index.ts";
+import { GithubRepositoryService } from "../src/Repository/GithubRepository.ts";
+import { GithubApiService } from "../src/Services/GithubApiService.ts";
+import { ServiceError } from "../src/Types/index.ts";
+import { ErrorPage } from "../src/pages/Error.ts";
 
-const apiEndpoint = Deno.env.get("GITHUB_API") || CONSTANTS.DEFAULT_GITHUB_API;
-const client = new GithubAPIClient(apiEndpoint);
+const serviceProvider = new GithubApiService();
+const client = new GithubRepositoryService(serviceProvider).repository;
 
-export default async (req: Request) => {
+const defaultHeaders = new Headers(
+  {
+    "Content-Type": "image/svg+xml",
+    "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`,
+  },
+);
+
+export default (request: Request) =>
+  staticRenderRegeneration(request, {
+    revalidate: CONSTANTS.REVALIDATE_TIME,
+    headers: defaultHeaders,
+  }, function (req: Request) {
+    return app(req);
+  });
+
+async function app(req: Request): Promise<Response> {
   const params = parseParams(req);
   const username = params.get("username");
   const row = params.getNumberValue("row", CONSTANTS.DEFAULT_MAX_ROW);
@@ -57,18 +76,16 @@ export default async (req: Request) => {
     );
   }
   const userInfo = await client.requestUserInfo(username);
-  if (userInfo === null) {
-    const error = new Error404(
-      "Can not find a user with username: " + username,
-    );
+  if (userInfo instanceof ServiceError) {
     return new Response(
-      error.render(),
+      ErrorPage({ error: userInfo, username }).render(),
       {
-        status: error.status,
+        status: userInfo.code,
         headers: new Headers({ "Content-Type": "text" }),
       },
     );
   }
+
   // Success Response
   return new Response(
     new Card(
@@ -83,12 +100,7 @@ export default async (req: Request) => {
       noFrame,
     ).render(userInfo, theme),
     {
-      headers: new Headers(
-        {
-          "Content-Type": "image/svg+xml",
-          "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`,
-        },
-      ),
+      headers: defaultHeaders,
     },
   );
-};
+}

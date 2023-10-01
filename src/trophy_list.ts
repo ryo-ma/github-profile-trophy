@@ -1,21 +1,23 @@
 import {
-  Trophy,
-  TotalStarTrophy,
+  AllSuperRankTrophy,
+  AncientAccountTrophy,
+  Joined2020Trophy,
+  LongTimeAccountTrophy,
+  MultipleLangTrophy,
+  MultipleOrganizationsTrophy,
+  OGAccountTrophy,
   TotalCommitTrophy,
   TotalFollowerTrophy,
   TotalIssueTrophy,
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
-  MultipleLangTrophy,
-  LongTimeAccountTrophy,
-  AncientAccountTrophy,
-  OGAccountTrophy,
   JoinedThisYearTrophy,
-  AllSuperRankTrophy,
-  MultipleOrganizationsTrophy,
+  TotalReviewsTrophy,
+  TotalStarTrophy,
+  Trophy,
 } from "./trophy.ts";
 import { UserInfo } from "./user_info.ts";
-import { RANK_ORDER, RANK } from "./utils.ts";
+import { RANK, RANK_ORDER } from "./utils.ts";
 
 export class TrophyList {
   private trophies = new Array<Trophy>();
@@ -28,6 +30,7 @@ export class TrophyList {
       new TotalIssueTrophy(userInfo.totalIssues),
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
+      new TotalReviewsTrophy(userInfo.totalReviews),
     );
     // Secret trophies
     this.trophies.push(
@@ -47,7 +50,9 @@ export class TrophyList {
     return this.trophies;
   }
   private get isAllSRank() {
-      return this.trophies.every((trophy) => trophy.rank.slice(0, 1) == RANK.S) ? 1 : 0;
+    return this.trophies.every((trophy) => trophy.rank.slice(0, 1) == RANK.S)
+      ? 1
+      : 0;
   }
   filterByHideen() {
     this.trophies = this.trophies.filter((trophy) =>
@@ -62,9 +67,9 @@ export class TrophyList {
   filterByRanks(ranks: Array<string>) {
     if (ranks.filter((rank) => rank.includes("-")).length !== 0) {
       this.trophies = this.trophies.filter((trophy) =>
-        !ranks.map(rank => rank.substring(1)).includes(trophy.rank)
-      )
-      return
+        !ranks.map((rank) => rank.substring(1)).includes(trophy.rank)
+      );
+      return;
     }
     this.trophies = this.trophies.filter((trophy) =>
       ranks.includes(trophy.rank)
@@ -76,4 +81,3 @@ export class TrophyList {
     );
   }
 }
-
