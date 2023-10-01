@@ -85,7 +85,8 @@ export class UserInfo {
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
     const ancientAccount =
       new Date(userActivity.createdAt).getFullYear() <= 2010 ? 1 : 0;
-    const joinedThisYear = new Date(userActivity.createdAt).getFullYear() == new Date().getUTCFullYear()
+    const joinedThisYear = new Date(userActivity.createdAt).getFullYear() ==
+        new Date().getUTCFullYear()
       ? 1
       : 0;
     const ogAccount = new Date(userActivity.createdAt).getFullYear() <= 2008

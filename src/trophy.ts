@@ -136,8 +136,8 @@ export class AllSuperRankTrophy extends Trophy {
     this.hidden = true;
   }
 }
-export class JoinedThisYearTrophy extends Trophy{
-  constructor(score: number){
+export class JoinedThisYearTrophy extends Trophy {
+  constructor(score: number) {
     const rankConditions = [
       new RankCondition(
         RANK.SECRET,
@@ -148,7 +148,7 @@ export class JoinedThisYearTrophy extends Trophy{
     super(score, rankConditions);
     this.title = "New Joinee";
     this.filterTitles = ["New", "JoinedThisYear"];
-    this.bottomMessage = `Joined ${new Date().getUTCFullYear()}`
+    this.bottomMessage = `Joined ${new Date().getUTCFullYear()}`;
     this.hidden = true;
   }
 }

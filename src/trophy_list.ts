@@ -1,7 +1,7 @@
 import {
   AllSuperRankTrophy,
   AncientAccountTrophy,
-  Joined2020Trophy,
+  JoinedThisYearTrophy,
   LongTimeAccountTrophy,
   MultipleLangTrophy,
   MultipleOrganizationsTrophy,
@@ -11,7 +11,6 @@ import {
   TotalIssueTrophy,
   TotalPullRequestTrophy,
   TotalRepositoryTrophy,
-  JoinedThisYearTrophy,
   TotalReviewsTrophy,
   TotalStarTrophy,
   Trophy,
