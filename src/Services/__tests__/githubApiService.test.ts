@@ -2,9 +2,19 @@ import { GithubApiService } from "../GithubApiService.ts";
 import { assertEquals, returnsNext, soxa, stub } from "../../../deps.ts";
 import { GitHubUserRepository } from "../../user_info.ts";
 
-import rateLimitMock from "../__mocks__/rateLimitMock.json";
-import successGithubResponseMock from "../__mocks__/successGithubResponse.json";
-import notFoundGithubResponseMock from "../__mocks__/notFoundUserMock.json";
+const rateLimitMock = await import("../__mocks__/rateLimitMock.json", {
+  assert: { type: "json" },
+});
+
+const successGithubResponseMock = await import(
+  "../__mocks__/successGithubResponse.json",
+  { assert: { type: "json" } }
+);
+
+const notFoundGithubResponseMock = await import(
+  "../__mocks__/notFoundUserMock.json",
+  { assert: { type: "json" } }
+);
 
 import { ServiceError } from "../../Types/index.ts";
 
@@ -16,42 +26,42 @@ stub(
   returnsNext([
     // Should get data in first try
     new Promise((resolve) => {
-      resolve(successGithubResponseMock);
+      resolve(successGithubResponseMock.default);
     }),
     // // Should get data in second Retry
     new Promise((resolve) => {
-      resolve(rateLimitMock.rate_limit);
+      resolve(rateLimitMock.default.rate_limit);
     }),
     new Promise((resolve) => {
-      resolve(successGithubResponseMock);
+      resolve(successGithubResponseMock.default);
     }),
     // Should throw NOT FOUND
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock);
+      resolve(notFoundGithubResponseMock.default);
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock);
+      resolve(notFoundGithubResponseMock.default);
     }),
     // Should throw NOT FOUND even if request the user only
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock);
+      resolve(notFoundGithubResponseMock.default);
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock);
+      resolve(notFoundGithubResponseMock.default);
     }),
     // Should throw RATE LIMIT
     new Promise((resolve) => {
-      resolve(rateLimitMock.rate_limit);
+      resolve(rateLimitMock.default.rate_limit);
     }),
     new Promise((resolve) => {
-      resolve(rateLimitMock.rate_limit);
+      resolve(rateLimitMock.default.rate_limit);
     }),
     // Should throw RATE LIMIT Exceed
     new Promise((resolve) => {
-      resolve(rateLimitMock.rate_limit);
+      resolve(rateLimitMock.default.rate_limit);
     }),
     new Promise((resolve) => {
-      resolve(rateLimitMock.exceeded);
+      resolve(rateLimitMock.default.exceeded);
     }),
   ]),
 );
