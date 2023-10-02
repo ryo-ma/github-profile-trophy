@@ -1,8 +1,10 @@
 import { Bulk, connect, Redis } from "../../deps.ts";
 import { Logger } from "../Helpers/Logger.ts";
+import { CONSTANTS } from "../utils.ts";
 
 const enableCache = Deno.env.get("ENABLE_REDIS") || false;
 
+// https://developer.redis.com/develop/deno/
 class CacheProvider {
   private static instance: CacheProvider;
   public client: Redis | null = null;
@@ -47,7 +49,9 @@ class CacheProvider {
       if (!this.client) {
         await this.connect();
       }
-      await this.client?.set(key, value);
+      await this.client?.set(key, value, {
+        px: CONSTANTS.REDIS_TTL,
+      });
     } catch (e) {
       Logger.error(`Failed to set cache: ${e.message}`);
     }
