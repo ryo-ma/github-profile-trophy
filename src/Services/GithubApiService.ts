@@ -117,7 +117,6 @@ export class GithubApiService extends GithubRepository {
       } else {
         Logger.error(error);
       }
-      console.log("HIT", error);
       return new ServiceError("not found", EServiceKindError.NOT_FOUND);
     }
   }
