@@ -2,17 +2,9 @@ import { GithubApiService } from "../GithubApiService.ts";
 import { assertEquals, returnsNext, soxa, stub } from "../../../deps.ts";
 import { GitHubUserRepository } from "../../user_info.ts";
 
-import rateLimitMock from "../__mocks__/rateLimitMock.json" with {
-  type: "json",
-};
-
-import successGithubResponseMock from "../__mocks__/successGithubResponse.json" with {
-  type: "json",
-};
-
-import notFoundGithubResponseMock from "../__mocks__/notFoundUserMock.json" with {
-  type: "json",
-};
+import rateLimitMock from "../__mocks__/rateLimitMock.json";
+import successGithubResponseMock from "../__mocks__/successGithubResponse.json";
+import notFoundGithubResponseMock from "../__mocks__/notFoundUserMock.json";
 
 import { ServiceError } from "../../Types/index.ts";
 
