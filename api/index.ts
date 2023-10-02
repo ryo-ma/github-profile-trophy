@@ -8,6 +8,7 @@ import { GithubRepositoryService } from "../src/Repository/GithubRepository.ts";
 import { GithubApiService } from "../src/Services/GithubApiService.ts";
 import { ServiceError } from "../src/Types/index.ts";
 import { ErrorPage } from "../src/pages/Error.ts";
+import { cacheProvider } from "../src/config/cache.ts";
 
 const serviceProvider = new GithubApiService();
 const client = new GithubRepositoryService(serviceProvider).repository;
@@ -75,17 +76,25 @@ async function app(req: Request): Promise<Response> {
       },
     );
   }
-  const userInfo = await client.requestUserInfo(username);
-  if (userInfo instanceof ServiceError) {
-    return new Response(
-      ErrorPage({ error: userInfo, username }).render(),
-      {
-        status: userInfo.code,
-        headers: new Headers({ "Content-Type": "text" }),
-      },
-    );
-  }
+  const userKeyCache = ["v1", username].join("-");
+  const userInfoCached = await cacheProvider.get(userKeyCache) || "{}";
+  let userInfo = JSON.parse(userInfoCached);
+  const hasCache = !!Object.keys(userInfo).length;
 
+  if (!hasCache) {
+    const userResponseInfo = await client.requestUserInfo(username);
+    if (userResponseInfo instanceof ServiceError) {
+      return new Response(
+        ErrorPage({ error: userInfo, username }).render(),
+        {
+          status: userResponseInfo.code,
+          headers: new Headers({ "Content-Type": "text" }),
+        },
+      );
+    }
+    userInfo = userResponseInfo;
+    await cacheProvider.set(userKeyCache, JSON.stringify(userInfo));
+  }
   // Success Response
   return new Response(
     new Card(
