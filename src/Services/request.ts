@@ -20,17 +20,13 @@ export async function requestGithubData<T = unknown>(
   }) as QueryDefaultResponse<{ user: T }>;
   const responseData = response.data;
 
-  if (!responseData?.data?.user) {
-    throw handleError(
-      responseData as unknown as GithubErrorResponse | GithubExceedError,
-    );
-  }
-
-  if (responseData.data.user) {
+  if (responseData?.data?.user) {
     return responseData.data.user;
   }
 
-  throw new ServiceError("not found", EServiceKindError.NOT_FOUND);
+  throw handleError(
+    responseData as unknown as GithubErrorResponse | GithubExceedError,
+  );
 }
 
 function handleError(
