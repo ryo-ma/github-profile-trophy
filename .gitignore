@@ -3,3 +3,4 @@
 .idea
 deno.lock
 *.sh
+**/.DS_Store
