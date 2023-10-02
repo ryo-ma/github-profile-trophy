@@ -5,12 +5,15 @@ import { GitHubUserRepository } from "../../user_info.ts";
 import rateLimitMock from "../__mocks__/rateLimitMock.json" with {
   type: "json",
 };
+
 import successGithubResponseMock from "../__mocks__/successGithubResponse.json" with {
   type: "json",
 };
+
 import notFoundGithubResponseMock from "../__mocks__/notFoundUserMock.json" with {
   type: "json",
 };
+
 import { ServiceError } from "../../Types/index.ts";
 
 // Unfortunatelly, The spy is a global instance
