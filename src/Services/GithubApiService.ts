@@ -78,7 +78,7 @@ export class GithubApiService extends GithubRepository {
 
     if (status.includes("rejected")) {
       Logger.error(`Can not find a user with username:' ${username}'`);
-      return new ServiceError("not found", EServiceKindError.NOT_FOUND);
+      return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
     }
 
     return new UserInfo(
@@ -108,16 +108,16 @@ export class GithubApiService extends GithubRepository {
 
       return response;
     } catch (error) {
-      if (error instanceof ServiceError) {
-        Logger.error(error);
-        return error;
+      if (error.cause instanceof ServiceError) {
+        Logger.error(error.cause.message);
+        return error.cause;
       }
       if (error instanceof Error && error.cause) {
         Logger.error(JSON.stringify(error.cause, null, 2));
       } else {
         Logger.error(error);
       }
-
+      console.log("HIT", error);
       return new ServiceError("not found", EServiceKindError.NOT_FOUND);
     }
   }

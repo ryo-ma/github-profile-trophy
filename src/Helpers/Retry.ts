@@ -13,12 +13,13 @@ async function* createAsyncIterable<T>(
   delay: number,
 ) {
   for (let i = 0; i < retries; i++) {
+    const isLastAttempt = i === retries - 1;
     try {
       const data = await callback({ attempt: i });
       yield data;
       return;
     } catch (e) {
-      if (e instanceof ServiceError && i < (retries - 1)) {
+      if (e instanceof ServiceError && isLastAttempt) {
         yield e;
         return;
       }
@@ -35,6 +36,7 @@ export class Retry {
   async fetch<T = unknown>(
     callback: callbackType<T>,
   ) {
+    let lastError = null;
     for await (
       const callbackResult of createAsyncIterable<T>(
         callback,
@@ -42,11 +44,19 @@ export class Retry {
         this.retryDelay,
       )
     ) {
-      if (callbackResult) {
+      const isError = callbackResult instanceof Error;
+
+      if (callbackResult && !isError) {
         return callbackResult as T;
+      }
+
+      if (isError) {
+        lastError = callbackResult;
       }
     }
 
-    throw new Error(`Max retries (${this.maxRetries}) exceeded.`);
+    throw new Error(`Max retries (${this.maxRetries}) exceeded.`, {
+      cause: lastError,
+    });
   }
 }

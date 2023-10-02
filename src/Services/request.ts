@@ -20,7 +20,7 @@ export async function requestGithubData<T = unknown>(
   }) as QueryDefaultResponse<{ user: T }>;
   const responseData = response.data;
 
-  if (responseData.data.user) {
+  if (responseData?.data?.user) {
     return responseData.data.user;
   }
 
