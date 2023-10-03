@@ -67,6 +67,7 @@ export const CONSTANTS = {
   DEFAULT_GITHUB_API: "https://api.github.com/graphql",
   DEFAULT_GITHUB_RETRY_DELAY: 1000,
   REVALIDATE_TIME: HOUR_IN_MILLISECONDS,
+  REDIS_TTL: HOUR_IN_MILLISECONDS * 4,
 };
 
 export enum RANK {

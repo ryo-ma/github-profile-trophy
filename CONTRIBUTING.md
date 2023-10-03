@@ -5,6 +5,7 @@
 - Deno >= v1.36.1
 - [Vercel](https://vercel.com/)
 - GitHub API v4
+- Docker and Docker compose (optional)
 
 ## Local Run
 
@@ -25,6 +26,14 @@ Run local server.
 ```sh
 deno task start
 ```
+
+You can enable the Redis if you want, but it's not mandatory.
+
+```sh
+docker compose up -d
+```
+
+Rename `env-example` to `.env`, and change ENABLE_REDIS to true
 
 Open localhost from your browser.
 

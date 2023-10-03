@@ -11,6 +11,12 @@ import {
   stub,
 } from "https://deno.land/std@0.203.0/testing/mock.ts";
 
+export {
+  type Bulk,
+  connect,
+  type Redis,
+} from "https://deno.land/x/redis@v0.31.0/mod.ts";
+
 import { CONSTANTS } from "./src/utils.ts";
 
 const baseURL = Deno.env.get("GITHUB_API") || CONSTANTS.DEFAULT_GITHUB_API;
