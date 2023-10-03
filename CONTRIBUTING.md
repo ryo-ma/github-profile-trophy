@@ -5,7 +5,7 @@
 - Deno >= v1.9.2
 - [Vercel](https://vercel.com/)
 - GitHub API v4
-- Docker and Docker compose (opcional)
+- Docker and Docker compose (optional)
 
 ## Local Run
 
