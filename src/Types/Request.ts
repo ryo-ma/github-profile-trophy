@@ -3,9 +3,19 @@ export type GithubError = {
   type: string;
 };
 
+export type GithubErrorResponse = {
+  errors: GithubError[];
+};
+
+export type GithubExceedError = {
+  documentation_url: string;
+  message: string;
+};
+
 export type QueryDefaultResponse<T = unknown> = {
   data: {
     data: T;
-    errors: GithubError[];
+    errors?: GithubErrorResponse;
+    message?: string;
   };
 };

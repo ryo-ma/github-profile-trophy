@@ -1,5 +1,6 @@
 .vscode
 .env
 .idea
-.lock
+deno.lock
 *.sh
+**/.DS_Store

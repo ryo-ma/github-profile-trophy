@@ -1,0 +1,18 @@
+{
+  "exceeded": {
+    "data": {
+      "documentation_url": "https://docs.github.com/en/free-pro-team@latest/rest/overview/resources-in-the-rest-api#secondary-rate-limits",
+      "message": "You have exceeded a secondary rate limit. Please wait a few minutes before you try again. If you reach out to GitHub Support for help, please include the request ID DBD8:FB98:31801A8:3222432:65195FDB."
+    }
+  },
+  "rate_limit": {
+    "data": {
+      "errors": [
+        {
+          "type": "RATE_LIMITED",
+          "message": "API rate limit exceeded for user ID 10711649."
+        }
+      ]
+    }
+  }
+}
