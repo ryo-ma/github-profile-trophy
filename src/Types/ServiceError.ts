@@ -3,6 +3,7 @@ import { EServiceKindError } from "./EServiceKindError.ts";
 export class ServiceError extends Error {
   constructor(message: string, kind: EServiceKindError) {
     super(message);
+    this.message = message;
     this.name = "ServiceError";
     this.cause = kind;
   }
