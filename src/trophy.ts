@@ -277,7 +277,7 @@ export class AccountDurationTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.SS,
-        "GranMaster",
+        "Grandmaster",
         55, // 15 years
       ),
       new RankCondition(
