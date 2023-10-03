@@ -267,6 +267,57 @@ export class TotalReviewsTrophy extends Trophy {
   }
 }
 
+export class AccountDurationTrophy extends Trophy {
+  constructor(score: number) {
+    const rankConditions = [
+      new RankCondition(
+        RANK.SSS,
+        "Seasoned Veteran",
+        70, // 20 years
+      ),
+      new RankCondition(
+        RANK.SS,
+        "GranMaster",
+        55, // 15 years
+      ),
+      new RankCondition(
+        RANK.S,
+        "Master Dev",
+        40, // 10 years
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Expert Dev",
+        28, // 7.5 years
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Experienced Dev",
+        18, // 5 years
+      ),
+      new RankCondition(
+        RANK.A,
+        "Intermediate Dev",
+        11, // 3 years
+      ),
+      new RankCondition(
+        RANK.B,
+        "Junior Dev",
+        6, // 1.5 years
+      ),
+      new RankCondition(
+        RANK.C,
+        "Newbie",
+        2, // 0.5 year
+      ),
+    ];
+    super(score, rankConditions);
+    this.title = "Experience";
+    this.filterTitles = ["Experience", "Duration", "Since"];
+    // this.hidden = true;
+  }
+}
+
 export class TotalStarTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [

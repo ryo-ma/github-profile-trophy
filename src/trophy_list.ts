@@ -1,4 +1,5 @@
 import {
+  AccountDurationTrophy,
   AllSuperRankTrophy,
   AncientAccountTrophy,
   Joined2020Trophy,
@@ -40,6 +41,7 @@ export class TrophyList {
       new OGAccountTrophy(userInfo.ogAccount),
       new Joined2020Trophy(userInfo.joined2020),
       new MultipleOrganizationsTrophy(userInfo.totalOrganizations),
+      new AccountDurationTrophy(userInfo.durationDays),
     );
   }
   get length() {

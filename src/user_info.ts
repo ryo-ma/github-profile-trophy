@@ -51,6 +51,7 @@ export class UserInfo {
   public readonly totalRepositories: number;
   public readonly languageCount: number;
   public readonly durationYear: number;
+  public readonly durationDays: number;
   public readonly ancientAccount: number;
   public readonly joined2020: number;
   public readonly ogAccount: number;
@@ -83,6 +84,9 @@ export class UserInfo {
     const durationTime = new Date().getTime() -
       new Date(userActivity.createdAt).getTime();
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
+    const durationDays = Math.floor(
+      durationTime / (1000 * 60 * 60 * 24) / 100,
+    );
     const ancientAccount =
       new Date(userActivity.createdAt).getFullYear() <= 2010 ? 1 : 0;
     const joined2020 = new Date(userActivity.createdAt).getFullYear() == 2020
@@ -104,6 +108,7 @@ export class UserInfo {
     this.totalRepositories = userRepository.repositories.totalCount;
     this.languageCount = languages.size;
     this.durationYear = durationYear;
+    this.durationDays = durationDays;
     this.ancientAccount = ancientAccount;
     this.joined2020 = joined2020;
     this.ogAccount = ogAccount;
