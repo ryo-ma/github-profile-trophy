@@ -2,7 +2,7 @@
 
 ## Environment
 
-- Deno >= v1.9.2
+- Deno >= v1.36.1
 - [Vercel](https://vercel.com/)
 - GitHub API v4
 
