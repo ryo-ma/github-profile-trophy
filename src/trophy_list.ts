@@ -55,7 +55,7 @@ export class TrophyList {
       ? 1
       : 0;
   }
-  filterByHideen() {
+  filterByHidden() {
     this.trophies = this.trophies.filter((trophy) =>
       !trophy.hidden || trophy.rank !== RANK.UNKNOWN
     );
