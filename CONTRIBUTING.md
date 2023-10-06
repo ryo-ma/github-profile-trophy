@@ -43,11 +43,21 @@ http://localhost:8080/?username=ryo-ma
 
 Read the [.editorconfig](./.editorconfig)
 
-## Run deno lint
+## What to do before contributing
 
-If you want to contribute to my project, you should check the lint with the
-following command.
+### 1. Run deno lint
 
 ```sh
-deno lint --unstable
+deno task lint
+```
+
+### 2. Run deno fmt
+
+```sh
+deno task fmt
+```
+### 3. Run deno test
+
+```sh
+deno task test
 ```
