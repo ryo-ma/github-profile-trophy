@@ -49,9 +49,21 @@ Pull requests are are always welcome! In general, they should a single concern i
 
 ## Run deno lint
 
-If you want to contribute to my project, you should check the lint with the
-following command.
+## What to do before contributing
+
+### 1. Run deno lint
 
 ```sh
-deno lint --unstable
+deno task lint
+```
+
+### 2. Run deno fmt
+
+```sh
+deno task fmt
+```
+### 3. Run deno test
+
+```sh
+deno task test
 ```
