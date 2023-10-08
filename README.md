@@ -506,4 +506,5 @@ Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
 
 # License
 
-This product is licensed under the [MIT License](https://github.com/ryo-ma/github-profile-trophy/blob/master/LICENSE).
+This product is licensed under the
+[MIT License](https://github.com/ryo-ma/github-profile-trophy/blob/master/LICENSE).
