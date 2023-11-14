@@ -26,7 +26,7 @@ export class Card {
   ): string {
     const trophyList = new TrophyList(userInfo);
 
-    trophyList.filterByHideen();
+    trophyList.filterByHidden();
 
     if (this.titles.length != 0) {
       trophyList.filterByTitles(this.titles);
