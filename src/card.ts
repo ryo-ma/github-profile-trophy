@@ -34,8 +34,7 @@ export class Card {
 
     if (this.ranks.length != 0) {
       trophyList.filterByRanks(this.ranks);
-    }
-    else {
+    } else {
       trophyList.filterByRanks(null);
     }
 
