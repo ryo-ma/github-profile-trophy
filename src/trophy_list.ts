@@ -65,10 +65,10 @@ export class TrophyList {
       return trophy.filterTitles.some((title) => titles.includes(title));
     });
   }
-  filterByRanks(ranks: Array<string>) {
-    if (ranks.filter((rank) => rank.includes("-")).length !== 0) {
+  filterByRanks(ranks: Array<string> | null) {
+    if (ranks === null) {
       this.trophies = this.trophies.filter((trophy) =>
-        !ranks.map((rank) => rank.substring(1)).includes(trophy.rank)
+        trophy.rank !== RANK.UNKNOWN
       );
       return;
     }
