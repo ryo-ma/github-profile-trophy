@@ -45,12 +45,12 @@ export function parseParams(req: Request): CustomURLSearchParams {
 
 export function abridgeScore(score: number): string {
   if (Math.abs(score) < 1) {
-    return "0pt";
+    return "0";
   }
   if (Math.abs(score) > 999) {
-    return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "kpt";
+    return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "k";
   }
-  return (Math.sign(score) * Math.abs(score)).toString() + "pt";
+  return (Math.sign(score) * Math.abs(score)).toString();
 }
 
 const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;

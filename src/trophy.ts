@@ -16,8 +16,10 @@ export class Trophy {
   topMessage = "Unknown";
   bottomMessage = "0";
   title = "";
+  criterion = "pt";
   filterTitles: Array<string> = [];
   hidden = false;
+  hideinfo = false;
   constructor(
     private score: number,
     private rankConditions: Array<RankCondition>,
@@ -97,8 +99,8 @@ export class Trophy {
           ${getTrophyIcon(theme, this.rank)}
           <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="13" fill="${SECONDARY}">${this.title}</text>
           <text x="50%" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10.5" fill="${TEXT}">${this.topMessage}</text>
-          <text x="50%" y="97" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10" fill="${TEXT}">${this.bottomMessage}</text>
-          ${nextRankBar}
+            ${this.hideinfo ? '' : `<text x="50%" y="97" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10" fill="${TEXT}">${this.bottomMessage} ${this.criterion}</text>`}
+            ${this.hideinfo ? '' : nextRankBar}
         </svg>
         `;
   }
@@ -117,6 +119,7 @@ export class MultipleLangTrophy extends Trophy {
     this.title = "MultiLanguage";
     this.filterTitles = ["MultipleLang", "MultiLanguage"];
     this.hidden = true;
+    this.criterion = "Lang/s";
   }
 }
 
@@ -134,6 +137,7 @@ export class AllSuperRankTrophy extends Trophy {
     this.filterTitles = ["AllSuperRank"];
     this.bottomMessage = "All S Rank";
     this.hidden = true;
+    this.hideinfo = true;
   }
 }
 export class Joined2020Trophy extends Trophy {
@@ -150,6 +154,7 @@ export class Joined2020Trophy extends Trophy {
     this.filterTitles = ["Joined2020"];
     this.bottomMessage = "Joined 2020";
     this.hidden = true;
+    this.hideinfo = true;
   }
 }
 export class AncientAccountTrophy extends Trophy {
@@ -166,6 +171,7 @@ export class AncientAccountTrophy extends Trophy {
     this.filterTitles = ["AncientUser"];
     this.bottomMessage = "Before 2010";
     this.hidden = true;
+    this.hideinfo = true;
   }
 }
 export class LongTimeAccountTrophy extends Trophy {
@@ -214,6 +220,7 @@ export class OGAccountTrophy extends Trophy {
     this.filterTitles = ["OGUser"];
     this.bottomMessage = "Joined 2008";
     this.hidden = true;
+    this.hideinfo = true;
   }
 }
 
@@ -264,6 +271,7 @@ export class TotalReviewsTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "Reviews";
     this.filterTitles = ["Review", "Reviews"];
+    this.criterion = "Review/s";
   }
 }
 
@@ -365,6 +373,7 @@ export class TotalStarTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "Stars";
     this.filterTitles = ["Star", "Stars"];
+    this.criterion = "Star/s";
   }
 }
 
@@ -415,6 +424,7 @@ export class TotalCommitTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "Commits";
     this.filterTitles = ["Commit", "Commits"];
+    this.criterion = "Commit/s";
   }
 }
 
@@ -465,6 +475,7 @@ export class TotalFollowerTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "Followers";
     this.filterTitles = ["Follower", "Followers"];
+    this.criterion = "Follower/s";
   }
 }
 
@@ -515,6 +526,7 @@ export class TotalIssueTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "Issues";
     this.filterTitles = ["Issue", "Issues"];
+    this.criterion = "Issue/s";
   }
 }
 
@@ -565,6 +577,7 @@ export class TotalPullRequestTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "PullRequest";
     this.filterTitles = ["PR", "PullRequest", "Pulls", "Puller"];
+    this.criterion = "PR/s";
   }
 }
 
@@ -615,5 +628,6 @@ export class TotalRepositoryTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "Repositories";
     this.filterTitles = ["Repo", "Repository", "Repositories"];
+    this.criterion = "Repo/s";
   }
 }
