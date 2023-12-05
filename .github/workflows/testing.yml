@@ -1,0 +1,30 @@
+name: Check PR Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  install-dependencies:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        deno-version: [1.36.1]
+
+    steps:
+      - name: Git Checkout Deno Module
+        uses: actions/checkout@v2
+      - name: Use Deno Version ${{ matrix.deno-version }}
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: ${{ matrix.deno-version }}
+      - name: Deno format check
+        run: deno fmt --check
+      - name: Deno lint check
+        run: deno task lint
+      - name: Test Deno Module
+        run: deno task test

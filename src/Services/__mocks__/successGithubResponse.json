@@ -1,0 +1,1541 @@
+{
+  "data": {
+    "data": {
+      "user": {
+        "repositories": {
+          "totalCount": 128,
+          "nodes": [
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 23
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 11
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 9
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 6
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 6
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Java"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 5
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 5
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Jupyter Notebook"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 5
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 4
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 3
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 2
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 2
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 2
+              }
+            },
+            {
+              "languages": {
+                "nodes": []
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "PHP"
+                  },
+                  {
+                    "name": "Go"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Dockerfile"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Dockerfile"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Dart"
+                  },
+                  {
+                    "name": "Swift"
+                  },
+                  {
+                    "name": "Kotlin"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Vue"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Jupyter Notebook"
+                  },
+                  {
+                    "name": "Python"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Dart"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "Swift"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Vue"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "PHP"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 1
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": []
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": []
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Shell"
+                  },
+                  {
+                    "name": "Dockerfile"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Dockerfile"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": []
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "C#"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "PHP"
+                  },
+                  {
+                    "name": "Vue"
+                  },
+                  {
+                    "name": "Blade"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "C"
+                  },
+                  {
+                    "name": "C++"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "C++"
+                  },
+                  {
+                    "name": "Makefile"
+                  },
+                  {
+                    "name": "CMake"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "C++"
+                  },
+                  {
+                    "name": "Makefile"
+                  },
+                  {
+                    "name": "CMake"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Vue"
+                  },
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": []
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "PHP"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Blade"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Rust"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Svelte"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "Dockerfile"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Rust"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Dockerfile"
+                  },
+                  {
+                    "name": "Shell"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "Shell"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Dart"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "Swift"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Dart"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Rust"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "Swift"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "SCSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Shell"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "SCSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "CSS"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "SCSS"
+                  },
+                  {
+                    "name": "JavaScript"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "SCSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "SCSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "Swift"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "HTML"
+                  },
+                  {
+                    "name": "CSS"
+                  }
+                ]
+              },
+              "stargazers": {
+                "totalCount": 0
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

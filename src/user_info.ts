@@ -31,6 +31,7 @@ export type GitHubUserActivity = {
   contributionsCollection: {
     totalCommitContributions: number;
     restrictedContributionsCount: number;
+    totalPullRequestReviewContributions: number;
   };
   organizations: {
     totalCount: number;
@@ -45,10 +46,12 @@ export class UserInfo {
   public readonly totalIssues: number;
   public readonly totalOrganizations: number;
   public readonly totalPullRequests: number;
+  public readonly totalReviews: number;
   public readonly totalStargazers: number;
   public readonly totalRepositories: number;
   public readonly languageCount: number;
   public readonly durationYear: number;
+  public readonly durationDays: number;
   public readonly ancientAccount: number;
   public readonly joined2020: number;
   public readonly ogAccount: number;
@@ -81,23 +84,31 @@ export class UserInfo {
     const durationTime = new Date().getTime() -
       new Date(userActivity.createdAt).getTime();
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
+    const durationDays = Math.floor(
+      durationTime / (1000 * 60 * 60 * 24) / 100,
+    );
     const ancientAccount =
       new Date(userActivity.createdAt).getFullYear() <= 2010 ? 1 : 0;
     const joined2020 = new Date(userActivity.createdAt).getFullYear() == 2020
       ? 1
       : 0;
-    const ogAccount =
-      new Date(userActivity.createdAt).getFullYear() <= 2008 ? 1 : 0;
+    const ogAccount = new Date(userActivity.createdAt).getFullYear() <= 2008
+      ? 1
+      : 0;
 
     this.totalCommits = totalCommits;
     this.totalFollowers = userActivity.followers.totalCount;
-    this.totalIssues = userIssue.openIssues.totalCount + userIssue.closedIssues.totalCount;
+    this.totalIssues = userIssue.openIssues.totalCount +
+      userIssue.closedIssues.totalCount;
     this.totalOrganizations = userActivity.organizations.totalCount;
     this.totalPullRequests = userPullRequest.pullRequests.totalCount;
+    this.totalReviews =
+      userActivity.contributionsCollection.totalPullRequestReviewContributions;
     this.totalStargazers = totalStargazers;
     this.totalRepositories = userRepository.repositories.totalCount;
     this.languageCount = languages.size;
     this.durationYear = durationYear;
+    this.durationDays = durationDays;
     this.ancientAccount = ancientAccount;
     this.joined2020 = joined2020;
     this.ogAccount = ogAccount;

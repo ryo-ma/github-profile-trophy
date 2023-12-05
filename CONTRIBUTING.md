@@ -2,14 +2,15 @@
 
 ## Environment
 
-* Deno >= v1.9.2
-* [Vercel](https://vercel.com/)
-* GitHub API v4
+- Deno >= v1.36.1
+- [Vercel](https://vercel.com/)
+- GitHub API v4
+- Docker and Docker compose (optional)
 
 ## Local Run
 
-Create `.env` file to project root directory, and write your GitHub token to the `.env` file.
-Please select the authority of `repo` when creating token.
+Create `.env` file to project root directory, and write your GitHub token to the
+`.env` file. Please select the authority of `repo` when creating token.
 
 ```properties
 GITHUB_TOKEN1=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -23,8 +24,16 @@ GITHUB_API=https://github.example.com/api/graphql
 Run local server.
 
 ```sh
-deno run --allow-net --allow-read --allow-env debug.ts
+deno task start
 ```
+
+You can enable the Redis if you want, but it's not mandatory.
+
+```sh
+docker compose up -d
+```
+
+Rename `env-example` to `.env`, and change ENABLE_REDIS to true
 
 Open localhost from your browser.
 
@@ -34,10 +43,31 @@ http://localhost:8080/?username=ryo-ma
 
 Read the [.editorconfig](./.editorconfig)
 
+## Pull Requests
+
+Pull requests are are always welcome! In general, they should a single concern
+in the least number of changed lines as possible. For changes that address core
+functionality, it is best to open an issue to discuss your proposal first. I
+look forward to seeing what you come up with!
+
 ## Run deno lint
 
-If you want to contribute to my project, you should check the lint with the following command.
+## What to do before contributing
+
+### 1. Run deno lint
 
 ```sh
-deno lint --unstable
+deno task lint
+```
+
+### 2. Run deno fmt
+
+```sh
+deno task fmt
+```
+
+### 3. Run deno test
+
+```sh
+deno task test
 ```

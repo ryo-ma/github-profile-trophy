@@ -1,4 +1,4 @@
-export const COLORS: {[name: string]: Theme} = {
+export const COLORS: { [name: string]: Theme } = {
   default: {
     BACKGROUND: "#FFF",
     TITLE: "#000",
@@ -601,4 +601,3 @@ export interface Theme {
   DEFAULT_RANK_SHADOW: string;
   DEFAULT_RANK_TEXT: string;
 }
-
