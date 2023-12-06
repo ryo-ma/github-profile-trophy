@@ -217,6 +217,7 @@ Available themes.
 | [apprentice](#apprentice)   |
 | [dark_dimmed](#dark_dimmed) |
 | [dark_lover](#dark_lover)   |
+| [kimbie_dark](#kimbie_dark) |
 
 ### flat
 
@@ -436,6 +437,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=dark_lover
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/31789752/152659041-de5b23cb-1be8-4e6b-b07b-726127ab8c3a.png">
+</p>
+
+### kimbie_dark
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=kimbie_dark
+```
+
+<p align="center">
+  <img width="660" src="https://user-images.githubusercontent.com/8161064/288417332-408705a4-ae9c-47fe-af1a-9fb08555f526.png">
 </p>
 
 ## Margin Width
