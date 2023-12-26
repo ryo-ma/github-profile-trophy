@@ -200,6 +200,64 @@ export class MultipleOrganizationsTrophy extends Trophy {
   }
 }
 
+// The following code was used to assign a Chinese Zodiac animal based on the user's join year.
+// It mapped every year to its corresponding Zodiac animal in a 12-year cycle.
+// For example:
+// 2008 or 2020 was the Year of the Rat,
+// 2009 or 2021 was the Year of the Ox,
+// 2010 or 2022 was the Year of the Tiger,
+// 2011 or 2023 was the Year of the Rabbit,
+// 2012 or 2024 was the Year of the Dragon,
+// 2013 or 2025 was the Year of the Snake,
+// 2014 or 2026 was the Year of the Horse,
+// 2015 or 2027 was the Year of the Goat,
+// 2016 or 2028 was the Year of the Monkey,
+// 2017 or 2029 was the Year of the Rooster,
+// 2018 or 2030 was the Year of the Dog,
+// 2019 or 2031 was the Year of the Pig.
+
+export class ChineseZodiacAnimalTrophy extends Trophy {
+  constructor(year: number) {
+    const rankConditions = [
+      new RankCondition(RANK.SECRET, "Year of the Pig", 2031),
+      new RankCondition(RANK.SECRET, "Year of the Dog", 2030),
+      new RankCondition(RANK.SECRET, "Year of the Rooster", 2029),
+      new RankCondition(RANK.SECRET, "Year of the Monkey", 2028),
+      new RankCondition(RANK.SECRET, "Year of the Goat", 2027),
+      new RankCondition(RANK.SECRET, "Year of the Horse", 2026),
+      new RankCondition(RANK.SECRET, "Year of the Snake", 2025),
+      new RankCondition(RANK.SECRET, "Year of the Dragon", 2024),
+      new RankCondition(RANK.SECRET, "Year of the Rabbit", 2023),
+      new RankCondition(RANK.SECRET, "Year of the Tiger", 2022),
+      new RankCondition(RANK.SECRET, "Year of the Ox", 2021),
+      new RankCondition(RANK.SECRET, "Year of the Rat", 2020),
+      new RankCondition(RANK.SECRET, "Year of the Pig", 2019),
+      new RankCondition(RANK.SECRET, "Year of the Dog", 2018),
+      new RankCondition(RANK.SECRET, "Year of the Rooster", 2017),
+      new RankCondition(RANK.SECRET, "Year of the Monkey", 2016),
+      new RankCondition(RANK.SECRET, "Year of the Goat", 2015),
+      new RankCondition(RANK.SECRET, "Year of the Horse", 2014),
+      new RankCondition(RANK.SECRET, "Year of the Snake", 2013),
+      new RankCondition(RANK.SECRET, "Year of the Dragon", 2012),
+      new RankCondition(RANK.SECRET, "Year of the Rabbit", 2011),
+      new RankCondition(RANK.SECRET, "Year of the Tiger", 2010),
+      new RankCondition(RANK.SECRET, "Year of the Ox", 2009),
+      new RankCondition(RANK.SECRET, "Year of the Rat", 2008),
+    ];
+    super(year, rankConditions);
+    this.title = "Zodiac";
+    this.filterTitles = [
+      "Zodiac",
+      "Chinese",
+      "Animal",
+      "Calendar",
+      "ChineseZodiacAnimal",
+    ];
+    this.bottomMessage = `Joined ${year}`;
+    this.hidden = true;
+  }
+}
+
 export class OGAccountTrophy extends Trophy {
   constructor(score: number) {
     const rankConditions = [

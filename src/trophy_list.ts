@@ -2,6 +2,7 @@ import {
   AccountDurationTrophy,
   AllSuperRankTrophy,
   AncientAccountTrophy,
+  ChineseZodiacAnimalTrophy,
   Joined2020Trophy,
   LongTimeAccountTrophy,
   MultipleLangTrophy,
@@ -42,6 +43,7 @@ export class TrophyList {
       new Joined2020Trophy(userInfo.joined2020),
       new MultipleOrganizationsTrophy(userInfo.totalOrganizations),
       new AccountDurationTrophy(userInfo.durationDays),
+      new ChineseZodiacAnimalTrophy(userInfo.joinYear),
     );
   }
   get length() {
