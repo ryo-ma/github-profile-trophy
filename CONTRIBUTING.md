@@ -60,10 +60,10 @@ look forward to seeing what you come up with!
 deno task lint
 ```
 
-### 2. Run deno fmt
+### 2. Run deno format
 
 ```sh
-deno task fmt
+deno task format
 ```
 
 ### 3. Run deno test
