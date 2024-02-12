@@ -273,7 +273,7 @@ export class AccountDurationTrophy extends Trophy {
       new RankCondition(
         RANK.SSS,
         "Seasoned Veteran",
-        70, // 20 years
+        73, // 20 years
       ),
       new RankCondition(
         RANK.SS,
@@ -283,7 +283,7 @@ export class AccountDurationTrophy extends Trophy {
       new RankCondition(
         RANK.S,
         "Master Dev",
-        40, // 10 years
+        37, // 10 years
       ),
       new RankCondition(
         RANK.AAA,
