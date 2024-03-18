@@ -47,10 +47,13 @@ export function abridgeScore(score: number): string {
   if (Math.abs(score) < 1) {
     return "0pt";
   }
-  if (Math.abs(score) > 999) {
-    return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "kpt";
+  if (Math.abs(score) == 1) {
+    return "1pt";
   }
-  return (Math.sign(score) * Math.abs(score)).toString() + "pt";
+  if (Math.abs(score) > 999) {
+    return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(2) + "kpts";
+  }
+  return (Math.sign(score) * Math.abs(score)).toString() + "pts";
 }
 
 const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
