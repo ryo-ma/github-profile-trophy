@@ -64,9 +64,41 @@ async function app(req: Request): Promise<Response> {
   if (username === null) {
     const [base] = req.url.split("?");
     const error = new Error400(
-      `<h2>"username" is a required query parameter</h2>
-<p>The URL should look like <code>${base}?username=USERNAME</code>, where
-<code>USERNAME</code> is <em>your GitHub username.</em>`,
+      `<section>
+      <div>
+        <h2>"username" is a required query parameter</h2>
+        <p>The URL should look like
+        <div>
+          <p id="base-show">${base}?username=USERNAME</p>
+          <button>Copy Base Url</button>
+          <span id="temporary-span"></span>
+        </div>where
+        <code>USERNAME</code> is <em>your GitHub username.</em>
+      </div>
+      <div>
+        <h2>You can use this form: </h2>
+        <p>Enter your username and click get trophies</p>
+        <form action="https://github-profile-trophy.vercel.app/" method="get">
+          <label for="username">GitHub Username</label>
+          <input type="text" name="username" id="username" placeholder="Ex. mojombo" required>
+          <button type="submit">Get Trophy&apos;s</button>
+        </form>
+      </div>
+      <script>
+        const base = "https://github-profile-trophy.vercel.app/";
+        const button = document.querySelector("button");
+        const input = document.querySelector("input");
+        const temporarySpan = document.querySelector("#temporary-span");
+
+        button.addEventListener("click", () => {
+          navigator.clipboard.writeText(document.querySelector("#base-show").textContent);
+          temporarySpan.textContent = "Copied!";
+          setTimeout(() => {
+            temporarySpan.textContent = "";
+          }, 1500);
+        });
+      </script>
+    </section>`,
     );
     return new Response(
       error.render(),
