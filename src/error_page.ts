@@ -2,13 +2,13 @@ abstract class BaseError {
   readonly status!: number;
   readonly message!: string;
   constructor(readonly content?: string) {}
-  render(): string {
+  render() {
     const page: string = this.renderPage();
     return page;
   }
 
-  private renderPage(): string {
-    const htmlPage: string = `<!DOCTYPE html>
+  private renderPage() {
+    const htmlPage = `<!DOCTYPE html>
     <html lang="en">
 
     <head>
