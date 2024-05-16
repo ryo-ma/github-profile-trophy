@@ -106,7 +106,10 @@ abstract class BaseError {
     <body>
       <h1 style="text-align: center;">${this.status} - ${this.message}</h1>
       <p style="text-align: center;">${this.content ?? ""}</p>
-      ${this.content && `<a id="back-link" href="https://github-profile-trophy.vercel.app/">Go back</a>`}
+      ${
+      this.content &&
+      '<a id="back-link" href="https://github-profile-trophy.vercel.app/">Go back</a>'
+    }
     </body>
     </html>`;
 
