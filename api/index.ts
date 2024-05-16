@@ -80,7 +80,7 @@ async function app(req: Request): Promise<Response> {
         <p>Enter your username and click get trophies</p>
         <form action="https://github-profile-trophy.vercel.app/" method="get">
           <label for="username">GitHub Username</label>
-          <input type="text" name="username" id="username" placeholder="Ex. mojombo" required>
+          <input type="text" name="username" id="username" placeholder="Ex. gabriel-logan" required>
           <button type="submit">Get Trophy&apos;s</button>
         </form>
       </div>
@@ -117,7 +117,7 @@ async function app(req: Request): Promise<Response> {
     const userResponseInfo = await client.requestUserInfo(username);
     if (userResponseInfo instanceof ServiceError) {
       return new Response(
-        ErrorPage({ error: userInfo, username }).render(),
+        ErrorPage({ error: userResponseInfo, username }).render(),
         {
           status: userResponseInfo.code,
           headers: new Headers({ "Content-Type": "text" }),
