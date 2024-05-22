@@ -28,6 +28,14 @@ abstract class BaseError {
         p {
           color: #666;
         }
+        #back-link {
+          display: flex;
+          justify-content: center;
+          text-decoration: none;
+        }
+        #back-link:hover {
+          text-decoration: underline;
+        }
         section {
           width: 80%;
           margin: 0 auto;
@@ -62,7 +70,7 @@ abstract class BaseError {
           cursor: pointer;
         }
         #base-show {
-          font-size: 14px;
+          font-size: 16px;
           color: #333;
           background-color: #f4f4f4;
           padding: 10px;
@@ -75,12 +83,12 @@ abstract class BaseError {
         }
         @media (max-width: 768px) {
           #base-show {
-            font-size: 14;
+            font-size: 14px;
           }
         }
         @media (max-width: 480px) {
           #base-show {
-            font-size: 8;
+            font-size: 8px;
           }
         }
         @media (min-width: 768px) {
@@ -98,6 +106,10 @@ abstract class BaseError {
     <body>
       <h1 style="text-align: center;">${this.status} - ${this.message}</h1>
       <p style="text-align: center;">${this.content ?? ""}</p>
+      ${
+      this.content &&
+      '<a id="back-link" href="https://github-profile-trophy.vercel.app/">Go back</a>'
+    }
     </body>
     </html>`;
 
