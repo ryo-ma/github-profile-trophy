@@ -14,8 +14,8 @@ import {
 } from "../Schemas/index.ts";
 import { Retry } from "../Helpers/Retry.ts";
 import { CONSTANTS } from "../utils.ts";
-import { EServiceKindError } from "../Types/EServiceKindError.ts";
-import { ServiceError } from "../Types/ServiceError.ts";
+import { EServiceKindError } from "../Types/index.ts";
+import { ServiceError } from "../Types/index.ts";
 import { Logger } from "../Helpers/Logger.ts";
 import { requestGithubData } from "./request.ts";
 
@@ -85,7 +85,7 @@ export class GithubApiService extends GithubRepository {
       (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
-      repository as GitHubUserRepository,
+      repository,
     );
   }
 
