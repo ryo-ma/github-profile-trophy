@@ -5,7 +5,7 @@ interface ErrorPageProps {
   error: ServiceError;
 }
 
-export function ErrorPage({ error}: ErrorPageProps) {
+export function ErrorPage({ error }: ErrorPageProps) {
   let cause: Error400 | Error404 | Error419 = new Error400();
 
   if (error.cause === EServiceKindError.RATE_LIMIT) {
@@ -14,7 +14,7 @@ export function ErrorPage({ error}: ErrorPageProps) {
 
   if (error.cause === EServiceKindError.NOT_FOUND) {
     cause = new Error404(
-      "Sorry, the user you are looking for was not found."
+      "Sorry, the user you are looking for was not found.",
     );
   }
 
