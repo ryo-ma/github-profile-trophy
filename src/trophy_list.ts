@@ -27,7 +27,6 @@ export class TrophyList {
       new TotalStarTrophy(userInfo.totalStargazers),
       new TotalCommitTrophy(userInfo.totalCommits),
       new TotalFollowerTrophy(userInfo.totalFollowers),
-      new TotalIssueTrophy(userInfo.totalIssues),
       new TotalPullRequestTrophy(userInfo.totalPullRequests),
       new TotalRepositoryTrophy(userInfo.totalRepositories),
       new TotalReviewsTrophy(userInfo.totalReviews),
