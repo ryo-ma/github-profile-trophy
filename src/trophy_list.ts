@@ -77,9 +77,13 @@ export class TrophyList {
     );
   }
   filterByExclusionTitles(titles: Array<string>) {
-    const excludeTitles = titles.filter(title => title.startsWith("-")).map(title => title.substring(1));
+    const excludeTitles = titles.filter((title) => title.startsWith("-")).map(
+      (title) => title.substring(1),
+    );
     if (excludeTitles.length > 0) {
-      this.trophies = this.trophies.filter(trophy => !excludeTitles.includes(trophy.title));
+      this.trophies = this.trophies.filter((trophy) =>
+        !excludeTitles.includes(trophy.title)
+      );
     }
   }
   sortByRank() {

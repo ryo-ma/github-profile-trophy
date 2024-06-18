@@ -29,7 +29,9 @@ export class Card {
     trophyList.filterByHidden();
 
     if (this.titles.length != 0) {
-      const includeTitles = this.titles.filter(title => !title.startsWith("-"));
+      const includeTitles = this.titles.filter((title) =>
+        !title.startsWith("-")
+      );
       if (includeTitles.length > 0) {
         trophyList.filterByTitles(includeTitles);
       }
