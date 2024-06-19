@@ -3,12 +3,11 @@ abstract class BaseError {
   readonly message!: string;
   constructor(readonly content?: string) {}
   render() {
-    const page = this.renderPage();
-    return page;
+    return this.renderPage();
   }
 
   private renderPage() {
-    const htmlPage = `<!DOCTYPE html>
+    return `<!DOCTYPE html>
     <html lang="en"><head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +45,7 @@ abstract class BaseError {
           border-radius: 5px;
           padding: 20px;
           margin-bottom: 20px;
-          box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         }
         form {
           display: flex;
@@ -108,12 +107,10 @@ abstract class BaseError {
       <p style="text-align: center;">${this.content ?? ""}</p>
       ${
       this.content &&
-      '<a id="back-link" href="https://github-profile-trophy.vercel.app/">Go back</a>'
+      '<a id="back-link" href="/">Go back</a>'
     }
     </body>
     </html>`;
-
-    return htmlPage;
   }
 }
 

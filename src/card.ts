@@ -66,7 +66,7 @@ export class Card {
     return row;
   }
   private getHeight(row: number) {
-    // Calculate the height of card from turns
+    // Calculate the height of the card from turns
     return this.panelSize * row + this.marginHeight * (row - 1);
   }
 

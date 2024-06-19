@@ -77,7 +77,7 @@ export class TrophyList {
     );
   }
   sortByRank() {
-    this.trophies = this.trophies.sort((a: Trophy, b: Trophy) =>
+    this.trophies = this.trophies.toSorted((a: Trophy, b: Trophy) =>
       RANK_ORDER.indexOf(a.rank) - RANK_ORDER.indexOf(b.rank)
     );
   }

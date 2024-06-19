@@ -45,8 +45,8 @@ Read the [.editorconfig](./.editorconfig)
 
 ## Pull Requests
 
-Pull requests are are always welcome! In general, they should a single concern
-in the least number of changed lines as possible. For changes that address core
+Pull requests are always welcome! In general, they should a single concern in
+the least number of changed lines as possible. For changes that address core
 functionality, it is best to open an issue to discuss your proposal first. I
 look forward to seeing what you come up with!
 

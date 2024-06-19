@@ -1,9 +1,4 @@
 export class CustomURLSearchParams extends URLSearchParams {
-  constructor(
-    init?: string[][] | Record<string, string> | string | URLSearchParams,
-  ) {
-    super(init);
-  }
   getStringValue(key: string, defaultValue: string): string {
     if (super.has(key)) {
       const param = super.get(key);

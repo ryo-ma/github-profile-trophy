@@ -26,7 +26,7 @@ export class Trophy {
     this.setRank();
   }
   setRank() {
-    const sortedRankConditions = this.rankConditions.sort((a, b) =>
+    const sortedRankConditions = this.rankConditions.toSorted((a, b) =>
       RANK_ORDER.indexOf(a.rank) - RANK_ORDER.indexOf(b.rank)
     );
     // Set the rank that hit the first condition
@@ -314,7 +314,6 @@ export class AccountDurationTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "Experience";
     this.filterTitles = ["Experience", "Duration", "Since"];
-    // this.hidden = true;
   }
 }
 

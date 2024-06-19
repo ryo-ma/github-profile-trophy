@@ -14,8 +14,7 @@ import {
 } from "../Schemas/index.ts";
 import { Retry } from "../Helpers/Retry.ts";
 import { CONSTANTS } from "../utils.ts";
-import { EServiceKindError } from "../Types/EServiceKindError.ts";
-import { ServiceError } from "../Types/ServiceError.ts";
+import { EServiceKindError, ServiceError } from "../Types/index.ts";
 import { Logger } from "../Helpers/Logger.ts";
 import { requestGithubData } from "./request.ts";
 
@@ -85,7 +84,7 @@ export class GithubApiService extends GithubRepository {
       (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
-      repository as GitHubUserRepository,
+      repository,
     );
   }
 
@@ -98,15 +97,13 @@ export class GithubApiService extends GithubRepository {
         TOKENS.length,
         CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
       );
-      const response = await retry.fetch<Promise<T>>(async ({ attempt }) => {
+      return await retry.fetch<Promise<T>>(async ({ attempt }) => {
         return await requestGithubData(
           query,
           variables,
           TOKENS[attempt],
         );
       });
-
-      return response;
     } catch (error) {
       if (error.cause instanceof ServiceError) {
         Logger.error(error.cause.message);
