@@ -1,5 +1,4 @@
 export class CustomURLSearchParams extends URLSearchParams {
-
   getStringValue(key: string, defaultValue: string): string {
     if (super.has(key)) {
       const param = super.get(key);

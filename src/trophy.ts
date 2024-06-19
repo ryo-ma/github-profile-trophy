@@ -314,7 +314,6 @@ export class AccountDurationTrophy extends Trophy {
     super(score, rankConditions);
     this.title = "Experience";
     this.filterTitles = ["Experience", "Duration", "Since"];
-
   }
 }
 
