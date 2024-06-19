@@ -1,4 +1,4 @@
-import { GithubRepository } from "../Repository/GithubRepository.ts";
+import {GithubRepository} from "../Repository/GithubRepository.ts";
 import {
   GitHubUserActivity,
   GitHubUserIssue,
@@ -6,18 +6,12 @@ import {
   GitHubUserRepository,
   UserInfo,
 } from "../user_info.ts";
-import {
-  queryUserActivity,
-  queryUserIssue,
-  queryUserPullRequest,
-  queryUserRepository,
-} from "../Schemas/index.ts";
-import { Retry } from "../Helpers/Retry.ts";
-import { CONSTANTS } from "../utils.ts";
-import { EServiceKindError } from "../Types/index.ts";
-import { ServiceError } from "../Types/index.ts";
-import { Logger } from "../Helpers/Logger.ts";
-import { requestGithubData } from "./request.ts";
+import {queryUserActivity, queryUserIssue, queryUserPullRequest, queryUserRepository,} from "../Schemas/index.ts";
+import {Retry} from "../Helpers/Retry.ts";
+import {CONSTANTS} from "../utils.ts";
+import {EServiceKindError, ServiceError} from "../Types/index.ts";
+import {Logger} from "../Helpers/Logger.ts";
+import {requestGithubData} from "./request.ts";
 
 // Need to be here - Exporting from another file makes array of null
 export const TOKENS = [
@@ -98,15 +92,13 @@ export class GithubApiService extends GithubRepository {
         TOKENS.length,
         CONSTANTS.DEFAULT_GITHUB_RETRY_DELAY,
       );
-      const response = await retry.fetch<Promise<T>>(async ({ attempt }) => {
+      return await retry.fetch<Promise<T>>(async ({attempt}) => {
         return await requestGithubData(
           query,
           variables,
           TOKENS[attempt],
         );
       });
-
-      return response;
     } catch (error) {
       if (error.cause instanceof ServiceError) {
         Logger.error(error.cause.message);
