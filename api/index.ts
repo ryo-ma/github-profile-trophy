@@ -117,7 +117,7 @@ async function app(req: Request): Promise<Response> {
     const userResponseInfo = await client.requestUserInfo(username);
     if (userResponseInfo instanceof ServiceError) {
       return new Response(
-        ErrorPage({ error: userResponseInfo, username }).render(),
+        ErrorPage({ error: userResponseInfo }).render(),
         {
           status: userResponseInfo.code,
           headers: new Headers({ "Content-Type": "text" }),

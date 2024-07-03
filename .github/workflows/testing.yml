@@ -7,19 +7,19 @@ on:
   pull_request:
     branches:
       - master
+  workflow_dispatch:
 jobs:
   install-dependencies:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        deno-version: [1.36.1]
+        deno-version: [1.43.6]
 
     steps:
       - name: Git Checkout Deno Module
-        uses: actions/checkout@v2
-      - name: Use Deno Version ${{ matrix.deno-version }}
-        uses: denolib/setup-deno@v2
+        uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
         with:
           deno-version: ${{ matrix.deno-version }}
       - name: Deno format check

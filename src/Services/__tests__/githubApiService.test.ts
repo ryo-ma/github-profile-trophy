@@ -3,17 +3,17 @@ import { assertEquals, returnsNext, soxa, stub } from "../../../deps.ts";
 import { GitHubUserRepository } from "../../user_info.ts";
 
 const rateLimitMock = await import("../__mocks__/rateLimitMock.json", {
-  assert: { type: "json" },
+  with: { type: "json" },
 });
 
 const successGithubResponseMock = await import(
   "../__mocks__/successGithubResponse.json",
-  { assert: { type: "json" } }
+  { with: { type: "json" } }
 );
 
 const notFoundGithubResponseMock = await import(
   "../__mocks__/notFoundUserMock.json",
-  { assert: { type: "json" } }
+  { with: { type: "json" } }
 );
 
 import { ServiceError } from "../../Types/index.ts";
