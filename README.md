@@ -127,7 +127,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&title=Stars,Followers
 You can also exclude the trophies you don't want to display.
 
 ```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&title=-Issues,-Commits
+https://github-profile-trophy.vercel.app/?username=ryo-ma&title=-Stars,-Followers
 ```
 
 ## Filter by ranks
