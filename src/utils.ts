@@ -51,7 +51,7 @@ export function abridgeScore(score: number): string {
 const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 
 export const CONSTANTS = {
-  CACHE_MAX_AGE: 7200,
+  CACHE_MAX_AGE: 14400,
   DEFAULT_PANEL_SIZE: 110,
   DEFAULT_MAX_COLUMN: 8,
   DEFAULT_MAX_ROW: 3,
