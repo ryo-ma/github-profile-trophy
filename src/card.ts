@@ -29,7 +29,13 @@ export class Card {
     trophyList.filterByHidden();
 
     if (this.titles.length != 0) {
-      trophyList.filterByTitles(this.titles);
+      const includeTitles = this.titles.filter((title) =>
+        !title.startsWith("-")
+      );
+      if (includeTitles.length > 0) {
+        trophyList.filterByTitles(includeTitles);
+      }
+      trophyList.filterByExclusionTitles(this.titles);
     }
 
     if (this.ranks.length != 0) {

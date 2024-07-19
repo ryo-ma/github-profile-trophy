@@ -76,6 +76,16 @@ export class TrophyList {
       ranks.includes(trophy.rank)
     );
   }
+  filterByExclusionTitles(titles: Array<string>) {
+    const excludeTitles = titles.filter((title) => title.startsWith("-")).map(
+      (title) => title.substring(1),
+    );
+    if (excludeTitles.length > 0) {
+      this.trophies = this.trophies.filter((trophy) =>
+        !excludeTitles.includes(trophy.title)
+      );
+    }
+  }
   sortByRank() {
     this.trophies = this.trophies.toSorted((a: Trophy, b: Trophy) =>
       RANK_ORDER.indexOf(a.rank) - RANK_ORDER.indexOf(b.rank)
