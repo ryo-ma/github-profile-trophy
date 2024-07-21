@@ -81,7 +81,7 @@ async function app(req: Request): Promise<Response> {
         <form action="https://github-profile-trophy.vercel.app/" method="get">
           <label for="username">GitHub Username</label>
           <input type="text" name="username" id="username" placeholder="Ex. gabriel-logan" required>
-          <button type="submit">Get Trophy&apos;s</button>
+          <button type="submit">Get Trophies</button>
         </form>
       </div>
       <script>
