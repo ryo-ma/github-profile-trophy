@@ -84,20 +84,6 @@ async function app(req: Request): Promise<Response> {
           <button type="submit">Get Trophies</button>
         </form>
       </div>
-      <script>
-        const base = "https://github-profile-trophy.vercel.app/";
-        const button = document.querySelector("button");
-        const input = document.querySelector("input");
-        const temporarySpan = document.querySelector("#temporary-span");
-
-        button.addEventListener("click", () => {
-          navigator.clipboard.writeText(document.querySelector("#base-show").textContent);
-          temporarySpan.textContent = "Copied!";
-          setTimeout(() => {
-            temporarySpan.textContent = "";
-          }, 1500);
-        });
-      </script>
     </section>`,
     );
     return new Response(
