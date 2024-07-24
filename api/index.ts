@@ -60,6 +60,7 @@ async function app(req: Request): Promise<Response> {
   const ranks: Array<string> = params.getAll("rank").flatMap((r) =>
     r.split(",")
   ).map((r) => r.trim());
+  const center: boolean = params.getBooleanValue("center", CONSTANTS.DEFAULT_CENTER)
 
   if (username === null) {
     const [base] = req.url.split("?");
@@ -125,6 +126,7 @@ async function app(req: Request): Promise<Response> {
       paddingHeight,
       noBackground,
       noFrame,
+      center
     ).render(userInfo, theme),
     {
       headers: defaultHeaders,
