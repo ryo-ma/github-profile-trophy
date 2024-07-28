@@ -223,6 +223,7 @@ Available themes.
 | [dark_dimmed](#dark_dimmed) |
 | [dark_lover](#dark_lover)   |
 | [kimbie_dark](#kimbie_dark) |
+| [aura](#aura) |
 
 ### flat
 
@@ -452,6 +453,16 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=kimbie_dark
 
 <p align="center">
   <img width="660" src="https://user-images.githubusercontent.com/8161064/288417332-408705a4-ae9c-47fe-af1a-9fb08555f526.png">
+</p>
+
+### aura
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=aura
+```
+
+<p align="center">
+  <img width="660" src="https://github.com/user-attachments/assets/18a2266c-9a88-4882-940d-162c0c4d36e0">
 </p>
 
 ## Margin Width
