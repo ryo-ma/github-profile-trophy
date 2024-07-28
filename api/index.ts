@@ -81,6 +81,13 @@ async function app(req: Request): Promise<Response> {
         <form action="https://github-profile-trophy.vercel.app/" method="get">
           <label for="username">GitHub Username</label>
           <input type="text" name="username" id="username" placeholder="Ex. gabriel-logan" required>
+          <label for="theme">Theme (Optional)</label>
+          <input type="text" name="theme" id="theme" placeholder="Ex. onedark" value="light">
+          <text>
+            See all the available themes
+            <a href="https://github.com/ryo-ma/github-profile-trophy?tab=readme-ov-file#apply-theme" target="_blank">here</a>
+          </text>
+          <br>
           <button type="submit">Get Trophy&apos;s</button>
         </form>
       </div>
