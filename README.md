@@ -77,6 +77,8 @@ this code.
 
 <p align="center">
   <img width="110" src="https://user-images.githubusercontent.com/6661165/91643641-28cd4780-ea70-11ea-94a9-a51885252700.png" />
+    <img width="110" src="SecretOrganizationTrophie.png" />
+
 </p>
 
 There are only a few secret trophies. Therefore, if you come up with interesting
