@@ -13,7 +13,7 @@
   <a href="https://github.com/ryo-ma/github-profile-trophy/stargazers">
     <img src="https://img.shields.io/github/stars/ryo-ma/github-profile-trophy" alt="Stargazers"/>
   </a>
-    <a href="https://github.com/ryo-ma/github-profile-trophy/LICENSE">
+    <a href=https://github.com/ryo-ma/github-profile-trophy/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/ryo-ma/github-profile-trophy" alt="License"/>
   </a>
 </div>
