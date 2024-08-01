@@ -60,6 +60,7 @@ async function app(req: Request): Promise<Response> {
   const ranks: Array<string> = params.getAll("rank").flatMap((r) =>
     r.split(",")
   ).map((r) => r.trim());
+  const center: boolean = params.getBooleanValue("center", CONSTANTS.DEFAULT_CENTER)
 
   if (username === null) {
     const [base] = req.url.split("?");
@@ -81,23 +82,9 @@ async function app(req: Request): Promise<Response> {
         <form action="https://github-profile-trophy.vercel.app/" method="get">
           <label for="username">GitHub Username</label>
           <input type="text" name="username" id="username" placeholder="Ex. gabriel-logan" required>
-          <button type="submit">Get Trophy&apos;s</button>
+          <button type="submit">Get Trophies</button>
         </form>
       </div>
-      <script>
-        const base = "https://github-profile-trophy.vercel.app/";
-        const button = document.querySelector("button");
-        const input = document.querySelector("input");
-        const temporarySpan = document.querySelector("#temporary-span");
-
-        button.addEventListener("click", () => {
-          navigator.clipboard.writeText(document.querySelector("#base-show").textContent);
-          temporarySpan.textContent = "Copied!";
-          setTimeout(() => {
-            temporarySpan.textContent = "";
-          }, 1500);
-        });
-      </script>
     </section>`,
     );
     return new Response(
@@ -139,6 +126,7 @@ async function app(req: Request): Promise<Response> {
       paddingHeight,
       noBackground,
       noFrame,
+      center
     ).render(userInfo, theme),
     {
       headers: defaultHeaders,

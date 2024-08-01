@@ -16,6 +16,7 @@ export class Card {
     private marginHeight: number,
     private noBackground: boolean,
     private noFrame: boolean,
+    private center: boolean,
   ) {
     this.width = panelSize * this.maxColumn +
       this.marginWidth * (this.maxColumn - 1);
@@ -53,17 +54,16 @@ export class Card {
     const row = this.getRow(trophyList);
     this.height = this.getHeight(row);
 
+    const style = this.center ? "display: block; margin: auto;" : "";
+
     return `
-    <svg
-      width="${this.width}"
-      height="${this.height}"
-      viewBox="0 0 ${this.width} ${this.height}"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      ${this.renderTrophy(trophyList, theme)}
-    </svg>`;
+      <svg xmlns="http://www.w3.org/2000/svg" style="height:${this.height}px;width:${this.width}px;${style}">
+        <svg xmlns="http://www.w3.org/2000/svg">
+          ${this.renderTrophy(trophyList, theme)}
+        </svg>
+      </svg>`;
   }
+
   private getRow(trophyList: TrophyList) {
     let row = Math.floor((trophyList.length - 1) / this.maxColumn) + 1;
     if (row > this.maxRow) {
