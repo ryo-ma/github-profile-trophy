@@ -88,9 +88,10 @@ const getSmallTrophyIcon = (
   // Single Rank
   return "";
 };
-export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN) => {
+export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN, trophyStyle: string | null = null) => {
   let color = theme.DEFAULT_RANK_BASE;
   let rankColor = theme.DEFAULT_RANK_TEXT;
+  console.log(trophyStyle)
   let backgroundIcon = "";
   let gradationColor = `
       <stop offset="0%" stop-color="${theme.DEFAULT_RANK_BASE}"/>

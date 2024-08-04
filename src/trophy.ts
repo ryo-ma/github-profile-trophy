@@ -65,6 +65,7 @@ export class Trophy {
     panelSize = CONSTANTS.DEFAULT_PANEL_SIZE,
     noBackground = CONSTANTS.DEFAULT_NO_BACKGROUND,
     noFrame = CONSTANTS.DEFAULT_NO_FRAME,
+    trophyStyle: string | null = null,
   ): string {
     const { BACKGROUND: PRIMARY, TITLE: SECONDARY, TEXT, NEXT_RANK_BAR } =
       theme;
@@ -94,7 +95,7 @@ export class Trophy {
             stroke-opacity="${noFrame ? "0" : "1"}"
             fill-opacity="${noBackground ? "0" : "1"}"
           />
-          ${getTrophyIcon(theme, this.rank)}
+          ${getTrophyIcon(theme, this.rank, trophyStyle)}
           <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="13" fill="${SECONDARY}">${this.title}</text>
           <text x="50%" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10.5" fill="${TEXT}">${this.topMessage}</text>
           <text x="50%" y="97" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10" fill="${TEXT}">${this.bottomMessage}</text>
