@@ -70,6 +70,8 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 | UNKNOWN    | You have not taken action yet. Let's act first.                                            |
 | SECRET     | This rank is very rare. The trophy will not be displayed until certain conditions are met. |
 
+**NOTE: The ```UNKNOWN``` rank is denoted by ```?```**
+
 ## Secret Rank
 
 The acquisition condition is secret, but you can know the condition by reading
@@ -154,6 +156,8 @@ You can also exclude ranks.
 ```
 https://github-profile-trophy.vercel.app/?username=ryo-ma&rank=-C,-B
 ```
+
+**NOTE: Since ```UNKNOWN``` is denoted by ```?```, in order to include or exclude it you will have to use ```rank=?``` and ```rank=-?``` respectively**
 
 ## Specify the maximum row & column size
 
