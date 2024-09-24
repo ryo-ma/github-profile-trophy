@@ -78,7 +78,7 @@ The acquisition condition is secret, but you can know the condition by reading
 this code.
 
 <p align="center">
-  <img width="110" src="https://user-images.githubusercontent.com/6661165/91643641-28cd4780-ea70-11ea-94a9-a51885252700.png" />
+  <img width="110" src="https://github.com/user-attachments/assets/40461f38-a317-431c-93d2-a56c2e803cf3" />
 </p>
 
 There are only a few secret trophies. Therefore, if you come up with interesting
@@ -91,10 +91,10 @@ conditions, I will consider adding a trophy. I am waiting for contributions.
 </p>
 
 1. Title name of aggregation target.
-2. Current Rank.
+2. Current rank.
 3. Title according to rank.
 4. Target aggregation result.
-5. Next Rank Bar. The road from the current rank to the next rank.
+5. Rank progress bar.
 
 # Optional Request Parameters
 
@@ -504,10 +504,11 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&no-bg=true
 ```
 
 <p align="center">
-  <img width=660 src="https://user-images.githubusercontent.com/6661165/104810864-ed72c000-583a-11eb-863b-04acffb705ea.png">
+  <img width="969" src="https://github.com/user-attachments/assets/32d3b63b-7845-42cb-b71c-31abaa673bcb">
 </p>
 
 ## Hide frames
+
 
 You can hide the frames around the trophies.\
 `Available value: boolean type (true or false)`\
@@ -518,7 +519,7 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&no-frame=true
 ```
 
 <p align="center">
-  <img width=660 src="https://user-images.githubusercontent.com/6661165/104810887-1d21c800-583b-11eb-8f0d-785c1640dc5d.png">
+  <img width="936" src="https://github.com/user-attachments/assets/54de15a3-d907-4a50-8117-170aae74d1cd">
 </p>
 
 # Contribution Guide
