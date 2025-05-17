@@ -114,17 +114,17 @@ export class MultipleLangTrophy extends Trophy {
       ),
       new RankCondition(
         RANK.SSS,
-        "Lengendary Polygot",
+        "Lengendary Polyglot",
         40,
       ),
       new RankCondition(
         RANK.SS,
-        "Master Polygot",
+        "Master Polyglot",
         30,
       ),
       new RankCondition(
         RANK.S,
-        "Expert Polygot",
+        "Expert Polyglot",
         25
       ),
       new RankCondition(
