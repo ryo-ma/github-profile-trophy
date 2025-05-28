@@ -575,6 +575,30 @@ export const COLORS: { [name: string]: Theme } = {
     DEFAULT_RANK_SHADOW: "#719190",
     DEFAULT_RANK_TEXT: "#d3af86",
   },
+  aura: {
+    BACKGROUND: "#1E1D26",
+    TITLE: "#FFFFFF",
+    ICON_CIRCLE: "#FFFFFF",
+    TEXT: "#dbffe6",
+    LAUREL: "#a9fcca",
+    SECRET_RANK_1: "#c273ff",
+    SECRET_RANK_2: "#c273ff",
+    SECRET_RANK_3: "#c273ff",
+    SECRET_RANK_TEXT: "#bd93f9",
+    NEXT_RANK_BAR: "#715df5",
+    S_RANK_BASE: "#8e57ff",
+    S_RANK_SHADOW: "#2361ad",
+    S_RANK_TEXT: "#6272a4",
+    A_RANK_BASE: "#7c71f5",
+    A_RANK_SHADOW: "#3ae056",
+    A_RANK_TEXT: "#6272a4",
+    B_RANK_BASE: "#226a80",
+    B_RANK_SHADOW: "#226a80",
+    B_RANK_TEXT: "#6272a4",
+    DEFAULT_RANK_BASE: "#5e8c2a",
+    DEFAULT_RANK_SHADOW: "#5e8c2a",
+    DEFAULT_RANK_TEXT: "#5e8c2a",
+  }
 };
 
 export interface Theme {
