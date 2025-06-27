@@ -575,7 +575,7 @@ export const COLORS: { [name: string]: Theme } = {
     DEFAULT_RANK_SHADOW: "#719190",
     DEFAULT_RANK_TEXT: "#d3af86",
   },
-  redeclipse: {
+  red_eclipse: {
     BACKGROUND: "#000000",
     TITLE: "#FF0000",
     ICON_CIRCLE: "#000000",
