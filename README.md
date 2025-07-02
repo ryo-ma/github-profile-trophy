@@ -225,7 +225,7 @@ Available themes.
 | [dark_dimmed](#dark_dimmed) |
 | [dark_lover](#dark_lover)   |
 | [kimbie_dark](#kimbie_dark) |
-| [aura](#aura) |
+| [aura](#aura)               |
 
 ### flat
 

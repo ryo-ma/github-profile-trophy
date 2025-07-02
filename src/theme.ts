@@ -598,7 +598,7 @@ export const COLORS: { [name: string]: Theme } = {
     DEFAULT_RANK_BASE: "#5e8c2a",
     DEFAULT_RANK_SHADOW: "#5e8c2a",
     DEFAULT_RANK_TEXT: "#5e8c2a",
-  }
+  },
 };
 
 export interface Theme {
