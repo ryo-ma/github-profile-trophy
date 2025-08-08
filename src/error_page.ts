@@ -102,7 +102,7 @@ abstract class BaseError {
           }
         }
       </style>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7387527627218970" crossorigin="anonymous"></script>
+      <script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7387527627218970" crossorigin="anonymous"></script>
     </head>
     <body>
       <h1 style="text-align: center;">${this.message}</h1>
