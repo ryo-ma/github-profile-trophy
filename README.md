@@ -21,21 +21,23 @@
   </a>
 </div>
 
-
 > ⚠️ **Notice from the Project Owner**
 >
-> Hello everyone,  
-> I am the owner of this project.  
+> Hello everyone,\
+> I am the owner of this project.
 >
-> Currently, due to the increase in users and traffic, the cost of maintaining this service has become quite high, and it is becoming financially difficult to sustain.  
-> As costs continue to rise, there is a possibility that the service may have to be discontinued.  
-> We are now at a stage where monetization and financial support are essential.  
+> Currently, due to the increase in users and traffic, the cost of maintaining
+> this service has become quite high, and it is becoming financially difficult
+> to sustain.\
+> As costs continue to rise, there is a possibility that the service may have to
+> be discontinued.\
+> We are now at a stage where monetization and financial support are essential.
 >
-> Your support in the following ways would be greatly appreciated:  
+> Your support in the following ways would be greatly appreciated:
 >
-> 1. Financial support: [GitHub Sponsors](https://github.com/sponsors/ryo-ma)  
-> 2. Reducing server load through self-hosting (by forking on GitHub and deploying to Vercel)  
-
+> 1. Financial support: [GitHub Sponsors](https://github.com/sponsors/ryo-ma)
+> 2. Reducing server load through self-hosting (by forking on GitHub and
+> deploying to Vercel)
 
 # Quick Start
 
