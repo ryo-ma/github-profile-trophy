@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "start": "deno run -A debug.ts",
-    "debug": "deno run --inspect-brk -A debug.ts",
+    "start": "deno run -A main.ts",
+    "debug": "deno run --inspect-brk -A main.ts",
     "format": "deno fmt",
     "lint": "deno lint",
     "test": "ENV_TYPE=test deno test --allow-env"
