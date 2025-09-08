@@ -60,6 +60,7 @@ async function app(req: Request): Promise<Response> {
   const ranks: Array<string> = params.getAll("rank").flatMap((r) =>
     r.split(",")
   ).map((r) => r.trim());
+  const trophy_style = params.get("trophy_style");
 
   if (username === null) {
     const [base] = req.url.split("?");
@@ -146,6 +147,7 @@ async function app(req: Request): Promise<Response> {
       paddingHeight,
       noBackground,
       noFrame,
+      trophy_style,
     ).render(userInfo, theme),
     {
       headers: defaultHeaders,
