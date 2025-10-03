@@ -582,6 +582,7 @@ Your contributions help keep development going and make this work possible.
 
 ## 🎁 One-Time Sponsors
 
+* [@arnabnandy7](https://github.com/arnabnandy7) — $10 (Oct 3, 2025)
 * [@JoqarSabon](https://github.com/JoqarSabon) — $5 (May 24, 2024)
 * [@syaghoubi00](https://github.com/syaghoubi00) — $5 (Jan 28, 2024)
 * [@pylapp](https://github.com/pylapp) — $20 (Jan 15, 2024)
