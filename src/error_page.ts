@@ -11,6 +11,7 @@ abstract class BaseError {
     <html lang="en"><head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="google-adsense-account" content="ca-pub-7387527627218970">
       <title>GitHub Profile Trophy</title>
       <meta name="description" content="🏆 Add dynamically generated GitHub Stat Trophies on your readme">
       <style>
@@ -101,9 +102,10 @@ abstract class BaseError {
           }
         }
       </style>
+      <script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7387527627218970" crossorigin="anonymous"></script>
     </head>
     <body>
-      <h1 style="text-align: center;">${this.status} - ${this.message}</h1>
+      <h1 style="text-align: center;">${this.message}</h1>
       <p style="text-align: center;">${this.content ?? ""}</p>
       ${
       this.content &&
@@ -112,6 +114,11 @@ abstract class BaseError {
     </body>
     </html>`;
   }
+}
+
+export class Error200 extends BaseError {
+  readonly status = 200;
+  readonly message = "";
 }
 
 export class Error400 extends BaseError {
