@@ -567,6 +567,7 @@ Your contributions help keep development going and make this work possible.
 
 ## 💖 Monthly Sponsors
 
+* [@pmsosa](https://github.com/pmsosa) — $10 / month
 * [@chenfeng-huang](https://github.com/chenfeng-huang) — $10 / month
 * [@holly-hacker](https://github.com/holly-hacker) — $2 / month
 * [@skillerious](https://github.com/skillerious) — $2 / month (since Aug 17, 2024)
