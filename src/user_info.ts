@@ -1,6 +1,7 @@
 type Language = { name: string };
 type Stargazers = { totalCount: number };
 type Repository = {
+  name: string;
   languages: { nodes: Language[] };
   stargazers: Stargazers;
   createdAt: string;
@@ -86,6 +87,7 @@ export class UserInfo {
     // Find the earliest repository creation date
     const earliestRepoDate = userRepository.repositories.nodes.reduce(
       (earliest: string, node: Repository) => {
+        console.log('Repository name:', node.name || 'Unknown');
         const repoCreatedAt = new Date(node.createdAt).getTime();
         const earliestTime = new Date(earliest).getTime();
         return repoCreatedAt < earliestTime ? node.createdAt : earliest;
