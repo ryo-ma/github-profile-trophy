@@ -97,6 +97,8 @@ export class UserInfo {
 
     const durationTime = new Date().getTime() -
       new Date(earliestRepoDate).getTime();
+    console.log('Earliest repository creation date:', earliestRepoDate);
+    console.log('Duration time (ms):', durationTime);
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
     const durationDays = Math.floor(
       durationTime / (1000 * 60 * 60 * 24) / 100,
