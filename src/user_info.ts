@@ -85,13 +85,15 @@ export class UserInfo {
     });
 
     // Find the earliest repository creation date
-    const earliestRepoDate = userRepository.repositories.nodes.reduce(
-      (earliest: string, node: Repository) => {
-        const repoCreatedAt = new Date(node.createdAt).getTime();
-        const earliestTime = new Date(earliest).getTime();
-        return repoCreatedAt < earliestTime ? node.createdAt : earliest;
+    let earliestRepoDate = userActivity.createdAt; // start with the oldest possible
+
+    earliestRepoDate = userRepository.repositories.nodes.reduce(
+      (earliest, node) => {
+        return new Date(node.createdAt).getTime() < new Date(earliest).getTime()
+          ? node.createdAt
+          : earliest;
       },
-      userRepository.repositories.nodes[0]?.createdAt || userActivity.createdAt,
+      earliestRepoDate
     );
 
     const durationTime = new Date().getTime() -
