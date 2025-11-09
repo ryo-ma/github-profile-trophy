@@ -87,7 +87,6 @@ export class UserInfo {
     // Find the earliest repository creation date
     const earliestRepoDate = userRepository.repositories.nodes.reduce(
       (earliest: string, node: Repository) => {
-        console.log('Repository name:', node.name || 'Unknown');
         const repoCreatedAt = new Date(node.createdAt).getTime();
         const earliestTime = new Date(earliest).getTime();
         return repoCreatedAt < earliestTime ? node.createdAt : earliest;
@@ -97,8 +96,6 @@ export class UserInfo {
 
     const durationTime = new Date().getTime() -
       new Date(earliestRepoDate).getTime();
-    console.log('Earliest repository creation date:', earliestRepoDate);
-    console.log('Duration time (ms):', durationTime);
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
     const durationDays = Math.floor(
       durationTime / (1000 * 60 * 60 * 24) / 100,
