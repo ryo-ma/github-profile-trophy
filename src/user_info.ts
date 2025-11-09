@@ -66,45 +66,40 @@ export class UserInfo {
     const totalCommits =
       userActivity.contributionsCollection.restrictedContributionsCount +
       userActivity.contributionsCollection.totalCommitContributions;
-    const totalStargazers = userRepository.repositories.nodes.reduce(
-      (prev: number, node: Repository) => {
-        return prev + node.stargazers.totalCount;
-      },
-      0,
-    );
-
+    // Single-pass aggregation for stargazers, languages and earliest repo date.
     const languages = new Set<string>();
-    userRepository.repositories.nodes.forEach((node: Repository) => {
-      if (node.languages.nodes != undefined) {
-        node.languages.nodes.forEach((node: Language) => {
-          if (node != undefined) {
-            languages.add(node.name);
-          }
-        });
+    let totalStargazers = 0;
+    const nodes = userRepository.repositories.nodes || [];
+
+    // Initialize earliest timestamp from first node or fallback to userActivity.createdAt
+    let earliestTimestamp = nodes.length > 0 && nodes[0].createdAt
+      ? Date.parse(nodes[0].createdAt)
+      : Date.parse(userActivity.createdAt);
+
+    for (const node of nodes) {
+      if (!node) continue;
+
+      totalStargazers += node.stargazers?.totalCount ?? 0;
+
+      if (node.languages?.nodes) {
+        for (const lang of node.languages.nodes) {
+          if (lang && lang.name) languages.add(lang.name);
+        }
       }
-    });
 
-    // Find the earliest repository creation date
-    const earliestRepoDate = userRepository.repositories.nodes.reduce(
-      (earliest: string, node: Repository) => {
-        const repoCreatedAt = new Date(node.createdAt).getTime();
-        const earliestTime = new Date(earliest).getTime();
-        return repoCreatedAt < earliestTime ? node.createdAt : earliest;
-      },
-      userRepository.repositories.nodes[0]?.createdAt || userActivity.createdAt,
-    );
+      const t = Date.parse(node.createdAt);
+      if (!Number.isNaN(t) && t < earliestTimestamp) earliestTimestamp = t;
+    }
 
-    const durationTime = new Date().getTime() -
-      new Date(earliestRepoDate).getTime();
+    // Duration calculations using numeric timestamps and correct day formula
+    const durationTime = Date.now() - earliestTimestamp;
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
-    const durationDays = Math.floor(
-      durationTime / (1000 * 60 * 60 * 24) / 100,
-    );
-    const ancientAccount = new Date(earliestRepoDate).getFullYear() <= 2010
-      ? 1
-      : 0;
-    const joined2020 = new Date(earliestRepoDate).getFullYear() == 2020 ? 1 : 0;
-    const ogAccount = new Date(earliestRepoDate).getFullYear() <= 2008 ? 1 : 0;
+    const durationDays = Math.floor(durationTime / (1000 * 60 * 60 * 24));
+
+    const earliestDate = new Date(earliestTimestamp);
+    const ancientAccount = earliestDate.getFullYear() <= 2010 ? 1 : 0;
+    const joined2020 = earliestDate.getFullYear() === 2020 ? 1 : 0;
+    const ogAccount = earliestDate.getFullYear() <= 2008 ? 1 : 0;
 
     this.totalCommits = totalCommits;
     this.totalFollowers = userActivity.followers.totalCount;
