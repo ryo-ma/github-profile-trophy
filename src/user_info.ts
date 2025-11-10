@@ -93,7 +93,7 @@ export class UserInfo {
           ? node.createdAt
           : earliest;
       },
-      earliestRepoDate
+      earliestRepoDate,
     );
 
     const durationTime = new Date().getTime() -
