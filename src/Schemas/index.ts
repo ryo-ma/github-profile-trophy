@@ -46,7 +46,6 @@ export const queryUserRepository = `
       repositories(first: 100, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
         totalCount
         nodes {
-          name
           languages(first: 3, orderBy: {direction:DESC, field: SIZE}) {
             nodes {
               name
