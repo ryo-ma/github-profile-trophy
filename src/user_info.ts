@@ -3,6 +3,7 @@ type Stargazers = { totalCount: number };
 type Repository = {
   languages: { nodes: Language[] };
   stargazers: Stargazers;
+  createdAt: string;
 };
 export type GitHubUserRepository = {
   repositories: {
@@ -81,20 +82,30 @@ export class UserInfo {
         });
       }
     });
+
+    // Find the earliest repository creation date
+    let earliestRepoDate = userActivity.createdAt; // start with the oldest possible
+
+    earliestRepoDate = userRepository.repositories.nodes.reduce(
+      (earliest, node) => {
+        return new Date(node.createdAt).getTime() < new Date(earliest).getTime()
+          ? node.createdAt
+          : earliest;
+      },
+      earliestRepoDate,
+    );
+
     const durationTime = new Date().getTime() -
-      new Date(userActivity.createdAt).getTime();
+      new Date(earliestRepoDate).getTime();
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
     const durationDays = Math.floor(
       durationTime / (1000 * 60 * 60 * 24) / 100,
     );
-    const ancientAccount =
-      new Date(userActivity.createdAt).getFullYear() <= 2010 ? 1 : 0;
-    const joined2020 = new Date(userActivity.createdAt).getFullYear() == 2020
+    const ancientAccount = new Date(earliestRepoDate).getFullYear() <= 2010
       ? 1
       : 0;
-    const ogAccount = new Date(userActivity.createdAt).getFullYear() <= 2008
-      ? 1
-      : 0;
+    const joined2020 = new Date(earliestRepoDate).getFullYear() == 2020 ? 1 : 0;
+    const ogAccount = new Date(earliestRepoDate).getFullYear() <= 2008 ? 1 : 0;
 
     this.totalCommits = totalCommits;
     this.totalFollowers = userActivity.followers.totalCount;
