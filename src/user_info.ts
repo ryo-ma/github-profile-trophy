@@ -1,7 +1,6 @@
 type Language = { name: string };
 type Stargazers = { totalCount: number };
 type Repository = {
-  name: string;
   languages: { nodes: Language[] };
   stargazers: Stargazers;
   createdAt: string;
