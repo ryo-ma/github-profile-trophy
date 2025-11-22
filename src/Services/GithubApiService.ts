@@ -55,36 +55,54 @@ export class GithubApiService extends GithubRepository {
     );
   }
   async requestUserInfo(username: string): Promise<UserInfo | ServiceError> {
-    // Avoid to call others if one of them is null
-    const repository = await this.requestUserRepository(username);
-
-    if (repository instanceof ServiceError) {
-      Logger.error(repository);
-      return repository;
-    }
-
+    // Execute all API calls in parallel for better performance
     const promises = Promise.allSettled([
+      this.requestUserRepository(username),
       this.requestUserActivity(username),
       this.requestUserIssue(username),
       this.requestUserPullRequest(username),
     ]);
-    const [activity, issue, pullRequest] = await promises;
-    const status = [
-      activity.status,
-      issue.status,
-      pullRequest.status,
-    ];
+    const [repository, activity, issue, pullRequest] = await promises;
 
-    if (status.includes("rejected")) {
+    // Check if any promise was rejected
+    if (
+      [repository, activity, issue, pullRequest].some((result) =>
+        result.status === "rejected"
+      )
+    ) {
       Logger.error(`Can not find a user with username:' ${username}'`);
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
     }
 
+    // Extract values and check for ServiceError in all results
+    const repositoryValue = repository.value;
+    const activityValue = activity.value;
+    const issueValue = issue.value;
+    const pullRequestValue = pullRequest.value;
+
+    // Return first ServiceError found
+    if (repositoryValue instanceof ServiceError) {
+      Logger.error(repositoryValue);
+      return repositoryValue;
+    }
+    if (activityValue instanceof ServiceError) {
+      Logger.error(activityValue);
+      return activityValue;
+    }
+    if (issueValue instanceof ServiceError) {
+      Logger.error(issueValue);
+      return issueValue;
+    }
+    if (pullRequestValue instanceof ServiceError) {
+      Logger.error(pullRequestValue);
+      return pullRequestValue;
+    }
+
     return new UserInfo(
-      (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
-      (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
-      (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
-      repository,
+      activityValue,
+      issueValue,
+      pullRequestValue,
+      repositoryValue,
     );
   }
 
