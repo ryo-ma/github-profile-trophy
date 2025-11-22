@@ -16,7 +16,7 @@ const client = new GithubRepositoryService(serviceProvider).repository;
 const defaultHeaders = new Headers(
   {
     "Content-Type": "image/svg+xml",
-    "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`,
+    "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}, s-maxage=${CONSTANTS.CDN_CACHE_MAX_AGE}, stale-while-revalidate=${CONSTANTS.STALE_WHILE_REVALIDATE}`,
   },
 );
 

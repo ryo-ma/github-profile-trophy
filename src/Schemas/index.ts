@@ -43,7 +43,7 @@ export const queryUserPullRequest = `
 export const queryUserRepository = `
   query userInfo($username: String!) {
     user(login: $username) {
-      repositories(first: 100, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
+      repositories(first: 50, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
         totalCount
         nodes {
           languages(first: 3, orderBy: {direction:DESC, field: SIZE}) {
