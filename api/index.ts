@@ -34,33 +34,6 @@ async function app(req: Request): Promise<Response> {
   const row = params.getNumberValue("row", CONSTANTS.DEFAULT_MAX_ROW);
   const column = params.getNumberValue("column", CONSTANTS.DEFAULT_MAX_COLUMN);
   const themeParam: string = params.getStringValue("theme", "default");
-  let theme: Theme = COLORS.default;
-  if (Object.keys(COLORS).includes(themeParam)) {
-    theme = COLORS[themeParam];
-  }
-  const marginWidth = params.getNumberValue(
-    "margin-w",
-    CONSTANTS.DEFAULT_MARGIN_W,
-  );
-  const paddingHeight = params.getNumberValue(
-    "margin-h",
-    CONSTANTS.DEFAULT_MARGIN_H,
-  );
-  const noBackground = params.getBooleanValue(
-    "no-bg",
-    CONSTANTS.DEFAULT_NO_BACKGROUND,
-  );
-  const noFrame = params.getBooleanValue(
-    "no-frame",
-    CONSTANTS.DEFAULT_NO_FRAME,
-  );
-  const titles: Array<string> = params.getAll("title").flatMap((r) =>
-    r.split(",")
-  ).map((r) => r.trim());
-  const ranks: Array<string> = params.getAll("rank").flatMap((r) =>
-    r.split(",")
-  ).map((r) => r.trim());
-
   if (username === null) {
     const [base] = req.url.split("?");
     const error = new Error400(
@@ -111,10 +84,37 @@ async function app(req: Request): Promise<Response> {
       error.render(),
       {
         status: error.status,
-        headers: new Headers({ "Content-Type": "text" }),
+        headers: new Headers({ "Content-Type": "text", "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`}),
       },
     );
   }
+  let theme: Theme = COLORS.default;
+  if (Object.keys(COLORS).includes(themeParam)) {
+    theme = COLORS[themeParam];
+  }
+  const marginWidth = params.getNumberValue(
+    "margin-w",
+    CONSTANTS.DEFAULT_MARGIN_W,
+  );
+  const paddingHeight = params.getNumberValue(
+    "margin-h",
+    CONSTANTS.DEFAULT_MARGIN_H,
+  );
+  const noBackground = params.getBooleanValue(
+    "no-bg",
+    CONSTANTS.DEFAULT_NO_BACKGROUND,
+  );
+  const noFrame = params.getBooleanValue(
+    "no-frame",
+    CONSTANTS.DEFAULT_NO_FRAME,
+  );
+  const titles: Array<string> = params.getAll("title").flatMap((r) =>
+    r.split(",")
+  ).map((r) => r.trim());
+  const ranks: Array<string> = params.getAll("rank").flatMap((r) =>
+    r.split(",")
+  ).map((r) => r.trim());
+
   const userKeyCache = ["v1", username].join("-");
   const userInfoCached = await cacheProvider.get(userKeyCache) || "{}";
   let userInfo = JSON.parse(userInfoCached);
@@ -127,7 +127,7 @@ async function app(req: Request): Promise<Response> {
         ErrorPage({ error: userResponseInfo }).render(),
         {
           status: userResponseInfo.code,
-          headers: new Headers({ "Content-Type": "text" }),
+          headers: new Headers({ "Content-Type": "text", "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}` }),
         },
       );
     }
