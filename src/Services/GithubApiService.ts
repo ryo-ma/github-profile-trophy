@@ -63,29 +63,44 @@ export class GithubApiService extends GithubRepository {
       this.requestUserPullRequest(username),
     ]);
     const [repository, activity, issue, pullRequest] = await promises;
-    const status = [
-      repository.status,
-      activity.status,
-      issue.status,
-      pullRequest.status,
-    ];
 
-    if (status.includes("rejected")) {
+    // Check if any promise was rejected
+    if (
+      repository.status === "rejected" || activity.status === "rejected" ||
+      issue.status === "rejected" || pullRequest.status === "rejected"
+    ) {
       Logger.error(`Can not find a user with username:' ${username}'`);
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
     }
 
-    // Check for ServiceError in repository result
-    const repositoryValue = (repository as PromiseFulfilledResult<GitHubUserRepository | ServiceError>).value;
+    // Extract values and check for ServiceError in all results
+    const repositoryValue = repository.value;
+    const activityValue = activity.value;
+    const issueValue = issue.value;
+    const pullRequestValue = pullRequest.value;
+
+    // Return first ServiceError found
     if (repositoryValue instanceof ServiceError) {
       Logger.error(repositoryValue);
       return repositoryValue;
     }
+    if (activityValue instanceof ServiceError) {
+      Logger.error(activityValue);
+      return activityValue;
+    }
+    if (issueValue instanceof ServiceError) {
+      Logger.error(issueValue);
+      return issueValue;
+    }
+    if (pullRequestValue instanceof ServiceError) {
+      Logger.error(pullRequestValue);
+      return pullRequestValue;
+    }
 
     return new UserInfo(
-      (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
-      (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
-      (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
+      activityValue,
+      issueValue,
+      pullRequestValue,
       repositoryValue,
     );
   }

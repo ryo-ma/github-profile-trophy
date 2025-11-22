@@ -13,10 +13,18 @@ import { cacheProvider } from "../src/config/cache.ts";
 const serviceProvider = new GithubApiService();
 const client = new GithubRepositoryService(serviceProvider).repository;
 
+// Build cache control header with optimized caching strategy
+const cacheControlHeader = [
+  "public",
+  `max-age=${CONSTANTS.CACHE_MAX_AGE}`,
+  `s-maxage=${CONSTANTS.CDN_CACHE_MAX_AGE}`,
+  `stale-while-revalidate=${CONSTANTS.STALE_WHILE_REVALIDATE}`,
+].join(", ");
+
 const defaultHeaders = new Headers(
   {
     "Content-Type": "image/svg+xml",
-    "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}, s-maxage=${CONSTANTS.CDN_CACHE_MAX_AGE}, stale-while-revalidate=${CONSTANTS.STALE_WHILE_REVALIDATE}`,
+    "Cache-Control": cacheControlHeader,
   },
 );
 
