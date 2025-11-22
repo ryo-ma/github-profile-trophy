@@ -84,7 +84,10 @@ async function app(req: Request): Promise<Response> {
       error.render(),
       {
         status: error.status,
-        headers: new Headers({ "Content-Type": "text", "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`}),
+        headers: new Headers({
+          "Content-Type": "text",
+          "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`,
+        }),
       },
     );
   }
@@ -127,7 +130,10 @@ async function app(req: Request): Promise<Response> {
         ErrorPage({ error: userResponseInfo }).render(),
         {
           status: userResponseInfo.code,
-          headers: new Headers({ "Content-Type": "text", "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}` }),
+          headers: new Headers({
+            "Content-Type": "text",
+            "Cache-Control": `public, max-age=${CONSTANTS.CACHE_MAX_AGE}`,
+          }),
         },
       );
     }
