@@ -555,6 +555,14 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&no-frame=true
 
 Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
 
+# Performance & Optimization
+
+This service has been optimized to reduce Vercel duration time and costs. See [PERFORMANCE.md](./PERFORMANCE.md) for detailed information about:
+- Caching strategies
+- API call optimizations
+- Self-hosting for better performance
+- Performance monitoring
+
 # License
 
 This product is licensed under the

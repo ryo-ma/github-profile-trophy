@@ -62,7 +62,7 @@ export const CONSTANTS = {
   DEFAULT_NO_BACKGROUND: false,
   DEFAULT_NO_FRAME: false,
   DEFAULT_GITHUB_API: "https://api.github.com/graphql",
-  DEFAULT_GITHUB_RETRY_DELAY: 1000,
+  DEFAULT_GITHUB_RETRY_DELAY: 500, // Reduced from 1000ms for faster response
   REVALIDATE_TIME: HOUR_IN_MILLISECONDS,
   REDIS_TTL: HOUR_IN_MILLISECONDS * 4,
 };
