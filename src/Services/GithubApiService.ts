@@ -66,8 +66,9 @@ export class GithubApiService extends GithubRepository {
 
     // Check if any promise was rejected
     if (
-      repository.status === "rejected" || activity.status === "rejected" ||
-      issue.status === "rejected" || pullRequest.status === "rejected"
+      [repository, activity, issue, pullRequest].some((result) =>
+        result.status === "rejected"
+      )
     ) {
       Logger.error(`Can not find a user with username:' ${username}'`);
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
