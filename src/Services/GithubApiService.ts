@@ -56,20 +56,16 @@ export class GithubApiService extends GithubRepository {
   }
   async requestUserInfo(username: string): Promise<UserInfo | ServiceError> {
     // Avoid to call others if one of them is null
-    const repository = await this.requestUserRepository(username);
-
-    if (repository instanceof ServiceError) {
-      Logger.error(repository);
-      return repository;
-    }
 
     const promises = Promise.allSettled([
+      this.requestUserRepository(username),
       this.requestUserActivity(username),
       this.requestUserIssue(username),
       this.requestUserPullRequest(username),
     ]);
-    const [activity, issue, pullRequest] = await promises;
+    const [repository, activity, issue, pullRequest] = await promises;
     const status = [
+      repository.status,
       activity.status,
       issue.status,
       pullRequest.status,
@@ -84,7 +80,7 @@ export class GithubApiService extends GithubRepository {
       (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
       (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
       (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
-      repository,
+      (repository as PromiseFulfilledResult<GitHubUserRepository>).value,
     );
   }
 
