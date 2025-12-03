@@ -43,7 +43,7 @@ async function app(req: Request): Promise<Response> {
   const column = params.getNumberValue("column", CONSTANTS.DEFAULT_MAX_COLUMN);
   const themeParam: string = params.getStringValue("theme", "default");
   if (username === null) {
-    const base = 'https://github-profile-trophy.com';
+    const [base] = req.url.split("?");
     const error = new Error400(
       `<section>
       <div>
@@ -59,7 +59,7 @@ async function app(req: Request): Promise<Response> {
       <div>
         <h2>You can use this form: </h2>
         <p>Enter your username and click get trophies</p>
-        <form action="https://github-profile-trophy.com/" method="get">
+        <form action="https://github-profile-trophy.vercel.app/" method="get">
           <label for="username">GitHub Username</label>
           <input type="text" name="username" id="username" placeholder="Ex. gabriel-logan" required>
           <label for="theme">Theme (Optional)</label>
@@ -73,7 +73,7 @@ async function app(req: Request): Promise<Response> {
         </form>
       </div>
       <script>
-        const base = "https://github-profile-trophy.com/";
+        const base = "https://github-profile-trophy.vercel.app/";
         const button = document.querySelector("button");
         const input = document.querySelector("input");
         const temporarySpan = document.querySelector("#temporary-span");
