@@ -573,22 +573,22 @@ export class TotalRepositoryTrophy extends Trophy {
       new RankCondition(
         RANK.SSS,
         "God Repo Creator",
-        100,
+        50,
       ),
       new RankCondition(
         RANK.SS,
         "Deep Repo Creator",
-        90,
+        45,
       ),
       new RankCondition(
         RANK.S,
         "Super Repo Creator",
-        80,
+        40,
       ),
       new RankCondition(
         RANK.AAA,
         "Ultra Repo Creator",
-        50,
+        35,
       ),
       new RankCondition(
         RANK.AA,
