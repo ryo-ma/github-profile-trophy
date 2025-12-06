@@ -587,7 +587,7 @@ contributions help keep development going and make this work possible.
 - [@port19x](https://github.com/port19x) — $2 / month (since Jan 27, 2022)
 
 ## 🎁 One-Time Sponsors
-
+- [@tapegram](https://github.com/tapegram) — $20 (December 6, 2025)
 - [@WilliamCorotan](https://github.com/WilliamCorotan) — $5 (November 5, 2025)
 - [@arnabnandy7](https://github.com/arnabnandy7) — $10 (Oct 3, 2025)
 - [@JoqarSabon](https://github.com/JoqarSabon) — $5 (May 24, 2024)
