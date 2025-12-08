@@ -567,6 +567,7 @@ contributions help keep development going and make this work possible.
 
 ## 💖 Monthly Sponsors
 
+- [@Leay15](https://github.com/Leay15) - $10 / month
 - [@hesreallyhim](https://github.com/hesreallyhim) - $10 / month
 - [@pmsosa](https://github.com/pmsosa) — $10 / month
 - [@chenfeng-huang](https://github.com/chenfeng-huang) — $10 / month
