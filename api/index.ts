@@ -1,7 +1,7 @@
 import { Card } from "../src/card.ts";
 import { CONSTANTS, parseParams } from "../src/utils.ts";
 import { COLORS, Theme } from "../src/theme.ts";
-import { Error400 } from "../src/error_page.ts";
+import { Error200 } from "../src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 import { staticRenderRegeneration } from "../src/StaticRenderRegeneration/index.ts";
 import { GithubRepositoryService } from "../src/Repository/GithubRepository.ts";
@@ -44,7 +44,7 @@ async function app(req: Request): Promise<Response> {
   const themeParam: string = params.getStringValue("theme", "default");
   if (username === null) {
     const [base] = req.url.split("?");
-    const error = new Error400(
+    const error = new Error200(
       `<section>
       <div>
         <h2>"username" is a required query parameter</h2>
