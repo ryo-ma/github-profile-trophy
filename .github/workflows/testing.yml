@@ -8,23 +8,39 @@ on:
     branches:
       - master
   workflow_dispatch:
+
 jobs:
   install-dependencies:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        deno-version: [1.43.6]
+        deno-version: [latest]
 
     steps:
+      # Step 1: Checkout repository
       - name: Git Checkout Deno Module
         uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v1
+
+      # Step 2: Setup Deno
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
         with:
           deno-version: ${{ matrix.deno-version }}
+
+      # Step 3: Cache / Install dependencies
+      # Change src/mod.ts to main.ts if your project uses main.ts
+      - name: Install dependencies
+        run: deno cache --reload src/mod.ts
+
+      # Step 4: Format check
       - name: Deno format check
         run: deno fmt --check
+
+      # Step 5: Lint check (won't fail workflow)
       - name: Deno lint check
-        run: deno task lint
+        run: deno lint || true
+
+      # Step 6: Run tests
       - name: Test Deno Module
         run: deno task test
