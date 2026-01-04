@@ -41,6 +41,11 @@
 > 3. Share your github-profile-trophy URL deployed to Vercel for load balancing
 >    (Send email: saka_ro@yahoo.co.jp or Pull Request)
 
+# Load balancing endpoints
+
+These are endpoints provided by volunteers.
+* [https://github-profile-trophy-liard-delta.vercel.app](https://github-profile-trophy-liard-delta.vercel.app/) by [(https://github.com/Adwitya](Adwitya)
+
 # Quick Start
 
 Add the following code to your readme. When pasting the code into your profile's
