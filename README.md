@@ -43,7 +43,7 @@
 
 # Load balancing endpoints
 
-These are endpoints provided by volunteers.
+These are endpoints provided by volunteers. Please use these in moderation.
 * [https://github-profile-trophy-liard-delta.vercel.app](https://github-profile-trophy-liard-delta.vercel.app/) by [Adwitya](https://github.com/Adwitya)
 
 # Quick Start
