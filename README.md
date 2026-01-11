@@ -44,9 +44,13 @@
 # Load balancing endpoints
 
 These are endpoints provided by volunteers. Please use these in moderation.
-* [https://github-profile-trophy-liard-delta.vercel.app](https://github-profile-trophy-liard-delta.vercel.app/) by [Adwitya](https://github.com/Adwitya)
-* [https://github-profile-trophy-fork-two.vercel.app](https://github-profile-trophy-fork-two.vercel.app) by [hesreallyhim](https://github.com/hesreallyhim)
-* [https://github-profile-trophy-winning.vercel.app](https://github-profile-trophy-winning.vercel.app) by [hongbo-wei](https://github.com/hongbo-wei)
+
+- [https://github-profile-trophy-liard-delta.vercel.app](https://github-profile-trophy-liard-delta.vercel.app/)
+  by [Adwitya](https://github.com/Adwitya)
+- [https://github-profile-trophy-fork-two.vercel.app](https://github-profile-trophy-fork-two.vercel.app)
+  by [hesreallyhim](https://github.com/hesreallyhim)
+- [https://github-profile-trophy-winning.vercel.app](https://github-profile-trophy-winning.vercel.app)
+  by [hongbo-wei](https://github.com/hongbo-wei)
 
 # Quick Start
 
@@ -597,6 +601,7 @@ contributions help keep development going and make this work possible.
 - [@port19x](https://github.com/port19x) — $2 / month (since Jan 27, 2022)
 
 ## 🎁 One-Time Sponsors
+
 - [@hesreallyhim](https://github.com/hesreallyhim) - $100 (Jan 11, 2026)
 - [@Seo-4d696b75](https://github.com/Seo-4d696b75) — $10 (Jan 4, 2026)
 - [@massif-01](https://github.com/massif-01) — $5 (December 17, 2025)
