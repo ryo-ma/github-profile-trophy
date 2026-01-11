@@ -105,11 +105,16 @@ export class GithubApiService extends GithubRepository {
           TOKENS[attempt],
         );
       });
-    } catch (error) {
-      if (error.cause instanceof ServiceError) {
+    } catch (error: unknown) {
+      // Check if error has a cause property that is a ServiceError
+      if (
+        error instanceof Error &&
+        error.cause instanceof ServiceError
+      ) {
         Logger.error(error.cause.message);
         return error.cause;
       }
+      // Check if error is an Error with a cause property
       if (error instanceof Error && error.cause) {
         Logger.error(JSON.stringify(error.cause, null, 2));
       } else {
