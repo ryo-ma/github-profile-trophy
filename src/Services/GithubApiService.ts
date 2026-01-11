@@ -114,7 +114,7 @@ export class GithubApiService extends GithubRepository {
         Logger.error(error.cause.message);
         return error.cause;
       }
-      // Check if error is an Error with a cause property
+      // Handle other Error instances with a cause property
       if (error instanceof Error && error.cause) {
         Logger.error(JSON.stringify(error.cause, null, 2));
       } else {
