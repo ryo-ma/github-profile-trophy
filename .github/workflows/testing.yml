@@ -31,7 +31,7 @@ jobs:
       # Step 3: Cache / Install dependencies
       # Change src/mod.ts to main.ts if your project uses main.ts
       - name: Install dependencies
-        run: deno cache --reload src/main.ts
+        run: deno cache --reload deps.ts
 
       # Step 4: Format check
       - name: Deno format check
