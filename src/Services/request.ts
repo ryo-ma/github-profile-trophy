@@ -1,6 +1,7 @@
 import { soxa } from "../../deps.ts";
 import {
   EServiceKindError,
+  GithubError,
   GithubErrorResponse,
   GithubExceedError,
   QueryDefaultResponse,
@@ -24,26 +25,29 @@ export async function requestGithubData<T = unknown>(
     return responseData.data.user;
   }
 
-  throw handleError(
-    responseData as unknown as GithubErrorResponse | GithubExceedError,
-  );
+  throw handleError(responseData);
 }
 
 function handleError(
-  reponseErrors: GithubErrorResponse | GithubExceedError,
+  responseData: {
+    errors?: GithubError[];
+    message?: string;
+    documentation_url?: string;
+    data?: unknown;
+  },
 ): ServiceError {
   let isRateLimitExceeded = false;
-  const arrayErrors = (reponseErrors as GithubErrorResponse)?.errors || [];
-  const objectError = (reponseErrors as GithubExceedError) || {};
+  const arrayErrors = responseData?.errors || [];
+  const hasMessage = responseData?.message;
 
-  if (Array.isArray(arrayErrors)) {
+  if (Array.isArray(arrayErrors) && arrayErrors.length > 0) {
     isRateLimitExceeded = arrayErrors.some((error) =>
       error.type.includes(EServiceKindError.RATE_LIMIT)
     );
   }
 
-  if (objectError?.message) {
-    isRateLimitExceeded = objectError?.message.includes(
+  if (hasMessage) {
+    isRateLimitExceeded = responseData.message!.toLowerCase().includes(
       "rate limit",
     );
   }

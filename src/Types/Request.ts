@@ -15,7 +15,8 @@ export type GithubExceedError = {
 export type QueryDefaultResponse<T = unknown> = {
   data: {
     data: T;
-    errors?: GithubErrorResponse;
+    errors?: GithubError[];
     message?: string;
+    documentation_url?: string;
   };
 };
