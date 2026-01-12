@@ -29,7 +29,7 @@ stub(
       resolve(successGithubResponseMock.default);
     }),
     // Should throw NOT FOUND (requestUserInfo makes 4 API calls: repository, activity, issue, pullRequest)
-    // Each call retries up to 2 times, so 8 promises total
+    // Each call makes 2 attempts (one per token), so 8 promises total
     new Promise((resolve) => {
       resolve(notFoundGithubResponseMock.default);
     }),
