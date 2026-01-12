@@ -38,7 +38,6 @@ function handleError(
 ): ServiceError {
   let isRateLimitExceeded = false;
   const arrayErrors = responseData?.errors || [];
-  const hasMessage = responseData?.message;
 
   if (Array.isArray(arrayErrors) && arrayErrors.length > 0) {
     isRateLimitExceeded = arrayErrors.some((error) =>
@@ -46,8 +45,8 @@ function handleError(
     );
   }
 
-  if (hasMessage) {
-    isRateLimitExceeded = responseData.message!.toLowerCase().includes(
+  if (responseData?.message) {
+    isRateLimitExceeded = responseData.message.toLowerCase().includes(
       "rate limit",
     );
   }
