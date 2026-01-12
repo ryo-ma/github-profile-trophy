@@ -30,10 +30,10 @@ export async function requestGithubData<T = unknown>(
 
 function handleError(
   responseData: {
+    data?: unknown;
     errors?: GithubError[];
     message?: string;
     documentation_url?: string;
-    data?: unknown;
   },
 ): ServiceError {
   let isRateLimitExceeded = false;
