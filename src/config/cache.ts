@@ -25,6 +25,7 @@ class CacheProvider {
       port: Number(Deno.env.get("REDIS_PORT")) || 6379,
       username: Deno.env.get("REDIS_USERNAME") || "",
       password: Deno.env.get("REDIS_PASSWORD") || "",
+      tls: Deno.env.get("TLS") === 'true',
     });
   }
 
