@@ -2,7 +2,7 @@ import { Bulk, connect, Redis } from "../../deps.ts";
 import { Logger } from "../Helpers/Logger.ts";
 import { CONSTANTS } from "../utils.ts";
 
-const enableCache = Deno.env.get("ENABLE_REDIS") || false;
+const enableCache: boolean = Deno.env.get("ENABLE_REDIS") === "true";
 
 // https://developer.redis.com/develop/deno/
 class CacheProvider {
