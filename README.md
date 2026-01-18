@@ -51,6 +51,8 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [hesreallyhim](https://github.com/hesreallyhim)
 - [https://github-profile-trophy-winning.vercel.app](https://github-profile-trophy-winning.vercel.app)
   by [hongbo-wei](https://github.com/hongbo-wei)
+- [https://github-profile-trophy-kannan.vercel.app](https://github-profile-trophy-kannan.vercel.app)
+  by [kann4n](https://github.com/kann4n)
 
 # Quick Start
 
