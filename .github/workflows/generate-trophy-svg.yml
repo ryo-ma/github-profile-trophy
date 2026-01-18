@@ -1,0 +1,46 @@
+name: Generate Trophy SVG
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: generate-trophy-svg
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: "1.44.4"
+
+      - name: Cache Deno dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/deno
+          key: deno-${{ runner.os }}-${{ hashFiles('deps.ts', 'deno.json', 'api/**/*.ts', 'src/**/*.ts', 'scripts/**/*.ts') }}
+          restore-keys: |
+            deno-${{ runner.os }}-
+
+      - name: Generate SVG
+        env:
+          GITHUB_TOKEN1: ${{ secrets.GITHUB_TOKEN1 || github.token }}
+          GITHUB_TOKEN2: ${{ secrets.GITHUB_TOKEN2 }}
+        run: >
+          deno run -A scripts/generate-trophy-svg.ts
+          --username "${{ github.repository_owner }}"
+          --output "generated/${{ github.repository_owner }}.svg"
+
+      - name: Upload SVG artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trophy-svg-${{ github.repository_owner }}
+          path: generated/${{ github.repository_owner }}.svg
+          retention-days: 2
