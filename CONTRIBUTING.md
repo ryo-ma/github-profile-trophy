@@ -77,7 +77,8 @@ deno task test
 
 ### Vercel
 
-The project is configured for deployment on Vercel by default. The `vercel.json` configuration handles the routing automatically.
+The project is configured for deployment on Vercel by default. The `vercel.json`
+configuration handles the routing automatically.
 
 For more information, see the [Vercel documentation](https://vercel.com/docs).
 
@@ -99,11 +100,12 @@ For more information, see the [Vercel documentation](https://vercel.com/docs).
    cd github-profile-trophy
    ```
 
-2. **Set up environment file** (see [Local Development](#local-development) for token setup):
+2. **Set up environment file** (see [Local Development](#local-development) for
+   token setup):
    ```sh
    cp env-example .env
    ```
-   
+
    Edit `.env` and configure:
    ```properties
    ENABLE_REDIS=true
@@ -132,7 +134,7 @@ For more information, see the [Vercel documentation](https://vercel.com/docs).
    ```nginx
    server {
        server_name your-domain.com;
- 
+
        location / {
            proxy_pass http://127.0.0.1:3000;
            proxy_set_header Host $host;
@@ -145,9 +147,9 @@ For more information, see the [Vercel documentation](https://vercel.com/docs).
 
 3. **Add SSL certificate**
 
-     ```
-     certbot --nginx
-     ```
+   ```
+   certbot --nginx
+   ```
 
 4. **Reload nginx configuration**
 
