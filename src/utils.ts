@@ -38,6 +38,12 @@ export function parseParams(req: Request): CustomURLSearchParams {
   return new CustomURLSearchParams(splittedURL[1]);
 }
 
+export function getBaseUrl(req: Request): string {
+  const proto = req.headers.get("x-forwarded-proto") || "http"; // reverse proxy compatible protocol discovery
+  const host = req.headers.get("host");
+  return `${proto}://${host}`;
+}
+
 export function abridgeScore(score: number): string {
   if (Math.abs(score) < 1) {
     return "0pt";
