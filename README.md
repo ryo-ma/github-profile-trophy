@@ -574,6 +574,20 @@ Usage:
 deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME OUTPUT_DIR THEME
 ```
 
+## Generate an svg inside Github CI (Workflow)
+Using the provided github action you can easly generate the trophy inside an github workflow. This eliminates the needs of an online service running but you have to manualy update rerun the action to update the file.
+
+Usage:
+```yaml
+- name: Generate trophy
+  uses: Erik-Donath/github-profile-trophy@feature/generate-svg
+  with:
+    username: your-username
+    output_path: trophy.svg
+    token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+
 # Contribution Guide
 
 Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
