@@ -58,6 +58,14 @@ async function main() {
   const theme = (COLORS as any)[themeName] ?? (COLORS as any).default;
   const svg = card.render(userInfo, theme);
 
+  try {
+    const dir = outputPath.replace(/\/[^/]+$/, "");
+    if (dir) await Deno.mkdir(dir, { recursive: true });
+  } catch {
+    console.error("Failed to create directory. No permission?");
+    Deno.exit(3);
+  }
+
   await Deno.writeTextFile(outputPath, svg);
   console.log(`Wrote ${outputPath}`);
 }
