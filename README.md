@@ -567,17 +567,24 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&no-frame=true
 </p>
 
 ## Generate an svg file localy
-Using the render_svg.ts script you can generate your trophys as an svg file given your username, (Enviroment Vars: See [env-example](env-example)).
+
+Using the render_svg.ts script you can generate your trophys as an svg file
+given your username, (Enviroment Vars: See [env-example](env-example)).
 
 Usage:
+
 ```bash
 deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME OUTPUT_DIR THEME
 ```
 
 ## Generate an svg inside Github CI (Workflow)
-Using the provided github action you can easly generate the trophy inside an github workflow. This eliminates the needs of an online service running but you have to manualy update rerun the action to update the file.
+
+Using the provided github action you can easly generate the trophy inside an
+github workflow. This eliminates the needs of an online service running but you
+have to manualy update rerun the action to update the file.
 
 Usage:
+
 ```yaml
 - name: Generate trophy
   uses: Erik-Donath/github-profile-trophy@feature/generate-svg
@@ -586,7 +593,6 @@ Usage:
     output_path: trophy.svg
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
-
 
 # Contribution Guide
 
