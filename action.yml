@@ -1,0 +1,27 @@
+name: Generate GitHub Profile Trophy SVG
+description: Run the local generator script to produce an SVG.
+inputs:
+  username:
+    description: "GitHub username to generate the trophy for"
+    required: true
+  output_path:
+    description: "Output path to write the SVG"
+    required: true
+    default: "trophy.svg"
+  token:
+    description: "PAT or token to use for GitHub API"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+
+    - name: Generate trophy
+      shell: bash
+      env:
+        GITHUB_TOKEN1: ${{ inputs.token }}
+      run: |
+        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}"
