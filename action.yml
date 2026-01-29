@@ -9,8 +9,7 @@ inputs:
     required: true
   file:
     description: "Output path to write the SVG"
-    required: true
-    default: "trophy.svg"
+    required: false
   theme:
     description: "Theme to use"
     required: false
@@ -52,11 +51,11 @@ runs:
           $GITHUB_ACTION_PATH/render_svg.ts \
           "${{ inputs.username }}" \
           ${{ inputs.file != '' && format('--file "{0}"', inputs.file) || '' }} \
-          ${{ inputs.theme != 'default' && format('--theme "{0}"', inputs.theme) || '' }} \
-          ${{ inputs.cols != '-1' && format('--cols "{0}"', inputs.cols) || '' }} \
-          ${{ inputs.rows != '10' && format('--rows "{0}"', inputs.rows) || '' }} \
-          ${{ inputs['panel-size'] != '115' && format('--panel-size "{0}"', inputs['panel-size']) || '' }} \
-          ${{ inputs['margin-width'] != '10' && format('--margin-width "{0}"', inputs['margin-width']) || '' }} \
-          ${{ inputs['margin-height'] != '10' && format('--margin-height "{0}"', inputs['margin-height']) || '' }} \
+          ${{ inputs.theme != '' && format('--theme "{0}"', inputs.theme) || '' }} \
+          ${{ inputs['max-cols'] != '' && format('--cols "{0}"', inputs['max-cols']) || '' }} \
+          ${{ inputs['max-rows'] != '' && format('--rows "{0}"', inputs['max-rows']) || '' }} \
+          ${{ inputs['panel-size'] != '' && format('--panel-size "{0}"', inputs['panel-size']) || '' }} \
+          ${{ inputs['margin-width'] != '' && format('--margin-width "{0}"', inputs['margin-width']) || '' }} \
+          ${{ inputs['margin-height'] != '' && format('--margin-height "{0}"', inputs['margin-height']) || '' }} \
           ${{ inputs['no-background'] == 'true' && '--no-background' || '' }} \
           ${{ inputs['no-frame'] == 'true' && '--no-frame' || '' }}
