@@ -1,14 +1,50 @@
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
+import { parseArgs } from "https://deno.land/std@0.208.0/cli/parse_args.ts";
 
-const username = Deno.args[0];
-const outputPath = Deno.args[1] ?? "./assets/trophy.svg";
-const themeName = Deno.args[2] ?? "default";
-
-if (!username) {
-  console.error(
-    "Usage: deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME [OUTPUT_PATH] [THEME]",
-  );
+if(!Deno.env.get("GITHUB_TOKEN1")) {
+  console.error("Github Token is required!");
   Deno.exit(1);
+}
+
+const args = parseArgs(Deno.args, {
+  boolean: ["help"],
+  string: ["file", "theme", "cols", "rows"],
+  default: { file: "./trophy.svg", theme: "default", cols: "-1", rows: "10" },
+  alias: { help: "h", file: "f", theme: "t", cols: "c", rows: "r" },
+});
+
+if (args._.length == 0 || args.help) {
+  console.log(`
+Usage: deno run render_svg.ts USERNAME [options]
+
+ENVIROMENT VARIABLES:
+  GITHUB_TOKEN1: Github Token
+
+
+USERNAME:
+  Github username.
+
+
+Options
+  -f, --file Path to output file (default: ./trophy.svg)
+  -t, --theme Theme-Name (default: default)
+  -c, --cols Colums
+  -r, --rows Rows
+  -h, --help Shows this help
+  `);
+
+  Deno.exit(1);
+}
+
+const [username] = args._ as string[];
+const outputPath = args.file as string;
+const themeName  = args.theme as string;
+const cols = parseInt(args.cols as string, 10);
+const rows = parseInt(args.rows as string, 10);
+
+if (Number.isNaN(cols) || Number.isNaN(rows)) {
+  console.error("Cols and Rows need to be Integers!");
+  Deno.exit(2);
 }
 
 import { GithubApiService } from "./src/Services/GithubApiService.ts";
@@ -37,8 +73,8 @@ async function main() {
   const userInfo = userInfoOrError as any;
 
   const panelSize = 115;
-  const maxRow = 10;
-  const maxColumn = -1; // auto
+  const maxRow = rows;
+  const maxColumn = cols;
   const marginWidth = 10;
   const marginHeight = 10;
   const noBackground = false;
