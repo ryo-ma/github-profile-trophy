@@ -138,10 +138,10 @@ async function main() {
   }
 
   try {
-  await Deno.writeTextFile(file, svg);
-  console.log(`Wrote ${file}`);
+    await Deno.writeTextFile(file, svg);
+    console.log(`Wrote ${file}`);
   } catch {
-    console.error("Failed to write file. No permission?")
+    console.error("Failed to write file. No permission?");
     Deno.exit(5);
   }
 }
