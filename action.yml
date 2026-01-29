@@ -1,16 +1,48 @@
 name: Generate GitHub Profile Trophy SVG
 description: Run the local generator script to produce an SVG.
 inputs:
-  username:
-    description: "GitHub username to generate the trophy for"
-    required: true
-  output_path:
-    description: "Output path to write the SVG"
-    required: true
-    default: "trophy.svg"
   token:
     description: "PAT or token to use for GitHub API"
     required: true
+  username:
+    description: "GitHub username to generate the trophy for"
+    required: true
+  file:
+    description: "Output path to write the SVG"
+    required: true
+    default: "trophy.svg"
+  theme:
+    description: "Theme to use"
+    required: false
+    default: "default"
+  max-cols:
+    description: "Maximum of Cols"
+    required: false
+    default: -1
+  max-rows:
+    description: "Maximum of Rows"
+    required: false
+    default: 10
+  panel-size:
+    description: "Size of the Panel"
+    required: false
+    default: 115
+  margin-width:
+    description: "Margin Width"
+    required: false
+    default: 10
+  margin-height:
+    description: "Margin Height"
+    required: false
+    default: 10
+  no-background:
+    description: "Disable background"
+    required: false
+    default: false
+  no-frame:
+    description: "Disable frame"
+    required: false
+    default: false
 runs:
   using: "composite"
   steps:
@@ -24,4 +56,15 @@ runs:
       env:
         GITHUB_TOKEN1: ${{ inputs.token }}
       run: |
-        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}"
+        deno run --allow-net --allow-env --allow-read --allow-write \
+          $GITHUB_ACTION_PATH/render_svg.ts \
+          "${{ inputs.username }}" \
+          --file "${{ inputs.file }}" \
+          --theme "${{ inputs.theme }}" \
+          --cols "${{ inputs.cols }}" \
+          --rows "${{ inputs.rows }}" \
+          --panel-size "${{ inputs['panel-size'] }}" \
+          --margin-width "${{ inputs['margin-width'] }}" \
+          --margin-height "${{ inputs['margin-height'] }}" \
+          ${{ inputs['no-background'] && '--no-background' || '' }} \
+          ${{ inputs['no-frame'] && '--no-frame' || '' }}
