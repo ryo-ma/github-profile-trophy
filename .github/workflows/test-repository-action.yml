@@ -12,7 +12,7 @@ jobs:
         uses: ./.
         with:
           username: ${{ github.repository_owner }}
-          output_path: ./trophy.svg
+          file: ./trophy.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Verify SVG generated
