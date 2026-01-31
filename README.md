@@ -55,6 +55,8 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [kann4n](https://github.com/kann4n)
 - [https://trophy.ryglcloud.net](https://trophy.ryglcloud.net)
   by [PracticalRyan](https://github.com/PracticalRyan)
+- [https://github-profile-trophy-tawny.vercel.app](https://github-profile-trophy-tawny.vercel.app)
+  by [vijaypurohit322](https://github.com/vijaypurohit322)
 
 # Quick Start
 
