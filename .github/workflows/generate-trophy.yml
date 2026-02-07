@@ -1,0 +1,38 @@
+name: Generate Trophy
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  generate-trophy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      # env-example に合わせて GitHub Secrets を設定してください。
+      # 必須: GITHUB_TOKEN1, GITHUB_USERNAME
+      # 任意: GITHUB_TOKEN2, GITHUB_API, PORT
+      - name: Run server (background)
+        env:
+          GITHUB_TOKEN1: ${{ secrets.GITHUB_TOKEN1 }}
+          GITHUB_TOKEN2: ${{ secrets.GITHUB_TOKEN2 }}
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          GITHUB_API: ${{ secrets.GITHUB_API }}
+          PORT: ${{ secrets.PORT }}
+        run: |
+          deno run -A main.ts &
+          sleep 2
+      - name: Generate Trophy
+        run: |
+          mkdir -p public
+          curl -sSL http://localhost:${PORT:-8080}/ -o ./public/trophy.svg
+      - name: Commit and Push to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

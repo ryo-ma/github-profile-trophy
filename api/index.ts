@@ -8,7 +8,6 @@ import { GithubRepositoryService } from "../src/Repository/GithubRepository.ts";
 import { GithubApiService } from "../src/Services/GithubApiService.ts";
 import { ServiceError } from "../src/Types/index.ts";
 import { ErrorPage } from "../src/pages/Error.ts";
-import { cacheProvider } from "../src/config/cache.ts";
 
 const serviceProvider = new GithubApiService();
 const client = new GithubRepositoryService(serviceProvider).repository;
@@ -38,53 +37,17 @@ export default (request: Request) =>
 
 async function app(req: Request): Promise<Response> {
   const params = parseParams(req);
-  const username = params.get("username");
+  const username = Deno.env.get("GITHUB_USERNAME") || "";
   const row = params.getNumberValue("row", CONSTANTS.DEFAULT_MAX_ROW);
   const column = params.getNumberValue("column", CONSTANTS.DEFAULT_MAX_COLUMN);
   const themeParam: string = params.getStringValue("theme", "default");
-  if (username === null) {
-    const [base] = req.url.split("?");
+  if (!username) {
     const error = new Error400(
       `<section>
       <div>
-        <h2>"username" is a required query parameter</h2>
-        <p>The URL should look like
-        <div>
-          <p id="base-show">${base}?username=USERNAME</p>
-          <button>Copy Base Url</button>
-          <span id="temporary-span"></span>
-        </div>where
-        <code>USERNAME</code> is <em>your GitHub username.</em>
+        <h2>"GITHUB_USERNAME" is not set</h2>
+        <p>Set <code>GITHUB_USERNAME</code> in your .env to a fixed GitHub username.</p>
       </div>
-      <div>
-        <h2>You can use this form: </h2>
-        <p>Enter your username and click "Get Trophies"</p>
-        <form action="${base}" method="get">
-          <label for="username">GitHub Username</label>
-          <input type="text" name="username" id="username" placeholder="Ex. gabriel-logan" required>
-          <label for="theme">Theme (Optional)</label>
-          <input type="text" name="theme" id="theme" placeholder="Ex. onedark" value="light">
-          <text>
-            See all the available themes
-            <a href="https://github.com/ryo-ma/github-profile-trophy?tab=readme-ov-file#apply-theme" target="_blank">here</a>
-          </text>
-          <br>
-          <button type="submit">Get Trophies</button>
-        </form>
-      </div>
-      <script>
-        const button = document.querySelector("button");
-        const input = document.querySelector("input");
-        const temporarySpan = document.querySelector("#temporary-span");
-
-        button.addEventListener("click", () => {
-          navigator.clipboard.writeText(document.querySelector("#base-show").textContent);
-          temporarySpan.textContent = "Copied!";
-          setTimeout(() => {
-            temporarySpan.textContent = "";
-          }, 1500);
-        });
-      </script>
     </section>`,
     );
     return new Response(
@@ -125,28 +88,20 @@ async function app(req: Request): Promise<Response> {
     r.split(",")
   ).map((r) => r.trim());
 
-  const userKeyCache = ["v1", username].join("-");
-  const userInfoCached = await cacheProvider.get(userKeyCache) || "{}";
-  let userInfo = JSON.parse(userInfoCached);
-  const hasCache = !!Object.keys(userInfo).length;
-
-  if (!hasCache) {
-    const userResponseInfo = await client.requestUserInfo(username);
-    if (userResponseInfo instanceof ServiceError) {
-      return new Response(
-        ErrorPage({ error: userResponseInfo }).render(),
-        {
-          status: userResponseInfo.code,
-          headers: new Headers({
-            "Content-Type": "text",
-            "Cache-Control": cacheControlHeader,
-          }),
-        },
-      );
-    }
-    userInfo = userResponseInfo;
-    await cacheProvider.set(userKeyCache, JSON.stringify(userInfo));
+  const userResponseInfo = await client.requestUserInfo(username);
+  if (userResponseInfo instanceof ServiceError) {
+    return new Response(
+      ErrorPage({ error: userResponseInfo }).render(),
+      {
+        status: userResponseInfo.code,
+        headers: new Headers({
+          "Content-Type": "text",
+          "Cache-Control": cacheControlHeader,
+        }),
+      },
+    );
   }
+  const userInfo = userResponseInfo;
   // Success Response
   return new Response(
     new Card(
