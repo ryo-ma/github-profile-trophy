@@ -16,7 +16,7 @@ jobs:
           deno-version: v1.x
       - name: Run server (background)
         env:
-          GITHUB_TOKEN1: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN1: ${{ secrets.GITHUB_PAT }}
           GITHUB_USERNAME: perpouh
           GITHUB_API: https://api.github.com/graphql
           PORT: 80
