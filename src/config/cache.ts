@@ -23,8 +23,8 @@ class CacheProvider {
     this.client = await connect({
       hostname: Deno.env.get("REDIS_HOST") || "",
       port: Number(Deno.env.get("REDIS_PORT")) || 6379,
-      username: Deno.env.get("REDIS_USERNAME") || "",
-      password: Deno.env.get("REDIS_PASSWORD") || "",
+      username: Deno.env.get("REDIS_USERNAME") || undefined,
+      password: Deno.env.get("REDIS_PASSWORD") || undefined,
     });
   }
 
