@@ -57,6 +57,19 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [PracticalRyan](https://github.com/PracticalRyan)
 - [https://github-profile-trophy-tawny.vercel.app](https://github-profile-trophy-tawny.vercel.app)
   by [vijaypurohit322](https://github.com/vijaypurohit322)
+- [https://github-profile-repo.vercel.app](https://github-profile-repo.vercel.app/))
+  by [HackyCoder0951](https://github.com/hackycoder0951)
+  
+# Quick Deployement Check 
+
+- use any deployed link and add your git user name in username value
+- for example
+```
+https://github-profile-repo.vercel.app/?username=USERNAME
+to
+https://github-profile-repo.vercel.app/?username=HackyCoder0951
+```
+- then you will get trophies 
 
 # Quick Start
 
