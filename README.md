@@ -60,6 +60,17 @@ These are endpoints provided by volunteers. Please use these in moderation.
 - [https://github-profile-repo.vercel.app](https://github-profile-repo.vercel.app/))
   by [HackyCoder0951](https://github.com/hackycoder0951)
   
+# Quick Deployement Check 
+
+- use any deployed link and add your git user name in username value
+- for example
+```
+https://github-profile-repo.vercel.app/?username=USERNAME
+to
+https://github-profile-repo.vercel.app/?username=HackyCoder0951
+```
+- then you will get trophies 
+
 # Quick Start
 
 Add the following code to your readme. When pasting the code into your profile's
