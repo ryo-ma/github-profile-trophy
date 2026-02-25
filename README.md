@@ -53,12 +53,12 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [hongbo-wei](https://github.com/hongbo-wei)
 - [https://github-profile-trophy-kannan.vercel.app](https://github-profile-trophy-kannan.vercel.app)
   by [kann4n](https://github.com/kann4n)
-- [https://trophy.ryglcloud.net](https://trophy.ryglcloud.net)
-  by [PracticalRyan](https://github.com/PracticalRyan)
+- [https://trophy.ryglcloud.net](https://trophy.ryglcloud.net) by
+  [PracticalRyan](https://github.com/PracticalRyan)
 - [https://github-profile-trophy-tawny.vercel.app](https://github-profile-trophy-tawny.vercel.app)
   by [vijaypurohit322](https://github.com/vijaypurohit322)
-- [https://gh-trophy.cdnsoft.net](https://gh-trophy.cdnsoft.net)
-  by [cromatikap](https://github.com/cromatikap)
+- [https://gh-trophy.cdnsoft.net](https://gh-trophy.cdnsoft.net) by
+  [cromatikap](https://github.com/cromatikap)
 
 # Quick Start
 
