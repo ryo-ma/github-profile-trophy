@@ -1,0 +1,21 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: gh-trophy_db
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    command: ["redis-server", "--requirepass", "dummy-pwd-to-avoid-ERR-AUTH"]
+
+  github-profile-trophy:
+    image: github-profile-trophy:latest
+    build: .
+    container_name: gh-trophy_app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:8080"
+    env_file:
+      - .env
+
+volumes:
+  redis-data:

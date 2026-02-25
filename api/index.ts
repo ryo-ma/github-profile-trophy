@@ -1,5 +1,5 @@
 import { Card } from "../src/card.ts";
-import { CONSTANTS, parseParams } from "../src/utils.ts";
+import { CONSTANTS, getBaseUrl, parseParams } from "../src/utils.ts";
 import { COLORS, Theme } from "../src/theme.ts";
 import { Error400 } from "../src/error_page.ts";
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
@@ -43,7 +43,7 @@ async function app(req: Request): Promise<Response> {
   const column = params.getNumberValue("column", CONSTANTS.DEFAULT_MAX_COLUMN);
   const themeParam: string = params.getStringValue("theme", "default");
   if (username === null) {
-    const [base] = req.url.split("?");
+    const base = getBaseUrl(req);
     const error = new Error400(
       `<section>
       <div>

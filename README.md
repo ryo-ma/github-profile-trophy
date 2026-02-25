@@ -57,6 +57,8 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [PracticalRyan](https://github.com/PracticalRyan)
 - [https://github-profile-trophy-tawny.vercel.app](https://github-profile-trophy-tawny.vercel.app)
   by [vijaypurohit322](https://github.com/vijaypurohit322)
+- [https://gh-trophy.cdnsoft.net](https://gh-trophy.cdnsoft.net)
+  by [cromatikap](https://github.com/cromatikap)
 
 # Quick Start
 
