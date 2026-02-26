@@ -57,6 +57,14 @@ export const queryUserRepository = `
           createdAt
         }
       }
+      gists(first: 100, orderBy: {direction: DESC, field: UPDATED_AT}) {
+        totalCount
+        nodes {
+          stargazers {
+            totalCount
+          }
+        }
+      }
     }
   }
 `;

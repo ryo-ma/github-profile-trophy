@@ -5,10 +5,17 @@ type Repository = {
   stargazers: Stargazers;
   createdAt: string;
 };
+type Gist = {
+  stargazers: Stargazers;
+};
 export type GitHubUserRepository = {
   repositories: {
     totalCount: number;
     nodes: Repository[];
+  };
+  gists: {
+    totalCount: number;
+    nodes: Gist[];
   };
 };
 
@@ -67,6 +74,12 @@ export class UserInfo {
       userActivity.contributionsCollection.totalCommitContributions;
     const totalStargazers = userRepository.repositories.nodes.reduce(
       (prev: number, node: Repository) => {
+        return prev + node.stargazers.totalCount;
+      },
+      0,
+    ) +
+    userRepository.gists.nodes.reduce(
+      (prev: number, node: Gist) => {
         return prev + node.stargazers.totalCount;
       },
       0,
