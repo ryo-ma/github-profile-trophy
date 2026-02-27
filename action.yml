@@ -1,16 +1,39 @@
 name: Generate GitHub Profile Trophy SVG
 description: Run the local generator script to produce an SVG.
 inputs:
-  username:
-    description: "GitHub username to generate the trophy for"
-    required: true
-  output_path:
-    description: "Output path to write the SVG"
-    required: true
-    default: "trophy.svg"
   token:
     description: "PAT or token to use for GitHub API"
     required: true
+  username:
+    description: "GitHub username to generate the trophy for"
+    required: true
+  file:
+    description: "Output path to write the SVG"
+    required: false
+  theme:
+    description: "Theme to use"
+    required: false
+  max-cols:
+    description: "Maximum of Cols"
+    required: false
+  max-rows:
+    description: "Maximum of Rows"
+    required: false
+  panel-size:
+    description: "Size of the Panel"
+    required: false
+  margin-width:
+    description: "Margin Width"
+    required: false
+  margin-height:
+    description: "Margin Height"
+    required: false
+  no-background:
+    description: "Disable background"
+    required: false
+  no-frame:
+    description: "Disable frame"
+    required: false
 runs:
   using: "composite"
   steps:
@@ -24,4 +47,15 @@ runs:
       env:
         GITHUB_TOKEN1: ${{ inputs.token }}
       run: |
-        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}"
+        deno run --allow-net --allow-env --allow-read --allow-write \
+          $GITHUB_ACTION_PATH/render_svg.ts \
+          "${{ inputs.username }}" \
+          ${{ inputs.file != '' && format('--file "{0}"', inputs.file) || '' }} \
+          ${{ inputs.theme != '' && format('--theme "{0}"', inputs.theme) || '' }} \
+          ${{ inputs['max-cols'] != '' && format('--cols "{0}"', inputs['max-cols']) || '' }} \
+          ${{ inputs['max-rows'] != '' && format('--rows "{0}"', inputs['max-rows']) || '' }} \
+          ${{ inputs['panel-size'] != '' && format('--panel-size "{0}"', inputs['panel-size']) || '' }} \
+          ${{ inputs['margin-width'] != '' && format('--margin-width "{0}"', inputs['margin-width']) || '' }} \
+          ${{ inputs['margin-height'] != '' && format('--margin-height "{0}"', inputs['margin-height']) || '' }} \
+          ${{ inputs['no-background'] == 'true' && '--no-background' || '' }} \
+          ${{ inputs['no-frame'] == 'true' && '--no-frame' || '' }}

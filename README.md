@@ -582,8 +582,29 @@ given your username, (Enviroment Vars: See [env-example](env-example)).
 Usage:
 
 ```bash
-deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME OUTPUT_DIR THEME
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME [options]
+
+# Examples:
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts octocat
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts octocat -f profile/trophy.svg --theme classic
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts octocat --no-background --no-frame
+
+# Help:
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts --help
 ```
+
+Options:
+
+- `-f, --file FILE` Output path (default: `./trophy.svg`)
+- `-t, --theme THEME` Theme name (default: `default`)
+- `-c, --cols N` Max columns (-1=auto, default: `-1`)
+- `-r, --rows N` Max rows (default: `10`)
+- `-s, --panel-size N` Panel size (default: `115`)
+- `-mw, --margin-width N` Margin width (default: `10`)
+- `-mh, --margin-height N` Margin height (default: `10`)
+- `--no-background` Disable background
+- `--no-frame` Disable frame
+- `-h, --help` Show help
 
 ## Generate an svg inside Github CI (Workflow)
 
@@ -594,12 +615,20 @@ have to manualy update rerun the action to update the file.
 Usage:
 
 ```yaml
-- name: Generate trophy
+- name: Generate Profile Trophy
   uses: Erik-Donath/github-profile-trophy@feature/generate-svg
   with:
-    username: your-username
-    output_path: trophy.svg
     token: ${{ secrets.GITHUB_TOKEN }}
+    username: your-username
+    file: trophy.svg
+    theme: classic
+    cols: -1
+    rows: 10
+    panel-size: 115
+    margin-width: 10
+    margin-height: 10
+    no-background: false
+    no-frame: false
 ```
 
 # Contribution Guide
