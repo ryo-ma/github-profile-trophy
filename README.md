@@ -101,7 +101,25 @@ Ranks are `SSS` `SS` `S` `AAA` `AA` `A` `B` `C` `UNKNOWN` `SECRET`.
 | UNKNOWN    | You have not taken action yet. Let's act first.                                            |
 | SECRET     | This rank is very rare. The trophy will not be displayed until certain conditions are met. |
 
-**NOTE: The `UNKNOWN` rank is denoted by `?`**
+**NOTE: The `UNKNOWN` rank is denoted by `?` in URLs and filters.** 
+
+## Trophy Points and Levels
+
+| Trophy Rank | Points Needed | Description |
+|------------|---------------|-------------|
+| SSS        | 1000+         | Hard to reach, brag-worthy |
+| SS         | 800-999       | Very high achievement |
+| S          | 600-799       | High rank |
+| AAA        | 400-599       | Good effort |
+| AA         | 300-399       | Solid progress |
+| A          | 200-299       | Keep improving |
+| B          | 100-199       | Making good progress |
+| C          | 50-99         | Beginner level |
+| UNKNOWN    | 0-49          | Not yet started |
+| SECRET     |  -            | Special rare conditions |
+
+
+*Note: Points are estimated; actual calculations may vary.*
 
 ## Secret Rank
 
