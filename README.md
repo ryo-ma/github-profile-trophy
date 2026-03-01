@@ -62,7 +62,7 @@ These are endpoints provided by volunteers. Please use these in moderation.
 - [https://gh-trophy.cdnsoft.net](https://gh-trophy.cdnsoft.net) by
   [cromatikap](https://github.com/cromatikap)
 - [https://trophygh.kolioaris.xyz](https://trophygh.kolioaris.xyz) by
-  [cromatikap](https://github.com/kolioaris)
+  [kolioaris](https://github.com/kolioaris)
 
 # Quick Start
 
