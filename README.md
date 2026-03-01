@@ -61,6 +61,8 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [HackyCoder0951](https://github.com/hackycoder0951)
 - [https://gh-trophy.cdnsoft.net](https://gh-trophy.cdnsoft.net) by
   [cromatikap](https://github.com/cromatikap)
+- [https://trophygh.kolioaris.xyz](https://trophygh.kolioaris.xyz) by
+  [kolioaris](https://github.com/kolioaris)
 
 # Quick Start
 
