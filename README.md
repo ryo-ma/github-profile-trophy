@@ -241,32 +241,36 @@ parameter `row` will be ignored.
 
 Available themes.
 
-| theme                       |
-| --------------------------- |
-| [flat](#flat)               |
-| [onedark](#onedark)         |
-| [gruvbox](#gruvbox)         |
-| [dracula](#dracula)         |
-| [monokai](#monokai)         |
-| [chalk](#chalk)             |
-| [nord](#nord)               |
-| [alduin](#alduin)           |
-| [darkhub](#darkhub)         |
-| [juicyfresh](#juicyfresh)   |
-| [buddhism](#buddhism)       |
-| [oldie](#oldie)             |
-| [radical](#radical)         |
-| [onestar](#onestar)         |
-| [discord](#discord)         |
-| [algolia](#algolia)         |
-| [gitdimmed](#gitdimmed)     |
-| [tokyonight](#tokyonight)   |
-| [matrix](#matrix)           |
-| [apprentice](#apprentice)   |
-| [dark_dimmed](#dark_dimmed) |
-| [dark_lover](#dark_lover)   |
-| [kimbie_dark](#kimbie_dark) |
-| [aura](#aura)               |
+| theme                                         |
+| ----------------------------------------------|
+| [flat](#flat)                                 |
+| [onedark](#onedark)                           |
+| [gruvbox](#gruvbox)                           |
+| [dracula](#dracula)                           |
+| [monokai](#monokai)                           |
+| [chalk](#chalk)                               |
+| [nord](#nord)                                 |
+| [alduin](#alduin)                             |
+| [darkhub](#darkhub)                           |
+| [juicyfresh](#juicyfresh)                     |
+| [buddhism](#buddhism)                         |
+| [oldie](#oldie)                               |
+| [radical](#radical)                           |
+| [onestar](#onestar)                           |
+| [discord](#discord)                           |
+| [algolia](#algolia)                           |
+| [gitdimmed](#gitdimmed)                       |
+| [tokyonight](#tokyonight)                     |
+| [matrix](#matrix)                             |
+| [apprentice](#apprentice)                     |
+| [dark_dimmed](#dark_dimmed)                   |
+| [dark_lover](#dark_lover)                     |
+| [kimbie_dark](#kimbie_dark)                   |
+| [aura](#aura)                                 |
+| [catppuccin_latte](#catppuccin_latte)         |
+| [catppuccin_frappe](#catppuccin_frappe)       |
+| [catppuccin_macchiato](#catppuccin_macchiato) |
+| [catppuccin_mocha](#catppuccin_mocha)         |
 
 ### flat
 
@@ -506,6 +510,45 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=aura
 
 <p align="center">
   <img width="660" src="https://github.com/user-attachments/assets/18a2266c-9a88-4882-940d-162c0c4d36e0">
+
+### catppuccin_latte
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=catppuccin_latte
+```
+
+<p align="center">
+  <img width="660" src="https://i.ibb.co/XxHcRYXR/image.png">
+</p>
+
+### catppuccin_frappe
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=catppuccin_frappe
+```
+
+<p align="center">
+  <img width="660" src="https://i.ibb.co/cK3f89Cc/image.png">
+</p>
+
+### catppuccin_macchiato
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=catppuccin_macchiato
+```
+
+<p align="center">
+  <img width="660" src="https://i.ibb.co/5WDPkstV/image.png">
+</p>
+
+### catppuccin_mocha
+
+```
+https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=catppuccin_mocha
+```
+
+<p align="center">
+  <img width="660" src="https://i.ibb.co/yBbvRhF2/image.png">
 </p>
 
 ## Margin Width
