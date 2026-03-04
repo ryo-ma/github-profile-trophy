@@ -9,7 +9,7 @@ class CacheProvider {
   private static instance: CacheProvider;
   public client: Redis | null = null;
 
-  private constructor() { }
+  private constructor() {}
 
   static getInstance(): CacheProvider {
     if (!CacheProvider.instance) {
