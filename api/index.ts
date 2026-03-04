@@ -92,7 +92,7 @@ async function app(req: Request): Promise<Response> {
       {
         status: error.status,
         headers: new Headers({
-          "Content-Type": "text",
+          "Content-Type": "text/html",
           "Cache-Control": cacheControlHeader,
         }),
       },
@@ -138,7 +138,7 @@ async function app(req: Request): Promise<Response> {
         {
           status: userResponseInfo.code,
           headers: new Headers({
-            "Content-Type": "text",
+            "Content-Type": "text/html",
             "Cache-Control": cacheControlHeader,
           }),
         },
