@@ -63,6 +63,7 @@ These are endpoints provided by volunteers. Please use these in moderation.
   [cromatikap](https://github.com/cromatikap)
 - [https://trophygh.kolioaris.xyz](https://trophygh.kolioaris.xyz) by
   [kolioaris](https://github.com/kolioaris)
+- [https://github-profile-trophy-beryl-three.vercel.app/](https://github-profile-trophy-beryl-three.vercel.app/) by [https://github.com/externalPointerVariable](https://github.com/externalPointerVariable) `Supports public requests`
 
 # Quick Start
 
