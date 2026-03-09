@@ -72,7 +72,14 @@ export class GithubApiService extends GithubRepository {
         pullRequest.status,
       ];
 
-      if (status.includes("rejected")) {
+      const values = [
+        repository.status === "fulfilled" ? repository.value : null,
+        activity.status === "fulfilled" ? activity.value : null,
+        issue.status === "fulfilled" ? issue.value : null,
+        pullRequest.status === "fulfilled" ? pullRequest.value : null,
+      ];
+
+      if (status.includes("rejected") || values.some((v) => v instanceof ServiceError)) {
         Logger.error(`Can not find a user with username:' ${username}'`);
         return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
       }

@@ -86,18 +86,19 @@ export class Trophy {
           <rect
             x="0.5"
             y="0.5"
-            rx="4.5"
+            rx="3"
             width="${panelSize - 1}"
             height="${panelSize - 1}"
-            stroke="#e1e4e8"
+            stroke="#e4e4e7"
+            stroke-width="0.8"
             fill="${PRIMARY}"
             stroke-opacity="${noFrame ? "0" : "1"}"
             fill-opacity="${noBackground ? "0" : "1"}"
           />
           ${getTrophyIcon(theme, this.rank)}
-          <text x="50%" y="18" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="13" fill="${SECONDARY}">${this.title}</text>
-          <text x="50%" y="85" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10.5" fill="${TEXT}">${this.topMessage}</text>
-          <text x="50%" y="97" text-anchor="middle" font-family="Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" font-weight="bold" font-size="10" fill="${TEXT}">${this.bottomMessage}</text>
+          <text x="50%" y="18" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="600" font-size="12" fill="${SECONDARY}">${this.title}</text>
+          <text x="50%" y="85" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="400" font-size="10" fill="${TEXT}">${this.topMessage}</text>
+          <text x="50%" y="97" text-anchor="middle" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="400" font-size="9.5" fill="${TEXT}">${this.bottomMessage}</text>
           ${nextRankBar}
         </svg>
         `;

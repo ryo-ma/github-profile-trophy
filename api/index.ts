@@ -44,49 +44,7 @@ async function app(req: Request): Promise<Response> {
   const themeParam: string = params.getStringValue("theme", "default");
   if (username === null) {
     const [base] = req.url.split("?");
-    const error = new Error400(
-      `<section>
-      <div>
-        <h2>"username" is a required query parameter</h2>
-        <p>The URL should look like
-        <div>
-          <p id="base-show">${base}?username=USERNAME</p>
-          <button>Copy Base Url</button>
-          <span id="temporary-span"></span>
-        </div>where
-        <code>USERNAME</code> is <em>your GitHub username.</em>
-      </div>
-      <div>
-        <h2>You can use this form: </h2>
-        <p>Enter your username and click "Get Trophies"</p>
-        <form action="${base}" method="get">
-          <label for="username">GitHub Username</label>
-          <input type="text" name="username" id="username" placeholder="Ex. gabriel-logan" required>
-          <label for="theme">Theme (Optional)</label>
-          <input type="text" name="theme" id="theme" placeholder="Ex. onedark" value="light">
-          <text>
-            See all the available themes
-            <a href="https://github.com/ryo-ma/github-profile-trophy?tab=readme-ov-file#apply-theme" target="_blank">here</a>
-          </text>
-          <br>
-          <button type="submit">Get Trophies</button>
-        </form>
-      </div>
-      <script>
-        const button = document.querySelector("button");
-        const input = document.querySelector("input");
-        const temporarySpan = document.querySelector("#temporary-span");
-
-        button.addEventListener("click", () => {
-          navigator.clipboard.writeText(document.querySelector("#base-show").textContent);
-          temporarySpan.textContent = "Copied!";
-          setTimeout(() => {
-            temporarySpan.textContent = "";
-          }, 1500);
-        });
-      </script>
-    </section>`,
-    );
+    const error = new Error400(base);
     return new Response(
       error.render(),
       {
