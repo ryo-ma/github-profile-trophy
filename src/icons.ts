@@ -48,19 +48,19 @@ export const getNextRankBar = (
     </style>
     <rect
       x="15"
-      y="101"
+      y="102"
       rx="1"
       width="${maxWidth}"
-      height="3.2"
-      opacity="0.3"
+      height="2"
+      opacity="0.2"
       fill="${color}"
     />
     <rect
       id="${title}-rank-progress"
       x="15"
-      y="101"
+      y="102"
       rx="1"
-      height="3.2"
+      height="2"
       fill="${color}"
     />
   `;
