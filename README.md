@@ -63,10 +63,10 @@ These are endpoints provided by volunteers. Please use these in moderation.
   [cromatikap](https://github.com/cromatikap)
 - [https://trophygh.kolioaris.xyz](https://trophygh.kolioaris.xyz) by
   [kolioaris](https://github.com/kolioaris)
-- [https://github-profile-trophy-orcin-eta.vercel.app](https://github-profile-trophy-orcin-eta.vercel.app/) by
-  [manupawick](https://github.com/manupawickramasinghe)
-- [https://github-profile-trophy-reiyua-mirror.vercel.app](https://github-profile-trophy-reiyua-mirror.vercel.app) by
-  [reiyua](https://github.com/reiyua)
+- [https://github-profile-trophy-orcin-eta.vercel.app](https://github-profile-trophy-orcin-eta.vercel.app/)
+  by [manupawick](https://github.com/manupawickramasinghe)
+- [https://github-profile-trophy-reiyua-mirror.vercel.app](https://github-profile-trophy-reiyua-mirror.vercel.app)
+  by [reiyua](https://github.com/reiyua)
 
 # Quick Start
 
