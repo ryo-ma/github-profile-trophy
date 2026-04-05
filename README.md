@@ -67,6 +67,8 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [manupawick](https://github.com/manupawickramasinghe)
 - [https://github-profile-trophy-reiyua-mirror.vercel.app](https://github-profile-trophy-reiyua-mirror.vercel.app)
   by [reiyua](https://github.com/reiyua)
+- [https://github-profile-trophy-sigma-one.vercel.app](https://github-profile-trophy-sigma-one.vercel.app/))
+  by [namankoolwal]
 
 # Quick Start
 
