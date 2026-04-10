@@ -10,6 +10,7 @@ type Repository = {
       };
     };
   } | null;
+  createdAt: string;
 };
 export type GitHubUserRepository = {
   repositories: {
@@ -55,6 +56,12 @@ export type GitHubUserActivity = {
     totalCount: number;
   };
 };
+
+export type GitHubUserAll =
+  & GitHubUserActivity
+  & GitHubUserIssue
+  & GitHubUserPullRequest
+  & GitHubUserRepository;
 export class UserInfo {
   public readonly totalCommits: number;
   public readonly totalFollowers: number;
@@ -70,6 +77,11 @@ export class UserInfo {
   public readonly ancientAccount: number;
   public readonly joined2020: number;
   public readonly ogAccount: number;
+
+  static fromCombined(data: GitHubUserAll): UserInfo {
+    return new UserInfo(data, data, data, data);
+  }
+
   constructor(
     userActivity: GitHubUserActivity,
     userIssue: GitHubUserIssue,
@@ -103,8 +115,20 @@ export class UserInfo {
         });
       }
     });
-    const durationTime = new Date().getTime() -
-      new Date('2020-01-17').getTime(); // Hardcoded due to the deletion of my old account
+
+    // Find the earliest repository creation date
+    let earliestRepoDate = userActivity.createdAt; // start with the oldest possible
+
+    earliestRepoDate = userRepository.repositories.nodes.reduce(
+      (earliest, node) => {
+        return new Date(node.createdAt).getTime() < new Date(earliest).getTime()
+          ? node.createdAt
+          : earliest;
+      },
+      earliestRepoDate,
+    );
+
+    const durationTime = new Date().getTime() - new Date('2020-01-17').getTime(); // Hardcoded due to the deletion of my old account
     const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
     const durationDays = Math.floor(
       durationTime / (1000 * 60 * 60 * 24) / 100,

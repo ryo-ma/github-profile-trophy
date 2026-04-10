@@ -1,6 +1,7 @@
 import { ServiceError } from "../Types/index.ts";
 import {
   GitHubUserActivity,
+  GitHubUserAll,
   GitHubUserIssue,
   GitHubUserPullRequest,
   GitHubUserRepository,
@@ -9,6 +10,9 @@ import {
 
 export abstract class GithubRepository {
   abstract requestUserInfo(username: string): Promise<UserInfo | ServiceError>;
+  abstract requestUserAll(
+    username: string,
+  ): Promise<GitHubUserAll | ServiceError>;
   abstract requestUserActivity(
     username: string,
   ): Promise<GitHubUserActivity | ServiceError>;

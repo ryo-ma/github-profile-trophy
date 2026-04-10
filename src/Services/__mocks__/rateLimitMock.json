@@ -7,6 +7,9 @@
   },
   "rate_limit": {
     "data": {
+      "data": {
+        "user": null
+      },
       "errors": [
         {
           "type": "RATE_LIMITED",

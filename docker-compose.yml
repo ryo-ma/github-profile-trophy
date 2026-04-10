@@ -5,3 +5,12 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
+  deno-app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "80:8080"
+    environment:
+      - DENO_ENV=development
+    command: ["deno", "run", "--watch", "-A", "main.ts"]
