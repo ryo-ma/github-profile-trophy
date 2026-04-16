@@ -55,21 +55,6 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [kann4n](https://github.com/kann4n)
 - [https://trophy.ryglcloud.net](https://trophy.ryglcloud.net) by
   [PracticalRyan](https://github.com/PracticalRyan)
-- [https://github-profile-trophy-tawny.vercel.app](https://github-profile-trophy-tawny.vercel.app)
-  by [vijaypurohit322](https://github.com/vijaypurohit322)
-- [https://github-profile-repo.vercel.app](https://github-profile-repo.vercel.app/))
-  by [HackyCoder0951](https://github.com/hackycoder0951)
-- [https://gh-trophy.cdnsoft.net](https://gh-trophy.cdnsoft.net) by
-  [cromatikap](https://github.com/cromatikap)
-- [https://trophygh.kolioaris.xyz](https://trophygh.kolioaris.xyz) by
-  [kolioaris](https://github.com/kolioaris)
-- [https://github-profile-trophy-orcin-eta.vercel.app](https://github-profile-trophy-orcin-eta.vercel.app/)
-  by [manupawick](https://github.com/manupawickramasinghe)
-- [https://github-profile-trophy-reiyua-mirror.vercel.app](https://github-profile-trophy-reiyua-mirror.vercel.app)
-  by [reiyua](https://github.com/reiyua)
-- [https://github-profile-trophy-sigma-one.vercel.app](https://github-profile-trophy-sigma-one.vercel.app/))
-  by [namankoolwal](https://github.com/namankoolwal)
-- [https://trophy.benkou.dev/](https://trophy.benkou.dev/) by [Ben](https://github.com/0x5b62656e5d)
 
 # Quick Start
 
@@ -591,8 +576,29 @@ given your username, (Enviroment Vars: See [env-example](env-example)).
 Usage:
 
 ```bash
-deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME OUTPUT_DIR THEME
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME [options]
+
+# Examples:
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts octocat
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts octocat -f profile/trophy.svg --theme classic
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts octocat --no-background --no-frame
+
+# Help:
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts --help
 ```
+
+Options:
+
+- `-f, --file FILE` Output path (default: `./trophy.svg`)
+- `-t, --theme THEME` Theme name (default: `default`)
+- `-c, --cols N` Max columns (-1=auto, default: `-1`)
+- `-r, --rows N` Max rows (default: `10`)
+- `-s, --panel-size N` Panel size (default: `115`)
+- `-mw, --margin-width N` Margin width (default: `10`)
+- `-mh, --margin-height N` Margin height (default: `10`)
+- `--no-background` Disable background
+- `--no-frame` Disable frame
+- `-h, --help` Show help
 
 ## Generate an svg inside Github CI (Workflow)
 
@@ -603,12 +609,20 @@ have to manualy update rerun the action to update the file.
 Usage:
 
 ```yaml
-- name: Generate trophy
+- name: Generate Profile Trophy
   uses: Erik-Donath/github-profile-trophy@feature/generate-svg
   with:
-    username: your-username
-    output_path: trophy.svg
     token: ${{ secrets.GITHUB_TOKEN }}
+    username: your-username
+    file: trophy.svg
+    theme: classic
+    cols: -1
+    rows: 10
+    panel-size: 115
+    margin-width: 10
+    margin-height: 10
+    no-background: false
+    no-frame: false
 ```
 
 # Contribution Guide
