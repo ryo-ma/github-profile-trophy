@@ -1,0 +1,13 @@
+FROM denoland/deno:alpine-2.3.3
+
+WORKDIR /app
+
+COPY --chown=deno:deno . .
+
+USER deno
+
+RUN deno cache main.ts
+
+EXPOSE 8080
+
+CMD ["deno", "run", "--allow-net", "--allow-env", "--allow-read=./", "main.ts"]
