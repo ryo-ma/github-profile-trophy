@@ -1,5 +1,6 @@
 FROM denoland/deno:alpine-2.3.3
 
+RUN mkdir -p /app && chown deno:deno /app
 WORKDIR /app
 
 COPY --chown=deno:deno . .
