@@ -3,18 +3,54 @@ description: Run the local generator script to produce an SVG.
 inputs:
   username:
     description: "GitHub username to generate the trophy for"
-    required: true
-  output_path:
-    description: "Output path to write the SVG"
-    required: true
-    default: "trophy.svg"
-  token:
-    description: "PAT or token to use for GitHub API"
-    required: true
+    required: false
+    default: ${{ github.repository_owner }}
   theme:
     description: "Theme for the card"
     required: false
     default: "default"
+  column:
+    description: "Number of columns (-1 for auto)"
+    required: false
+    default: "8"
+  row:
+    description: "Maximum number of rows"
+    required: false
+    default: "3"
+  margin_w:
+    description: "Horizontal margin between trophies"
+    required: false
+    default: "0"
+  margin_h:
+    description: "Vertical margin between trophies"
+    required: false
+    default: "0"
+  no_bg:
+    description: "Disable card background (true/false)"
+    required: false
+    default: "false"
+  no_frame:
+    description: "Disable card frame (true/false)"
+    required: false
+    default: "false"
+  title:
+    description: "Filter by trophy title (comma-separated)"
+    required: false
+    default: ""
+  rank:
+    description: "Filter by rank (comma-separated)"
+    required: false
+    default: ""
+
+  output_path:
+    description: "Output path to write the SVG"
+    required: false
+    default: "./trophy.svg"
+
+  token:
+    description: "PAT or token to use for GitHub API"
+    required: true
+    default: ${{ github.token }}
 runs:
   using: "composite"
   steps:
@@ -28,4 +64,17 @@ runs:
       env:
         GITHUB_TOKEN1: ${{ inputs.token }}
       run: |
-        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}" "${{ inputs.theme }}"
+        ARGS=(
+          --username "${{ inputs.username }}"
+          --output "${{ inputs.output_path }}"
+          --theme "${{ inputs.theme }}"
+          --column "${{ inputs.column }}"
+          --row "${{ inputs.row }}"
+          --margin-w "${{ inputs.margin_w }}"
+          --margin-h "${{ inputs.margin_h }}"
+        )
+        [[ "${{ inputs.no_bg }}" == "true" ]] && ARGS+=(--no-bg)
+        [[ "${{ inputs.no_frame }}" == "true" ]] && ARGS+=(--no-frame)
+        [[ -n "${{ inputs.title }}" ]] && ARGS+=(--title "${{ inputs.title }}")
+        [[ -n "${{ inputs.rank }}" ]] && ARGS+=(--rank "${{ inputs.rank }}")
+        deno run --allow-net --allow-env --allow-read --allow-write "$GITHUB_ACTION_PATH/render_svg.ts" "${ARGS[@]}"
