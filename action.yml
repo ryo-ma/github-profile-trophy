@@ -11,6 +11,7 @@ inputs:
   token:
     description: "PAT or token to use for GitHub API"
     required: true
+    default: ${{ github.token }}
   theme:
     description: "Theme for the card"
     required: false
