@@ -57,13 +57,29 @@ if (flags.help || !username) {
 }
 
 function parseIntFlag(name: string, raw: unknown): number {
-  const value = Number(raw);
-  if (!Number.isFinite(value)) {
+  if (raw === undefined || raw === null) {
     console.error(
-      `Invalid value for --${name}: "${raw}" is not a valid number`,
+      `Invalid value for --${name}: a base-10 integer value is required`,
     );
     Deno.exit(1);
   }
+
+  const normalized = String(raw).trim();
+  if (normalized === "") {
+    console.error(
+      `Invalid value for --${name}: a base-10 integer value is required`,
+    );
+    Deno.exit(1);
+  }
+
+  const value = Number.parseInt(normalized, 10);
+  if (!Number.isInteger(value) || value.toString() !== normalized) {
+    console.error(
+      `Invalid value for --${name}: "${raw}" is not a valid base-10 integer`,
+    );
+    Deno.exit(1);
+  }
+
   return value;
 }
 
