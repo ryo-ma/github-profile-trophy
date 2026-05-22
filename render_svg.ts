@@ -33,27 +33,31 @@ const flags = parse(Deno.args, {
 });
 
 const username: string = flags.username ?? (flags._[0] as string);
+const usage = [
+  "Usage: deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts [options]",
+  "",
+  "Options:",
+  "  --username, -u   GitHub username (required)",
+  `  --output, -o     Output path for the SVG (default: ./assets/trophy.svg)`,
+  `  --theme, -t      Theme name (default: default)`,
+  `  --column, -c     Number of columns, -1 for auto (default: ${CONSTANTS.DEFAULT_MAX_COLUMN})`,
+  `  --row, -r        Maximum number of rows (default: ${CONSTANTS.DEFAULT_MAX_ROW})`,
+  `  --margin-w       Horizontal margin between trophies (default: ${CONSTANTS.DEFAULT_MARGIN_W})`,
+  `  --margin-h       Vertical margin between trophies (default: ${CONSTANTS.DEFAULT_MARGIN_H})`,
+  "  --no-bg          Disable card background",
+  "  --no-frame       Disable card frame",
+  "  --title          Filter by trophy title (can be specified multiple times or comma-separated)",
+  "  --rank           Filter by rank (can be specified multiple times or comma-separated)",
+].join("\n");
 
-if (flags.help || !username) {
-  console.error(
-    [
-      "Usage: deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts [options]",
-      "",
-      "Options:",
-      "  --username, -u   GitHub username (required)",
-      `  --output, -o     Output path for the SVG (default: ./assets/trophy.svg)`,
-      `  --theme, -t      Theme name (default: default)`,
-      `  --column, -c     Number of columns, -1 for auto (default: ${CONSTANTS.DEFAULT_MAX_COLUMN})`,
-      `  --row, -r        Maximum number of rows (default: ${CONSTANTS.DEFAULT_MAX_ROW})`,
-      `  --margin-w       Horizontal margin between trophies (default: ${CONSTANTS.DEFAULT_MARGIN_W})`,
-      `  --margin-h       Vertical margin between trophies (default: ${CONSTANTS.DEFAULT_MARGIN_H})`,
-      "  --no-bg          Disable card background",
-      "  --no-frame       Disable card frame",
-      "  --title          Filter by trophy title (can be specified multiple times or comma-separated)",
-      "  --rank           Filter by rank (can be specified multiple times or comma-separated)",
-    ].join("\n"),
-  );
-  if (!username) Deno.exit(1);
+if (flags.help) {
+  console.log(usage);
+  Deno.exit(0);
+}
+
+if (!username) {
+  console.error(usage);
+  Deno.exit(1);
 }
 
 function parseIntFlag(name: string, raw: unknown): number {
