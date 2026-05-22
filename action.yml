@@ -3,7 +3,8 @@ description: Run the local generator script to produce an SVG.
 inputs:
   username:
     description: "GitHub username to generate the trophy for"
-    required: true
+    required: false
+    default: ${{ github.repository_owner }}
   theme:
     description: "Theme for the card"
     required: false
