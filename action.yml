@@ -62,7 +62,7 @@ runs:
     - name: Generate trophy
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ inputs.token }}
+        GITHUB_TOKEN1: ${{ inputs.token }}
       run: |
         ARGS=(
           --username "${{ inputs.username }}"
