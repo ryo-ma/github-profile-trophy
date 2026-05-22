@@ -59,7 +59,9 @@ if (flags.help || !username) {
 function parseIntFlag(name: string, raw: unknown): number {
   const value = Number(raw);
   if (!Number.isFinite(value)) {
-    console.error(`Invalid value for --${name}: "${raw}" is not a valid number`);
+    console.error(
+      `Invalid value for --${name}: "${raw}" is not a valid number`,
+    );
     Deno.exit(1);
   }
   return value;
