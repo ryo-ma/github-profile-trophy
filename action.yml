@@ -4,14 +4,6 @@ inputs:
   username:
     description: "GitHub username to generate the trophy for"
     required: true
-  output_path:
-    description: "Output path to write the SVG"
-    required: false
-    default: "trophy.svg"
-  token:
-    description: "PAT or token to use for GitHub API"
-    required: true
-    default: ${{ github.token }}
   theme:
     description: "Theme for the card"
     required: false
@@ -48,6 +40,16 @@ inputs:
     description: "Filter by rank (comma-separated)"
     required: false
     default: ""
+
+  output_path:
+    description: "Output path to write the SVG"
+    required: false
+    default: "trophy.svg"
+
+  token:
+    description: "PAT or token to use for GitHub API"
+    required: true
+    default: ${{ github.token }}
 runs:
   using: "composite"
   steps:
