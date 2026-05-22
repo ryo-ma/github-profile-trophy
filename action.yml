@@ -44,7 +44,7 @@ inputs:
   output_path:
     description: "Output path to write the SVG"
     required: false
-    default: "trophy.svg"
+    default: "./trophy.svg"
 
   token:
     description: "PAT or token to use for GitHub API"
