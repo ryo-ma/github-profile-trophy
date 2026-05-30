@@ -70,6 +70,8 @@ These are endpoints provided by volunteers. Please use these in moderation.
 - [https://github-profile-trophy-sigma-one.vercel.app](https://github-profile-trophy-sigma-one.vercel.app/))
   by [namankoolwal](https://github.com/namankoolwal)
 - [https://trophy.benkou.dev/](https://trophy.benkou.dev/) by [Ben](https://github.com/0x5b62656e5d)
+- [https://github-trophies.devomb.com/](https://github-trophies.devomb.com/) by [DevomB](https://github.com/DevomB/Github-Trophies)
+- [https://github-profile-trophy-unserori.vercel.app/](https://github-profile-trophy-unserori.vercel.app/) by [unSerori](https://github.com/unSerori)
 
 # Quick Start
 
