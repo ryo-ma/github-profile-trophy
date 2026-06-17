@@ -16,6 +16,7 @@ export class Card {
     private marginHeight: number,
     private noBackground: boolean,
     private noFrame: boolean,
+    private trophyStyle: string | null,
   ) {
     this.width = panelSize * this.maxColumn +
       this.marginWidth * (this.maxColumn - 1);
@@ -61,7 +62,7 @@ export class Card {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      ${this.renderTrophy(trophyList, theme)}
+      ${this.renderTrophy(trophyList, theme, this.trophyStyle)}
     </svg>`;
   }
   private getRow(trophyList: TrophyList) {
@@ -76,7 +77,7 @@ export class Card {
     return this.panelSize * row + this.marginHeight * (row - 1);
   }
 
-  private renderTrophy(trophyList: TrophyList, theme: Theme) {
+  private renderTrophy(trophyList: TrophyList, theme: Theme, trophyStyle: string | null) {
     return trophyList.getArray.reduce(
       (sum: string, trophy: Trophy, i: number) => {
         const currentColumn = i % this.maxColumn;
@@ -92,6 +93,7 @@ export class Card {
             this.panelSize,
             this.noBackground,
             this.noFrame,
+            trophyStyle,
           );
       },
       "",
