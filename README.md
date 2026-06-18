@@ -614,6 +614,47 @@ Usage:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+# Self-hosting with Docker
+
+You can host your own instance using the provided `Dockerfile.prod`.
+
+## Environment Variables
+
+| Variable | Required | Default | Description |
+| --- | --- | --- | --- |
+| `PORT` | No | `8080` | Port the server listens on |
+| `GITHUB_TOKEN1` | Yes | — | GitHub personal access token |
+| `GITHUB_TOKEN2` | No | — | Secondary token for load balancing |
+| `GITHUB_API` | No | `https://api.github.com/graphql` | GitHub GraphQL API endpoint |
+| `ENABLE_REDIS` | No | — | Set to `true` to enable Redis caching |
+| `REDIS_HOST` | No | — | Redis host |
+| `REDIS_PORT` | No | `6379` | Redis port |
+| `REDIS_USERNAME` | No | — | Redis username |
+| `REDIS_PASSWORD` | No | — | Redis password |
+
+## Build & run locally
+
+```bash
+# Build
+docker build -f Dockerfile.prod -t github-profile-trophy .
+
+# Run
+docker run -p 8080:8080 \
+  -e GITHUB_TOKEN1=your_token \
+  github-profile-trophy
+```
+
+## Deploy with Coolify
+
+1. In the Coolify dashboard, create a new **Resource** → **Public Repository** (or Private, if configured).
+2. Set the **Build Pack** to `Dockerfile`.
+3. Set the **Dockerfile Path** to `Dockerfile.prod`.
+4. Under **Environment Variables**, add the variables from the table above (at minimum `GITHUB_TOKEN1`).
+5. Set the **Port** to `8080` (or your custom `PORT`).
+6. Click **Deploy**.
+
+> **Redis**: if you want caching, provision a Redis instance separately (e.g. Coolify's built-in Redis service) and pass its connection details via `REDIS_HOST`, `REDIS_PORT`, `REDIS_USERNAME`, and `REDIS_PASSWORD`, setting `ENABLE_REDIS=true`.
+
 # Contribution Guide
 
 Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
