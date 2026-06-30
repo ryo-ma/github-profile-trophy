@@ -616,6 +616,31 @@ Usage:
 
 # Contribution Guide
 
+## Self-hosting on Vercel
+Why not use Vercel..? 
+By self-hosting you avoid rate-limits, instances getting paused and you bypass the #439 issue.
+
+1. For people who do not have this REPO forked you need to do that before you can Deploy anything.
+
+2. Make an account, connect your GitHub account to Vercel, import your REPO.
+
+3. Go back to GitHub, generate a token and copy it.
+
+4. Configure your token-scope, like read:user + public_repo
+
+5. When you hit the configure screen on Vercel after you imported your REPO, paste the token in the VALUE bar and give it a name (you can use the same VALUE twice just give it another name)
+like: 
+GITHUB_TOKEN1
+GITHUB_TOKEN2
+
+6. After that you can deploy it
+
+7.  Set Vercel Authentication -> Only Preview Deployments, or your card shows blank
+ 
+
+8. You get a domain which you can use/test
+it looks something like this: https://<your-app>.vercel.app/?username=USERNAME
+
 Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
 
 # License
