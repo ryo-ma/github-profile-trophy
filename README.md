@@ -614,30 +614,6 @@ Usage:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Okay, I checked the actual file on your fork. Good news: **you committed it** (message "Add self-hosting instructions for Vercel" ✅). Two things to fix though — one real, one cosmetic.
-
-## Issue 1 — it landed in the wrong spot (this one matters)
-
-You searched for "Contribution Guide" and pasted, but it went **right after** the `# Contribution Guide` heading — so your section is now wedged *inside* Contributing, splitting it in half:
-
-```
-# Contribution Guide          ← heading
-## Self-hosting on Vercel      ← your section got stuffed here
-   ...your 8 steps...
-Check CONTRIBUTING.md...       ← the real Contribution Guide text, now orphaned below you
-# License
-```
-
-It needs to sit **above** `# Contribution Guide`, next to the other "run it yourself" sections. A maintainer would bounce it as-is.
-
-## Issue 2 — your token names will render mushed (cosmetic but ugly)
-
-Lines `like:` / `GITHUB_TOKEN1` / `GITHUB_TOKEN2` have no code block, so GitHub renders them as one run-on sentence. A code block fixes it.
-
-## The fix — one clean swap
-
-Edit `README.md` again. `Ctrl+F` for `# Contribution Guide`. Then **select from that `# Contribution Guide` line all the way down to your last line** (`...?username=USERNAME`), delete it, and paste this in its place. It's *your* words — I just lowercased `repo`, put the token names + URL in code blocks, and dropped the "Why not use Vercel..?" opener (re-add it if you liked it). The block ends with `# Contribution Guide` so Contributing snaps back together:
-
 ## Self-hosting on Vercel
 
 By self-hosting you avoid rate-limits, instances getting paused and you bypass the #439 issue.
