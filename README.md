@@ -614,6 +614,35 @@ Usage:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+## Self-hosting on Vercel
+
+By self-hosting you avoid rate-limits, instances getting paused and you bypass the #439 issue.
+
+1. For people who do not have this repo forked, you need to do that before you can deploy anything.
+
+2. Make an account, connect your GitHub account to Vercel, and import your repo.
+
+3. Go back to GitHub, generate a token, and copy it.
+
+4. Set your token scopes to `read:user` + `public_repo` (only use `repo` if you want private contributions counted).
+
+5. On Vercel's configure screen, add two environment variables and paste the token as the value of each — you can use the same token for both:
+
+```
+GITHUB_TOKEN1=your_token
+GITHUB_TOKEN2=your_token
+```
+
+6. After that you can deploy it.
+
+7. Set Vercel Authentication -> Only Preview Deployments, or your card shows blank.
+
+8. You get a domain which you can use/test, it looks something like this:
+
+```
+https://<your-app>.vercel.app/?username=USERNAME
+```
+
 # Contribution Guide
 
 Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
