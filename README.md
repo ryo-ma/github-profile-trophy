@@ -614,32 +614,60 @@ Usage:
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-# Contribution Guide
+Okay, I checked the actual file on your fork. Good news: **you committed it** (message "Add self-hosting instructions for Vercel" ✅). Two things to fix though — one real, one cosmetic.
+
+## Issue 1 — it landed in the wrong spot (this one matters)
+
+You searched for "Contribution Guide" and pasted, but it went **right after** the `# Contribution Guide` heading — so your section is now wedged *inside* Contributing, splitting it in half:
+
+```
+# Contribution Guide          ← heading
+## Self-hosting on Vercel      ← your section got stuffed here
+   ...your 8 steps...
+Check CONTRIBUTING.md...       ← the real Contribution Guide text, now orphaned below you
+# License
+```
+
+It needs to sit **above** `# Contribution Guide`, next to the other "run it yourself" sections. A maintainer would bounce it as-is.
+
+## Issue 2 — your token names will render mushed (cosmetic but ugly)
+
+Lines `like:` / `GITHUB_TOKEN1` / `GITHUB_TOKEN2` have no code block, so GitHub renders them as one run-on sentence. A code block fixes it.
+
+## The fix — one clean swap
+
+Edit `README.md` again. `Ctrl+F` for `# Contribution Guide`. Then **select from that `# Contribution Guide` line all the way down to your last line** (`...?username=USERNAME`), delete it, and paste this in its place. It's *your* words — I just lowercased `repo`, put the token names + URL in code blocks, and dropped the "Why not use Vercel..?" opener (re-add it if you liked it). The block ends with `# Contribution Guide` so Contributing snaps back together:
 
 ## Self-hosting on Vercel
-Why not use Vercel..? 
+
 By self-hosting you avoid rate-limits, instances getting paused and you bypass the #439 issue.
 
-1. For people who do not have this REPO forked you need to do that before you can Deploy anything.
+1. For people who do not have this repo forked, you need to do that before you can deploy anything.
 
-2. Make an account, connect your GitHub account to Vercel, import your REPO.
+2. Make an account, connect your GitHub account to Vercel, and import your repo.
 
-3. Go back to GitHub, generate a token and copy it.
+3. Go back to GitHub, generate a token, and copy it.
 
-4. Configure your token-scope, like read:user + public_repo
+4. Set your token scopes to `read:user` + `public_repo` (only use `repo` if you want private contributions counted).
 
-5. When you hit the configure screen on Vercel after you imported your REPO, paste the token in the VALUE bar and give it a name (you can use the same VALUE twice just give it another name)
-like: 
-GITHUB_TOKEN1
-GITHUB_TOKEN2
+5. On Vercel's configure screen, add two environment variables and paste the token as the value of each — you can use the same token for both:
 
-6. After that you can deploy it
+```
+GITHUB_TOKEN1=your_token
+GITHUB_TOKEN2=your_token
+```
 
-7.  Set Vercel Authentication -> Only Preview Deployments, or your card shows blank
- 
+6. After that you can deploy it.
 
-8. You get a domain which you can use/test
-it looks something like this: https://<your-app>.vercel.app/?username=USERNAME
+7. Set Vercel Authentication -> Only Preview Deployments, or your card shows blank.
+
+8. You get a domain which you can use/test, it looks something like this:
+
+```
+https://<your-app>.vercel.app/?username=USERNAME
+```
+
+# Contribution Guide
 
 Check [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
 
