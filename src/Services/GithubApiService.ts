@@ -1,6 +1,7 @@
 import { GithubRepository } from "../Repository/GithubRepository.ts";
 import {
   GitHubUserActivity,
+  GitHubUserAll,
   GitHubUserIssue,
   GitHubUserPullRequest,
   GitHubUserRepository,
@@ -8,6 +9,7 @@ import {
 } from "../user_info.ts";
 import {
   queryUserActivity,
+  queryUserAll,
   queryUserIssue,
   queryUserPullRequest,
   queryUserRepository,
@@ -25,6 +27,13 @@ export const TOKENS = [
 ];
 
 export class GithubApiService extends GithubRepository {
+  async requestUserAll(
+    username: string,
+  ): Promise<GitHubUserAll | ServiceError> {
+    return await this.executeQuery<GitHubUserAll>(queryUserAll, {
+      username,
+    });
+  }
   async requestUserRepository(
     username: string,
   ): Promise<GitHubUserRepository | ServiceError> {
@@ -55,34 +64,13 @@ export class GithubApiService extends GithubRepository {
     );
   }
   async requestUserInfo(username: string): Promise<UserInfo | ServiceError> {
-    // Avoid to call others if one of them is null
-
-    const promises = Promise.allSettled([
-      this.requestUserRepository(username),
-      this.requestUserActivity(username),
-      this.requestUserIssue(username),
-      this.requestUserPullRequest(username),
-    ]);
+    // Use single combined query instead of 4 separate queries to reduce Function Duration
     try {
-      const [repository, activity, issue, pullRequest] = await promises;
-      const status = [
-        repository.status,
-        activity.status,
-        issue.status,
-        pullRequest.status,
-      ];
-
-      if (status.includes("rejected")) {
-        Logger.error(`Can not find a user with username:' ${username}'`);
-        return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
+      const result = await this.requestUserAll(username);
+      if (result instanceof ServiceError) {
+        return result;
       }
-
-      return new UserInfo(
-        (activity as PromiseFulfilledResult<GitHubUserActivity>).value,
-        (issue as PromiseFulfilledResult<GitHubUserIssue>).value,
-        (pullRequest as PromiseFulfilledResult<GitHubUserPullRequest>).value,
-        (repository as PromiseFulfilledResult<GitHubUserRepository>).value,
-      );
+      return UserInfo.fromCombined(result);
     } catch {
       Logger.error(`Error fetching user info for username: ${username}`);
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);

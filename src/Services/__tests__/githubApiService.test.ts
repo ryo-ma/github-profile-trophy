@@ -28,26 +28,8 @@ stub(
     new Promise((resolve) => {
       resolve(successGithubResponseMock.default);
     }),
-    // Should throw NOT FOUND (requestUserInfo makes 4 API calls: repository, activity, issue, pullRequest)
-    // Each call makes 2 attempts (one per token), so 8 promises total
-    new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
-    }),
-    new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
-    }),
-    new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
-    }),
-    new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
-    }),
-    new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
-    }),
-    new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
-    }),
+    // Should throw NOT FOUND (requestUserInfo makes 1 combined API call)
+    // Each call makes 2 attempts (one per token), so 2 promises total
     new Promise((resolve) => {
       resolve(notFoundGithubResponseMock.default);
     }),

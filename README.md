@@ -45,6 +45,7 @@
 
 These are endpoints provided by volunteers. Please use these in moderation.
 
+- [https://trophygithubreadmelang.cybee.dpdns.org/](https://trophygithubreadmelang.cybee.dpdns.org/) by [Cyberbee-pro](https://github.com/Cyberbee-pro)
 - [https://github-profile-trophy-liard-delta.vercel.app](https://github-profile-trophy-liard-delta.vercel.app/)
   by [Adwitya](https://github.com/Adwitya)
 - [https://github-profile-trophy-fork-two.vercel.app](https://github-profile-trophy-fork-two.vercel.app)
@@ -53,10 +54,25 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [hongbo-wei](https://github.com/hongbo-wei)
 - [https://github-profile-trophy-kannan.vercel.app](https://github-profile-trophy-kannan.vercel.app)
   by [kann4n](https://github.com/kann4n)
-- [https://trophy.ryglcloud.net](https://trophy.ryglcloud.net)
-  by [PracticalRyan](https://github.com/PracticalRyan)
+- [https://trophy.ryglcloud.net](https://trophy.ryglcloud.net) by
+  [PracticalRyan](https://github.com/PracticalRyan)
 - [https://github-profile-trophy-tawny.vercel.app](https://github-profile-trophy-tawny.vercel.app)
   by [vijaypurohit322](https://github.com/vijaypurohit322)
+- [https://github-profile-repo.vercel.app](https://github-profile-repo.vercel.app/))
+  by [HackyCoder0951](https://github.com/hackycoder0951)
+- [https://gh-trophy.cdnsoft.net](https://gh-trophy.cdnsoft.net) by
+  [cromatikap](https://github.com/cromatikap)
+- [https://trophygh.kolioaris.xyz](https://trophygh.kolioaris.xyz) by
+  [kolioaris](https://github.com/kolioaris)
+- [https://github-profile-trophy-orcin-eta.vercel.app](https://github-profile-trophy-orcin-eta.vercel.app/)
+  by [manupawick](https://github.com/manupawickramasinghe)
+- [https://github-profile-trophy-reiyua-mirror.vercel.app](https://github-profile-trophy-reiyua-mirror.vercel.app)
+  by [reiyua](https://github.com/reiyua)
+- [https://github-profile-trophy-sigma-one.vercel.app](https://github-profile-trophy-sigma-one.vercel.app/))
+  by [namankoolwal](https://github.com/namankoolwal)
+- [https://trophy.benkou.dev/](https://trophy.benkou.dev/) by [Ben](https://github.com/0x5b62656e5d)
+- [https://github-trophies.devomb.com/](https://github-trophies.devomb.com/) by [DevomB](https://github.com/DevomB/Github-Trophies)
+- [https://github-profile-trophy-unserori.vercel.app/](https://github-profile-trophy-unserori.vercel.app/) by [unSerori](https://github.com/unSerori)
 
 # Quick Start
 
@@ -596,6 +612,35 @@ Usage:
     username: your-username
     output_path: trophy.svg
     token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+## Self-hosting on Vercel
+
+By self-hosting you avoid rate-limits, instances getting paused and you bypass the #439 issue.
+
+1. For people who do not have this repo forked, you need to do that before you can deploy anything.
+
+2. Make an account, connect your GitHub account to Vercel, and import your repo.
+
+3. Go back to GitHub, generate a token, and copy it.
+
+4. Set your token scopes to `read:user` + `public_repo` (only use `repo` if you want private contributions counted).
+
+5. On Vercel's configure screen, add two environment variables and paste the token as the value of each — you can use the same token for both:
+
+```
+GITHUB_TOKEN1=your_token
+GITHUB_TOKEN2=your_token
+```
+
+6. After that you can deploy it.
+
+7. Set Vercel Authentication -> Only Preview Deployments, or your card shows blank.
+
+8. You get a domain which you can use/test, it looks something like this:
+
+```
+https://<your-app>.vercel.app/?username=USERNAME
 ```
 
 # Contribution Guide

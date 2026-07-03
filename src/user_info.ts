@@ -41,6 +41,12 @@ export type GitHubUserActivity = {
     totalCount: number;
   };
 };
+
+export type GitHubUserAll =
+  & GitHubUserActivity
+  & GitHubUserIssue
+  & GitHubUserPullRequest
+  & GitHubUserRepository;
 export class UserInfo {
   public readonly totalCommits: number;
   public readonly totalFollowers: number;
@@ -56,6 +62,11 @@ export class UserInfo {
   public readonly ancientAccount: number;
   public readonly joined2020: number;
   public readonly ogAccount: number;
+
+  static fromCombined(data: GitHubUserAll): UserInfo {
+    return new UserInfo(data, data, data, data);
+  }
+
   constructor(
     userActivity: GitHubUserActivity,
     userIssue: GitHubUserIssue,

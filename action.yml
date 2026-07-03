@@ -11,6 +11,10 @@ inputs:
   token:
     description: "PAT or token to use for GitHub API"
     required: true
+  theme:
+    description: "Theme for the card"
+    required: false
+    default: "default"
 runs:
   using: "composite"
   steps:
@@ -24,4 +28,4 @@ runs:
       env:
         GITHUB_TOKEN1: ${{ inputs.token }}
       run: |
-        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}"
+        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}" "${{ inputs.theme }}"
