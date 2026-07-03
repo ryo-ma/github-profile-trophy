@@ -45,6 +45,7 @@
 
 These are endpoints provided by volunteers. Please use these in moderation.
 
+- [https://trophy.cx330.in](https://trophy.cx330.in) by [CX330] (https://cx330.in)
 - [https://trophygithubreadmelang.cybee.dpdns.org/](https://trophygithubreadmelang.cybee.dpdns.org/) by [Cyberbee-pro](https://github.com/Cyberbee-pro)
 - [https://github-profile-trophy-liard-delta.vercel.app](https://github-profile-trophy-liard-delta.vercel.app/)
   by [Adwitya](https://github.com/Adwitya)
