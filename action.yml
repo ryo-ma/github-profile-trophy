@@ -15,6 +15,22 @@ inputs:
     description: "Theme for the card"
     required: false
     default: "default"
+  title:
+    description: "Comma-separated list of trophy titles to display (e.g. 'Stars,Commits')"
+    required: false
+    default: ""
+  column:
+    description: "Maximum number of columns (-1 for auto)"
+    required: false
+    default: "-1"
+  no_frame:
+    description: "Disable trophy frame borders"
+    required: false
+    default: "false"
+  no_bg:
+    description: "Disable card background"
+    required: false
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -28,4 +44,11 @@ runs:
       env:
         GITHUB_TOKEN1: ${{ inputs.token }}
       run: |
-        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}" "${{ inputs.theme }}"
+        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts \
+          "${{ inputs.username }}" \
+          "${{ inputs.output_path }}" \
+          "${{ inputs.theme }}" \
+          "${{ inputs.title }}" \
+          "${{ inputs.column }}" \
+          "${{ inputs.no_frame }}" \
+          "${{ inputs.no_bg }}"

@@ -3,10 +3,14 @@ import "https://deno.land/x/dotenv@v0.5.0/load.ts";
 const username = Deno.args[0];
 const outputPath = Deno.args[1] ?? "./assets/trophy.svg";
 const themeName = Deno.args[2] ?? "default";
+const titleArg = Deno.args[3] ?? "";
+const columnArg = Deno.args[4] ?? "-1";
+const noFrameArg = Deno.args[5] ?? "false";
+const noBgArg = Deno.args[6] ?? "false";
 
 if (!username) {
   console.error(
-    "Usage: deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME [OUTPUT_PATH] [THEME]",
+    "Usage: deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME [OUTPUT_PATH] [THEME] [TITLE] [COLUMN] [NO_FRAME] [NO_BG]",
   );
   Deno.exit(1);
 }
@@ -14,12 +18,20 @@ if (!username) {
 import { GithubApiService } from "./src/Services/GithubApiService.ts";
 import { Card } from "./src/card.ts";
 import { COLORS } from "./src/theme.ts";
+import { CONSTANTS } from "./src/utils.ts";
 
 async function main() {
   console.log("Starting trophy render...");
   console.log("Username:", username);
   console.log("Output path:", outputPath);
   console.log("Theme:", themeName);
+
+  const titles: Array<string> = titleArg
+    ? titleArg.split(",").map((t) => t.trim()).filter((t) => t.length > 0)
+    : [];
+  const maxColumn = parseInt(columnArg);
+  const noFrame = noFrameArg === "true";
+  const noBackground = noBgArg === "true";
 
   const svc = new GithubApiService();
 
@@ -36,22 +48,14 @@ async function main() {
 
   const userInfo = userInfoOrError as any;
 
-  const panelSize = 115;
-  const maxRow = 10;
-  const maxColumn = -1; // auto
-  const marginWidth = 10;
-  const marginHeight = 10;
-  const noBackground = false;
-  const noFrame = false;
-
   const card = new Card(
+    titles,
     [],
-    [],
-    maxColumn,
-    maxRow,
-    panelSize,
-    marginWidth,
-    marginHeight,
+    isNaN(maxColumn) ? -1 : maxColumn,
+    CONSTANTS.DEFAULT_MAX_ROW,
+    CONSTANTS.DEFAULT_PANEL_SIZE,
+    CONSTANTS.DEFAULT_MARGIN_W,
+    CONSTANTS.DEFAULT_MARGIN_H,
     noBackground,
     noFrame,
   );
