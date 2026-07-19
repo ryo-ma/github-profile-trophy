@@ -29,7 +29,7 @@ async function main() {
   const titles: Array<string> = titleArg
     ? titleArg.split(",").map((t) => t.trim()).filter((t) => t.length > 0)
     : [];
-  const maxColumn = parseInt(columnArg);
+  const maxColumn = parseInt(columnArg, 10);
   const noFrame = noFrameArg === "true";
   const noBackground = noBgArg === "true";
 
