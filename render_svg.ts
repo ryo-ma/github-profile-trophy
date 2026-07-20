@@ -5,7 +5,7 @@ import { CONSTANTS } from "./src/utils.ts";
 import { GithubApiService } from "./src/Services/GithubApiService.ts";
 
 const username = Deno.args[0];
-const outputPath = Deno.args[1] ?? "trophy.svg";
+const outputPath = Deno.args[1] ?? "./assets/trophy.svg";
 const themeName = Deno.args[2] ?? "default";
 const titleArg = Deno.args[3] ?? "";
 const columnArg = Deno.args[4] ?? String(CONSTANTS.DEFAULT_MAX_COLUMN);
