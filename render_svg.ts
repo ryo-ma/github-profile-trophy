@@ -1,12 +1,16 @@
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
+import { COLORS } from "./src/theme.ts";
+import { Card } from "./src/card.ts";
+import { CONSTANTS } from "./src/utils.ts";
+import { GithubApiService } from "./src/Services/GithubApiService.ts";
 
 const username = Deno.args[0];
-const outputPath = Deno.args[1] ?? "./assets/trophy.svg";
+const outputPath = Deno.args[1] ?? "trophy.svg";
 const themeName = Deno.args[2] ?? "default";
 const titleArg = Deno.args[3] ?? "";
-const columnArg = Deno.args[4] ?? "-1";
-const noFrameArg = Deno.args[5] ?? "false";
-const noBgArg = Deno.args[6] ?? "false";
+const columnArg = Deno.args[4] ?? String(CONSTANTS.DEFAULT_MAX_COLUMN);
+const noFrameArg = Deno.args[5] ?? String(CONSTANTS.DEFAULT_NO_FRAME);
+const noBgArg = Deno.args[6] ?? String(CONSTANTS.DEFAULT_NO_BACKGROUND);
 
 if (!username) {
   console.error(
@@ -14,11 +18,6 @@ if (!username) {
   );
   Deno.exit(1);
 }
-
-import { GithubApiService } from "./src/Services/GithubApiService.ts";
-import { Card } from "./src/card.ts";
-import { COLORS } from "./src/theme.ts";
-import { CONSTANTS } from "./src/utils.ts";
 
 async function main() {
   console.log("Starting trophy render...");
@@ -51,7 +50,7 @@ async function main() {
   const card = new Card(
     titles,
     [],
-    isNaN(maxColumn) ? -1 : maxColumn,
+    isNaN(maxColumn) ? CONSTANTS.DEFAULT_MAX_COLUMN : maxColumn,
     CONSTANTS.DEFAULT_MAX_ROW,
     CONSTANTS.DEFAULT_PANEL_SIZE,
     CONSTANTS.DEFAULT_MARGIN_W,
