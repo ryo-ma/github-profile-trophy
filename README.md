@@ -594,7 +594,7 @@ given your username, (Enviroment Vars: See [env-example](env-example)).
 Usage:
 
 ```bash
-deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME OUTPUT_DIR THEME
+deno run --allow-net --allow-env --allow-read --allow-write ./render_svg.ts USERNAME [OUTPUT_PATH] [THEME] [TITLE] [COLUMN] [NO_FRAME] [NO_BG]
 ```
 
 ## Generate an svg inside Github CI (Workflow)
@@ -607,11 +607,17 @@ Usage:
 
 ```yaml
 - name: Generate trophy
-  uses: Erik-Donath/github-profile-trophy@feature/generate-svg
+  uses: ryo-ma/github-profile-trophy@master
   with:
     username: your-username
     output_path: trophy.svg
     token: ${{ secrets.GITHUB_TOKEN }}
+    # Optional inputs:
+    theme: default        # Theme name (default: "default")
+    title: Stars,Commits  # Comma-separated trophy titles to include (default: all)
+    column: 8             # Max columns (default: 8)
+    no_frame: false       # Disable trophy frame borders (default: false)
+    no_bg: false          # Disable card background (default: false)
 ```
 
 ## Self-hosting on Vercel
