@@ -607,7 +607,7 @@ Usage:
 
 ```yaml
 - name: Generate trophy
-  uses: ryo-ma/github-profile-trophy@master
+  uses: ryo-ma/github-profile-trophy@v1.0
   with:
     username: your-username
     output_path: trophy.svg
