@@ -4,6 +4,7 @@ inputs:
   username:
     description: "GitHub username to generate the trophy for"
     required: true
+    default: ${{ github.repository_owner }}
   output_path:
     description: "Output path to write the SVG"
     required: true
