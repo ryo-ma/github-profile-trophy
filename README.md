@@ -615,7 +615,7 @@ Usage:
     # Optional inputs:
     theme: default        # Theme name (default: "default")
     title: Stars,Commits  # Comma-separated trophy titles to include (default: all)
-    column: -1            # Max columns, -1 for auto (default: -1)
+    column: 8             # Max columns (default: 8)
     no_frame: false       # Disable trophy frame borders (default: false)
     no_bg: false          # Disable card background (default: false)
 ```
