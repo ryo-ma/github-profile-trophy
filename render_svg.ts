@@ -8,7 +8,7 @@ const username = Deno.args[0];
 const outputPath = Deno.args[1] ?? "./assets/trophy.svg";
 const themeName = Deno.args[2] ?? "default";
 const titleArg = Deno.args[3] ?? "";
-const columnArg = Deno.args[4] ?? String(CONSTANTS.DEFAULT_MAX_COLUMN);
+const columnArg = Deno.args[4];
 const noFrameArg = Deno.args[5] ?? String(CONSTANTS.DEFAULT_NO_FRAME);
 const noBgArg = Deno.args[6] ?? String(CONSTANTS.DEFAULT_NO_BACKGROUND);
 
@@ -28,7 +28,7 @@ async function main() {
   const titles: Array<string> = titleArg
     ? titleArg.split(",").map((t) => t.trim()).filter((t) => t.length > 0)
     : [];
-  const maxColumn = parseInt(columnArg, 10);
+  const maxColumn = columnArg ? parseInt(columnArg, 10) : titles.length;
   const noFrame = noFrameArg === "true";
   const noBackground = noBgArg === "true";
 
