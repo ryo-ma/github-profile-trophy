@@ -22,9 +22,8 @@ inputs:
     required: false
     default: ""
   column:
-    description: "Maximum number of columns (-1 for auto)"
+    description: "Maximum number of columns"
     required: false
-    default: "8"
   no_frame:
     description: "Disable trophy frame borders"
     required: false
