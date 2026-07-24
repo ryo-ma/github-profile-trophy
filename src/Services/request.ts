@@ -2,8 +2,6 @@ import { soxa } from "../../deps.ts";
 import {
   EServiceKindError,
   GithubError,
-  GithubErrorResponse,
-  GithubExceedError,
   QueryDefaultResponse,
   ServiceError,
 } from "../Types/index.ts";
@@ -27,17 +25,11 @@ export async function requestGithubData<T = unknown>(
       JSON.stringify(responseData.errors, null, 2),
     );
 
-    const isRateLimitExceeded = responseData.errors.some((error) =>
-      error.type?.includes(EServiceKindError.RATE_LIMIT)
-    );
-
     throw new ServiceError(
       responseData.errors
         .map((error) => error.message)
         .join("; "),
-      isRateLimitExceeded
-        ? EServiceKindError.RATE_LIMIT
-        : EServiceKindError.NOT_FOUND,
+      getGraphQLErrorKind(responseData.errors),
     );
   }
 
@@ -46,6 +38,22 @@ export async function requestGithubData<T = unknown>(
   }
 
   throw handleError(responseData);
+}
+
+function getGraphQLErrorKind(errors: GithubError[]): EServiceKindError {
+  const errorTypes = errors.map((error) => error.type);
+
+  if (
+    errorTypes.some((type) => type?.includes(EServiceKindError.RATE_LIMIT))
+  ) {
+    return EServiceKindError.RATE_LIMIT;
+  }
+
+  if (errorTypes.every((type) => type === EServiceKindError.NOT_FOUND)) {
+    return EServiceKindError.NOT_FOUND;
+  }
+
+  return EServiceKindError.UPSTREAM;
 }
 
 function handleError(

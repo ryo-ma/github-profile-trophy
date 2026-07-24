@@ -14,6 +14,8 @@ export class ServiceError extends Error {
         return 419;
       case EServiceKindError.NOT_FOUND:
         return 404;
+      case EServiceKindError.UPSTREAM:
+        return 502;
       default:
         return 400;
     }
