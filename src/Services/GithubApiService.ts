@@ -22,8 +22,8 @@ import { requestGithubData } from "./request.ts";
 
 // Need to be here - Exporting from another file makes array of null
 export const TOKENS = [
-  Deno.env.get("GITHUB_TOKEN1"),
-  Deno.env.get("GITHUB_TOKEN2"),
+  Deno.env.get("PAT_1"),
+  Deno.env.get("PAT_2"),
 ];
 
 export class GithubApiService extends GithubRepository {
@@ -94,7 +94,7 @@ export class GithubApiService extends GithubRepository {
         );
       });
     } catch (error) {
-      if (error.cause instanceof ServiceError) {
+      if (error instanceof Error && error.cause instanceof ServiceError) {
         Logger.error(error.cause.message);
         return error.cause;
       }

@@ -26,6 +26,6 @@ runs:
     - name: Generate trophy
       shell: bash
       env:
-        GITHUB_TOKEN1: ${{ inputs.token }}
+        PAT_1: ${{ inputs.token }}
       run: |
         deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}" "${{ inputs.theme }}"

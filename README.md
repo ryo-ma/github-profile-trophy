@@ -629,8 +629,8 @@ By self-hosting you avoid rate-limits, instances getting paused and you bypass t
 5. On Vercel's configure screen, add two environment variables and paste the token as the value of each — you can use the same token for both:
 
 ```
-GITHUB_TOKEN1=your_token
-GITHUB_TOKEN2=your_token
+PAT_1=your_token
+PAT_2=your_token
 ```
 
 6. After that you can deploy it.
