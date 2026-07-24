@@ -51,9 +51,7 @@ export const queryUserRepository = `
               name
             }
           }
-          stargazers {
-            totalCount
-          }
+          stargazerCount
           createdAt
         }
       }
@@ -93,9 +91,7 @@ export const queryUserAll = `
               name
             }
           }
-          stargazers {
-            totalCount
-          }
+          stargazerCount
           createdAt
         }
       }
