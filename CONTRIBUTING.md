@@ -13,8 +13,8 @@ Create `.env` file to project root directory, and write your GitHub token to the
 `.env` file. Please select the authority of `repo` when creating token.
 
 ```properties
-PAT_1=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-PAT_2=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+GITHUB_TOKEN1=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+GITHUB_TOKEN2=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 # if using GitHub Enterprise:
 # (this env var defaults to https://api.github.com/graphql)
