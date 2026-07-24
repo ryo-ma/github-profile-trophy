@@ -21,6 +21,26 @@ export async function requestGithubData<T = unknown>(
   }) as QueryDefaultResponse<{ user: T }>;
   const responseData = response.data;
 
+  if (responseData?.errors?.length) {
+    console.error(
+      "GitHub GraphQL errors:",
+      JSON.stringify(responseData.errors, null, 2),
+    );
+
+    const isRateLimitExceeded = responseData.errors.some((error) =>
+      error.type?.includes(EServiceKindError.RATE_LIMIT)
+    );
+
+    throw new ServiceError(
+      responseData.errors
+        .map((error) => error.message)
+        .join("; "),
+      isRateLimitExceeded
+        ? EServiceKindError.RATE_LIMIT
+        : EServiceKindError.NOT_FOUND,
+    );
+  }
+
   if (responseData?.data?.user) {
     return responseData.data.user;
   }
