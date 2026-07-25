@@ -6,6 +6,9 @@
     "lint": "deno lint",
     "test": "ENV_TYPE=test deno test --allow-env"
   },
+  "fmt": {
+    "indentWidth": 2
+  },
   "imports": {
     "@std/assert": "jsr:@std/assert@^1.0.19",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.7",

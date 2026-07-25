@@ -1,14 +1,14 @@
 {
-    "functions": {
-        "api/**/*.[jt]s": {
-            "runtime": "vercel-deno@3.1.1",
-            "maxDuration": 5
-        }
-    },
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/api/$1"
-        }
-    ]
+  "functions": {
+    "api/**/*.[jt]s": {
+      "runtime": "vercel-deno@3.1.1",
+      "maxDuration": 5
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
 }
