@@ -4,3 +4,4 @@
 deno.lock
 *.sh
 **/.DS_Store
+*.svg
