@@ -66,7 +66,7 @@ async function app(req: Request): Promise<Response> {
           <input type="text" name="theme" id="theme" placeholder="Ex. onedark" value="light">
           <text>
             See all the available themes
-            <a href="https://github.com/ryo-ma/github-profile-trophy?tab=readme-ov-file#apply-theme" target="_blank">here</a>
+            <a href="https://github.com/xploitoverload/github-profile-trophy?tab=readme-ov-file#apply-theme" target="_blank">here</a>
           </text>
           <br>
           <button type="submit">Get Trophies</button>
