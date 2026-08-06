@@ -1,5 +1,6 @@
 import { RANK } from "./utils.ts";
 import { Theme } from "./theme.ts";
+import trophyStyles from "./TrophyStyles/index.ts";
 
 const leafIcon = (laurel: string): string => {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="90pt" height="90pt" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
@@ -88,7 +89,7 @@ const getSmallTrophyIcon = (
   // Single Rank
   return "";
 };
-export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN) => {
+export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN, trophyStyle: string | null = null) => {
   let color = theme.DEFAULT_RANK_BASE;
   let rankColor = theme.DEFAULT_RANK_TEXT;
   let backgroundIcon = "";
@@ -138,21 +139,29 @@ export const getTrophyIcon = (theme: Theme, rank = RANK.UNKNOWN) => {
     <path fill-rule="evenodd" d="M12.5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm-6-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 2a3 3 0 1 1 6 0 3 3 0 0 1-6 0z"/>
     <path d="M3 1h10c-.495 3.467-.5 10-5 10S3.495 4.467 3 1zm0 15a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1H3zm2-1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1H5z"/>
     <circle cx="8" cy="6" r="4" fill="${ICON_CIRCLE}" />
-    <text x="6" y="8" font-family="Courier, Monospace" font-size="7" fill="${rankColor}">${
-    rank.slice(0, 1)
-  }</text>
+    <text x="6" y="8" font-family="Courier, Monospace" font-size="7" fill="${rankColor}">${rank.slice(0, 1)
+    }</text>
   `;
   const optionRankIcon = getSmallTrophyIcon(icon, color, rank.length - 1);
   return `
-  ${backgroundIcon}
-  ${optionRankIcon}
-  <defs>
-    <linearGradient id="${rank}" gradientTransform="rotate(45)">
-    ${gradationColor}
-    </linearGradient>
-  </defs>
-  <svg x="28" y="20" width="100" height="100" viewBox="0 0 30 30" fill="url(#${rank})" xmlns="http://www.w3.org/2000/svg">
-    ${icon}
-  </svg>
+  ${trophyStyle ?
+    // custom trophy style
+    `
+    ${trophyStyles[trophyStyle][rank]}
+    `
+    :
+    // default trophy style
+    `
+    ${backgroundIcon}
+    ${optionRankIcon}
+    <defs>
+      <linearGradient id="${rank}" gradientTransform="rotate(45)">
+      ${gradationColor}
+      </linearGradient>
+    </defs>
+    <svg x="28" y="20" width="100" height="100" viewBox="0 0 30 30" fill="url(#${rank})" xmlns="http://www.w3.org/2000/svg">
+      ${icon}
+    </svg>
+    `}
   `;
 };
