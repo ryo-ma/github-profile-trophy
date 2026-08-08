@@ -110,7 +110,47 @@ export class MultipleLangTrophy extends Trophy {
       new RankCondition(
         RANK.SECRET,
         "Rainbow Lang User",
-        10,
+        50,
+      ),
+      new RankCondition(
+        RANK.SSS,
+        "Lengendary Polyglot",
+        40,
+      ),
+      new RankCondition(
+        RANK.SS,
+        "Master Polyglot",
+        30,
+      ),
+      new RankCondition(
+        RANK.S,
+        "Expert Polyglot",
+        25
+      ),
+      new RankCondition(
+        RANK.AAA,
+        "Fluent",
+        20
+      ),
+      new RankCondition(
+        RANK.AA,
+        "Versatile Coder",
+        15
+      ),
+      new RankCondition(
+        RANK.A,
+        "Language Explorer",
+        10
+      ),
+      new RankCondition(
+        RANK.B,
+        "Learning the Languages",
+        5
+      ),
+      new RankCondition(
+        RANK.C,
+        "Bilingual",
+        2,
       ),
     ];
     super(score, rankConditions);
