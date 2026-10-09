@@ -5,5 +5,8 @@
     "format": "deno fmt",
     "lint": "deno lint",
     "test": "ENV_TYPE=test deno test --allow-env"
+  },
+  "imports": {
+    "@std/dotenv": "jsr:@std/dotenv@^0.224.0"
   }
 }

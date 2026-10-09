@@ -1,8 +1,7 @@
 type Language = { name: string };
-type Stargazers = { totalCount: number };
 type Repository = {
   languages: { nodes: Language[] };
-  stargazers: Stargazers;
+  stargazerCount: number;
   createdAt: string;
 };
 export type GitHubUserRepository = {
@@ -41,6 +40,12 @@ export type GitHubUserActivity = {
     totalCount: number;
   };
 };
+
+export type GitHubUserAll =
+  & GitHubUserActivity
+  & GitHubUserIssue
+  & GitHubUserPullRequest
+  & GitHubUserRepository;
 export class UserInfo {
   public readonly totalCommits: number;
   public readonly totalFollowers: number;
@@ -56,6 +61,11 @@ export class UserInfo {
   public readonly ancientAccount: number;
   public readonly joined2020: number;
   public readonly ogAccount: number;
+
+  static fromCombined(data: GitHubUserAll): UserInfo {
+    return new UserInfo(data, data, data, data);
+  }
+
   constructor(
     userActivity: GitHubUserActivity,
     userIssue: GitHubUserIssue,
@@ -67,7 +77,7 @@ export class UserInfo {
       userActivity.contributionsCollection.totalCommitContributions;
     const totalStargazers = userRepository.repositories.nodes.reduce(
       (prev: number, node: Repository) => {
-        return prev + node.stargazers.totalCount;
+        return prev + node.stargazerCount;
       },
       0,
     );

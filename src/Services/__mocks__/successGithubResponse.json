@@ -13,9 +13,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 23
-              }
+              "stargazerCount": 23
             },
             {
               "languages": {
@@ -25,9 +23,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 11
-              }
+              "stargazerCount": 11
             },
             {
               "languages": {
@@ -37,9 +33,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 9
-              }
+              "stargazerCount": 9
             },
             {
               "languages": {
@@ -49,9 +43,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 6
-              }
+              "stargazerCount": 6
             },
             {
               "languages": {
@@ -61,9 +53,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 6
-              }
+              "stargazerCount": 6
             },
             {
               "languages": {
@@ -73,9 +63,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 5
-              }
+              "stargazerCount": 5
             },
             {
               "languages": {
@@ -85,9 +73,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 5
-              }
+              "stargazerCount": 5
             },
             {
               "languages": {
@@ -97,9 +83,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 5
-              }
+              "stargazerCount": 5
             },
             {
               "languages": {
@@ -109,9 +93,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 4
-              }
+              "stargazerCount": 4
             },
             {
               "languages": {
@@ -121,9 +103,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 3
-              }
+              "stargazerCount": 3
             },
             {
               "languages": {
@@ -133,9 +113,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 2
-              }
+              "stargazerCount": 2
             },
             {
               "languages": {
@@ -145,9 +123,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 2
-              }
+              "stargazerCount": 2
             },
             {
               "languages": {
@@ -157,17 +133,13 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 2
-              }
+              "stargazerCount": 2
             },
             {
               "languages": {
                 "nodes": []
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -177,9 +149,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -195,9 +165,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -213,9 +181,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -225,27 +191,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
-            },
-            {
-              "languages": {
-                "nodes": [
-                  {
-                    "name": "TypeScript"
-                  },
-                  {
-                    "name": "JavaScript"
-                  },
-                  {
-                    "name": "Dockerfile"
-                  }
-                ]
-              },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -261,9 +207,23 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
+            },
+            {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "TypeScript"
+                  },
+                  {
+                    "name": "JavaScript"
+                  },
+                  {
+                    "name": "Dockerfile"
+                  }
+                ]
+              },
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -279,9 +239,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -294,9 +252,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -312,9 +268,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -327,9 +281,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -345,9 +297,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -363,9 +313,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -375,9 +323,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 1
-              }
+              "stargazerCount": 1
             },
             {
               "languages": {
@@ -393,9 +339,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -411,9 +355,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -429,25 +371,19 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
                 "nodes": []
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
                 "nodes": []
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -463,9 +399,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -475,9 +409,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -487,9 +419,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -505,9 +435,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -523,17 +451,13 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
                 "nodes": []
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -546,9 +470,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -564,9 +486,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -582,9 +502,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -597,9 +515,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -615,9 +531,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -633,9 +547,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -651,9 +563,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -669,9 +579,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -687,9 +595,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -699,9 +605,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -714,9 +618,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -732,9 +634,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -744,9 +644,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -759,9 +657,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -771,9 +667,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -783,9 +677,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -801,9 +693,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -819,9 +709,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -831,9 +719,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -846,9 +732,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -864,9 +748,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -882,9 +764,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -894,17 +774,13 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
                 "nodes": []
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -917,9 +793,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -935,9 +809,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -953,9 +825,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -971,9 +841,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -989,9 +857,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1001,9 +867,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1019,9 +883,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1031,9 +893,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1049,9 +909,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1064,9 +922,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1079,9 +935,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1097,9 +951,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1115,9 +967,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1133,9 +983,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1145,9 +993,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1163,9 +1009,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1175,9 +1019,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1193,9 +1035,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1211,9 +1051,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1223,9 +1061,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1238,9 +1074,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1250,9 +1084,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1268,9 +1100,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1283,9 +1113,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1301,9 +1129,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1319,9 +1145,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1337,9 +1161,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1355,9 +1177,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1373,9 +1193,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1391,9 +1209,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1409,9 +1225,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1427,9 +1241,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1445,9 +1257,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1463,9 +1273,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1481,9 +1289,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1493,9 +1299,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1511,9 +1315,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             },
             {
               "languages": {
@@ -1529,9 +1331,7 @@
                   }
                 ]
               },
-              "stargazers": {
-                "totalCount": 0
-              }
+              "stargazerCount": 0
             }
           ]
         }

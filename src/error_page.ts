@@ -128,3 +128,8 @@ export class Error404 extends BaseError {
   readonly status = 404;
   readonly message = "Not Found";
 }
+
+export class Error502 extends BaseError {
+  readonly status = 502;
+  readonly message = "Bad Gateway";
+}
