@@ -616,6 +616,17 @@ Usage:
     username: your-username
     output_path: trophy.svg
     token: ${{ secrets.GITHUB_TOKEN }}
+    # optional
+    theme: default
+    max-cols: 6
+    max-rows: 10
+    margin-width: 10
+    margin-height: 10
+    panel-size: 115
+    no-bg: false
+    no-frame: false
+    title: Stars,-Followers
+    rank: -C,-B
 ```
 
 ## Self-hosting on Vercel

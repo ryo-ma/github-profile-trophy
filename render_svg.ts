@@ -14,6 +14,10 @@ if (!username) {
 import { GithubApiService } from "./src/Services/GithubApiService.ts";
 import { Card } from "./src/card.ts";
 import { COLORS } from "./src/theme.ts";
+import {
+  outputDirectory,
+  readRenderOptions,
+} from "./src/Helpers/renderOptions.ts";
 
 async function main() {
   console.log("Starting trophy render...");
@@ -36,17 +40,21 @@ async function main() {
 
   const userInfo = userInfoOrError as any;
 
-  const panelSize = 115;
-  const maxRow = 10;
-  const maxColumn = -1; // auto
-  const marginWidth = 10;
-  const marginHeight = 10;
-  const noBackground = false;
-  const noFrame = false;
+  const {
+    panelSize,
+    maxRow,
+    maxColumn,
+    marginWidth,
+    marginHeight,
+    noBackground,
+    noFrame,
+    titles,
+    ranks,
+  } = readRenderOptions();
 
   const card = new Card(
-    [],
-    [],
+    titles,
+    ranks,
     maxColumn,
     maxRow,
     panelSize,
@@ -59,7 +67,7 @@ async function main() {
   const svg = card.render(userInfo, theme);
 
   try {
-    const dir = outputPath.replace(/\/[^/]+$/, "");
+    const dir = outputDirectory(outputPath);
     if (dir) await Deno.mkdir(dir, { recursive: true });
   } catch {
     console.error("Failed to create directory. No permission?");

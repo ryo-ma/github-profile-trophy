@@ -15,6 +15,42 @@ inputs:
     description: "Theme for the card"
     required: false
     default: "default"
+  max-cols:
+    description: "Maximum number of columns (-1 = one row with every trophy)"
+    required: false
+    default: "-1"
+  max-rows:
+    description: "Maximum number of rows"
+    required: false
+    default: "10"
+  margin-width:
+    description: "Horizontal gap between trophies, in px"
+    required: false
+    default: "10"
+  margin-height:
+    description: "Vertical gap between trophies, in px"
+    required: false
+    default: "10"
+  panel-size:
+    description: "Size of each trophy panel, in px"
+    required: false
+    default: "115"
+  no-bg:
+    description: "Set to true for a transparent background"
+    required: false
+    default: "false"
+  no-frame:
+    description: "Set to true to hide the trophy frames"
+    required: false
+    default: "false"
+  title:
+    description: "Comma-separated trophy titles to include (prefix with - to exclude)"
+    required: false
+    default: ""
+  rank:
+    description: "Comma-separated ranks to include (prefix with - to exclude)"
+    required: false
+    default: ""
 runs:
   using: "composite"
   steps:
@@ -27,5 +63,14 @@ runs:
       shell: bash
       env:
         GITHUB_TOKEN1: ${{ inputs.token }}
+        TROPHY_MAX_COLS: ${{ inputs.max-cols }}
+        TROPHY_MAX_ROWS: ${{ inputs.max-rows }}
+        TROPHY_MARGIN_WIDTH: ${{ inputs.margin-width }}
+        TROPHY_MARGIN_HEIGHT: ${{ inputs.margin-height }}
+        TROPHY_PANEL_SIZE: ${{ inputs.panel-size }}
+        TROPHY_NO_BG: ${{ inputs.no-bg }}
+        TROPHY_NO_FRAME: ${{ inputs.no-frame }}
+        TROPHY_TITLE: ${{ inputs.title }}
+        TROPHY_RANK: ${{ inputs.rank }}
       run: |
         deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}" "${{ inputs.theme }}"
