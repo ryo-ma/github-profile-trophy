@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        deno-version: ["1.44.4"]
+        deno-version: ["1.44.4", "2.x"]
 
     steps:
       # Step 1: Checkout repository
@@ -24,7 +24,7 @@ jobs:
 
       # Step 2: Setup Deno
       - name: Setup Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
           deno-version: ${{ matrix.deno-version }}
 
@@ -37,9 +37,9 @@ jobs:
       - name: Deno format check
         run: deno fmt --check
 
-      # Step 5: Lint check (won't fail workflow)
+      # Step 5: Lint check
       - name: Deno lint check
-        run: deno lint || true
+        run: deno lint
 
       # Step 6: Run tests
       - name: Test Deno Module
