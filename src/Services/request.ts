@@ -11,8 +11,7 @@ export async function requestGithubData<T = unknown>(
   variables: { [key: string]: string },
   token = "",
 ) {
-  const response = await soxa.post("", {}, {
-    data: { query, variables },
+  const response = await soxa.post("", { query, variables }, {
     headers: {
       Authorization: `bearer ${token}`,
     },

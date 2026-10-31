@@ -19,6 +19,7 @@ import { CONSTANTS } from "../utils.ts";
 import { EServiceKindError, ServiceError } from "../Types/index.ts";
 import { Logger } from "../Helpers/Logger.ts";
 import { requestGithubData } from "./request.ts";
+import { safeErrorMessage } from "../Helpers/safeErrorMessage.ts";
 
 // Need to be here - Exporting from another file makes array of null
 export const TOKENS = [
@@ -71,8 +72,9 @@ export class GithubApiService extends GithubRepository {
         return result;
       }
       return UserInfo.fromCombined(result);
-    } catch {
+    } catch (error) {
       Logger.error(`Error fetching user info for username: ${username}`);
+      Logger.error(safeErrorMessage(error));
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
     }
   }
@@ -98,11 +100,10 @@ export class GithubApiService extends GithubRepository {
         Logger.error(error.cause.message);
         return error.cause;
       }
-      if (error instanceof Error && error.cause) {
-        Logger.error(JSON.stringify(error.cause, null, 2));
-      } else {
-        Logger.error(error);
-      }
+      const cause = error instanceof Error && error.cause
+        ? error.cause
+        : error;
+      Logger.error(safeErrorMessage(cause));
       return new ServiceError("not found", EServiceKindError.NOT_FOUND);
     }
   }

@@ -1,5 +1,6 @@
 import { ServiceError } from "../Types/index.ts";
 import { Logger } from "./Logger.ts";
+import { safeErrorMessage } from "./safeErrorMessage.ts";
 
 export type RetryCallbackProps = {
   attempt: number;
@@ -25,7 +26,7 @@ async function* createAsyncIterable<T>(
       }
 
       yield null;
-      Logger.error(e);
+      Logger.error(safeErrorMessage(e));
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
