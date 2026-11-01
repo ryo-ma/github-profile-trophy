@@ -74,3 +74,42 @@ Deno.test("readRenderOptions falls back on non-numeric values", () => {
   assertEquals(options.maxColumn, -1);
   assertEquals(options.noBackground, false);
 });
+
+Deno.test("readRenderOptions falls back on out-of-range values", () => {
+  // Regression: max-cols 0 caused division/modulo by zero in Card, and
+  // negative sizes produced invalid SVG dimensions.
+  const options = readRenderOptions(envOf({
+    TROPHY_MAX_COLS: "0",
+    TROPHY_MAX_ROWS: "-2",
+    TROPHY_PANEL_SIZE: "-100",
+    TROPHY_MARGIN_WIDTH: "-1",
+    TROPHY_MARGIN_HEIGHT: "100000",
+  }));
+  assertEquals(options.maxColumn, -1);
+  assertEquals(options.maxRow, 10);
+  assertEquals(options.panelSize, 115);
+  assertEquals(options.marginWidth, 10);
+  assertEquals(options.marginHeight, 10);
+});
+
+Deno.test("readRenderOptions falls back on fractional values", () => {
+  const options = readRenderOptions(envOf({
+    TROPHY_MAX_COLS: "2.5",
+    TROPHY_PANEL_SIZE: "99.9",
+  }));
+  assertEquals(options.maxColumn, -1);
+  assertEquals(options.panelSize, 115);
+});
+
+Deno.test("readRenderOptions accepts -1 and range bounds", () => {
+  const options = readRenderOptions(envOf({
+    TROPHY_MAX_COLS: "-1",
+    TROPHY_MAX_ROWS: "1",
+    TROPHY_PANEL_SIZE: "1000",
+    TROPHY_MARGIN_WIDTH: "0",
+  }));
+  assertEquals(options.maxColumn, -1);
+  assertEquals(options.maxRow, 1);
+  assertEquals(options.panelSize, 1000);
+  assertEquals(options.marginWidth, 0);
+});

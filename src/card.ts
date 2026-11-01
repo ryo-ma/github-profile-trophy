@@ -44,6 +44,19 @@ export class Card {
 
     trophyList.sortByRank();
 
+    // Filters can remove every trophy, render an empty card instead of
+    // computing dimensions from a zero column/row count.
+    if (trophyList.length === 0) {
+      return `
+    <svg
+      width="0"
+      height="0"
+      viewBox="0 0 0 0"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    ></svg>`;
+    }
+
     if (this.maxColumn == -1) {
       this.maxColumn = trophyList.length;
       this.width = this.panelSize * this.maxColumn +
@@ -77,7 +90,10 @@ export class Card {
   }
 
   private renderTrophy(trophyList: TrophyList, theme: Theme) {
-    return trophyList.getArray.reduce(
+    // Only render what fits in maxColumn x maxRow, the rest would sit
+    // outside the viewport set by getHeight().
+    const capacity = this.maxColumn * this.maxRow;
+    return trophyList.getArray.slice(0, capacity).reduce(
       (sum: string, trophy: Trophy, i: number) => {
         const currentColumn = i % this.maxColumn;
         const currentRow = Math.floor(i / this.maxColumn);

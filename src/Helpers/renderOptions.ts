@@ -14,11 +14,30 @@ export interface RenderOptions {
 
 type EnvGetter = (name: string) => string | undefined;
 
-function readNumber(get: EnvGetter, name: string, fallback: number): number {
+// Reads an integer in [min, max]. Anything else (non-numeric, fractional,
+// out of range) falls back, since values like 0 columns or negative sizes
+// break the layout math in Card.
+function readInteger(
+  get: EnvGetter,
+  name: string,
+  fallback: number,
+  min: number,
+  max: number,
+  allowed: Array<number> = [],
+): number {
   const value = get(name)?.trim();
   if (!value) return fallback;
   const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : fallback;
+  if (
+    Number.isInteger(parsed) &&
+    ((parsed >= min && parsed <= max) || allowed.includes(parsed))
+  ) {
+    return parsed;
+  }
+  console.warn(
+    `Ignoring invalid ${name}="${value}"; using default ${fallback}.`,
+  );
+  return fallback;
 }
 
 function readBoolean(get: EnvGetter, name: string): boolean {
@@ -35,11 +54,12 @@ export function readRenderOptions(
   get: EnvGetter = (name) => Deno.env.get(name),
 ): RenderOptions {
   return {
-    panelSize: readNumber(get, "TROPHY_PANEL_SIZE", 115),
-    maxRow: readNumber(get, "TROPHY_MAX_ROWS", 10),
-    maxColumn: readNumber(get, "TROPHY_MAX_COLS", -1), // -1 = auto
-    marginWidth: readNumber(get, "TROPHY_MARGIN_WIDTH", 10),
-    marginHeight: readNumber(get, "TROPHY_MARGIN_HEIGHT", 10),
+    panelSize: readInteger(get, "TROPHY_PANEL_SIZE", 115, 1, 1000),
+    maxRow: readInteger(get, "TROPHY_MAX_ROWS", 10, 1, 100),
+    // -1 = auto (one row with every trophy)
+    maxColumn: readInteger(get, "TROPHY_MAX_COLS", -1, 1, 100, [-1]),
+    marginWidth: readInteger(get, "TROPHY_MARGIN_WIDTH", 10, 0, 500),
+    marginHeight: readInteger(get, "TROPHY_MARGIN_HEIGHT", 10, 0, 500),
     noBackground: readBoolean(get, "TROPHY_NO_BG"),
     noFrame: readBoolean(get, "TROPHY_NO_FRAME"),
     titles: readList(get, "TROPHY_TITLE"),
