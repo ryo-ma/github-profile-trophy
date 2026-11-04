@@ -89,7 +89,7 @@ export class Trophy {
             rx="4.5"
             width="${panelSize - 1}"
             height="${panelSize - 1}"
-            stroke="#e1e4e8"
+            stroke="${theme.FRAME}"
             fill="${PRIMARY}"
             stroke-opacity="${noFrame ? "0" : "1"}"
             fill-opacity="${noBackground ? "0" : "1"}"
