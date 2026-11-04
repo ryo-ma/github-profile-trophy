@@ -43,9 +43,9 @@ export function abridgeScore(score: number): string {
     return "0pt";
   }
   if (Math.abs(score) > 999) {
-    return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "kpt";
+    return (Math.sign(score) * (Math.abs(score) / 1000)).toFixed(1) + "kpts";
   }
-  return (Math.sign(score) * Math.abs(score)).toString() + "pt";
+  return (Math.sign(score) * Math.abs(score)).toString() + "pt" + (Math.abs(score) > 1 ? "s" : "");
 }
 
 const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
