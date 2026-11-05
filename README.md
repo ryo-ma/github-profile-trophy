@@ -78,6 +78,7 @@ These are endpoints provided by volunteers. Please use these in moderation.
 - [https://github-profile-trophy-unserori.vercel.app/](https://github-profile-trophy-unserori.vercel.app/)
   by [unSerori](https://github.com/unSerori)
 - [https://github-profile-trophy-beryl-three.vercel.app/](https://github-profile-trophy-beryl-three.vercel.app/) by [externalPointerVariable](https://github.com/externalPointerVariable)
+- [https://github-trophy-jagratadeb.vercel.app](https://github-trophy-jagratadeb.vercel.app) by [Jagrata Deb](https://github.com/jagratadeb)
 
 # Quick Start
 
