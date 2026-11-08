@@ -601,6 +601,17 @@ export const COLORS: { [name: string]: Theme } = {
   },
 };
 
+// Theme aliases for ecosystem compatibility
+COLORS["one-dark"] = COLORS.onedark;
+COLORS["one_dark"] = COLORS.onedark;
+COLORS["tokyo-night"] = COLORS.tokyonight;
+COLORS["tokyo_night"] = COLORS.tokyonight;
+COLORS["dark-dimmed"] = COLORS.dark_dimmed;
+COLORS["dark-lover"] = COLORS.dark_lover;
+COLORS["kimbie-dark"] = COLORS.kimbie_dark;
+COLORS["juicy-fresh"] = COLORS.juicyfresh;
+COLORS["git-dimmed"] = COLORS.gitdimmed;
+
 export interface Theme {
   BACKGROUND: string;
   TITLE: string;
