@@ -57,7 +57,6 @@ jobs:
     timeout-minutes: 15
     environment:
       name: Production
-      url: ${{ steps.deploy.outputs.url }}
     env:
       VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID || secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID || secrets.VERCEL_PROJECT_ID }}
@@ -148,46 +147,9 @@ jobs:
         run: vercel build --prod --token="$VERCEL_TOKEN"
 
       - name: Deploy production artifacts
-        id: deploy
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          import json
-          import os
-          import subprocess
-          import sys
-          from pathlib import Path
-          from urllib.parse import urlsplit
-
-          result = subprocess.run([
-              "vercel", "deploy", "--prebuilt", "--prod", "--yes", "--json",
-              "--token=" + os.environ["VERCEL_TOKEN"],
-          ], capture_output=True, text=True)
-          try:
-              if result.returncode:
-                  raise ValueError("Deployment failed")
-              try:
-                  payload = json.loads(result.stdout)
-              except ValueError:
-                  payload = {"url": result.stdout.strip()}
-              url = payload.get("url") or payload.get("deployment", {}).get("url")
-              if not isinstance(url, str) or any(char.isspace() for char in url):
-                  raise ValueError("Missing deployment URL")
-              if "://" not in url:
-                  url = "https://" + url
-              parsed = urlsplit(url)
-              if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
-                  raise ValueError("Invalid deployment URL")
-          except (ValueError, TypeError, AttributeError):
-              print("::error::Vercel deployment failed or returned an invalid result. Check the Vercel deployment logs.")
-              sys.exit(1)
-          with Path(os.environ["GITHUB_OUTPUT"]).open("a") as output:
-              output.write(f"url={url}\n")
-          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as summary:
-              summary.write(f"Production deployment: {url}\nCommit: {os.environ['GITHUB_SHA']}\n")
-          PY
+        run: vercel deploy --prebuilt --prod --yes --token="$VERCEL_TOKEN"
 
       - name: Remove downloaded environment files
         if: always()

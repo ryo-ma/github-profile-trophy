@@ -47,8 +47,8 @@ project is linked locally, `.vercel/project.json` contains `projectId` and
 
 After saving these settings, open **Actions > Project checks and deployment >
 Run workflow**, select `master`, and start it. Subsequent pushes to `master`
-deploy automatically. The job summary and GitHub's `Production` environment link
-to the resulting deployment.
+deploy automatically. The deployment URL appears in the deploy job's Vercel
+output.
 
 The workflow uses a pinned Vercel CLI, pulls the existing project's Production
 settings, builds once, and uploads the prebuilt output. It checks metadata for
