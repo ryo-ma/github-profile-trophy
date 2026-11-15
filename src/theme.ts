@@ -432,28 +432,30 @@ export const COLORS: { [name: string]: Theme } = {
     DEFAULT_RANK_TEXT: "#0d1117",
   },
   tokyonight: {
-    BACKGROUND: "#1a1b27",
-    TITLE: "#70a5fd",
-    ICON_CIRCLE: "#bf91f3",
-    TEXT: "#38bdae",
-    LAUREL: "#178600",
-    SECRET_RANK_1: "#ff5555",
-    SECRET_RANK_2: "#ff79c6",
-    SECRET_RANK_3: "#388bfd",
-    SECRET_RANK_TEXT: "#ff79c6",
-    NEXT_RANK_BAR: "#00aeff",
-    S_RANK_BASE: "#ffb86c",
-    S_RANK_SHADOW: "#ffb86c",
-    S_RANK_TEXT: "#0d1117",
-    A_RANK_BASE: "#2dde98",
-    A_RANK_TEXT: "#0d1117",
-    A_RANK_SHADOW: "#2dde98",
-    B_RANK_BASE: "#8be9fd",
-    B_RANK_SHADOW: "#8be9fd",
-    B_RANK_TEXT: "#0d1117",
-    DEFAULT_RANK_BASE: "#5c75c3",
-    DEFAULT_RANK_SHADOW: "#6272a4",
-    DEFAULT_RANK_TEXT: "#0d1117",
+    STYLE: "blue",
+    FRAME: "#1c4058",
+    BACKGROUND: "#09111f",
+    TITLE: "#46d9ff",
+    ICON_CIRCLE: "#d6f6ff",
+    TEXT: "#b8cde0",
+    LAUREL: "#2785b0",
+    SECRET_RANK_1: "#e5fbff",
+    SECRET_RANK_2: "#36d5ff",
+    SECRET_RANK_3: "#087bd9",
+    SECRET_RANK_TEXT: "#e5fbff",
+    NEXT_RANK_BAR: "#22ceff",
+    S_RANK_BASE: "#62e3ff",
+    S_RANK_SHADOW: "#0784d4",
+    S_RANK_TEXT: "#e5fbff",
+    A_RANK_BASE: "#32ceff",
+    A_RANK_SHADOW: "#0873c9",
+    A_RANK_TEXT: "#e5fbff",
+    B_RANK_BASE: "#24b6ed",
+    B_RANK_SHADOW: "#1264a5",
+    B_RANK_TEXT: "#e5fbff",
+    DEFAULT_RANK_BASE: "#4498c7",
+    DEFAULT_RANK_SHADOW: "#235477",
+    DEFAULT_RANK_TEXT: "#e5fbff",
   },
   matrix: {
     BACKGROUND: "#000000",
@@ -602,6 +604,8 @@ export const COLORS: { [name: string]: Theme } = {
 };
 
 export interface Theme {
+  STYLE?: "blue";
+  FRAME?: string;
   BACKGROUND: string;
   TITLE: string;
   ICON_CIRCLE: string;

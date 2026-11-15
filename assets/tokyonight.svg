@@ -1,0 +1,391 @@
+<svg
+      width="1070"
+      height="110"
+      viewBox="0 0 1070 110"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <svg x="0" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-MultiLanguage-0-0-title">
+    <title id="blue-MultiLanguage-0-0-title">MultiLanguage: SECRET, Rainbow Lang User, 13pt</title>
+    <defs>
+      <linearGradient id="blue-MultiLanguage-0-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-MultiLanguage-0-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#36d5ff" stop-opacity="0.12"/><stop offset="1" stop-color="#36d5ff" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-MultiLanguage-0-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#e5fbff"/><stop offset="0.35" stop-color="#36d5ff"/><stop offset="1" stop-color="#087bd9"/>
+      </linearGradient>
+      <linearGradient id="blue-MultiLanguage-0-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#087bd9"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-MultiLanguage-0-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-MultiLanguage-0-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">MultiLanguage</text>
+
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#36d5ff" opacity="0.1"/>
+      <g stroke="url(#blue-MultiLanguage-0-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-MultiLanguage-0-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#e5fbff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#e5fbff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <path d="m55 35 5 7-5 8-5-8z" fill="#e5fbff"/>
+       <path d="m28 25 1.3 3.7L33 30l-3.7 1.3L28 35l-1.3-3.7L23 30l3.7-1.3zM81 34l1 3 3 1-3 1-1 3-1-3-3-1 3-1z" fill="#46d9ff" opacity="0.8"/>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">Rainbow Lang User</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">13pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="url(#blue-MultiLanguage-0-0-progress)"/>
+  </svg><svg x="120" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-Repositories-120-0-title">
+    <title id="blue-Repositories-120-0-title">Repositories: SSS, God Repo Creator, 70pt</title>
+    <defs>
+      <linearGradient id="blue-Repositories-120-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-Repositories-120-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#62e3ff" stop-opacity="0.12"/><stop offset="1" stop-color="#62e3ff" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-Repositories-120-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d6f6ff"/><stop offset="0.35" stop-color="#62e3ff"/><stop offset="1" stop-color="#0784d4"/>
+      </linearGradient>
+      <linearGradient id="blue-Repositories-120-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#0784d4"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-Repositories-120-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-Repositories-120-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">Repositories</text>
+      <g fill="none" stroke="#2785b0" stroke-width="1.2" stroke-linecap="round" opacity="0.75">
+        <path d="M36 65C25 58 22 45 28 32M74 65C85 58 88 45 82 32"/>
+        <path d="M31 60l-7-1m4-5-6-3m4-4-5-5m5-2-3-6m56 26 7-1m-4-5 6-3m-4-4 5-5m-5-2 3-6"/>
+      </g>
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#62e3ff" opacity="0.1"/>
+      <g stroke="url(#blue-Repositories-120-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-Repositories-120-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#d6f6ff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#d6f6ff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <text x="55" y="46" text-anchor="middle" font-size="8.5" font-weight="800" fill="#e5fbff">SSS</text>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">God Repo Creator</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">70pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="url(#blue-Repositories-120-0-progress)"/>
+  </svg><svg x="240" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-Commits-240-0-title">
+    <title id="blue-Commits-240-0-title">Commits: AAA, Ultra Committer, 543pt</title>
+    <defs>
+      <linearGradient id="blue-Commits-240-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-Commits-240-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#32ceff" stop-opacity="0.12"/><stop offset="1" stop-color="#32ceff" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-Commits-240-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d6f6ff"/><stop offset="0.35" stop-color="#32ceff"/><stop offset="1" stop-color="#0873c9"/>
+      </linearGradient>
+      <linearGradient id="blue-Commits-240-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#0873c9"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-Commits-240-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-Commits-240-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">Commits</text>
+      <g fill="none" stroke="#2785b0" stroke-width="1.2" stroke-linecap="round" opacity="0.75">
+        <path d="M36 65C25 58 22 45 28 32M74 65C85 58 88 45 82 32"/>
+        <path d="M31 60l-7-1m4-5-6-3m4-4-5-5m5-2-3-6m56 26 7-1m-4-5 6-3m-4-4 5-5m-5-2 3-6"/>
+      </g>
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#32ceff" opacity="0.1"/>
+      <g stroke="url(#blue-Commits-240-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-Commits-240-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#d6f6ff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#d6f6ff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <text x="55" y="46" text-anchor="middle" font-size="8.5" font-weight="800" fill="#e5fbff">AAA</text>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">Ultra Committer</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">543pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="6.707999999999999" height="2.5" rx="1.25" fill="url(#blue-Commits-240-0-progress)"/>
+  </svg><svg x="360" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-PullRequest-360-0-title">
+    <title id="blue-PullRequest-360-0-title">PullRequest: AAA, Ultra Puller, 160pt</title>
+    <defs>
+      <linearGradient id="blue-PullRequest-360-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-PullRequest-360-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#32ceff" stop-opacity="0.12"/><stop offset="1" stop-color="#32ceff" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-PullRequest-360-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d6f6ff"/><stop offset="0.35" stop-color="#32ceff"/><stop offset="1" stop-color="#0873c9"/>
+      </linearGradient>
+      <linearGradient id="blue-PullRequest-360-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#0873c9"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-PullRequest-360-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-PullRequest-360-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">PullRequest</text>
+      <g fill="none" stroke="#2785b0" stroke-width="1.2" stroke-linecap="round" opacity="0.75">
+        <path d="M36 65C25 58 22 45 28 32M74 65C85 58 88 45 82 32"/>
+        <path d="M31 60l-7-1m4-5-6-3m4-4-5-5m5-2-3-6m56 26 7-1m-4-5 6-3m-4-4 5-5m-5-2 3-6"/>
+      </g>
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#32ceff" opacity="0.1"/>
+      <g stroke="url(#blue-PullRequest-360-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-PullRequest-360-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#d6f6ff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#d6f6ff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <text x="55" y="46" text-anchor="middle" font-size="8.5" font-weight="800" fill="#e5fbff">AAA</text>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">Ultra Puller</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">160pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="46.8" height="2.5" rx="1.25" fill="url(#blue-PullRequest-360-0-progress)"/>
+  </svg><svg x="480" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-Followers-480-0-title">
+    <title id="blue-Followers-480-0-title">Followers: AA, Active User, 71pt</title>
+    <defs>
+      <linearGradient id="blue-Followers-480-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-Followers-480-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#32ceff" stop-opacity="0.12"/><stop offset="1" stop-color="#32ceff" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-Followers-480-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d6f6ff"/><stop offset="0.35" stop-color="#32ceff"/><stop offset="1" stop-color="#0873c9"/>
+      </linearGradient>
+      <linearGradient id="blue-Followers-480-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#0873c9"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-Followers-480-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-Followers-480-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">Followers</text>
+      <g fill="none" stroke="#2785b0" stroke-width="1.2" stroke-linecap="round" opacity="0.75">
+        <path d="M36 65C25 58 22 45 28 32M74 65C85 58 88 45 82 32"/>
+        <path d="M31 60l-7-1m4-5-6-3m4-4-5-5m5-2-3-6m56 26 7-1m-4-5 6-3m-4-4 5-5m-5-2 3-6"/>
+      </g>
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#32ceff" opacity="0.1"/>
+      <g stroke="url(#blue-Followers-480-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-Followers-480-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#d6f6ff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#d6f6ff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <text x="55" y="46" text-anchor="middle" font-size="10" font-weight="800" fill="#e5fbff">AA</text>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">Active User</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">71pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="32.76" height="2.5" rx="1.25" fill="url(#blue-Followers-480-0-progress)"/>
+  </svg><svg x="600" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-Stars-600-0-title">
+    <title id="blue-Stars-600-0-title">Stars: B, Middle Star, 21pt</title>
+    <defs>
+      <linearGradient id="blue-Stars-600-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-Stars-600-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#24b6ed" stop-opacity="0.12"/><stop offset="1" stop-color="#24b6ed" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-Stars-600-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d6f6ff"/><stop offset="0.35" stop-color="#24b6ed"/><stop offset="1" stop-color="#1264a5"/>
+      </linearGradient>
+      <linearGradient id="blue-Stars-600-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#1264a5"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-Stars-600-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-Stars-600-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">Stars</text>
+
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#24b6ed" opacity="0.1"/>
+      <g stroke="url(#blue-Stars-600-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-Stars-600-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#d6f6ff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#d6f6ff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <text x="55" y="46" text-anchor="middle" font-size="13" font-weight="800" fill="#e5fbff">B</text>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">Middle Star</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">21pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="42.900000000000006" height="2.5" rx="1.25" fill="url(#blue-Stars-600-0-progress)"/>
+  </svg><svg x="720" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-Experience-720-0-title">
+    <title id="blue-Experience-720-0-title">Experience: B, Junior Dev, 9pt</title>
+    <defs>
+      <linearGradient id="blue-Experience-720-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-Experience-720-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#24b6ed" stop-opacity="0.12"/><stop offset="1" stop-color="#24b6ed" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-Experience-720-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d6f6ff"/><stop offset="0.35" stop-color="#24b6ed"/><stop offset="1" stop-color="#1264a5"/>
+      </linearGradient>
+      <linearGradient id="blue-Experience-720-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#1264a5"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-Experience-720-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-Experience-720-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">Experience</text>
+
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#24b6ed" opacity="0.1"/>
+      <g stroke="url(#blue-Experience-720-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-Experience-720-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#d6f6ff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#d6f6ff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <text x="55" y="46" text-anchor="middle" font-size="13" font-weight="800" fill="#e5fbff">B</text>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">Junior Dev</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">9pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="46.8" height="2.5" rx="1.25" fill="url(#blue-Experience-720-0-progress)"/>
+  </svg><svg x="840" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-Issues-840-0-title">
+    <title id="blue-Issues-840-0-title">Issues: C, First Issue, 1pt</title>
+    <defs>
+      <linearGradient id="blue-Issues-840-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-Issues-840-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#4498c7" stop-opacity="0.12"/><stop offset="1" stop-color="#4498c7" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-Issues-840-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d6f6ff"/><stop offset="0.35" stop-color="#4498c7"/><stop offset="1" stop-color="#235477"/>
+      </linearGradient>
+      <linearGradient id="blue-Issues-840-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#235477"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-Issues-840-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-Issues-840-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">Issues</text>
+
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#4498c7" opacity="0.1"/>
+      <g stroke="url(#blue-Issues-840-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-Issues-840-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#d6f6ff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#d6f6ff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <text x="55" y="46" text-anchor="middle" font-size="13" font-weight="800" fill="#e5fbff">C</text>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">First Issue</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">1pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="0" height="2.5" rx="1.25" fill="url(#blue-Issues-840-0-progress)"/>
+  </svg><svg x="960" y="0" width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="blue-Reviews-960-0-title">
+    <title id="blue-Reviews-960-0-title">Reviews: C, New Reviewer, 1pt</title>
+    <defs>
+      <linearGradient id="blue-Reviews-960-0-surface" x1="0" y1="0" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#101f32"/><stop offset="1" stop-color="#09111f"/>
+      </linearGradient>
+      <radialGradient id="blue-Reviews-960-0-ambient" cx="55" cy="42" r="47" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#4498c7" stop-opacity="0.12"/><stop offset="1" stop-color="#4498c7" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="blue-Reviews-960-0-metal" x1="36" y1="29" x2="74" y2="66" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d6f6ff"/><stop offset="0.35" stop-color="#4498c7"/><stop offset="1" stop-color="#235477"/>
+      </linearGradient>
+      <linearGradient id="blue-Reviews-960-0-progress" x1="16" y1="0" x2="94" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#235477"/><stop offset="1" stop-color="#22ceff"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="108" height="108" rx="9" fill="url(#blue-Reviews-960-0-surface)"/>
+         <rect x="2" y="2" width="106" height="106" rx="8" fill="url(#blue-Reviews-960-0-ambient)"/>
+    <rect x="1" y="1" width="108" height="108" rx="9" stroke="#1c4058"/>
+         <path d="M15 1.5h24" stroke="#46d9ff" stroke-opacity="0.65" stroke-linecap="round"/>
+    <g font-family="Segoe UI,Helvetica,Arial,sans-serif">
+      <text x="55" y="17" text-anchor="middle" font-size="10.8" font-weight="700" fill="#46d9ff">Reviews</text>
+
+      <ellipse cx="55" cy="71" rx="17" ry="2" fill="#4498c7" opacity="0.1"/>
+      <g stroke="url(#blue-Reviews-960-0-metal)" stroke-width="2.8" stroke-linejoin="round">
+        <path d="M39 34h-7c-8 0-5 15 11 16M71 34h7c8 0 5 15-11 16"/>
+      </g>
+      <g fill="url(#blue-Reviews-960-0-metal)">
+        <path d="M38 29h34l-3 16c-1.6 8-6 13-14 13s-12.4-5-14-13z"/>
+        <path d="M52 56h6v9h-6z"/>
+        <path d="M47 64h16l4 5H43z"/>
+        <rect x="41" y="69" width="28" height="3" rx="1.5"/>
+      </g>
+      <path d="M42 31h26" stroke="#d6f6ff" stroke-opacity="0.75" stroke-linecap="round"/>
+      <circle cx="55" cy="42" r="10.3" fill="#071c2e" stroke="#d6f6ff" stroke-opacity="0.32" stroke-width="0.8"/>
+      <text x="55" y="46" text-anchor="middle" font-size="13" font-weight="800" fill="#e5fbff">C</text>
+      <text x="55" y="83" text-anchor="middle" font-size="8.1" font-weight="500" fill="#b8cde0">New Reviewer</text>
+      <text x="55" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#d6f6ff">1pt</text>
+    </g>
+    <rect x="16" y="102" width="78" height="2.5" rx="1.25" fill="#22ceff" opacity="0.14"/>
+    <rect x="16" y="102" width="0" height="2.5" rx="1.25" fill="url(#blue-Reviews-960-0-progress)"/>
+  </svg>
+    </svg>

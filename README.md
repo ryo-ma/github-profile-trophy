@@ -53,8 +53,8 @@ These are endpoints provided by volunteers. Please use these in moderation.
   by [hongbo-wei](https://github.com/hongbo-wei)
 - [https://github-profile-trophy-kannan.vercel.app](https://github-profile-trophy-kannan.vercel.app)
   by [kann4n](https://github.com/kann4n)
-- [https://trophy.ryglcloud.net](https://trophy.ryglcloud.net)
-  by [PracticalRyan](https://github.com/PracticalRyan)
+- [https://trophy.ryglcloud.net](https://trophy.ryglcloud.net) by
+  [PracticalRyan](https://github.com/PracticalRyan)
 - [https://github-profile-trophy-tawny.vercel.app](https://github-profile-trophy-tawny.vercel.app)
   by [vijaypurohit322](https://github.com/vijaypurohit322)
 
@@ -436,13 +436,26 @@ https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=gitdimmed
 
 ### tokyonight
 
-```
-https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=tokyonight
+This fork's custom Tokyo Night theme uses electric blue, cyan, and ice-blue
+highlights on dark navy panels. It includes a compact trophy silhouette, clear
+rank badges, and static progress bars, with no pink or purple accents.
+
+![Custom Tokyo Night trophies with sample data](./assets/tokyonight.svg)
+
+Use your deployment's URL in your GitHub profile README:
+
+```markdown
+[![GitHub trophies](https://YOUR_DEPLOYMENT_URL/?username=BaranaNadil&theme=tokyonight&column=-1&margin-w=10&margin-h=10)](https://github.com/BaranaNadil/github-profile-trophy2)
 ```
 
-<p align="center">
-  <img width="660" src="https://user-images.githubusercontent.com/6661165/135482087-27764d6f-53b4-4c2a-8473-32431d12660c.png">
-</p>
+The preview above uses representative sample values. Generate it locally without
+a GitHub token:
+
+```sh
+deno run --allow-write scripts/preview_theme.ts
+```
+
+The theme also supports `no-bg=true` and `no-frame=true`.
 
 ### matrix
 

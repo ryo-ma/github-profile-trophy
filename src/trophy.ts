@@ -1,6 +1,7 @@
 import { getNextRankBar, getTrophyIcon } from "./icons.ts";
 import { abridgeScore, CONSTANTS, RANK, RANK_ORDER } from "./utils.ts";
 import { Theme } from "./theme.ts";
+import { renderBlueTrophy } from "./blue_trophy.ts";
 
 class RankCondition {
   constructor(
@@ -66,6 +67,15 @@ export class Trophy {
     noBackground = CONSTANTS.DEFAULT_NO_BACKGROUND,
     noFrame = CONSTANTS.DEFAULT_NO_FRAME,
   ): string {
+    if (theme.STYLE === "blue") {
+      return renderBlueTrophy(theme, {
+        title: this.title,
+        rank: this.rank,
+        message: this.topMessage,
+        score: this.bottomMessage,
+        progress: this.calculateNextRankPercentage(),
+      }, { x, y, panelSize, noBackground, noFrame });
+    }
     const { BACKGROUND: PRIMARY, TITLE: SECONDARY, TEXT, NEXT_RANK_BAR } =
       theme;
     const nextRankBar = getNextRankBar(
