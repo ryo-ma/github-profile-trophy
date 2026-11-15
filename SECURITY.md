@@ -1,99 +1,135 @@
 # Security
 
-The HTTP service generates trophies for the account configured by
-`PERSONAL_USERNAME` in `src/security/github.ts`. SVG images are publicly
-viewable for use in GitHub profile READMEs. Requests cannot select a different
-account.
+The HTTP service serves the account configured by `PERSONAL_USERNAME` in
+`src/security/github.ts`. Images are public; request parameters cannot select
+another account. Credentials are supplied by the hosting environment.
 
-## Required deployment configuration
+## Public data policy
 
-Set `GITHUB_TOKEN1` to a personal access token belonging to the configured
-account, using the hosting provider's encrypted environment variables.
-`GITHUB_TOKEN2` is optional and must belong to the same account. Requests
-without a configured token return HTTP 503.
+Repository queries request `privacy: PUBLIC`. Repository, issue, pull request,
+commit, and review records must also carry both `visibility: PUBLIC` and
+`isPrivate: false`. Private, internal, inconsistent, and unknown visibility
+records are excluded before totals are calculated. Unfiltered GitHub aggregate
+counts and restricted contribution totals are not used.
 
-The service authenticates each configured token using GitHub's `GET /user`
-endpoint before fetching or serving owner data. An invalid token or a token for
-another account fails closed. Successful ownership verification lasts at most
-five minutes; token removal or rotation clears the in-process data state on the
-next request. Revocation at GitHub is detected at the next verification or
-upstream data refresh, rather than instantaneously.
+Account age and follower counts come from the unauthenticated public profile
+endpoint, so a privileged token cannot expand the profile data being displayed.
+Organization counts use GitHub's documented public-membership endpoint. Reviews
+must be submitted, belong to the configured account, and fall within the past
+year. Pending reviews and archived pull requests are excluded.
 
-The account is specified by `PERSONAL_USERNAME` in `src/security/github.ts`;
-request parameters cannot change it. Missing `username` defaults to this owner.
-Other usernames return HTTP 403, including when owner data is already cached.
+Only numeric trophy statistics reach the public SVG or shared statistics cache.
+Private repository names, file contents, email addresses, review bodies, and
+GitHub tokens are not part of that projection. Owner verification requests only
+the authenticated viewer's login through GraphQL.
 
-The deployment does not accept GitHub tokens from visitors. Do not place a PAT
-in query strings, README image URLs, source files, logs, or browser code. Keep
-`.env` local and ignored by Git. Create a token with the minimum permissions
-needed for the statistics you want to show; broad write permissions are not
-required by this service. Rotate any token that has been exposed.
+Requests are bounded: repository, issue, authored pull request, public
+organization, and reviewed pull request listings stop after 300 records each.
+Commit queries inspect at most 100 repository groups and the first 100
+contribution days per group. Review queries inspect the latest 100 author
+reviews per checked pull request. Contributions use the past-year window. Counts
+can therefore be conservative for large accounts; the service never fills gaps
+with private totals.
 
-GitHub Actions' built-in `GITHUB_TOKEN` is an installation token, rather than a
-personal user token. The live service requires a user PAT for the ownership
-check. The offline SVG generator can still run inside a trusted workflow with
-its supplied token; it is not an HTTP endpoint.
+## Credentials and caching
 
-For GitHub Enterprise, set `GITHUB_API` to the HTTPS GraphQL endpoint, for
-example `https://github.example.com/api/graphql`. The ownership check uses the
-matching `/api/v3/user` endpoint. URL credentials, query strings, fragments, and
-redirects are rejected. The default endpoint is GitHub.com's HTTPS API.
+`GITHUB_TOKEN1` must belong to the configured account. `GITHUB_TOKEN2` is
+optional and must belong to the same account. Use the minimum read permissions
+required for public statistics, set an expiration, and rotate exposed tokens.
+The live endpoint does not accept tokens from visitors or query strings.
 
-## Application protections
+Hosted requests require an HTTPS Redis REST service configured with
+`RATE_LIMIT_REDIS_URL` and `RATE_LIMIT_REDIS_TOKEN`. The Redis credential is
+separate from the GitHub token; recognizable GitHub tokens and reused configured
+GitHub credentials are rejected as Redis credentials.
 
-- A global budget allows 60 requests per minute **per running application
-  instance**. Excess requests receive HTTP 429 and `Retry-After`. Forwarding
-  headers cannot reset this budget, and no per-IP map can grow without bound.
-- Only GET and HEAD on `/`, `/api`, and `/api/` are accepted. Oversized URLs,
-  bodies, unknown parameters, duplicate scalar parameters, and malformed filters
-  are rejected before contacting GitHub.
-- Columns are limited to 1-15, or -1 for adaptive width; rows to 1-15; margins
-  to 0-30. Title and rank lists, parameter counts, and URL length are bounded.
-- There is one owner-data cache entry per instance, valid for 15 minutes. All
-  rendering variants share that data. Simultaneous cache misses share one fetch.
-  Requests cannot create arbitrary disk or Redis cache keys through this route.
-- Upstream failures trigger a 30-second cooldown. Requests during cooldown
-  cannot extend it. GitHub rate limits return HTTP 429.
-- Each GitHub request has a real two-second abort deadline covering both the
-  connection and response body. Up to two configured tokens may be tried.
-- All HTTP responses use `private, no-store` caching and `nosniff`.
+Redis stores a validated owner proof for five minutes and a strict projection of
+14 numeric statistics for 15 minutes. Keys bind the account, GitHub API
+endpoint, policy version, and a SHA-256 credential fingerprint. Raw GitHub
+tokens are not stored in keys or values. Local in-flight requests coalesce;
+shared locks prevent multiple instances from refreshing the same source
+simultaneously. Expired lock owners cannot publish or remove another worker's
+lock.
 
-These limits reduce application work and GitHub API consumption. They are not a
-complete DDoS defense. Memory state resets on restart and is not shared between
-serverless instances or regions.
+Shared expiry is authoritative. A cache hit does not gain a new local lifetime.
+Token removal denies subsequent requests; token rotation changes the cache
+scope. Revocation at GitHub is detected during the next owner verification or
+upstream request. Public visibility changes are reflected on the next statistics
+refresh. A cached image is a snapshot of data that was public when fetched.
 
-## Hosting firewall: required for distributed attacks
+All HTTP responses use `private, no-store`, `nosniff`, and a restrictive content
+security policy. Redis outages, malformed cached values, and failed ownership
+checks fail closed. Cached errors are never used as successful source data.
 
-On Vercel, automatic DDoS mitigation is provided by the platform. Additionally,
-use your project's **Firewall** settings to apply a rate-limit rule before
-requests reach the function. A reasonable starting point for the SVG endpoint is
-60 requests per minute per source IP, with a short block duration. Check your
-plan's available rules and monitor actual image-proxy traffic before making that
-rule stricter. Do not base access on a spoofable User-Agent or Referer.
+Keep `.env` and `.env.*` out of Git, container images, and uploads. Never place
+credentials in image URLs, source files, logs, or browser code. Production
+imports use local application modules; dotenv is loaded only by local/CLI entry
+points. The committed `deno.lock` pins remote dependency content for those entry
+points, and CI verifies it without allowing unnoticed dependency changes.
 
-If you use another host, put equivalent edge protection in front of the origin
-and prevent direct access around it. Configure a shared/edge request budget when
-you need a limit across all application instances.
+## Request limits
 
-Purge cached responses when changing access rules. Set usage alerts and spending
-controls available from the host. During an incident, inspect firewall logs and
-use temporary blocking or challenge mode as appropriate; a browser challenge can
-also prevent image proxies from fetching the trophy SVG.
+Valid requests receive a local per-client allowance of 60 requests per minute.
+Client identity comes from the socket peer or Vercel's overwritten forwarding
+metadata, not arbitrary forwarding headers on a standalone server. Unknown
+clients share a bounded bucket. Invalid requests are rejected before spending
+the valid-image allowance or the shared counter.
 
-Firewall rules, cache purges, and account spending controls are hosting-account
-settings. They are not enabled merely by pushing this repository. Do not treat a
-successful test run as proof that the live hosting firewall is configured.
+One atomic Redis operation enforces 60 requests per minute per client and 300
+across the deployment. Client denials do not consume the global allowance, and
+global denials do not create client entries. Client identifiers are hashed and
+expire with the current global window. Raw IP addresses are not stored in Redis
+keys. Hashes are short-lived identifiers, not a claim of irreversible anonymity.
 
-Sources:
-[GitHub credential security](https://docs.github.com/en/rest/authentication/keeping-your-api-credentials-secure),
-[GitHub authenticated user endpoint](https://docs.github.com/en/rest/users/users#get-the-authenticated-user),
-[Vercel DDoS mitigation](https://vercel.com/docs/vercel-firewall/ddos-mitigation),
-[Vercel firewall rate limiting](https://vercel.com/docs/vercel-firewall/vercel-waf/rate-limiting).
+The hosted API requires the shared limiter even when provider system variables
+are unavailable. Local development can use memory limits; other public hosting
+must set `REQUIRE_SHARED_RATE_LIMIT=true`. Missing or unavailable shared
+services return HTTP 503 rather than silently reverting to a weaker public
+configuration.
 
-## Verification
+Only GET and HEAD on the documented API routes are accepted. URLs, parameter
+counts, layout dimensions, and filters are bounded. GitHub connections and
+bodies have two-second abort deadlines and a two-MiB response cap; statistics
+fetching has a six-second overall deadline. Redis commands have one-second
+deadlines, bounded response sizes, bounded lock waits, and expiring locks.
+Source failures trigger a local 30-second cooldown. GitHub rate limits remain
+HTTP 429.
 
-Run `deno task test` for offline tests covering owner enforcement, wrong-account
-and missing tokens, rotation, concurrent requests, cache behavior, spoofed
-headers, cooldowns, and real upstream request cancellation. Tests use fake
-tokens and mocked HTTP responses; they do not validate your deployment's real
-PAT.
+## Hosting and containers
+
+Vercel serves static files only from `public/`; application source remains part
+of the function bundle and is not published as static content. Configure hosting
+firewall rules before function execution and set usage/spending controls. Redis
+limits bound application work but do not replace network DDoS mitigation or
+prevent every billable request. Browser challenges can also block image proxies.
+
+Use equivalent edge controls and prevent origin bypass on other hosts. A reverse
+proxy must enforce its own client limits because the standalone server treats
+the proxy as its socket peer. Purge cached responses when changing access rules.
+
+The container uses a pinned image, a non-root user, scoped Deno permissions, and
+runtime-supplied environment variables. Compose binds to loopback, uses a
+read-only root filesystem, and does not publish an unused Redis service. Docker
+network permissions allow GitHub.com by default; add explicit Redis or
+Enterprise hosts when enabling those services. Container images must not contain
+`.env`.
+
+## Automation and verification
+
+Composite action inputs are passed through quoted environment-backed arguments.
+Action revisions are pinned, checkout credentials are not persisted, and
+workflow tokens have explicit permissions. Real credentials are never required
+in unit tests. Run `deno task test`, `deno task lint`, and formatting checks
+before changes.
+
+Local tests verify public-only filtering, cache and lock behavior, request
+fairness, timeouts, credential boundaries, and safe failure. They do not prove
+that hosting firewall rules, real Redis credentials, or PAT permissions have
+been configured correctly. Confirm those settings in the hosting account.
+
+References:
+[GitHub GraphQL users](https://docs.github.com/en/graphql/reference/users),
+[public organization memberships](https://docs.github.com/en/rest/orgs/orgs#list-organizations-for-a-user),
+[GitHub Actions security](https://docs.github.com/en/actions/reference/security/secure-use),
+[Vercel request headers](https://vercel.com/docs/headers/request-headers),
+[Vercel firewall](https://vercel.com/docs/vercel-firewall).

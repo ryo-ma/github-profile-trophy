@@ -1,46 +1,44 @@
-name: Check PR Test
+name: Project checks
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  install-dependencies:
+  checks:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        deno-version: ["1.44.4"]
-
+    timeout-minutes: 10
     steps:
-      # Step 1: Checkout repository
-      - name: Git Checkout Deno Module
-        uses: actions/checkout@v4
-
-      # Step 2: Setup Deno
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          deno-version: ${{ matrix.deno-version }}
+          persist-credentials: false
 
-      # Step 3: Cache / Install dependencies
-      # Change src/mod.ts to main.ts if your project uses main.ts
-      - name: Install dependencies
-        run: deno cache --reload deps.ts
+      - name: Setup Deno
+        uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
+        with:
+          deno-version: "1.44.4"
 
-      # Step 4: Format check
-      - name: Deno format check
+      - name: Verify dependencies
+        run: |
+          deno cache --lock=deno.lock deps.ts api/index.ts main.ts render_svg.ts
+          git diff --exit-code -- deno.lock
+
+      - name: Check formatting
         run: deno fmt --check
 
-      # Step 5: Lint check (won't fail workflow)
-      - name: Deno lint check
-        run: deno lint || true
+      - name: Lint
+        run: deno lint
 
-      # Step 6: Run tests
-      - name: Test Deno Module
+      - name: Test
         run: deno task test

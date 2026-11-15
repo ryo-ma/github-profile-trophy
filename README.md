@@ -12,7 +12,8 @@ The preview uses example statistics. Deployed images show data from GitHub.
    Vercel.
 2. Set `GITHUB_TOKEN1` to a personal access token belonging to the account
    configured by `PERSONAL_USERNAME` in `src/security/github.ts`.
-3. Add your deployment URL to your profile README:
+3. Set the Redis REST environment variables described in the deployment guide.
+4. Add your deployment URL to your profile README:
 
 ```markdown
 [![GitHub trophies](https://YOUR_PROJECT.vercel.app/?theme=tokyonight&column=-1&margin-w=10)](https://github.com/YOUR_USERNAME)
@@ -22,8 +23,10 @@ Replace `YOUR_PROJECT` with your deployment domain and `YOUR_USERNAME` with your
 GitHub username. The `username` parameter is optional and defaults to the
 configured account. If supplied, it must match that account.
 
-The hosted service generates trophies for one configured account. Images are
-publicly viewable, and deployment tokens stay on the server. See
+Statistics are calculated only from explicitly public resources. Private
+repositories, hidden activity, pending reviews, and archived pull requests are
+excluded. The hosted service generates trophies for one configured account.
+Images are publicly viewable, and deployment tokens stay on the server. See
 [SECURITY.md](./SECURITY.md) for token requirements and request limits.
 
 ## Trophies and ranks
@@ -42,6 +45,12 @@ their conditions are met.
 
 Each panel displays its category, rank, achievement description, score, and
 progress toward the next rank.
+
+Large-account counts are bounded: lists stop at 300 records; commit totals cover
+up to 100 public repository groups with 100 contribution days per group. Reviews
+cover up to 300 reviewed pull requests and 100 submitted author reviews per pull
+request. Contribution metrics use the past year. Counts can be conservative;
+private aggregate totals are never used to fill gaps.
 
 ## Request parameters
 

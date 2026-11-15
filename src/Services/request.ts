@@ -2,19 +2,22 @@ import { EServiceKindError, ServiceError } from "../Types/index.ts";
 import { githubApiUrl, githubJson } from "../security/github.ts";
 
 type GithubResponse<T> = {
-  data?: { user?: T | null };
+  data?: { [root: string]: T | null };
   errors?: { type?: string; message?: string }[];
   message?: string;
 };
 
 export async function requestGithubData<T = unknown>(
   query: string,
-  variables: { [key: string]: string },
+  variables: { [key: string]: string | null },
   token = "",
+  root = "user",
+  signal?: AbortSignal,
 ) {
   const response = await githubJson<GithubResponse<T>>(githubApiUrl(), token, {
     method: "POST",
     body: JSON.stringify({ query, variables }),
+    signal,
   });
   const errors = Array.isArray(response.errors) ? response.errors : [];
   if (
@@ -32,11 +35,12 @@ export async function requestGithubData<T = unknown>(
       EServiceKindError.NOT_FOUND,
     );
   }
-  if (errors.length || !response.data?.user) {
+  const data = response.data?.[root];
+  if (errors.length || data == null) {
     throw new ServiceError(
       "GitHub returned an incomplete response.",
       EServiceKindError.UNAVAILABLE,
     );
   }
-  return response.data.user;
+  return data;
 }

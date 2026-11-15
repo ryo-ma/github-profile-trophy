@@ -4,6 +4,7 @@ import { UserInfo } from "./user_info.ts";
 import { RANK } from "./utils.ts";
 import { ServiceError } from "./Types/index.ts";
 import { PERSONAL_USERNAME } from "./security/github.ts";
+import { LimitDecision, MemoryRateLimiter } from "./security/rate_limit.ts";
 
 type Dependencies = {
   tokens: () => string[];
@@ -18,6 +19,7 @@ type Dependencies = {
   dataTtlMs?: number;
   verificationTtlMs?: number;
   cooldownMs?: number;
+  sharedLimit?: (clientKey?: string) => Promise<LimitDecision>;
 };
 
 type State = {
@@ -132,8 +134,11 @@ export function createTrophyHandler(deps: Dependencies) {
   const now = deps.now ?? Date.now;
   const windowMs = deps.windowMs ?? 60_000;
   const maxRequests = deps.maxRequests ?? 60;
-  let windowStart = now();
-  let requestCount = 0;
+  const clientLimit = new MemoryRateLimiter({
+    limit: maxRequests,
+    windowMs,
+    now,
+  });
   let state: State | undefined;
 
   const load = (entry: State, tokens: string[]): Promise<UserInfo> => {
@@ -169,19 +174,7 @@ export function createTrophyHandler(deps: Dependencies) {
     return promise;
   };
 
-  return async (request: Request): Promise<Response> => {
-    // Global per-instance budget: client-supplied forwarding headers cannot reset it.
-    if (now() - windowStart >= windowMs) {
-      windowStart = now();
-      requestCount = 0;
-    }
-    if (++requestCount > maxRequests) {
-      return reply("Too many requests.", 429, {
-        "Retry-After": String(
-          Math.max(1, Math.ceil((windowStart + windowMs - now()) / 1000)),
-        ),
-      });
-    }
+  return async (request: Request, clientKey?: string): Promise<Response> => {
     if (request.method !== "GET" && request.method !== "HEAD") {
       return reply("Method not allowed.", 405, { "Allow": "GET, HEAD" });
     }
@@ -199,7 +192,7 @@ export function createTrophyHandler(deps: Dependencies) {
     } catch {
       return reply("Invalid URL.", 400);
     }
-    if (!["/", "/api", "/api/"].includes(url.pathname)) {
+    if (!["/", "/api", "/api/", "/api/index"].includes(url.pathname)) {
       return reply("Not found.", 404);
     }
     if (url.searchParams.getAll("username").length > 1) {
@@ -225,6 +218,28 @@ export function createTrophyHandler(deps: Dependencies) {
         "A personal GitHub token must be configured on the server.",
         503,
       );
+    }
+    // Invalid requests never spend the owner's image allowance. The caller supplies
+    // trusted hosting/socket metadata; raw forwarding headers are not read here.
+    const localDecision = clientLimit.consume(clientKey);
+    if (!localDecision.allowed) {
+      return reply("Too many requests.", 429, {
+        "Retry-After": String(localDecision.retryAfter),
+      });
+    }
+    if (deps.sharedLimit) {
+      try {
+        const sharedDecision = await deps.sharedLimit(clientKey);
+        if (!sharedDecision.allowed) {
+          return reply("Too many requests.", 429, {
+            "Retry-After": String(sharedDecision.retryAfter),
+          });
+        }
+      } catch {
+        return reply("Shared request limiting is unavailable.", 503, {
+          "Retry-After": "30",
+        });
+      }
     }
     const key = tokens.join("\0");
     if (state?.key !== key) {

@@ -1,14 +1,24 @@
 name: Test GitHub Profile Trophy Action
 on: [push, pull_request, workflow_dispatch]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: action-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test-trophy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout this repo
-        uses: actions/checkout@v4
-      - name: Test Action
-        id: trophy
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Generate trophy
         uses: ./.
         with:
           username: ${{ github.repository_owner }}
@@ -17,10 +27,5 @@ jobs:
 
       - name: Verify SVG generated
         run: |
-          if [ -f trophy.svg ]; then
-            echo "SVG exsists ($(wc -c < trophy.svg) Bytes)"
-            file trophy.svg
-          else
-            echo "SVG failed to generate"
-            exit 1
-          fi
+          test -s trophy.svg
+          file trophy.svg

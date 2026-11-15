@@ -1,4 +1,5 @@
 import "https://deno.land/x/dotenv@v0.5.0/load.ts";
+import { dirname } from "https://deno.land/std@0.203.0/path/dirname.ts";
 
 const username = Deno.args[0];
 const outputPath = Deno.args[1] ?? "./assets/trophy.svg";
@@ -14,6 +15,7 @@ if (!username) {
 import { GithubApiService } from "./src/Services/GithubApiService.ts";
 import { Card } from "./src/card.ts";
 import { COLORS } from "./src/theme.ts";
+import { ServiceError } from "./src/Types/index.ts";
 
 async function main() {
   console.log("Starting trophy render...");
@@ -25,16 +27,14 @@ async function main() {
 
   const userInfoOrError = await svc.requestUserInfo(username);
 
-  if (
-    !(userInfoOrError && (userInfoOrError as any).totalCommits !== undefined)
-  ) {
+  if (userInfoOrError instanceof ServiceError) {
     console.error(
       "Failed to fetch user info. Check token, username and rate limits.",
     );
     Deno.exit(2);
   }
 
-  const userInfo = userInfoOrError as any;
+  const userInfo = userInfoOrError;
 
   const panelSize = 115;
   const maxRow = 10;
@@ -55,12 +55,13 @@ async function main() {
     noBackground,
     noFrame,
   );
-  const theme = (COLORS as any)[themeName] ?? (COLORS as any).default;
+  const theme = Object.hasOwn(COLORS, themeName)
+    ? COLORS[themeName]
+    : COLORS.default;
   const svg = card.render(userInfo, theme);
 
   try {
-    const dir = outputPath.replace(/\/[^/]+$/, "");
-    if (dir) await Deno.mkdir(dir, { recursive: true });
+    await Deno.mkdir(dirname(outputPath), { recursive: true });
   } catch {
     console.error("Failed to create directory. No permission?");
     Deno.exit(3);

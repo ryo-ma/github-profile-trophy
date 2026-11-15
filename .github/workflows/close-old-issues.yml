@@ -3,14 +3,20 @@ on:
   schedule:
     - cron: "30 1 * * *"
 
+permissions: {}
+
+concurrency:
+  group: close-inactive-issues
+  cancel-in-progress: false
+
 jobs:
   close-issues:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       issues: write
-      pull-requests: write
     steps:
-      - uses: actions/stale@v5
+      - uses: actions/stale@1e223db275d687790206a7acac4d1a11bd6fe629 # v10
         with:
           days-before-issue-stale: 30
           days-before-issue-close: 14

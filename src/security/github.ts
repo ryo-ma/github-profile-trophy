@@ -34,33 +34,65 @@ export function githubApiUrl(): string {
   return url.href;
 }
 
-/** The timer covers both the connection and response body; redirects cannot forward the PAT. */
-export async function githubJson<T>(
-  url: string,
-  token: string,
-  init: RequestInit = {},
-  fetcher: typeof fetch = fetch,
-  timeoutMs = 2000,
-): Promise<T> {
-  if (!token || /\s/.test(token) || token.length > 256) {
-    throw new ServiceError(
-      "A GitHub token must be configured on the server.",
-      EServiceKindError.UNAVAILABLE,
-    );
+const MAX_RESPONSE_BYTES = 2 * 1024 * 1024;
+
+/** Keep upstream responses bounded, including when Content-Length is missing. */
+async function readJson<T>(response: Response): Promise<T> {
+  if (!response.body) throw new Error("Missing GitHub response body");
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let size = 0;
+  let text = "";
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_RESPONSE_BYTES) {
+        await reader.cancel();
+        throw new Error("GitHub response exceeded its size limit");
+      }
+      text += decoder.decode(value, { stream: true });
+    }
+    return JSON.parse(text + decoder.decode()) as T;
+  } finally {
+    reader.releaseLock();
   }
+}
+
+/** The deadline covers the connection/body and respects a caller's overall deadline. */
+async function requestJson<T>(
+  url: string,
+  token: string | undefined,
+  init: RequestInit,
+  fetcher: typeof fetch,
+  timeoutMs: number,
+): Promise<T> {
   const controller = new AbortController();
+  const abort = () => controller.abort();
+  if (init.signal?.aborted) controller.abort();
+  init.signal?.addEventListener("abort", abort, { once: true });
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetcher(url, {
+    if (controller.signal.aborted) throw new Error("Request aborted");
+    const target = new URL(url);
+    if (
+      target.protocol !== "https:" || target.username || target.password ||
+      target.hash
+    ) {
+      throw new Error("Invalid GitHub transport URL");
+    }
+    const requestHeaders: Record<string, string> = {
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "User-Agent": "github-profile-trophy",
+    };
+    if (token) requestHeaders.Authorization = `Bearer ${token}`;
+    const response = await fetcher(target.href, {
       ...init,
       redirect: "error",
       signal: controller.signal,
-      headers: {
-        "Accept": "application/vnd.github+json",
-        "Content-Type": "application/json",
-        "User-Agent": "personal-github-profile-trophy",
-        "Authorization": `Bearer ${token}`,
-      },
+      headers: requestHeaders,
     });
     if (
       response.status === 429 ||
@@ -80,7 +112,7 @@ export async function githubJson<T>(
         EServiceKindError.UNAVAILABLE,
       );
     }
-    return await response.json() as T;
+    return await readJson<T>(response);
   } catch (error) {
     if (error instanceof ServiceError) throw error;
     throw new ServiceError(
@@ -89,12 +121,39 @@ export async function githubJson<T>(
     );
   } finally {
     clearTimeout(timer);
+    init.signal?.removeEventListener("abort", abort);
   }
 }
 
+export function githubJson<T>(
+  url: string,
+  token: string,
+  init: RequestInit = {},
+  fetcher: typeof fetch = fetch,
+  timeoutMs = 2000,
+): Promise<T> {
+  if (!token || /\s/.test(token) || token.length > 256) {
+    return Promise.reject(
+      new ServiceError(
+        "A GitHub token must be configured on the server.",
+        EServiceKindError.UNAVAILABLE,
+      ),
+    );
+  }
+  return requestJson<T>(url, token, init, fetcher, timeoutMs);
+}
+
+/** Public profile fields must reflect an anonymous viewer, regardless of PAT permissions. */
+export function githubPublicJson<T>(
+  url: string,
+  init: RequestInit = {},
+  fetcher: typeof fetch = fetch,
+  timeoutMs = 2000,
+): Promise<T> {
+  return requestJson<T>(url, undefined, init, fetcher, timeoutMs);
+}
+
 export async function verifyTokenOwners(tokens: string[]): Promise<void> {
-  const url = new URL(githubApiUrl());
-  url.pathname = url.pathname === "/api/graphql" ? "/api/v3/user" : "/user";
   if (tokens.length === 0) {
     throw new ServiceError(
       "Configure a personal GitHub token before using this service.",
@@ -102,8 +161,20 @@ export async function verifyTokenOwners(tokens: string[]): Promise<void> {
     );
   }
   await Promise.all(tokens.map(async (token) => {
-    const user = await githubJson<{ login?: string }>(url.href, token);
-    if (user.login?.toLowerCase() !== PERSONAL_USERNAME.toLowerCase()) {
+    const result = await githubJson<{
+      data?: { viewer?: { login?: string } };
+      errors?: unknown[];
+    }>(githubApiUrl(), token, {
+      method: "POST",
+      body: JSON.stringify({
+        query: "query TrophyViewer { viewer { login } }",
+      }),
+    });
+    if (
+      result.errors?.length ||
+      result.data?.viewer?.login?.toLowerCase() !==
+        PERSONAL_USERNAME.toLowerCase()
+    ) {
       throw new ServiceError(
         "Every configured token must belong to the personal account.",
         EServiceKindError.UNAVAILABLE,

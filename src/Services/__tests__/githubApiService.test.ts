@@ -1,187 +1,56 @@
 import { GithubApiService } from "../GithubApiService.ts";
-import { assertEquals, returnsNext, stub } from "../../../deps.ts";
+import { assertEquals, stub } from "../../../deps.ts";
 import { GitHubUserRepository } from "../../user_info.ts";
-
-const rateLimitMock = await import("../__mocks__/rateLimitMock.json", {
-  with: { type: "json" },
-});
-
-const successGithubResponseMock = await import(
-  "../__mocks__/successGithubResponse.json",
-  { with: { type: "json" } }
-);
-
-const notFoundGithubResponseMock = await import(
-  "../__mocks__/notFoundUserMock.json",
-  { with: { type: "json" } }
-);
-
 import { ServiceError } from "../../Types/index.ts";
 
-// Unfortunatelly, The spy is a global instance
-// We can't reset mock as Jest does.
-stub(
-  globalThis,
-  "fetch",
-  returnsNext([
-    // Should get data in first try
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(successGithubResponseMock.default.data)),
-      );
-    }),
-    // Should throw NOT FOUND (requestUserInfo makes 4 API calls: repository, activity, issue, pullRequest)
-    // Each call makes 2 attempts (one per token), so 8 promises total
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    // Should throw NOT FOUND even if request the user only
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
-      );
-    }),
-    // Should throw RATE LIMIT
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(rateLimitMock.default.rate_limit.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(rateLimitMock.default.rate_limit.data)),
-      );
-    }),
-    // Should throw RATE LIMIT Exceed
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(rateLimitMock.default.rate_limit.data)),
-      );
-    }),
-    new Promise((resolve) => {
-      resolve(
-        new Response(JSON.stringify(rateLimitMock.default.exceeded.data)),
-      );
-    }),
-  ]),
-);
-
-Deno.test("Should get data in first try", async () => {
-  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
-
-  const data = await provider.requestUserRepository(
-    "test",
-  ) as GitHubUserRepository;
-
-  assertEquals(data.repositories.totalCount, 128);
-});
-
-//Deno.test("Should get data in second Retry", async () => {
-//  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
-//
-//  const data = await provider.requestUserRepository(
-//    "test",
-//  ) as GitHubUserRepository;
-//
-//  assertEquals(data.repositories.totalCount, 128);
-//});
-
-Deno.test("Should throw NOT FOUND", async () => {
-  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
-  let error = null;
-
+Deno.test("Repository service preserves a checked public repository", async () => {
+  const mock = stub(globalThis, "fetch", () =>
+    Promise.resolve(Response.json({
+      data: {
+        user: {
+          repositories: {
+            nodes: [{
+              id: "public-repository",
+              visibility: "PUBLIC",
+              isPrivate: false,
+              languages: { nodes: [{ name: "TypeScript" }] },
+              stargazers: { totalCount: 23 },
+              createdAt: "2020-01-01T00:00:00Z",
+            }],
+            pageInfo: { hasNextPage: false, endCursor: null },
+          },
+        },
+      },
+    })));
   try {
-    error = await provider.requestUserInfo("test");
-  } catch (e) {
-    error = e;
+    const data = await new GithubApiService(["test-token"])
+      .requestUserRepository("test") as GitHubUserRepository;
+    assertEquals(data.repositories.totalCount, 1);
+    assertEquals(data.repositories.nodes[0].stargazers.totalCount, 23);
+  } finally {
+    mock.restore();
   }
-
-  assertEquals(error.code, 404);
-  assertEquals(error instanceof ServiceError, true);
-});
-Deno.test("Should throw NOT FOUND even if request the user only", async () => {
-  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
-  let error = null;
-
-  try {
-    error = await provider.requestUserRepository("test");
-  } catch (e) {
-    error = e;
-  }
-
-  assertEquals(error.code, 404);
-  assertEquals(error instanceof ServiceError, true);
 });
 
-// The assertRejects() assertion is a little more complicated
-// mainly because it deals with Promises.
-// https://docs.deno.com/runtime/manual/basics/testing/assertions#throws
-Deno.test("Should throw RATE LIMIT", async () => {
-  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
-  let error = null;
-
-  try {
-    error = await provider.requestUserRepository("test");
-  } catch (e) {
-    error = e;
-  }
-
-  assertEquals(error.code, 429);
-  assertEquals(error instanceof ServiceError, true);
-});
-
-Deno.test("Should throw RATE LIMIT Exceed", async () => {
-  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
-  let error = null;
-
-  try {
-    error = await provider.requestUserRepository("test");
-  } catch (e) {
-    error = e;
-  }
-
-  assertEquals(error.code, 429);
-  assertEquals(error instanceof ServiceError, true);
-});
+for (
+  const [type, code] of [["NOT_FOUND", 404], ["RATE_LIMITED", 429]] as const
+) {
+  Deno.test(`Repository service preserves ${type} errors`, async () => {
+    const mock = stub(globalThis, "fetch", () =>
+      Promise.resolve(
+        Response.json({ errors: [{ type, message: "Upstream detail" }] }),
+      ));
+    try {
+      const result = await new GithubApiService(["test-token"])
+        .requestUserRepository("test");
+      assertEquals(result instanceof ServiceError, true);
+      assertEquals((result as ServiceError).code, code);
+      assertEquals(
+        (result as ServiceError).message.includes("Upstream detail"),
+        false,
+      );
+    } finally {
+      mock.restore();
+    }
+  });
+}

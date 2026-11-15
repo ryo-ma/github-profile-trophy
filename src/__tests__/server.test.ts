@@ -107,7 +107,9 @@ Deno.test("Other usernames and abusive parameters never reach GitHub", async () 
 
 Deno.test("Supported routes and case-insensitive owner work; HEAD has no body", async () => {
   const h = setup();
-  for (const path of ["/", "/api", "/api/", "/?username=barananadil"]) {
+  for (
+    const path of ["/", "/api", "/api/", "/api/index", "/?username=barananadil"]
+  ) {
     const response = await h.handler(request(path));
     assertEquals(response.status, 200);
     assertPrivate(response);
@@ -192,7 +194,7 @@ Deno.test("Failed token verification denies access without leaking errors", asyn
   assertEquals(h.fetched.length, 0);
 });
 
-Deno.test("Global request limit ignores spoofed IP and forwarding headers", async () => {
+Deno.test("Rejected requests do not consume valid clients' allowance", async () => {
   let time = 0;
   const h = setup({ now: () => time, maxRequests: 2, windowMs: 1000 });
   for (const ip of ["192.0.2.1", "192.0.2.2"]) {
@@ -204,8 +206,13 @@ Deno.test("Global request limit ignores spoofed IP and forwarding headers", asyn
     assertEquals(response.status, 403);
     assertPrivate(response);
   }
-  const limited = await h.handler(
+  const accepted = await h.handler(
     request("/", { headers: { "X-Forwarded-For": "192.0.2.3" } }),
+  );
+  assertEquals(accepted.status, 200);
+  assertEquals((await h.handler(request("/"))).status, 200);
+  const limited = await h.handler(
+    request("/", { headers: { "X-Forwarded-For": "192.0.2.4" } }),
   );
   assertEquals(limited.status, 429);
   assertEquals(Number(limited.headers.get("Retry-After")) >= 1, true);
@@ -215,8 +222,8 @@ Deno.test("Global request limit ignores spoofed IP and forwarding headers", asyn
     (await h.handler(request("/?username=someone-else"))).status,
     403,
   );
-  assertEquals(h.verified.length, 0);
-  assertEquals(h.fetched.length, 0);
+  assertEquals(h.verified.length, 1);
+  assertEquals(h.fetched.length, 1);
 });
 
 Deno.test("GitHub rate limits return 429 and cooldown cannot be extended by traffic", async () => {
@@ -268,4 +275,51 @@ Deno.test("Expired owner verification cannot serve previously cached data", asyn
   assertPrivate(response);
   assertEquals(h.fetched.length, 1);
   assertEquals((await response.text()).includes("<svg"), false);
+});
+
+Deno.test("A limited client does not exhaust another client's image allowance", async () => {
+  const h = setup({ maxRequests: 1 });
+  assertEquals((await h.handler(request(), "192.0.2.1")).status, 200);
+  assertEquals((await h.handler(request(), "192.0.2.1")).status, 429);
+  assertEquals((await h.handler(request(), "192.0.2.2")).status, 200);
+});
+
+Deno.test("Invalid requests do not consume the shared budget", async () => {
+  let calls = 0;
+  const h = setup({
+    sharedLimit: () => {
+      calls++;
+      return Promise.resolve({ allowed: true, remaining: 100, retryAfter: 0 });
+    },
+  });
+  for (let i = 0; i < 70; i++) {
+    assertEquals(
+      (await h.handler(request("/?username=someone-else"))).status,
+      403,
+    );
+  }
+  assertEquals(calls, 0);
+  assertEquals((await h.handler(request(), "192.0.2.1")).status, 200);
+  assertEquals(calls, 1);
+});
+
+Deno.test("Shared budget denial and outage stop requests before GitHub", async () => {
+  const denied = setup({
+    sharedLimit: () =>
+      Promise.resolve({ allowed: false, remaining: 0, retryAfter: 17 }),
+  });
+  const response = await denied.handler(request());
+  assertEquals(response.status, 429);
+  assertEquals(response.headers.get("Retry-After"), "17");
+  assertEquals(denied.fetched.length, 0);
+  const unavailable = setup({
+    sharedLimit: () => Promise.reject(new Error("private Redis credential")),
+  });
+  const failed = await unavailable.handler(request());
+  assertEquals(failed.status, 503);
+  assertEquals(
+    (await failed.text()).includes("private Redis credential"),
+    false,
+  );
+  assertEquals(unavailable.verified.length, 0);
 });

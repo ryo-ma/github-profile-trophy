@@ -1,9 +1,10 @@
 {
   "tasks": {
-    "start": "deno run -A main.ts",
-    "debug": "deno run --inspect-brk -A main.ts",
+    "start": "deno run --lock=deno.lock --allow-net --allow-env --allow-read=.env main.ts",
+    "debug": "deno run --lock=deno.lock --inspect-brk --allow-net --allow-env --allow-read=.env main.ts",
     "format": "deno fmt",
     "lint": "deno lint",
-    "test": "ENV_TYPE=test deno test --allow-env"
-  }
+    "test": "ENV_TYPE=test deno test --lock=deno.lock --allow-env"
+  },
+  "lock": "deno.lock"
 }

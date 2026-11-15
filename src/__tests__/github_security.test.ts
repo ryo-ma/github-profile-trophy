@@ -1,5 +1,9 @@
 import { assertEquals, assertRejects, stub } from "../../deps.ts";
-import { githubJson, verifyTokenOwners } from "../security/github.ts";
+import {
+  githubJson,
+  githubPublicJson,
+  verifyTokenOwners,
+} from "../security/github.ts";
 import { GithubApiService } from "../Services/GithubApiService.ts";
 import { EServiceKindError, ServiceError } from "../Types/index.ts";
 
@@ -12,7 +16,11 @@ Deno.test("All configured tokens must authenticate as the personal owner", async
     return Promise.resolve(
       new Response(
         JSON.stringify({
-          login: called.length === 1 ? "BaranaNadil" : "another-user",
+          data: {
+            viewer: {
+              login: called.length === 1 ? "BaranaNadil" : "another-user",
+            },
+          },
         }),
       ),
     );
@@ -29,6 +37,54 @@ Deno.test("All configured tokens must authenticate as the personal owner", async
   }
 });
 
+Deno.test("Anonymous profile fetching never forwards a supplied authorization header", async () => {
+  const mock: typeof fetch = (_url, init) => {
+    assertEquals(new Headers(init?.headers).has("Authorization"), false);
+    assertEquals(init?.redirect, "error");
+    return Promise.resolve(new Response('{"followers":3}'));
+  };
+  await githubPublicJson("https://api.github.com/users/example", {
+    headers: { Authorization: "Bearer must-not-leak" },
+  }, mock);
+});
+
+Deno.test("GitHub requests reject insecure transport and oversized response bodies", async () => {
+  let called = false;
+  const mock: typeof fetch = () => {
+    called = true;
+    return Promise.resolve(new Response("{}"));
+  };
+  await assertRejects(
+    () => githubJson("http://api.github.com/user", "example-token", {}, mock),
+    ServiceError,
+  );
+  assertEquals(called, false);
+  const large: typeof fetch = () =>
+    Promise.resolve(new Response('"' + "a".repeat(2 * 1024 * 1024) + '"'));
+  await assertRejects(
+    () => githubPublicJson("https://api.github.com/users/example", {}, large),
+    ServiceError,
+  );
+});
+
+Deno.test("A caller deadline aborts the GitHub request", async () => {
+  const parent = new AbortController();
+  let aborted = false;
+  const hanging: typeof fetch = (_url, init) =>
+    new Promise((_resolve, reject) => {
+      init?.signal?.addEventListener("abort", () => {
+        aborted = true;
+        reject(new Error("aborted"));
+      }, { once: true });
+    });
+  const pending = githubPublicJson("https://api.github.com/users/example", {
+    signal: parent.signal,
+  }, hanging);
+  parent.abort();
+  await assertRejects(() => pending, ServiceError);
+  assertEquals(aborted, true);
+});
+
 Deno.test("A secondary token for another account fails closed", async () => {
   const mock = stub(
     globalThis,
@@ -37,10 +93,14 @@ Deno.test("A secondary token for another account fails closed", async () => {
       Promise.resolve(
         new Response(
           JSON.stringify({
-            login: new Headers(init?.headers).get("Authorization") ===
-                "Bearer owner-token"
-              ? "BaranaNadil"
-              : "another-user",
+            data: {
+              viewer: {
+                login: new Headers(init?.headers).get("Authorization") ===
+                    "Bearer owner-token"
+                  ? "BaranaNadil"
+                  : "another-user",
+              },
+            },
           }),
         ),
       ),

@@ -1,15 +1,24 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "public",
   "functions": {
     "api/**/*.[jt]s": {
       "runtime": "vercel-deno@3.2.0",
-      "maxDuration": 10
+      "maxDuration": 30
     }
   },
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/api/$1"
+      "source": "/",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api/",
+      "destination": "/api/index"
     }
   ]
 }

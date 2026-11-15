@@ -4,8 +4,8 @@ GITHUB_TOKEN1=
 # Optional: a second personal token for the same account only.
 GITHUB_TOKEN2=
 GITHUB_API=https://api.github.com/graphql
-ENABLE_REDIS=
-REDIS_PORT=6379
-REDIS_HOST=
-REDIS_USERNAME=
-REDIS_PASSWORD=
+# HTTPS REST Redis endpoint and token; required on Vercel for shared request limits.
+RATE_LIMIT_REDIS_URL=
+RATE_LIMIT_REDIS_TOKEN=
+# Require shared limiting on other hosting platforms too.
+REQUIRE_SHARED_RATE_LIMIT=false

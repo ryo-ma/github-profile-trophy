@@ -37,9 +37,10 @@ Open the local endpoint:
 http://localhost:8080/?theme=tokyonight
 ```
 
-The HTTP service uses bounded in-memory caching. Redis is not required for this
-endpoint. The Docker Compose configuration is available for container-based
-local development:
+The local server can use bounded in-memory limits and caching. The hosted API
+requires Redis REST settings for shared limits and caching; set
+`REQUIRE_SHARED_RATE_LIMIT=true` when testing that mode locally. The Docker
+Compose configuration is available for container-based local development:
 
 ```sh
 docker compose up -d
@@ -53,6 +54,7 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for Vercel setup and
 Check formatting, lint the code, and run the tests:
 
 ```sh
+deno cache --lock=deno.lock deps.ts api/index.ts main.ts render_svg.ts
 deno fmt --check
 deno task lint
 deno task test
@@ -61,8 +63,11 @@ deno task test
 Run `deno task format` to apply formatting. Follow the settings in
 [.editorconfig](./.editorconfig).
 
-Tests use mocked GitHub responses and example credentials. Keep real tokens out
-of tests, fixtures, logs, and commits.
+Dependency updates must deliberately regenerate `deno.lock` and review changed
+URLs and checksums. CI rejects unexpected lockfile changes.
+
+Tests use mocked GitHub and Redis responses and example credentials. Keep real
+tokens out of tests, fixtures, logs, and commits.
 
 ## Pull requests
 

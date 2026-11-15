@@ -1,46 +1,99 @@
 type Language = { name: string };
-type Stargazers = { totalCount: number };
-type Repository = {
+export type RepositoryVisibility = {
+  visibility?: string;
+  isPrivate?: boolean;
+};
+
+export type Repository = RepositoryVisibility & {
+  id: string;
   languages: { nodes: Language[] };
-  stargazers: Stargazers;
+  stargazers: { totalCount: number };
   createdAt: string;
 };
+
+export type PublicIssue = {
+  id: string;
+  state: string;
+  repository: RepositoryVisibility;
+};
+
+export type PublicPullRequest = {
+  id: string;
+  repository: RepositoryVisibility;
+};
+export type PublicReview = {
+  id: string;
+  state: string;
+  submittedAt: string | null;
+  author: { login: string };
+  repository: RepositoryVisibility;
+};
+
 export type GitHubUserRepository = {
-  repositories: {
-    totalCount: number;
-    nodes: Repository[];
-  };
+  repositories: { totalCount: number; nodes: Repository[] };
 };
-
 export type GitHubUserIssue = {
-  openIssues: {
-    totalCount: number;
-  };
-  closedIssues: {
-    totalCount: number;
-  };
+  openIssues: { totalCount: number; nodes: PublicIssue[] };
+  closedIssues: { totalCount: number; nodes: PublicIssue[] };
 };
-
 export type GitHubUserPullRequest = {
-  pullRequests: {
-    totalCount: number;
-  };
+  pullRequests: { totalCount: number; nodes: PublicPullRequest[] };
 };
-
+export type RepositoryCommitContributions = {
+  repository: RepositoryVisibility;
+  contributions: { nodes: { commitCount: number }[] };
+};
 export type GitHubUserActivity = {
+  // These two profile fields come from the unauthenticated public user endpoint.
   createdAt: string;
+  followers: { totalCount: number };
+  login: string;
   contributionsCollection: {
-    totalCommitContributions: number;
-    restrictedContributionsCount: number;
-    totalPullRequestReviewContributions: number;
+    commitContributionsByRepository: RepositoryCommitContributions[];
   };
+  publicReviews: PublicReview[];
+  // Only the documented public-membership REST listing may populate these nodes.
   organizations: {
     totalCount: number;
-  };
-  followers: {
-    totalCount: number;
+    nodes: { login: string; publicMembership: true }[];
   };
 };
+
+/** Missing, internal, or inconsistent visibility metadata always fails closed. */
+export function isPublicRepository(
+  repository: RepositoryVisibility | null | undefined,
+): boolean {
+  return repository?.visibility === "PUBLIC" && repository.isPrivate === false;
+}
+
+function publicNodes<
+  T extends { repository: RepositoryVisibility; id: string },
+>(
+  nodes: T[] | undefined,
+): T[] {
+  const seen = new Set<string>();
+  return (nodes ?? []).filter((node) => {
+    if (
+      !node || !node.id || seen.has(node.id) ||
+      !isPublicRepository(node.repository)
+    ) return false;
+    seen.add(node.id);
+    return true;
+  });
+}
+
+function publicCommitCount(groups: RepositoryCommitContributions[]): number {
+  return (groups ?? []).reduce((total, group) => {
+    if (!isPublicRepository(group?.repository)) return total;
+    return total +
+      (group.contributions?.nodes ?? []).reduce((commits, node) => {
+        const count = node?.commitCount;
+        return commits +
+          (Number.isSafeInteger(count) && count >= 0 ? count : 0);
+      }, 0);
+  }, 0);
+}
+
 export class UserInfo {
   public readonly totalCommits: number;
   public readonly totalFollowers: number;
@@ -62,66 +115,79 @@ export class UserInfo {
     userPullRequest: GitHubUserPullRequest,
     userRepository: GitHubUserRepository,
   ) {
-    const totalCommits =
-      userActivity.contributionsCollection.restrictedContributionsCount +
-      userActivity.contributionsCollection.totalCommitContributions;
-    const totalStargazers = userRepository.repositories.nodes.reduce(
-      (prev: number, node: Repository) => {
-        return prev + node.stargazers.totalCount;
+    // Recheck here as well as at the API boundary. Never trust supplied aggregate totals.
+    const seen = new Set<string>();
+    const repositories = (userRepository.repositories.nodes ?? []).filter(
+      (node) => {
+        if (
+          !node || !node.id || seen.has(node.id) || !isPublicRepository(node)
+        ) {
+          return false;
+        }
+        seen.add(node.id);
+        return true;
+      },
+    );
+    const totalStargazers = repositories.reduce(
+      (total, node) => {
+        const count = node.stargazers?.totalCount;
+        return total +
+          (Number.isSafeInteger(count) && count >= 0 ? count : 0);
       },
       0,
     );
-
     const languages = new Set<string>();
-    userRepository.repositories.nodes.forEach((node: Repository) => {
-      if (node.languages.nodes != undefined) {
-        node.languages.nodes.forEach((node: Language) => {
-          if (node != undefined) {
-            languages.add(node.name);
-          }
-        });
+    for (const repository of repositories) {
+      for (const language of repository.languages?.nodes ?? []) {
+        if (typeof language?.name === "string") languages.add(language.name);
       }
-    });
+    }
 
-    // Find the earliest repository creation date
-    let earliestRepoDate = userActivity.createdAt; // start with the oldest possible
+    let earliestRepoDate = userActivity.createdAt;
+    for (const repository of repositories) {
+      if (Date.parse(repository.createdAt) < Date.parse(earliestRepoDate)) {
+        earliestRepoDate = repository.createdAt;
+      }
+    }
+    const durationTime = Date.now() - Date.parse(earliestRepoDate);
+    this.durationYear = new Date(durationTime).getUTCFullYear() - 1970;
+    this.durationDays = Math.floor(durationTime / (1000 * 60 * 60 * 24) / 100);
+    const joinedYear = new Date(earliestRepoDate).getUTCFullYear();
+    this.ancientAccount = joinedYear <= 2010 ? 1 : 0;
+    this.joined2020 = joinedYear === 2020 ? 1 : 0;
+    this.ogAccount = joinedYear <= 2008 ? 1 : 0;
 
-    earliestRepoDate = userRepository.repositories.nodes.reduce(
-      (earliest, node) => {
-        return new Date(node.createdAt).getTime() < new Date(earliest).getTime()
-          ? node.createdAt
-          : earliest;
-      },
-      earliestRepoDate,
+    this.totalCommits = publicCommitCount(
+      userActivity.contributionsCollection.commitContributionsByRepository,
     );
-
-    const durationTime = new Date().getTime() -
-      new Date(earliestRepoDate).getTime();
-    const durationYear = new Date(durationTime).getUTCFullYear() - 1970;
-    const durationDays = Math.floor(
-      durationTime / (1000 * 60 * 60 * 24) / 100,
-    );
-    const ancientAccount = new Date(earliestRepoDate).getFullYear() <= 2010
-      ? 1
-      : 0;
-    const joined2020 = new Date(earliestRepoDate).getFullYear() == 2020 ? 1 : 0;
-    const ogAccount = new Date(earliestRepoDate).getFullYear() <= 2008 ? 1 : 0;
-
-    this.totalCommits = totalCommits;
-    this.totalFollowers = userActivity.followers.totalCount;
-    this.totalIssues = userIssue.openIssues.totalCount +
-      userIssue.closedIssues.totalCount;
-    this.totalOrganizations = userActivity.organizations.totalCount;
-    this.totalPullRequests = userPullRequest.pullRequests.totalCount;
+    const reviewWindowEnd = Date.now();
+    const reviewWindowStart = new Date(reviewWindowEnd);
+    reviewWindowStart.setUTCFullYear(reviewWindowStart.getUTCFullYear() - 1);
     this.totalReviews =
-      userActivity.contributionsCollection.totalPullRequestReviewContributions;
+      publicNodes(userActivity.publicReviews).filter((review) => {
+        const submitted = Date.parse(review.submittedAt ?? "");
+        return ["APPROVED", "CHANGES_REQUESTED", "COMMENTED", "DISMISSED"]
+          .includes(
+            review.state,
+          ) &&
+          review.author?.login?.toLowerCase() ===
+            userActivity.login.toLowerCase() &&
+          submitted >= reviewWindowStart.getTime() &&
+          submitted <= reviewWindowEnd;
+      }).length;
+    this.totalFollowers = userActivity.followers.totalCount;
+    this.totalIssues = publicNodes(userIssue.openIssues.nodes).length +
+      publicNodes(userIssue.closedIssues.nodes).length;
+    this.totalOrganizations = new Set(
+      (userActivity.organizations.nodes ?? []).filter((organization) =>
+        organization?.publicMembership === true &&
+        typeof organization.login === "string"
+      ).map((organization) => organization.login.toLowerCase()),
+    ).size;
+    this.totalPullRequests =
+      publicNodes(userPullRequest.pullRequests.nodes).length;
     this.totalStargazers = totalStargazers;
-    this.totalRepositories = userRepository.repositories.totalCount;
+    this.totalRepositories = repositories.length;
     this.languageCount = languages.size;
-    this.durationYear = durationYear;
-    this.durationDays = durationDays;
-    this.ancientAccount = ancientAccount;
-    this.joined2020 = joined2020;
-    this.ogAccount = ogAccount;
   }
 }

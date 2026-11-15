@@ -5,7 +5,7 @@ inputs:
     description: "GitHub username to generate the trophy for"
     required: true
   output_path:
-    description: "Output path to write the SVG"
+    description: "Output path inside the workflow workspace"
     required: true
     default: "trophy.svg"
   token:
@@ -15,13 +15,23 @@ runs:
   using: "composite"
   steps:
     - name: Setup Deno
-      uses: denoland/setup-deno@v1
+      uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
       with:
-        deno-version: v1.x
+        deno-version: "1.44.4"
+
+    - name: Verify generator dependencies
+      shell: bash
+      run: deno cache --lock="$GITHUB_ACTION_PATH/deno.lock" "$GITHUB_ACTION_PATH/render_svg.ts"
 
     - name: Generate trophy
       shell: bash
       env:
         GITHUB_TOKEN1: ${{ inputs.token }}
-      run: |
-        deno run --allow-net --allow-env --allow-read --allow-write $GITHUB_ACTION_PATH/render_svg.ts "${{ inputs.username }}" "${{ inputs.output_path }}"
+        GITHUB_TOKEN2: ""
+        TROPHY_USERNAME: ${{ inputs.username }}
+        TROPHY_OUTPUT_PATH: ${{ inputs.output_path }}
+      run: >-
+        deno run --cached-only --lock="$GITHUB_ACTION_PATH/deno.lock"
+        --allow-net --allow-env=GITHUB_TOKEN1,GITHUB_TOKEN2,GITHUB_API,ENV_TYPE
+        --allow-read="$GITHUB_WORKSPACE" --allow-write="$GITHUB_WORKSPACE"
+        "$GITHUB_ACTION_PATH/render_svg.ts" "$TROPHY_USERNAME" "$TROPHY_OUTPUT_PATH"

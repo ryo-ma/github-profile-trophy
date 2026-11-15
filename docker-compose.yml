@@ -1,16 +1,21 @@
-version: "3"
 services:
-  redis:
-    container_name: trophy-redis
-    image: redis:latest
-    ports:
-      - "6379:6379"
   deno-app:
     build: .
-    volumes:
-      - .:/app
-    ports:
-      - "80:8080"
+    env_file:
+      - .env
     environment:
-      - DENO_ENV=development
-    command: ["deno", "run", "--watch", "-A", "main.ts"]
+      PORT: "8080"
+      ENV_TYPE: production
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m,uid=10001,gid=10001
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 64
+    mem_limit: 256m
+    cpus: 1.0
+    restart: unless-stopped
