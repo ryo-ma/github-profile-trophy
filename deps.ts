@@ -1,5 +1,3 @@
-import { Soxa as ServiceProvider } from "https://deno.land/x/soxa@1.4/src/core/Soxa.ts";
-import { defaults } from "https://deno.land/x/soxa@1.4/src/defaults.ts";
 import {
   assertEquals,
   assertRejects,
@@ -17,21 +15,4 @@ export {
   type Redis,
 } from "https://deno.land/x/redis@v0.31.0/mod.ts";
 
-import { CONSTANTS } from "./src/utils.ts";
-
-const baseURL = Deno.env.get("GITHUB_API") || CONSTANTS.DEFAULT_GITHUB_API;
-
-const soxa = new ServiceProvider({
-  ...defaults,
-  baseURL,
-});
-
-export {
-  assertEquals,
-  assertRejects,
-  assertSpyCalls,
-  returnsNext,
-  soxa,
-  spy,
-  stub,
-};
+export { assertEquals, assertRejects, assertSpyCalls, returnsNext, spy, stub };

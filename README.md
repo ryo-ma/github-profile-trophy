@@ -1,3 +1,36 @@
+# BaranaNadil's personal Tokyo Night trophies
+
+![Blue Tokyo Night trophies with sample values](./assets/tokyonight.svg)
+
+This fork serves trophies for **BaranaNadil only**. Your GitHub token stays in
+the deployment settings; visitors cannot use this service for another username.
+The image remains public so you can embed it in your GitHub profile.
+
+Set `GITHUB_TOKEN1` to **your personal access token** in your host's environment
+variables, then deploy. `GITHUB_TOKEN2` is optional and must belong to the same
+account. Requests fail closed without a token or if a configured token belongs
+to another account. The default theme is the custom blue `tokyonight` design.
+
+```markdown
+[![GitHub trophies](https://YOUR_DEPLOYMENT_URL/?username=BaranaNadil&theme=tokyonight&column=-1&margin-w=10)](https://github.com/BaranaNadil/github-profile-trophy2)
+```
+
+Replace `YOUR_DEPLOYMENT_URL` with your host. **Never put the token in this
+URL.** The preview above uses sample values; your deployed endpoint fetches real
+data.
+
+The server includes request validation, a per-instance request limit, shared
+in-flight fetching, bounded caching, and GitHub timeouts. Follow
+[the deployment security guide](./SECURITY.md) to configure hosting-layer DDoS
+protection and purge response caches from the previous public version.
+
+<details>
+<summary>Original upstream documentation and theme reference</summary>
+
+The reference below describes the original general-purpose service. This fork's
+owner restrictions and security limits take precedence. Credits and license
+remain with the original project.
+
 <div align="center">
   <img width="140" src="https://user-images.githubusercontent.com/6661165/91657958-61b4fd00-eb00-11ea-9def-dc7ef5367e34.png"  alt="GitHub Profile Trophy"/>
   <h2 align="center">GitHub Profile Trophy</h2>
@@ -663,3 +696,5 @@ contributions help keep development going and make this work possible.
 - [@michele-lorenzoni](https://github.com/michele-lorenzoni) — $10 (Nov
   26, 2024)
 - [@skillerious](https://github.com/skillerious) — $10 (Aug 17, 2024)
+
+</details>

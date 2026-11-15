@@ -1,5 +1,7 @@
 PORT=8080
+# Required: personal access token owned by BaranaNadil. Never put it in a URL.
 GITHUB_TOKEN1=
+# Optional: a second personal token for the same account only.
 GITHUB_TOKEN2=
 GITHUB_API=https://api.github.com/graphql
 ENABLE_REDIS=

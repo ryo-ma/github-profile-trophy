@@ -44,6 +44,10 @@ export class Card {
 
     trophyList.sortByRank();
 
+    if (trophyList.length === 0) {
+      return `<svg width="1" height="1" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><title>No trophies match these filters</title></svg>`;
+    }
+
     if (this.maxColumn == -1) {
       this.maxColumn = trophyList.length;
       this.width = this.panelSize * this.maxColumn +

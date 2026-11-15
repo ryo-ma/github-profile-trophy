@@ -1,5 +1,5 @@
 import { GithubApiService } from "../GithubApiService.ts";
-import { assertEquals, returnsNext, soxa, stub } from "../../../deps.ts";
+import { assertEquals, returnsNext, stub } from "../../../deps.ts";
 import { GitHubUserRepository } from "../../user_info.ts";
 
 const rateLimitMock = await import("../__mocks__/rateLimitMock.json", {
@@ -21,65 +21,95 @@ import { ServiceError } from "../../Types/index.ts";
 // Unfortunatelly, The spy is a global instance
 // We can't reset mock as Jest does.
 stub(
-  soxa,
-  "post",
+  globalThis,
+  "fetch",
   returnsNext([
     // Should get data in first try
     new Promise((resolve) => {
-      resolve(successGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(successGithubResponseMock.default.data)),
+      );
     }),
     // Should throw NOT FOUND (requestUserInfo makes 4 API calls: repository, activity, issue, pullRequest)
     // Each call makes 2 attempts (one per token), so 8 promises total
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     // Should throw NOT FOUND even if request the user only
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(notFoundGithubResponseMock.default);
+      resolve(
+        new Response(JSON.stringify(notFoundGithubResponseMock.default.data)),
+      );
     }),
     // Should throw RATE LIMIT
     new Promise((resolve) => {
-      resolve(rateLimitMock.default.rate_limit);
+      resolve(
+        new Response(JSON.stringify(rateLimitMock.default.rate_limit.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(rateLimitMock.default.rate_limit);
+      resolve(
+        new Response(JSON.stringify(rateLimitMock.default.rate_limit.data)),
+      );
     }),
     // Should throw RATE LIMIT Exceed
     new Promise((resolve) => {
-      resolve(rateLimitMock.default.rate_limit);
+      resolve(
+        new Response(JSON.stringify(rateLimitMock.default.rate_limit.data)),
+      );
     }),
     new Promise((resolve) => {
-      resolve(rateLimitMock.default.exceeded);
+      resolve(
+        new Response(JSON.stringify(rateLimitMock.default.exceeded.data)),
+      );
     }),
   ]),
 );
 
 Deno.test("Should get data in first try", async () => {
-  const provider = new GithubApiService();
+  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
 
   const data = await provider.requestUserRepository(
     "test",
@@ -89,7 +119,7 @@ Deno.test("Should get data in first try", async () => {
 });
 
 //Deno.test("Should get data in second Retry", async () => {
-//  const provider = new GithubApiService();
+//  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
 //
 //  const data = await provider.requestUserRepository(
 //    "test",
@@ -99,7 +129,7 @@ Deno.test("Should get data in first try", async () => {
 //});
 
 Deno.test("Should throw NOT FOUND", async () => {
-  const provider = new GithubApiService();
+  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
   let error = null;
 
   try {
@@ -112,7 +142,7 @@ Deno.test("Should throw NOT FOUND", async () => {
   assertEquals(error instanceof ServiceError, true);
 });
 Deno.test("Should throw NOT FOUND even if request the user only", async () => {
-  const provider = new GithubApiService();
+  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
   let error = null;
 
   try {
@@ -129,7 +159,7 @@ Deno.test("Should throw NOT FOUND even if request the user only", async () => {
 // mainly because it deals with Promises.
 // https://docs.deno.com/runtime/manual/basics/testing/assertions#throws
 Deno.test("Should throw RATE LIMIT", async () => {
-  const provider = new GithubApiService();
+  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
   let error = null;
 
   try {
@@ -138,12 +168,12 @@ Deno.test("Should throw RATE LIMIT", async () => {
     error = e;
   }
 
-  assertEquals(error.code, 419);
+  assertEquals(error.code, 429);
   assertEquals(error instanceof ServiceError, true);
 });
 
 Deno.test("Should throw RATE LIMIT Exceed", async () => {
-  const provider = new GithubApiService();
+  const provider = new GithubApiService(["test-token-one", "test-token-two"]);
   let error = null;
 
   try {
@@ -152,6 +182,6 @@ Deno.test("Should throw RATE LIMIT Exceed", async () => {
     error = e;
   }
 
-  assertEquals(error.code, 419);
+  assertEquals(error.code, 429);
   assertEquals(error instanceof ServiceError, true);
 });

@@ -10,7 +10,9 @@
 ## Local Run
 
 Create `.env` file to project root directory, and write your GitHub token to the
-`.env` file. Please select the authority of `repo` when creating token.
+`.env` file. The live service requires a personal token owned by BaranaNadil.
+Use the minimum permissions needed for the statistics you want to show. See
+[SECURITY.md](./SECURITY.md) for ownership verification and hosting protection.
 
 ```properties
 GITHUB_TOKEN1=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -27,7 +29,9 @@ Run local server.
 deno task start
 ```
 
-You can enable the Redis if you want, but it's not mandatory.
+The live personal endpoint uses bounded in-memory owner-data caching. The legacy
+Redis provider and response-file cache are not used by that endpoint. The Docker
+Compose configuration is retained for upstream development.
 
 ```sh
 docker compose up -d
@@ -37,7 +41,7 @@ Rename `env-example` to `.env`, and change ENABLE_REDIS to true
 
 Open localhost from your browser.
 
-http://localhost:8080/?username=ryo-ma
+http://localhost:8080/?username=BaranaNadil&theme=tokyonight
 
 ## Editor config
 

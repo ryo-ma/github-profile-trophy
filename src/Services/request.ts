@@ -1,65 +1,42 @@
-import { soxa } from "../../deps.ts";
-import {
-  EServiceKindError,
-  GithubError,
-  GithubErrorResponse,
-  GithubExceedError,
-  QueryDefaultResponse,
-  ServiceError,
-} from "../Types/index.ts";
+import { EServiceKindError, ServiceError } from "../Types/index.ts";
+import { githubApiUrl, githubJson } from "../security/github.ts";
+
+type GithubResponse<T> = {
+  data?: { user?: T | null };
+  errors?: { type?: string; message?: string }[];
+  message?: string;
+};
 
 export async function requestGithubData<T = unknown>(
   query: string,
   variables: { [key: string]: string },
   token = "",
 ) {
-  const response = await soxa.post("", {}, {
-    data: { query, variables },
-    headers: {
-      Authorization: `bearer ${token}`,
-    },
-  }) as QueryDefaultResponse<{ user: T }>;
-  const responseData = response.data;
-
-  if (responseData?.data?.user) {
-    return responseData.data.user;
-  }
-
-  throw handleError(responseData);
-}
-
-function handleError(
-  responseData: {
-    data?: unknown;
-    errors?: GithubError[];
-    message?: string;
-    documentation_url?: string;
-  },
-): ServiceError {
-  let isRateLimitExceeded = false;
-  const arrayErrors = responseData?.errors || [];
-
-  if (Array.isArray(arrayErrors) && arrayErrors.length > 0) {
-    isRateLimitExceeded = arrayErrors.some((error) =>
-      error.type.includes(EServiceKindError.RATE_LIMIT)
-    );
-  }
-
-  if (responseData?.message) {
-    isRateLimitExceeded = responseData.message.toLowerCase().includes(
-      "rate limit",
-    );
-  }
-
-  if (isRateLimitExceeded) {
+  const response = await githubJson<GithubResponse<T>>(githubApiUrl(), token, {
+    method: "POST",
+    body: JSON.stringify({ query, variables }),
+  });
+  const errors = Array.isArray(response.errors) ? response.errors : [];
+  if (
+    errors.some((error) => error.type === EServiceKindError.RATE_LIMIT) ||
+    response.message?.toLowerCase().includes("rate limit")
+  ) {
     throw new ServiceError(
-      "Rate limit exceeded",
+      "GitHub rate limit exceeded.",
       EServiceKindError.RATE_LIMIT,
     );
   }
-
-  throw new ServiceError(
-    "unknown error",
-    EServiceKindError.NOT_FOUND,
-  );
+  if (errors.some((error) => error.type === EServiceKindError.NOT_FOUND)) {
+    throw new ServiceError(
+      "GitHub account not found.",
+      EServiceKindError.NOT_FOUND,
+    );
+  }
+  if (errors.length || !response.data?.user) {
+    throw new ServiceError(
+      "GitHub returned an incomplete response.",
+      EServiceKindError.UNAVAILABLE,
+    );
+  }
+  return response.data.user;
 }
