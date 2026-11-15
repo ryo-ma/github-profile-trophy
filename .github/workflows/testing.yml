@@ -59,23 +59,27 @@ jobs:
       name: Production
       url: ${{ steps.deploy.outputs.url }}
     env:
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID || secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID || secrets.VERCEL_PROJECT_ID }}
       VERCEL_TELEMETRY_DISABLED: "1"
       DO_NOT_TRACK: "1"
     steps:
-      - name: Validate deployment secrets
+      - name: Validate deployment configuration
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         shell: bash
         run: |
           missing=0
-          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+          for name in VERCEL_ORG_ID VERCEL_PROJECT_ID; do
             if [[ -z "${!name}" ]]; then
-              printf '::error::Add %s in GitHub Actions secrets before deploying. See DEPLOYMENT.md.\n' "$name"
+              printf '::error::Add %s as a GitHub Actions repository variable or secret. See DEPLOYMENT.md.\n' "$name"
               missing=1
             fi
           done
+          if [[ -z "$VERCEL_TOKEN" ]]; then
+            echo '::error::Add VERCEL_TOKEN as a GitHub Actions repository secret, not a variable.'
+            missing=1
+          fi
           if [[ "$missing" != "0" ]]; then exit 1; fi
           case "$VERCEL_TOKEN" in
             github_pat_*|gh[pousr]_*)
