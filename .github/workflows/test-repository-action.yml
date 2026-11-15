@@ -21,6 +21,7 @@ jobs:
           persist-credentials: false
 
       - name: Generate trophy
+        id: generate
         uses: ./.
         with:
           username: ${{ github.repository_owner }}
@@ -31,3 +32,52 @@ jobs:
         run: |
           test -s trophy.svg
           file trophy.svg
+
+      - name: Diagnose GitHub source failures
+        if: failure() && steps.generate.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TROPHY_USERNAME: ${{ github.repository_owner }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+          from urllib.error import HTTPError
+          from urllib.request import Request, urlopen
+
+          owner = os.environ["TROPHY_USERNAME"]
+          headers = {"Authorization": "Bearer " + os.environ["GH_TOKEN"], "Content-Type": "application/json", "User-Agent": "trophy-ci"}
+          searches = {
+              "queryUserIssue": f"author:{owner} is:public is:issue",
+              "queryUserPullRequest": f"author:{owner} is:public is:pr -is:archived",
+              "queryUserReview": f"reviewed-by:{owner} is:public is:pr -is:archived sort:updated-desc",
+          }
+          source = Path("src/Schemas/index.ts").read_text()
+          for name, query in re.findall(r"export const (query\w+) = `(.*?)`;", source, re.S):
+              variables = {"username": owner, "cursor": None}
+              if name in searches:
+                  variables["search"] = searches[name]
+              request = Request("https://api.github.com/graphql", data=json.dumps({"query": query, "variables": variables}).encode(), headers=headers)
+              try:
+                  with urlopen(request, timeout=10) as response:
+                      payload = json.load(response)
+                      types = sorted({error.get("type", "UNKNOWN") for error in payload.get("errors", [])})
+                      types = [value if re.fullmatch(r"[A-Z_]{1,40}", value) else "UNKNOWN" for value in types]
+                      print(f"{name}: HTTP {response.status}; error types {types}")
+              except HTTPError as error:
+                  print(f"{name}: HTTP {error.code}")
+              except Exception:
+                  print(f"{name}: request failed")
+          for name, path, authenticated in [("public profile", f"/users/{owner}", False), ("public organizations", f"/users/{owner}/orgs?per_page=100&page=1", True)]:
+              request = Request("https://api.github.com" + path, headers=headers if authenticated else {"User-Agent": "trophy-ci"})
+              try:
+                  with urlopen(request, timeout=10) as response:
+                      print(f"{name}: HTTP {response.status}")
+              except HTTPError as error:
+                  print(f"{name}: HTTP {error.code}")
+              except Exception:
+                  print(f"{name}: request failed")
+          PY
