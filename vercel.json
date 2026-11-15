@@ -1,8 +1,8 @@
 {
-  "public": true,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/**/*.[jt]s": {
-      "runtime": "vercel-deno@3.1.1",
+      "runtime": "vercel-deno@3.2.0",
       "maxDuration": 10
     }
   },

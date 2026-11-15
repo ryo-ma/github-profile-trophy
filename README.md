@@ -6,6 +6,9 @@ This fork serves trophies for **BaranaNadil only**. Your GitHub token stays in
 the deployment settings; visitors cannot use this service for another username.
 The image remains public so you can embed it in your GitHub profile.
 
+For Vercel, follow the [deployment guide](./DEPLOYMENT.md): use the **Other**
+framework preset and deploy the latest `master` commit.
+
 Set `GITHUB_TOKEN1` to **your personal access token** in your host's environment
 variables, then deploy. `GITHUB_TOKEN2` is optional and must belong to the same
 account. Requests fail closed without a token or if a configured token belongs

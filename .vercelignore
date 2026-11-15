@@ -3,3 +3,12 @@
 README.md
 LICENSE
 debug.ts
+.git
+.vercel
+.vscode
+.idea
+.env
+.env.*
+test
+src/**/__tests__/**
+src/**/__mocks__/**
