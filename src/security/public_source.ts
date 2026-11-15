@@ -49,7 +49,7 @@ export function publicSource(
     const token = env("RATE_LIMIT_REDIS_TOKEN")?.trim();
     if (
       !url && !token && !requireShared &&
-      env("REQUIRE_SHARED_RATE_LIMIT") !== "true" && env("VERCEL") !== "1"
+      env("REQUIRE_SHARED_RATE_LIMIT") !== "true"
     ) {
       return undefined;
     }

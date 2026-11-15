@@ -37,10 +37,11 @@ Open the local endpoint:
 http://localhost:8080/?theme=tokyonight
 ```
 
-The local server can use bounded in-memory limits and caching. The hosted API
-requires Redis REST settings for shared limits and caching; set
-`REQUIRE_SHARED_RATE_LIMIT=true` when testing that mode locally. The Docker
-Compose configuration is available for container-based local development:
+Local and hosted servers use bounded in-memory limits and caching within each
+instance by default. No database is required. Configure both Redis REST settings
+to test shared limits and caching; set `REQUIRE_SHARED_RATE_LIMIT=true` when
+explicitly testing a required shared backend. The Docker Compose configuration
+is available for container-based local development:
 
 ```sh
 docker compose up -d

@@ -9,8 +9,8 @@ import { publicSource } from "../src/security/public_source.ts";
 
 function buildHandler(requireShared: boolean) {
   const usesSharedCache = requireShared ||
-    Deno.env.get("VERCEL") === "1" ||
-    !!Deno.env.get("RATE_LIMIT_REDIS_URL") ||
+    !!Deno.env.get("RATE_LIMIT_REDIS_URL")?.trim() ||
+    !!Deno.env.get("RATE_LIMIT_REDIS_TOKEN")?.trim() ||
     Deno.env.get("REQUIRE_SHARED_RATE_LIMIT") === "true";
   const source = publicSource({
     verify: verifyTokenOwners,
@@ -36,7 +36,7 @@ function buildHandler(requireShared: boolean) {
   });
 }
 
-const handler = buildHandler(true);
+const handler = buildHandler(false);
 
 export function handleRequest(request: Request, socketPeer?: string) {
   return handler(

@@ -1,5 +1,6 @@
 import {
   LimitDecision,
+  MemoryRateLimiter,
   RedisRestRateLimiter,
   SharedRateLimitError,
 } from "./rate_limit.ts";
@@ -35,20 +36,21 @@ export function trustedClientAddress(
     : undefined;
 }
 
-/** Vercel deployments fail closed until the shared budget has been configured. */
+/** Use an instance budget by default; explicitly configured shared limits fail closed. */
 export function deploymentBudget(
   env: Environment = (key) => Deno.env.get(key),
   requireShared = false,
 ) {
   let cachedKey = "";
   let limiter: RedisRestRateLimiter | undefined;
+  const instanceBudget = new MemoryRateLimiter({ limit: 300, maxClients: 1 });
   return (clientKey?: string): Promise<LimitDecision> => {
     const url = env("RATE_LIMIT_REDIS_URL")?.trim();
     const token = env("RATE_LIMIT_REDIS_TOKEN")?.trim();
-    const required = requireShared || env("VERCEL") === "1" ||
+    const required = requireShared ||
       env("REQUIRE_SHARED_RATE_LIMIT") === "true";
     if (!url && !token && !required) {
-      return Promise.resolve({ allowed: true, remaining: 0, retryAfter: 0 });
+      return Promise.resolve(instanceBudget.consume());
     }
     if (!url || !token) return Promise.reject(new SharedRateLimitError());
     if (

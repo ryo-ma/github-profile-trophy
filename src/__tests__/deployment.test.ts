@@ -18,11 +18,11 @@ Deno.test("Only trusted hosting or socket metadata supplies client identity", ()
   assertEquals(trustedClientAddress(malformed, true), undefined);
 });
 
-Deno.test("Public deployments require a configured shared request budget", async () => {
+Deno.test("Hosted deployments use memory limits unless shared limits are explicitly required", async () => {
   const production = deploymentBudget((name) =>
     name === "VERCEL" ? "1" : undefined
   );
-  await assertRejects(() => production("192.0.2.1"));
+  assertEquals((await production("192.0.2.1")).allowed, true);
   const required = deploymentBudget((name) =>
     name === "REQUIRE_SHARED_RATE_LIMIT" ? "true" : undefined
   );
@@ -31,6 +31,18 @@ Deno.test("Public deployments require a configured shared request budget", async
   assertEquals((await local()).allowed, true);
   const hosted = deploymentBudget(() => undefined, true);
   await assertRejects(() => hosted());
+});
+
+Deno.test("The default instance request budget is bounded without a database", async () => {
+  const budget = deploymentBudget((name) =>
+    name === "VERCEL" ? "1" : undefined
+  );
+  for (let request = 0; request < 300; request++) {
+    assertEquals((await budget(`client-${request}`)).allowed, true);
+  }
+  const denied = await budget("another-client");
+  assertEquals(denied.allowed, false);
+  assertEquals(denied.retryAfter > 0, true);
 });
 
 Deno.test("Incomplete or insecure shared-counter settings fail closed", async () => {

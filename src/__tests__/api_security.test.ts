@@ -29,8 +29,11 @@ function environment(settings: Record<string, string>) {
 }
 const request = () => new Request("https://trophy.example/?theme=tokyonight");
 
-Deno.test("Hosted entry point fails closed without Redis before contacting GitHub", async () => {
-  const restore = environment({ GITHUB_TOKEN1: "github-test-token" });
+Deno.test("Explicitly required shared limits fail closed before contacting GitHub", async () => {
+  const restore = environment({
+    GITHUB_TOKEN1: "github-test-token",
+    REQUIRE_SHARED_RATE_LIMIT: "true",
+  });
   const mock = stub(globalThis, "fetch", () => {
     throw new Error("No network request should be made");
   });
@@ -45,180 +48,214 @@ Deno.test("Hosted entry point fails closed without Redis before contacting GitHu
   }
 });
 
-Deno.test("Shared API caches only public numeric statistics and respects remote expiry", async () => {
-  const restore = environment({
-    GITHUB_TOKEN1: "github-test-token",
-    GITHUB_API: "https://api.github.com/graphql",
-    VERCEL: "1",
-    RATE_LIMIT_REDIS_URL: "https://redis.example",
-    RATE_LIMIT_REDIS_TOKEN: "redis-test-token",
-  });
-  let time = 0;
-  let githubCalls = 0;
-  let viewerCalls = 0;
-  const stored = new Map<string, { value: string; expiry: number }>();
-  const read = (key: string) => {
-    const entry = stored.get(key);
-    if (!entry || entry.expiry <= time) return null;
-    return entry.value;
-  };
-  const pageInfo = { hasNextPage: false, endCursor: null };
-  const publicRepo = { visibility: "PUBLIC", isPrivate: false };
-  const privateRepo = { visibility: "PRIVATE", isPrivate: true };
-  const mock = stub(
-    globalThis,
-    "fetch",
-    (input: RequestInfo | URL, init?: RequestInit) => {
-      const url = new URL(String(input));
-      const auth = new Headers(init?.headers).get("Authorization");
-      assertEquals(init?.redirect, "error");
-      if (url.hostname === "redis.example") {
-        assertEquals(auth, "Bearer redis-test-token");
-        assertEquals(String(init?.body).includes("github-test-token"), false);
-        const command: string[] = JSON.parse(String(init?.body));
-        let result: unknown;
-        if (command[0] === "GET") result = read(command[1]);
-        else if (command[0] === "SET") {
-          if (read(command[1]) !== null) result = null;
-          else {
-            stored.set(command[1], {
-              value: command[2],
-              expiry: time + Number(command[5]),
-            });
-            result = "OK";
+for (const shared of [false, true]) {
+  Deno.test(
+    shared
+      ? "Optional shared cache stores only public statistics and respects remote expiry"
+      : "Hosted API works without a database, caches public data, and still requires its token",
+    async () => {
+      const restore = environment({
+        GITHUB_TOKEN1: "github-test-token",
+        GITHUB_API: "https://api.github.com/graphql",
+        VERCEL: "1",
+        ...(shared
+          ? {
+            RATE_LIMIT_REDIS_URL: "https://redis.example",
+            RATE_LIMIT_REDIS_TOKEN: "redis-test-token",
           }
-        } else if (
-          command[0] === "EVAL" && command[1].includes('redis.call("INCR"')
-        ) {
-          result = [1, 50, 0];
-        } else if (command[0] === "EVAL" && command[2] === "2") {
-          if (read(command[3]) !== command[5]) result = 0;
-          else {
-            stored.set(command[4], {
-              value: command[6],
-              expiry: time + Number(command[7]) * 1000,
-            });
-            result = 1;
+          : {}),
+      });
+      let time = 0;
+      let githubCalls = 0;
+      let viewerCalls = 0;
+      const stored = new Map<string, { value: string; expiry: number }>();
+      const read = (key: string) => {
+        const entry = stored.get(key);
+        if (!entry || entry.expiry <= time) return null;
+        return entry.value;
+      };
+      const pageInfo = { hasNextPage: false, endCursor: null };
+      const publicRepo = { visibility: "PUBLIC", isPrivate: false };
+      const privateRepo = { visibility: "PRIVATE", isPrivate: true };
+      const mock = stub(
+        globalThis,
+        "fetch",
+        (input: RequestInfo | URL, init?: RequestInit) => {
+          const url = new URL(String(input));
+          const auth = new Headers(init?.headers).get("Authorization");
+          assertEquals(init?.redirect, "error");
+          if (url.hostname === "redis.example") {
+            assertEquals(auth, "Bearer redis-test-token");
+            assertEquals(
+              String(init?.body).includes("github-test-token"),
+              false,
+            );
+            const command: string[] = JSON.parse(String(init?.body));
+            let result: unknown;
+            if (command[0] === "GET") result = read(command[1]);
+            else if (command[0] === "SET") {
+              if (read(command[1]) !== null) result = null;
+              else {
+                stored.set(command[1], {
+                  value: command[2],
+                  expiry: time + Number(command[5]),
+                });
+                result = "OK";
+              }
+            } else if (
+              command[0] === "EVAL" && command[1].includes('redis.call("INCR"')
+            ) {
+              result = [1, 50, 0];
+            } else if (command[0] === "EVAL" && command[2] === "2") {
+              if (read(command[3]) !== command[5]) result = 0;
+              else {
+                stored.set(command[4], {
+                  value: command[6],
+                  expiry: time + Number(command[7]) * 1000,
+                });
+                result = 1;
+              }
+            } else if (command[0] === "EVAL" && command[2] === "1") {
+              if (read(command[3]) === command[4]) {
+                stored.delete(command[3]);
+                result = 1;
+              } else result = 0;
+            } else throw new Error("Unexpected command");
+            return Promise.resolve(Response.json({ result }));
           }
-        } else if (command[0] === "EVAL" && command[2] === "1") {
-          if (read(command[3]) === command[4]) {
-            stored.delete(command[3]);
-            result = 1;
-          } else result = 0;
-        } else throw new Error("Unexpected command");
-        return Promise.resolve(Response.json({ result }));
-      }
-      assertEquals(url.hostname, "api.github.com");
-      assertEquals(auth === "Bearer redis-test-token", false);
-      githubCalls++;
-      if (url.pathname === `/users/${PERSONAL_USERNAME}`) {
-        assertEquals(auth, null);
-        return Promise.resolve(Response.json({
-          login: PERSONAL_USERNAME,
-          created_at: "2020-01-01T00:00:00Z",
-          followers: 5,
-          email: "private-profile-marker@example.invalid",
-          total_private_repos: 987654,
-        }));
-      }
-      assertEquals(auth, "Bearer github-test-token");
-      if (url.pathname.endsWith("/orgs")) {
-        return Promise.resolve(
-          Response.json([]),
+          assertEquals(url.hostname, "api.github.com");
+          assertEquals(auth === "Bearer redis-test-token", false);
+          githubCalls++;
+          if (url.pathname === `/users/${PERSONAL_USERNAME}`) {
+            assertEquals(auth, null);
+            return Promise.resolve(Response.json({
+              login: PERSONAL_USERNAME,
+              created_at: "2020-01-01T00:00:00Z",
+              followers: 5,
+              email: "private-profile-marker@example.invalid",
+              total_private_repos: 987654,
+            }));
+          }
+          assertEquals(auth, "Bearer github-test-token");
+          if (url.pathname.endsWith("/orgs")) {
+            return Promise.resolve(
+              Response.json([]),
+            );
+          }
+          const { query, variables } = JSON.parse(String(init?.body));
+          let data: unknown;
+          if (query.includes("TrophyViewer")) {
+            viewerCalls++;
+            assertEquals(query, "query TrophyViewer { viewer { login } }");
+            data = { viewer: { login: PERSONAL_USERNAME } };
+          } else if (query.includes("publicUserRepositories")) {
+            data = {
+              user: {
+                repositories: {
+                  pageInfo,
+                  nodes: [
+                    {
+                      ...publicRepo,
+                      id: "public",
+                      languages: { nodes: [{ name: "TypeScript" }] },
+                      stargazers: { totalCount: 7 },
+                      createdAt: "2020-01-01T00:00:00Z",
+                    },
+                    {
+                      ...privateRepo,
+                      id: "private-repository-marker",
+                      stargazers: { totalCount: 987654 },
+                    },
+                  ],
+                },
+              },
+            };
+          } else if (query.includes("publicUserActivity")) {
+            data = {
+              user: {
+                contributionsCollection: {
+                  commitContributionsByRepository: [
+                    {
+                      repository: publicRepo,
+                      contributions: { nodes: [{ commitCount: 9 }] },
+                    },
+                    {
+                      repository: privateRepo,
+                      contributions: { nodes: [{ commitCount: 987654 }] },
+                    },
+                  ],
+                },
+              },
+            };
+          } else {
+            assertEquals(variables.search.includes("is:public"), true);
+            data = { search: { pageInfo, nodes: [] } };
+          }
+          return Promise.resolve(Response.json({ data }));
+        },
+      );
+      try {
+        const first = shared
+          ? createLocalRequestHandler()
+          : (request: Request, _peer: string) => hostedHandler(request);
+        const second = createLocalRequestHandler();
+        const response = await first(request(), "192.0.2.1");
+        assertEquals(response.status, 200);
+        const svg = await response.text();
+        assertEquals(
+          /987654|private-profile-marker|private-repository-marker|test-token/
+            .test(
+              svg,
+            ),
+          false,
         );
+        assertEquals(githubCalls, 8);
+        assertEquals((await second(request(), "192.0.2.2")).status, 200);
+        assertEquals(githubCalls, shared ? 8 : 16);
+        assertEquals(viewerCalls, shared ? 1 : 2);
+        if (!shared) {
+          assertEquals(stored.size, 0);
+          assertEquals((await first(request(), "192.0.2.1")).status, 200);
+          assertEquals(githubCalls, 16);
+          assertEquals(
+            (await first(
+              new Request("https://trophy.example/?username=someone-else"),
+              "192.0.2.1",
+            )).status,
+            403,
+          );
+          Deno.env.delete("GITHUB_TOKEN1");
+          assertEquals((await first(request(), "192.0.2.1")).status, 503);
+          assertEquals(githubCalls, 16);
+          return;
+        }
+        for (const [key, entry] of stored) {
+          assertEquals(/test-token/.test(key + entry.value), false);
+          if (key.includes(":stats:")) {
+            const value = JSON.parse(entry.value).value;
+            assertEquals(isPublicStatistics(value), true);
+            assertEquals(value.totalRepositories, 1);
+            assertEquals(value.totalStargazers, 7);
+            assertEquals(value.totalCommits, 9);
+            assertEquals(value.totalFollowers, 5);
+          }
+        }
+        // Even a warm process must revalidate when the shared proof expires.
+        time = 300001;
+        assertEquals((await first(request(), "192.0.2.1")).status, 200);
+        assertEquals(viewerCalls, 2);
+        assertEquals(githubCalls, 9);
+        time = 900001;
+        assertEquals((await first(request(), "192.0.2.1")).status, 200);
+        assertEquals(viewerCalls, 3);
+        assertEquals(githubCalls, 17);
+      } finally {
+        mock.restore();
+        restore();
       }
-      const { query, variables } = JSON.parse(String(init?.body));
-      let data: unknown;
-      if (query.includes("TrophyViewer")) {
-        viewerCalls++;
-        assertEquals(query, "query TrophyViewer { viewer { login } }");
-        data = { viewer: { login: PERSONAL_USERNAME } };
-      } else if (query.includes("publicUserRepositories")) {
-        data = {
-          user: {
-            repositories: {
-              pageInfo,
-              nodes: [
-                {
-                  ...publicRepo,
-                  id: "public",
-                  languages: { nodes: [{ name: "TypeScript" }] },
-                  stargazers: { totalCount: 7 },
-                  createdAt: "2020-01-01T00:00:00Z",
-                },
-                {
-                  ...privateRepo,
-                  id: "private-repository-marker",
-                  stargazers: { totalCount: 987654 },
-                },
-              ],
-            },
-          },
-        };
-      } else if (query.includes("publicUserActivity")) {
-        data = {
-          user: {
-            contributionsCollection: {
-              commitContributionsByRepository: [
-                {
-                  repository: publicRepo,
-                  contributions: { nodes: [{ commitCount: 9 }] },
-                },
-                {
-                  repository: privateRepo,
-                  contributions: { nodes: [{ commitCount: 987654 }] },
-                },
-              ],
-            },
-          },
-        };
-      } else {
-        assertEquals(variables.search.includes("is:public"), true);
-        data = { search: { pageInfo, nodes: [] } };
-      }
-      return Promise.resolve(Response.json({ data }));
     },
   );
-  try {
-    const first = createLocalRequestHandler();
-    const second = createLocalRequestHandler();
-    const response = await first(request(), "192.0.2.1");
-    assertEquals(response.status, 200);
-    const svg = await response.text();
-    assertEquals(
-      /987654|private-profile-marker|private-repository-marker|test-token/.test(
-        svg,
-      ),
-      false,
-    );
-    assertEquals(githubCalls, 8);
-    assertEquals((await second(request(), "192.0.2.2")).status, 200);
-    assertEquals(githubCalls, 8);
-    for (const [key, entry] of stored) {
-      assertEquals(/test-token/.test(key + entry.value), false);
-      if (key.includes(":stats:")) {
-        const value = JSON.parse(entry.value).value;
-        assertEquals(isPublicStatistics(value), true);
-        assertEquals(value.totalRepositories, 1);
-        assertEquals(value.totalStargazers, 7);
-        assertEquals(value.totalCommits, 9);
-        assertEquals(value.totalFollowers, 5);
-      }
-    }
-    // Even a warm process must revalidate when the shared proof expires.
-    time = 300001;
-    assertEquals((await first(request(), "192.0.2.1")).status, 200);
-    assertEquals(viewerCalls, 2);
-    assertEquals(githubCalls, 9);
-    time = 900001;
-    assertEquals((await first(request(), "192.0.2.1")).status, 200);
-    assertEquals(viewerCalls, 3);
-    assertEquals(githubCalls, 17);
-  } finally {
-    mock.restore();
-    restore();
-  }
-});
+}
 
 Deno.test("Public projection rejects extra personal fields and nonnumeric counts", async () => {
   const sample = Object.fromEntries([

@@ -132,7 +132,10 @@ jobs:
           except Exception:
               print("::error::Unable to inspect Vercel Production environment settings.")
               sys.exit(1)
-          required = {"GITHUB_TOKEN1", "RATE_LIMIT_REDIS_URL", "RATE_LIMIT_REDIS_TOKEN"}
+          required = {"GITHUB_TOKEN1"}
+          redis_settings = {"RATE_LIMIT_REDIS_URL", "RATE_LIMIT_REDIS_TOKEN"}
+          if keys & redis_settings:
+              required |= redis_settings
           missing = sorted(required - keys)
           for name in missing:
               print(f"::error::Set {name} in the Vercel project's Production environment before deploying.")

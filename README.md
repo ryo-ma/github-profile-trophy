@@ -12,8 +12,7 @@ The preview uses example statistics. Deployed images show data from GitHub.
    Vercel.
 2. Set `GITHUB_TOKEN1` to a personal access token belonging to the account
    configured by `PERSONAL_USERNAME` in `src/security/github.ts`.
-3. Set the Redis REST environment variables described in the deployment guide.
-4. Add your deployment URL to your profile README:
+3. Add your deployment URL to your profile README:
 
 ```markdown
 [![GitHub trophies](https://YOUR_PROJECT.vercel.app/?theme=tokyonight&column=-1&margin-w=10)](https://github.com/YOUR_USERNAME)
@@ -22,6 +21,10 @@ The preview uses example statistics. Deployed images show data from GitHub.
 Replace `YOUR_PROJECT` with your deployment domain and `YOUR_USERNAME` with your
 GitHub username. The `username` parameter is optional and defaults to the
 configured account. If supplied, it must match that account.
+
+A database is not required. The service uses in-memory caching and request
+limits within each server instance. Optional Redis REST configuration shares
+those controls across instances; see the deployment guide.
 
 Statistics are calculated only from explicitly public resources. Private
 repositories, hidden activity, pending reviews, and archived pull requests are
