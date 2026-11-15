@@ -14,8 +14,55 @@
    provider's REST URL and REST credential, not a `redis://` connection string
    or a GitHub token. These settings are required by the hosted API for shared
    limits and caching.
-5. Apply the variables to Production and any intended Preview environment, then
-   deploy. Redeploy after changing environment variables.
+5. Apply the variables to Production and any intended Preview environment.
+   Follow the GitHub Actions setup below to deploy. Run the deployment again
+   after changing environment variables.
+
+## GitHub Actions deployment
+
+The **Project checks and deployment** workflow runs on pushes to `master` and
+can also be started manually. Its production job runs only after dependency,
+formatting, lint, type, and test checks succeed. Pull requests run checks
+without deploying or receiving Vercel credentials. Active production runs finish
+in order.
+
+Add these repository secrets under **Settings > Secrets and variables >
+Actions**. Alternatively, store them in the existing `Production` environment
+under **Settings > Environments > Production**:
+
+| Secret              | Value                                                        |
+| ------------------- | ------------------------------------------------------------ |
+| `VERCEL_TOKEN`      | A Vercel deployment token for the existing project/workspace |
+| `VERCEL_ORG_ID`     | The existing Vercel workspace/team ID                        |
+| `VERCEL_PROJECT_ID` | The existing Vercel project ID                               |
+
+Create a suitably scoped deployment token in
+[Vercel account settings](https://vercel.com/account/settings/tokens). It is
+separate from the GitHub PAT. Find the project ID in the Vercel project's
+General settings and the team ID in the workspace's General settings. If the
+project is linked locally, `.vercel/project.json` contains `projectId` and
+`orgId`. Keep that generated directory out of Git.
+
+After saving the secrets, open **Actions > Project checks and deployment > Run
+workflow**, select `master`, and start it. Subsequent pushes to `master` deploy
+automatically. The job summary and GitHub's `Production` environment link to the
+resulting deployment.
+
+The workflow uses a pinned Vercel CLI, pulls the existing project's Production
+settings, builds once, and uploads the prebuilt output. It checks metadata for
+`GITHUB_TOKEN1`, `RATE_LIMIT_REDIS_URL`, and `RATE_LIMIT_REDIS_TOKEN` in
+Vercel's Production environment before deployment, without decrypting Sensitive
+values. These application credentials stay in Vercel settings; they are not
+GitHub deployment secrets. Downloaded environment files are neither cached nor
+published as artifacts and are removed at job end.
+
+`vercel.json` disables Vercel's separate Git-triggered deployments so production
+uses the Actions checks as its deployment gate. The repository can remain
+connected in Vercel. Missing deployment secrets or application settings stop the
+workflow with an error instead of publishing an unconfigured service. See
+[Vercel's GitHub Actions guide](https://vercel.com/kb/guide/how-can-i-use-github-actions-with-vercel).
+
+## Hosting behavior
 
 No service is provisioned by the repository. Choose the provider's plan and
 usage limits before enabling the shared backend. Keep Redis access restricted to

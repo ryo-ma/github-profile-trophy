@@ -1,4 +1,4 @@
-name: Project checks
+name: Project checks and deployment
 
 on:
   push:
@@ -12,7 +12,8 @@ permissions:
 
 concurrency:
   group: checks-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  # Finish active production deployments in order; cancel superseded PR checks.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   checks:
@@ -40,5 +41,147 @@ jobs:
       - name: Lint
         run: deno lint
 
+      - name: Type check entry points
+        run: deno check --lock=deno.lock api/index.ts main.ts render_svg.ts
+
       - name: Test
         run: deno task test
+
+  deploy:
+    name: Deploy production to Vercel
+    needs: checks
+    if: >-
+      github.ref == 'refs/heads/master' &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: Production
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TELEMETRY_DISABLED: "1"
+      DO_NOT_TRACK: "1"
+    steps:
+      - name: Validate deployment secrets
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        shell: bash
+        run: |
+          missing=0
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [[ -z "${!name}" ]]; then
+              printf '::error::Add %s in GitHub Actions secrets before deploying. See DEPLOYMENT.md.\n' "$name"
+              missing=1
+            fi
+          done
+          if [[ "$missing" != "0" ]]; then exit 1; fi
+          case "$VERCEL_TOKEN" in
+            github_pat_*|gh[pousr]_*)
+              echo '::error::VERCEL_TOKEN must be a Vercel deployment token, not a GitHub token.'
+              exit 1
+              ;;
+          esac
+
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@65.16.0
+
+      - name: Pull production project settings
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Verify required production settings
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          from urllib.parse import quote, urlencode
+          from urllib.request import Request, urlopen
+
+          params = {"target": "production", "decrypt": "false"}
+          if os.environ["VERCEL_ORG_ID"].startswith("team_"):
+              params["teamId"] = os.environ["VERCEL_ORG_ID"]
+          project = quote(os.environ["VERCEL_PROJECT_ID"], safe="")
+          url = f"https://api.vercel.com/v10/projects/{project}/env?{urlencode(params)}"
+          request = Request(url, headers={"Authorization": "Bearer " + os.environ["VERCEL_TOKEN"]})
+          try:
+              with urlopen(request, timeout=20) as response:
+                  records = json.load(response)["envs"]
+              keys = {record["key"] for record in records}
+          except Exception:
+              print("::error::Unable to inspect Vercel Production environment settings.")
+              sys.exit(1)
+          required = {"GITHUB_TOKEN1", "RATE_LIMIT_REDIS_URL", "RATE_LIMIT_REDIS_TOKEN"}
+          missing = sorted(required - keys)
+          for name in missing:
+              print(f"::error::Set {name} in the Vercel project's Production environment before deploying.")
+          sys.exit(bool(missing))
+          PY
+
+      - name: Build production artifacts
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy production artifacts
+        id: deploy
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+          import sys
+          from pathlib import Path
+          from urllib.parse import urlsplit
+
+          result = subprocess.run([
+              "vercel", "deploy", "--prebuilt", "--prod", "--yes", "--json",
+              "--token=" + os.environ["VERCEL_TOKEN"],
+          ], capture_output=True, text=True)
+          try:
+              if result.returncode:
+                  raise ValueError("Deployment failed")
+              try:
+                  payload = json.loads(result.stdout)
+              except ValueError:
+                  payload = {"url": result.stdout.strip()}
+              url = payload.get("url") or payload.get("deployment", {}).get("url")
+              if not isinstance(url, str) or any(char.isspace() for char in url):
+                  raise ValueError("Missing deployment URL")
+              if "://" not in url:
+                  url = "https://" + url
+              parsed = urlsplit(url)
+              if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
+                  raise ValueError("Invalid deployment URL")
+          except (ValueError, TypeError, AttributeError):
+              print("::error::Vercel deployment failed or returned an invalid result. Check the Vercel deployment logs.")
+              sys.exit(1)
+          with Path(os.environ["GITHUB_OUTPUT"]).open("a") as output:
+              output.write(f"url={url}\n")
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as summary:
+              summary.write(f"Production deployment: {url}\nCommit: {os.environ['GITHUB_SHA']}\n")
+          PY
+
+      - name: Remove downloaded environment files
+        if: always()
+        run: rm -rf -- .vercel
