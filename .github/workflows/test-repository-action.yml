@@ -3,8 +3,6 @@ on: [push, pull_request, workflow_dispatch]
 
 permissions:
   contents: read
-  issues: read
-  pull-requests: read
 
 concurrency:
   group: action-${{ github.event.pull_request.number || github.ref }}
@@ -20,64 +18,52 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Start local HTTPS GitHub fixture
+        env:
+          TROPHY_USERNAME: ${{ github.repository_owner }}
+        shell: bash
+        run: |
+          fixture_dir="$RUNNER_TEMP/trophy-ci-tls"
+          mkdir -p "$fixture_dir"
+          openssl req -x509 -newkey rsa:2048 -nodes -days 1 \
+            -keyout "$fixture_dir/ca.key" -out "$fixture_dir/ca.pem" \
+            -subj "/CN=trophy-ci-ca" -addext "basicConstraints=critical,CA:TRUE" \
+            -addext "keyUsage=critical,keyCertSign,cRLSign" -addext "subjectKeyIdentifier=hash" \
+            > /dev/null 2>&1
+          openssl req -newkey rsa:2048 -nodes -keyout "$fixture_dir/key.pem" \
+            -out "$fixture_dir/request.csr" -subj "/CN=localhost" > /dev/null 2>&1
+          printf 'subjectAltName=DNS:localhost,IP:127.0.0.1\nbasicConstraints=critical,CA:FALSE\nkeyUsage=critical,digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth\nsubjectKeyIdentifier=hash\nauthorityKeyIdentifier=keyid,issuer\n' > "$fixture_dir/extensions.cnf"
+          openssl x509 -req -in "$fixture_dir/request.csr" -CA "$fixture_dir/ca.pem" \
+            -CAkey "$fixture_dir/ca.key" -CAcreateserial -out "$fixture_dir/cert.pem" \
+            -days 1 -extfile "$fixture_dir/extensions.cnf" > /dev/null 2>&1
+          python3 .github/fixtures/github_api.py "$fixture_dir/cert.pem" "$fixture_dir/key.pem" "$TROPHY_USERNAME" \
+            > "$RUNNER_TEMP/trophy-fixture.log" 2>&1 &
+          printf 'TROPHY_FIXTURE_PID=%s\nDENO_CERT=%s\nGITHUB_API=https://127.0.0.1:8443/graphql\n' "$!" "$fixture_dir/ca.pem" >> "$GITHUB_ENV"
+          for attempt in {1..30}; do
+            if curl --silent --fail --cacert "$fixture_dir/ca.pem" https://127.0.0.1:8443/health > /dev/null; then
+              exit 0
+            fi
+            sleep 0.2
+          done
+          echo '::error::Local HTTPS fixture did not start.'
+          exit 1
+
       - name: Generate trophy
-        id: generate
         uses: ./.
         with:
           username: ${{ github.repository_owner }}
           output_path: ./trophy.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: fixture-token
 
       - name: Verify SVG generated
         run: |
           test -s trophy.svg
           file trophy.svg
 
-      - name: Diagnose GitHub source failures
-        if: failure() && steps.generate.outcome == 'failure'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TROPHY_USERNAME: ${{ github.repository_owner }}
+      - name: Stop local fixture
+        if: always()
         shell: bash
         run: |
-          python3 - <<'PY'
-          import json
-          import os
-          import re
-          from pathlib import Path
-          from urllib.error import HTTPError
-          from urllib.request import Request, urlopen
-
-          owner = os.environ["TROPHY_USERNAME"]
-          headers = {"Authorization": "Bearer " + os.environ["GH_TOKEN"], "Content-Type": "application/json", "User-Agent": "trophy-ci"}
-          searches = {
-              "queryUserIssue": f"author:{owner} is:public is:issue",
-              "queryUserPullRequest": f"author:{owner} is:public is:pr -is:archived",
-              "queryUserReview": f"reviewed-by:{owner} is:public is:pr -is:archived sort:updated-desc",
-          }
-          source = Path("src/Schemas/index.ts").read_text()
-          for name, query in re.findall(r"export const (query\w+) = `(.*?)`;", source, re.S):
-              variables = {"username": owner, "cursor": None}
-              if name in searches:
-                  variables["search"] = searches[name]
-              request = Request("https://api.github.com/graphql", data=json.dumps({"query": query, "variables": variables}).encode(), headers=headers)
-              try:
-                  with urlopen(request, timeout=10) as response:
-                      payload = json.load(response)
-                      types = sorted({error.get("type", "UNKNOWN") for error in payload.get("errors", [])})
-                      types = [value if re.fullmatch(r"[A-Z_]{1,40}", value) else "UNKNOWN" for value in types]
-                      print(f"{name}: HTTP {response.status}; error types {types}")
-              except HTTPError as error:
-                  print(f"{name}: HTTP {error.code}")
-              except Exception:
-                  print(f"{name}: request failed")
-          for name, path, authenticated in [("public profile", f"/users/{owner}", False), ("public organizations", f"/users/{owner}/orgs?per_page=100&page=1", True)]:
-              request = Request("https://api.github.com" + path, headers=headers if authenticated else {"User-Agent": "trophy-ci"})
-              try:
-                  with urlopen(request, timeout=10) as response:
-                      print(f"{name}: HTTP {response.status}")
-              except HTTPError as error:
-                  print(f"{name}: HTTP {error.code}")
-              except Exception:
-                  print(f"{name}: request failed")
-          PY
+          if [[ -n "${TROPHY_FIXTURE_PID:-}" ]]; then
+            kill "$TROPHY_FIXTURE_PID" || true
+          fi

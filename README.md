@@ -161,7 +161,10 @@ deno run --allow-net --allow-env --allow-read --allow-write render_svg.ts USERNA
 ```
 
 Use [action.yml](./action.yml) to run the generator in a trusted GitHub Actions
-workflow. Generated files must be regenerated to refresh their statistics.
+workflow. Supply a token with read access to the profile's public repositories.
+The built-in `GITHUB_TOKEN` is scoped to the workflow repository and may not be
+able to read a complete profile. Generated files must be regenerated to refresh
+their statistics.
 
 To render the example preview without GitHub credentials:
 
