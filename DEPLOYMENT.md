@@ -51,12 +51,13 @@ deploy automatically. The deployment URL appears in the deploy job's Vercel
 output.
 
 The workflow uses a pinned Vercel CLI, pulls the existing project's Production
-settings, builds once, and uploads the prebuilt output. It checks metadata for
-`GITHUB_TOKEN1` in Vercel's Production environment before deployment, without
-decrypting Sensitive values. If either optional Redis setting is present, both
-must be configured. Application credentials stay in Vercel settings; they are
-not GitHub deployment secrets. Downloaded environment files are neither cached
-nor published as artifacts and are removed at job end.
+settings, and submits the source for Vercel to build and deploy. Building on
+Vercel keeps the community Deno runtime's cache links within the build host. It
+checks metadata for `GITHUB_TOKEN1` in Vercel's Production environment before
+deployment, without decrypting Sensitive values. If either optional Redis
+setting is present, both must be configured. Application credentials stay in
+Vercel settings; they are not GitHub deployment secrets. Downloaded environment
+files are neither cached nor published as artifacts and are removed at job end.
 
 `vercel.json` disables Vercel's separate Git-triggered deployments so production
 uses the Actions checks as its deployment gate. The repository can remain
