@@ -3,6 +3,8 @@ on: [push, pull_request, workflow_dispatch]
 
 permissions:
   contents: read
+  issues: read
+  pull-requests: read
 
 concurrency:
   group: action-${{ github.event.pull_request.number || github.ref }}
