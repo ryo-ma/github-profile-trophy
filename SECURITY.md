@@ -1,15 +1,16 @@
-# Personal deployment security
+# Security
 
-This fork's live HTTP service is restricted to **BaranaNadil**. The SVG is
-public so it can appear on the owner's GitHub profile. It does not authenticate
-image viewers. It cannot be used to generate trophies for other usernames.
+The HTTP service generates trophies for the account configured by
+`PERSONAL_USERNAME` in `src/security/github.ts`. SVG images are publicly
+viewable for use in GitHub profile READMEs. Requests cannot select a different
+account.
 
 ## Required deployment configuration
 
-Set `GITHUB_TOKEN1` to a personal access token owned by **BaranaNadil**, using
-your hosting provider's encrypted environment variables. `GITHUB_TOKEN2` is
-optional; if configured, it must belong to the same account. No token means
-HTTP 503.
+Set `GITHUB_TOKEN1` to a personal access token belonging to the configured
+account, using the hosting provider's encrypted environment variables.
+`GITHUB_TOKEN2` is optional and must belong to the same account. Requests
+without a configured token return HTTP 503.
 
 The service authenticates each configured token using GitHub's `GET /user`
 endpoint before fetching or serving owner data. An invalid token or a token for
@@ -18,9 +19,9 @@ five minutes; token removal or rotation clears the in-process data state on the
 next request. Revocation at GitHub is detected at the next verification or
 upstream data refresh, rather than instantaneously.
 
-The owner is pinned by `PERSONAL_USERNAME` in `src/security/github.ts`; request
-parameters cannot change it. Missing `username` defaults to this owner. Other
-usernames return HTTP 403, including when owner data is already cached.
+The account is specified by `PERSONAL_USERNAME` in `src/security/github.ts`;
+request parameters cannot change it. Missing `username` defaults to this owner.
+Other usernames return HTTP 403, including when owner data is already cached.
 
 The deployment does not accept GitHub tokens from visitors. Do not place a PAT
 in query strings, README image URLs, source files, logs, or browser code. Keep
@@ -30,8 +31,8 @@ required by this service. Rotate any token that has been exposed.
 
 GitHub Actions' built-in `GITHUB_TOKEN` is an installation token, rather than a
 personal user token. The live service requires a user PAT for the ownership
-check. The existing offline SVG generator can still run inside a trusted
-workflow with its supplied token; it is not an HTTP endpoint.
+check. The offline SVG generator can still run inside a trusted workflow with
+its supplied token; it is not an HTTP endpoint.
 
 For GitHub Enterprise, set `GITHUB_API` to the HTTPS GraphQL endpoint, for
 example `https://github.example.com/api/graphql`. The ownership check uses the
@@ -52,12 +53,10 @@ redirects are rejected. The default endpoint is GitHub.com's HTTPS API.
   rendering variants share that data. Simultaneous cache misses share one fetch.
   Requests cannot create arbitrary disk or Redis cache keys through this route.
 - Upstream failures trigger a 30-second cooldown. Requests during cooldown
-  cannot extend it. GitHub rate limits remain HTTP 429 instead of becoming a
-  false 404.
+  cannot extend it. GitHub rate limits return HTTP 429.
 - Each GitHub request has a real two-second abort deadline covering both the
   connection and response body. Up to two configured tokens may be tried.
-- All HTTP responses use `private, no-store` caching and `nosniff`. The former
-  public disk/CDN response-cache path is not used by the live endpoint.
+- All HTTP responses use `private, no-store` caching and `nosniff`.
 
 These limits reduce application work and GitHub API consumption. They are not a
 complete DDoS defense. Memory state resets on restart and is not shared between
@@ -67,21 +66,19 @@ serverless instances or regions.
 
 On Vercel, automatic DDoS mitigation is provided by the platform. Additionally,
 use your project's **Firewall** settings to apply a rate-limit rule before
-requests reach the function. A reasonable starting point for this personal image
-endpoint is 60 requests per minute per source IP, with a short block duration.
-Check your plan's available rules and monitor actual image-proxy traffic before
-making that rule stricter. Do not base access on a spoofable User-Agent or
-Referer.
+requests reach the function. A reasonable starting point for the SVG endpoint is
+60 requests per minute per source IP, with a short block duration. Check your
+plan's available rules and monitor actual image-proxy traffic before making that
+rule stricter. Do not base access on a spoofable User-Agent or Referer.
 
 If you use another host, put equivalent edge protection in front of the origin
 and prevent direct access around it. Configure a shared/edge request budget when
 you need a limit across all application instances.
 
-After deploying this change, purge any response caches left by the former public
-version. Set usage alerts and spending controls available from your host. During
-an incident, inspect firewall logs and use temporary blocking or challenge mode
-as appropriate; a browser challenge can also prevent image proxies from fetching
-the trophy SVG.
+Purge cached responses when changing access rules. Set usage alerts and spending
+controls available from the host. During an incident, inspect firewall logs and
+use temporary blocking or challenge mode as appropriate; a browser challenge can
+also prevent image proxies from fetching the trophy SVG.
 
 Firewall rules, cache purges, and account spending controls are hosting-account
 settings. They are not enabled merely by pushing this repository. Do not treat a

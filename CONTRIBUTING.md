@@ -1,77 +1,71 @@
-# Contribution Guide
+# Contributing
 
-## Environment
+## Requirements
 
-- Deno >= v1.36.1
-- [Vercel](https://vercel.com/)
-- GitHub API v4
-- Docker and Docker compose (optional)
+- Deno 1.44.4, matching CI and the deployment runtime
+- A GitHub personal access token for the configured account
+- Docker and Docker Compose, if using the container environment
 
-## Local Run
+## Local setup
 
-Create `.env` file to project root directory, and write your GitHub token to the
-`.env` file. The live service requires a personal token owned by BaranaNadil.
-Use the minimum permissions needed for the statistics you want to show. See
-[SECURITY.md](./SECURITY.md) for ownership verification and hosting protection.
+Copy the environment example and configure credentials:
+
+```sh
+cp env-example .env
+```
+
+Set `GITHUB_TOKEN1` to a token belonging to the account identified by
+`PERSONAL_USERNAME` in `src/security/github.ts`. `GITHUB_TOKEN2` is optional and
+must belong to the same account. Use only the permissions required for the
+statistics the service displays.
+
+For GitHub Enterprise, set `GITHUB_API` to the HTTPS GraphQL endpoint:
 
 ```properties
-GITHUB_TOKEN1=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-GITHUB_TOKEN2=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-# if using GitHub Enterprise:
-# (this env var defaults to https://api.github.com/graphql)
 GITHUB_API=https://github.example.com/api/graphql
 ```
 
-Run local server.
+Start the server:
 
 ```sh
 deno task start
 ```
 
-The live personal endpoint uses bounded in-memory owner-data caching. The legacy
-Redis provider and response-file cache are not used by that endpoint. The Docker
-Compose configuration is retained for upstream development.
+Open the local endpoint:
+
+```text
+http://localhost:8080/?theme=tokyonight
+```
+
+The HTTP service uses bounded in-memory caching. Redis is not required for this
+endpoint. The Docker Compose configuration is available for container-based
+local development:
 
 ```sh
 docker compose up -d
 ```
 
-Rename `env-example` to `.env`, and change ENABLE_REDIS to true
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for Vercel setup and
+[SECURITY.md](./SECURITY.md) for credential and request-handling requirements.
 
-Open localhost from your browser.
+## Development checks
 
-http://localhost:8080/?username=BaranaNadil&theme=tokyonight
-
-## Editor config
-
-Read the [.editorconfig](./.editorconfig)
-
-## Pull Requests
-
-Pull requests are always welcome! In general, they should a single concern in
-the least number of changed lines as possible. For changes that address core
-functionality, it is best to open an issue to discuss your proposal first. I
-look forward to seeing what you come up with!
-
-## Run deno lint
-
-## What to do before contributing
-
-### 1. Run deno lint
+Check formatting, lint the code, and run the tests:
 
 ```sh
+deno fmt --check
 deno task lint
-```
-
-### 2. Run deno format
-
-```sh
-deno task format
-```
-
-### 3. Run deno test
-
-```sh
 deno task test
 ```
+
+Run `deno task format` to apply formatting. Follow the settings in
+[.editorconfig](./.editorconfig).
+
+Tests use mocked GitHub responses and example credentials. Keep real tokens out
+of tests, fixtures, logs, and commits.
+
+## Pull requests
+
+Keep each pull request focused on one concern. Describe the resulting behavior
+and the validation performed. Discuss substantial changes in an issue before
+implementation, and preserve existing attribution and license notices.

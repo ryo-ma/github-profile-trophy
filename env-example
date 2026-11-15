@@ -1,5 +1,5 @@
 PORT=8080
-# Required: personal access token owned by BaranaNadil. Never put it in a URL.
+# Required: personal access token for the configured account. Keep it out of URLs.
 GITHUB_TOKEN1=
 # Optional: a second personal token for the same account only.
 GITHUB_TOKEN2=
