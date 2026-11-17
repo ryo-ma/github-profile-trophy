@@ -4,7 +4,7 @@ import {
   GitHubUserIssue,
   GitHubUserPullRequest,
   GitHubUserRepository,
-  isPublicRepository,
+  isIncludedRepository,
   PublicIssue,
   PublicPullRequest,
   PublicReview,
@@ -30,7 +30,7 @@ import {
 
 export const TOKENS = configuredTokens();
 
-// Bound cold-cache work. Larger accounts receive conservative public-only counts.
+// Bound cold-cache work. Larger accounts receive conservative counts.
 export const MAX_PUBLIC_PAGES = 3;
 type Connection<T> = {
   nodes: (T | null)[];
@@ -68,6 +68,7 @@ export class GithubApiService extends GithubRepository {
   constructor(
     private tokens: string[] = TOKENS,
     private signal?: AbortSignal,
+    private includePrivate = false,
   ) {
     super();
   }
@@ -82,14 +83,15 @@ export class GithubApiService extends GithubRepository {
       const result: { repositories: Connection<Repository> } | ServiceError =
         await this.executeQuery<{ repositories: Connection<Repository> }>(
           queryUserRepository,
-          { username, cursor },
+          { username, cursor, privacy: this.includePrivate ? null : "PUBLIC" },
         );
       if (result instanceof ServiceError) return result;
       const connection: Connection<Repository> = result.repositories;
       if (!validConnection(connection)) return unavailable();
       nodes.push(
         ...connection.nodes.filter((node): node is Repository =>
-          !!node && typeof node.id === "string" && isPublicRepository(node)
+          !!node && typeof node.id === "string" &&
+          isIncludedRepository(node, this.includePrivate)
         ),
       );
       if (!connection.pageInfo.hasNextPage) break;
@@ -134,7 +136,9 @@ export class GithubApiService extends GithubRepository {
       contributionsCollection: {
         commitContributionsByRepository: collection
           .commitContributionsByRepository
-          .filter((group) => isPublicRepository(group?.repository)),
+          .filter((group) =>
+            isIncludedRepository(group?.repository, this.includePrivate)
+          ),
       },
     };
   }
@@ -184,7 +188,9 @@ export class GithubApiService extends GithubRepository {
       >(
         query,
         {
-          search: `${authorQualifier}:${username} is:public ${kind}`,
+          search: `${authorQualifier}:${username}${
+            this.includePrivate ? "" : " is:public"
+          } ${kind}`,
           username,
           cursor,
         },
@@ -195,7 +201,7 @@ export class GithubApiService extends GithubRepository {
       nodes.push(
         ...result.nodes.filter((node): node is T =>
           !!node && typeof node.id === "string" &&
-          isPublicRepository(node.repository)
+          isIncludedRepository(node.repository, this.includePrivate)
         ),
       );
       if (!result.pageInfo.hasNextPage) break;
@@ -309,7 +315,13 @@ export class GithubApiService extends GithubRepository {
       if (activity instanceof ServiceError) return activity;
       if (issue instanceof ServiceError) return issue;
       if (pullRequest instanceof ServiceError) return pullRequest;
-      return new UserInfo(activity, issue, pullRequest, repository);
+      return new UserInfo(
+        activity,
+        issue,
+        pullRequest,
+        repository,
+        this.includePrivate,
+      );
     } catch {
       return unavailable();
     }

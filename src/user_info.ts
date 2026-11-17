@@ -66,25 +66,43 @@ export function isPublicRepository(
   return repository?.visibility === "PUBLIC" && repository.isPrivate === false;
 }
 
-function publicNodes<
+/** Private counts require an explicit policy; unknown or inconsistent metadata is rejected. */
+export function isIncludedRepository(
+  repository: RepositoryVisibility | null | undefined,
+  includePrivate = false,
+): boolean {
+  if (isPublicRepository(repository)) return true;
+  if (!includePrivate || typeof repository?.isPrivate !== "boolean") {
+    return false;
+  }
+  return repository.visibility === "PRIVATE"
+    ? repository.isPrivate
+    : repository.visibility === "INTERNAL";
+}
+
+function countedNodes<
   T extends { repository: RepositoryVisibility; id: string },
 >(
   nodes: T[] | undefined,
+  includePrivate: boolean,
 ): T[] {
   const seen = new Set<string>();
   return (nodes ?? []).filter((node) => {
     if (
       !node || !node.id || seen.has(node.id) ||
-      !isPublicRepository(node.repository)
+      !isIncludedRepository(node.repository, includePrivate)
     ) return false;
     seen.add(node.id);
     return true;
   });
 }
 
-function publicCommitCount(groups: RepositoryCommitContributions[]): number {
+function commitCount(
+  groups: RepositoryCommitContributions[],
+  includePrivate: boolean,
+): number {
   return (groups ?? []).reduce((total, group) => {
-    if (!isPublicRepository(group?.repository)) return total;
+    if (!isIncludedRepository(group?.repository, includePrivate)) return total;
     return total +
       (group.contributions?.nodes ?? []).reduce((commits, node) => {
         const count = node?.commitCount;
@@ -114,13 +132,15 @@ export class UserInfo {
     userIssue: GitHubUserIssue,
     userPullRequest: GitHubUserPullRequest,
     userRepository: GitHubUserRepository,
+    includePrivate = false,
   ) {
     // Recheck here as well as at the API boundary. Never trust supplied aggregate totals.
     const seen = new Set<string>();
     const repositories = (userRepository.repositories.nodes ?? []).filter(
       (node) => {
         if (
-          !node || !node.id || seen.has(node.id) || !isPublicRepository(node)
+          !node || !node.id || seen.has(node.id) ||
+          !isIncludedRepository(node, includePrivate)
         ) {
           return false;
         }
@@ -157,27 +177,31 @@ export class UserInfo {
     this.joined2020 = joinedYear === 2020 ? 1 : 0;
     this.ogAccount = joinedYear <= 2008 ? 1 : 0;
 
-    this.totalCommits = publicCommitCount(
+    this.totalCommits = commitCount(
       userActivity.contributionsCollection.commitContributionsByRepository,
+      includePrivate,
     );
     const reviewWindowEnd = Date.now();
     const reviewWindowStart = new Date(reviewWindowEnd);
     reviewWindowStart.setUTCFullYear(reviewWindowStart.getUTCFullYear() - 1);
     this.totalReviews =
-      publicNodes(userActivity.publicReviews).filter((review) => {
-        const submitted = Date.parse(review.submittedAt ?? "");
-        return ["APPROVED", "CHANGES_REQUESTED", "COMMENTED", "DISMISSED"]
-          .includes(
-            review.state,
-          ) &&
-          review.author?.login?.toLowerCase() ===
-            userActivity.login.toLowerCase() &&
-          submitted >= reviewWindowStart.getTime() &&
-          submitted <= reviewWindowEnd;
-      }).length;
+      countedNodes(userActivity.publicReviews, includePrivate).filter(
+        (review) => {
+          const submitted = Date.parse(review.submittedAt ?? "");
+          return ["APPROVED", "CHANGES_REQUESTED", "COMMENTED", "DISMISSED"]
+            .includes(
+              review.state,
+            ) &&
+            review.author?.login?.toLowerCase() ===
+              userActivity.login.toLowerCase() &&
+            submitted >= reviewWindowStart.getTime() &&
+            submitted <= reviewWindowEnd;
+        },
+      ).length;
     this.totalFollowers = userActivity.followers.totalCount;
-    this.totalIssues = publicNodes(userIssue.openIssues.nodes).length +
-      publicNodes(userIssue.closedIssues.nodes).length;
+    this.totalIssues =
+      countedNodes(userIssue.openIssues.nodes, includePrivate).length +
+      countedNodes(userIssue.closedIssues.nodes, includePrivate).length;
     this.totalOrganizations = new Set(
       (userActivity.organizations.nodes ?? []).filter((organization) =>
         organization?.publicMembership === true &&
@@ -185,7 +209,7 @@ export class UserInfo {
       ).map((organization) => organization.login.toLowerCase()),
     ).size;
     this.totalPullRequests =
-      publicNodes(userPullRequest.pullRequests.nodes).length;
+      countedNodes(userPullRequest.pullRequests.nodes, includePrivate).length;
     this.totalStargazers = totalStargazers;
     this.totalRepositories = repositories.length;
     this.languageCount = languages.size;

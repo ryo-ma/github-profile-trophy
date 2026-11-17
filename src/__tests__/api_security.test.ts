@@ -51,8 +51,8 @@ Deno.test("Explicitly required shared limits fail closed before contacting GitHu
 for (const shared of [false, true]) {
   Deno.test(
     shared
-      ? "Optional shared cache stores only public statistics and respects remote expiry"
-      : "Hosted API works without a database, caches public data, and still requires its token",
+      ? "Shared cache isolates authenticated totals from anonymous public totals"
+      : "Hosted API uses private totals with its token and anonymous public totals without it",
     async () => {
       const restore = environment({
         GITHUB_TOKEN1: "github-test-token",
@@ -136,12 +136,42 @@ for (const shared of [false, true]) {
               total_private_repos: 987654,
             }));
           }
-          assertEquals(auth, "Bearer github-test-token");
+          if (url.pathname === `/users/${PERSONAL_USERNAME}/repos`) {
+            assertEquals(auth, null);
+            return Promise.resolve(Response.json([{
+              id: 1,
+              private: false,
+              visibility: "public",
+              stargazers_count: 7,
+              language: "TypeScript",
+              created_at: "2020-01-01T00:00:00Z",
+            }]));
+          }
+          if (
+            url.pathname === "/search/issues" ||
+            url.pathname === "/search/commits"
+          ) {
+            assertEquals(auth, null);
+            return Promise.resolve(Response.json({
+              total_count: url.pathname === "/search/commits" ? 9 : 1,
+              incomplete_results: false,
+              items: [],
+            }));
+          }
+          if (url.pathname === `/users/${PERSONAL_USERNAME}/events/public`) {
+            assertEquals(auth, null);
+            return Promise.resolve(Response.json([]));
+          }
           if (url.pathname.endsWith("/orgs")) {
+            assertEquals(
+              auth === null || auth === "Bearer github-test-token",
+              true,
+            );
             return Promise.resolve(
               Response.json([]),
             );
           }
+          assertEquals(auth, "Bearer github-test-token");
           const { query, variables } = JSON.parse(String(init?.body));
           let data: unknown;
           if (query.includes("TrophyViewer")) {
@@ -188,7 +218,7 @@ for (const shared of [false, true]) {
               },
             };
           } else {
-            assertEquals(variables.search.includes("is:public"), true);
+            assertEquals(variables.search.includes("is:public"), false);
             data = { search: { pageInfo, nodes: [] } };
           }
           return Promise.resolve(Response.json({ data }));
@@ -203,7 +233,7 @@ for (const shared of [false, true]) {
         assertEquals(response.status, 200);
         const svg = await response.text();
         assertEquals(
-          /987654|private-profile-marker|private-repository-marker|test-token/
+          /private-profile-marker|private-repository-marker|test-token/
             .test(
               svg,
             ),
@@ -225,8 +255,9 @@ for (const shared of [false, true]) {
             403,
           );
           Deno.env.delete("GITHUB_TOKEN1");
-          assertEquals((await first(request(), "192.0.2.1")).status, 503);
-          assertEquals(githubCalls, 16);
+          assertEquals((await first(request(), "192.0.2.1")).status, 200);
+          assertEquals(githubCalls, 23);
+          assertEquals(viewerCalls, 2);
           return;
         }
         for (const [key, entry] of stored) {
@@ -234,9 +265,9 @@ for (const shared of [false, true]) {
           if (key.includes(":stats:")) {
             const value = JSON.parse(entry.value).value;
             assertEquals(isPublicStatistics(value), true);
-            assertEquals(value.totalRepositories, 1);
-            assertEquals(value.totalStargazers, 7);
-            assertEquals(value.totalCommits, 9);
+            assertEquals(value.totalRepositories, 2);
+            assertEquals(value.totalStargazers, 987661);
+            assertEquals(value.totalCommits, 987663);
             assertEquals(value.totalFollowers, 5);
           }
         }
@@ -249,6 +280,25 @@ for (const shared of [false, true]) {
         assertEquals((await first(request(), "192.0.2.1")).status, 200);
         assertEquals(viewerCalls, 3);
         assertEquals(githubCalls, 17);
+        Deno.env.delete("GITHUB_TOKEN1");
+        assertEquals((await first(request(), "192.0.2.1")).status, 200);
+        assertEquals(githubCalls, 24);
+        assertEquals(viewerCalls, 3);
+        const statistics = [...stored].filter(([key]) =>
+          key.includes(":stats:")
+        ).map(([, entry]) => JSON.parse(entry.value).value);
+        assertEquals(
+          statistics.some((value) =>
+            value.totalRepositories === 1 && value.totalStargazers === 7
+          ),
+          true,
+        );
+        assertEquals(
+          statistics.some((value) =>
+            value.totalRepositories === 2 && value.totalStargazers === 987661
+          ),
+          true,
+        );
       } finally {
         mock.restore();
         restore();

@@ -36,7 +36,7 @@ type Loaders = {
   fetch: (owner: string, tokens: string[]) => Promise<UserInfo | ServiceError>;
 };
 
-/** Share only ownership proofs and a strict numeric public-data projection. */
+/** Share ownership proofs and numeric SVG statistics; credentials determine visibility. */
 export function publicSource(
   loaders: Loaders,
   requireShared: boolean,
@@ -73,12 +73,18 @@ export function publicSource(
     const digest = await crypto.subtle.digest(
       "SHA-256",
       new TextEncoder().encode(
-        ["public-v4", githubApiUrl(), PERSONAL_USERNAME, ...tokens].join("\0"),
+        [
+          "statistics-v5",
+          tokens.length ? "private" : "public",
+          githubApiUrl(),
+          PERSONAL_USERNAME,
+          ...tokens,
+        ].join("\0"),
       ),
     );
     const fingerprint = [...new Uint8Array(digest)]
       .map((value) => value.toString(16).padStart(2, "0")).join("");
-    return `trophy:{public-v4}:${kind}:${fingerprint}`;
+    return `trophy:{statistics-v5}:${kind}:${fingerprint}`;
   };
   return {
     verify: async (tokens: string[]) => {

@@ -4,6 +4,7 @@ import json
 import re
 import ssl
 import sys
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 
@@ -12,6 +13,7 @@ MAX_BODY_BYTES = 1024 * 1024
 FIXTURE_AUTHORIZATION = "Bearer fixture-token"
 PAGE_INFO = {"hasNextPage": False, "endCursor": None}
 PUBLIC_REPOSITORY = {"visibility": "PUBLIC", "isPrivate": False}
+PRIVATE_REPOSITORY = {"visibility": "PRIVATE", "isPrivate": True}
 
 
 def handler_for(username):
@@ -93,21 +95,28 @@ def handler_for(username):
                     raise ValueError("Incomplete request")
                 payload = json.loads(raw)
                 query = payload["query"]
-                variables = payload["variables"]
+                variables = payload.get("variables", {})
                 if not isinstance(query, str) or not isinstance(variables, dict):
                     raise ValueError("Invalid GraphQL payload")
                 operation = re.match(r"\s*query\s+([_A-Za-z][_0-9A-Za-z]*)\b", query)
-                if not operation or variables.get("username") != username:
+                if not operation:
                     raise ValueError("Unexpected GraphQL operation")
                 name = operation[1]
                 if payload.get("operationName", name) != name:
                     raise ValueError("Unexpected operation name")
+                if name != "TrophyViewer" and variables.get("username") != username:
+                    raise ValueError("Unexpected GraphQL username")
             except (KeyError, TypeError, ValueError, OSError):
                 self.reject()
                 return
 
-            if name == "publicUserRepositories":
-                if "privacy: PUBLIC" not in query:
+            if name == "TrophyViewer":
+                if query != "query TrophyViewer { viewer { login } }":
+                    self.reject()
+                    return
+                data = {"viewer": {"login": username}}
+            elif name == "publicUserRepositories":
+                if "privacy: $privacy" not in query or variables.get("privacy") not in ("PUBLIC", None):
                     self.reject()
                     return
                 repository = {
@@ -117,24 +126,50 @@ def handler_for(username):
                     "stargazers": {"totalCount": 7},
                     "createdAt": "2020-01-01T00:00:00Z",
                 }
+                private_repository = {
+                    **PRIVATE_REPOSITORY,
+                    "id": "fixture-private-repository",
+                    "languages": {"nodes": [{"name": "Python"}]},
+                    "stargazers": {"totalCount": 11},
+                    "createdAt": "2021-01-01T00:00:00Z",
+                }
                 data = {"user": {"repositories": {
-                    "nodes": [repository], "pageInfo": PAGE_INFO,
+                    "nodes": [repository] + ([private_repository] if variables.get("privacy") is None else []),
+                    "pageInfo": PAGE_INFO,
                 }}}
             elif name == "publicUserActivity":
                 data = {"user": {"contributionsCollection": {
                     "commitContributionsByRepository": [{
                         "repository": PUBLIC_REPOSITORY,
                         "contributions": {"nodes": [{"commitCount": 9}]},
+                    }, {
+                        "repository": PRIVATE_REPOSITORY,
+                        "contributions": {"nodes": [{"commitCount": 11}]},
                     }],
                 }}}
             elif name in {
                 "publicUserReviews", "publicUserIssues", "publicUserPullRequests",
             }:
                 search = variables.get("search", "")
-                if not isinstance(search, str) or "is:public" not in search.split():
+                qualifier = "reviewed-by" if name == "publicUserReviews" else "author"
+                kind = "is:issue" if name == "publicUserIssues" else "is:pr"
+                if not isinstance(search, str) or f"{qualifier}:{username}" not in search.split() or kind not in search.split():
                     self.reject()
                     return
-                data = {"search": {"nodes": [], "pageInfo": PAGE_INFO}}
+                nodes = []
+                if "is:public" not in search.split():
+                    node = {"id": "fixture-private-activity", "repository": PRIVATE_REPOSITORY}
+                    if name == "publicUserIssues":
+                        node["state"] = "OPEN"
+                    elif name == "publicUserReviews":
+                        node["reviews"] = {"nodes": [{
+                            "id": "fixture-private-review",
+                            "state": "APPROVED",
+                            "submittedAt": datetime.now(timezone.utc).isoformat(),
+                            "author": {"login": username},
+                        }]}
+                    nodes.append(node)
+                data = {"search": {"nodes": nodes, "pageInfo": PAGE_INFO}}
             else:
                 self.reject()
                 return

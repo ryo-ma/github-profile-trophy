@@ -10,7 +10,9 @@ The preview uses example statistics. Deployed images show data from GitHub.
 
 1. Follow the [deployment guide](./DEPLOYMENT.md) to deploy the service on
    Vercel.
-2. Set `GITHUB_TOKEN1` to a personal access token belonging to the account
+2. Choose the statistics to publish. Leave `GITHUB_TOKEN1` and `GITHUB_TOKEN2`
+   unset for public data only. To include private repository totals, set
+   `GITHUB_TOKEN1` to a personal access token belonging to the account
    configured by `PERSONAL_USERNAME` in `src/security/github.ts`.
 3. Add your deployment URL to your profile README:
 
@@ -26,11 +28,20 @@ A database is not required. The service uses in-memory caching and request
 limits within each server instance. Optional Redis REST configuration shares
 those controls across instances; see the deployment guide.
 
-Statistics are calculated only from explicitly public resources. Private
-repositories, hidden activity, pending reviews, and archived pull requests are
-excluded. The hosted service generates trophies for one configured account.
-Images are publicly viewable, and deployment tokens stay on the server. See
-[SECURITY.md](./SECURITY.md) for token requirements and request limits.
+The hosted service generates trophies for one configured account. Its server
+configuration controls the data included:
+
+| GitHub credentials on the server | Statistics shown                                |
+| -------------------------------- | ----------------------------------------------- |
+| Neither token configured         | Public data from anonymous REST requests        |
+| One or both tokens configured    | Public and accessible private repository totals |
+
+**Images are publicly viewable in both modes. Configuring a token publishes the
+private totals it can read to everyone viewing the SVG.** Repository names,
+files, commit messages, review bodies, email addresses, and tokens are not
+included in the image. Visitor-supplied credentials and URL parameters cannot
+change the mode. See [SECURITY.md](./SECURITY.md) for the data policy and
+request limits.
 
 ## Trophies and ranks
 
@@ -49,11 +60,18 @@ their conditions are met.
 Each panel displays its category, rank, achievement description, score, and
 progress toward the next rank.
 
-Large-account counts are bounded: lists stop at 300 records; commit totals cover
-up to 100 public repository groups with 100 contribution days per group. Reviews
-cover up to 300 reviewed pull requests and 100 submitted author reviews per pull
-request. Contribution metrics use the past year. Counts can be conservative;
-private aggregate totals are never used to fill gaps.
+With a configured token, repository and activity lists stop at 300 records;
+commit totals cover up to 100 eligible repository groups with 100 contribution
+days per group. Reviews cover up to 300 reviewed pull requests and 100 submitted
+author reviews per pull request. Contribution metrics use the past year. Pending
+reviews and archived pull requests are excluded.
+
+Without a token, public repository and organization lists stop at 300 records.
+Language counts use each repository's primary language. Issue, pull request, and
+commit counts use public REST search totals; commit search covers the past year
+and GitHub's default-branch index. Review counts use up to 300 public events
+from GitHub's available event history, which is limited to the last 30 days.
+These bounded and anonymous sources can produce conservative totals.
 
 ## Request parameters
 
@@ -146,7 +164,8 @@ cp env-example .env
 deno task start
 ```
 
-Set `GITHUB_TOKEN1` in `.env` before starting the server. Open:
+Leave both GitHub tokens blank for public-only statistics, or set
+`GITHUB_TOKEN1` in `.env` to include private repository totals. Open:
 
 ```text
 http://localhost:8080/?theme=tokyonight
@@ -164,10 +183,11 @@ deno run --allow-net --allow-env --allow-read --allow-write render_svg.ts USERNA
 ```
 
 Use [action.yml](./action.yml) to run the generator in a trusted GitHub Actions
-workflow. Supply a token with read access to the profile's public repositories.
-The built-in `GITHUB_TOKEN` is scoped to the workflow repository and may not be
-able to read a complete profile. Generated files must be regenerated to refresh
-their statistics.
+workflow. Its token input is optional. With a token, the generator includes
+accessible private repository totals; without one, it uses public REST data. The
+built-in `GITHUB_TOKEN` is scoped to the workflow repository and may not be able
+to read a complete profile. Generated files must be regenerated to refresh their
+statistics. Anyone given the generated file can view its totals.
 
 To render the example preview without GitHub credentials:
 

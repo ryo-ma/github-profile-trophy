@@ -4,45 +4,66 @@ The HTTP service serves the account configured by `PERSONAL_USERNAME` in
 `src/security/github.ts`. Images are public; request parameters cannot select
 another account. Credentials are supplied by the hosting environment.
 
-## Public data policy
+## Statistics visibility
 
-Repository queries request `privacy: PUBLIC`. Repository, issue, pull request,
-commit, and review records must also carry both `visibility: PUBLIC` and
-`isPrivate: false`. Private, internal, inconsistent, and unknown visibility
-records are excluded before totals are calculated. Unfiltered GitHub aggregate
-counts and restricted contribution totals are not used.
+The presence of server-side GitHub credentials controls the statistics shown.
+With neither `GITHUB_TOKEN1` nor `GITHUB_TOKEN2` configured, the service makes
+anonymous REST requests and includes public data only. With a configured token,
+it includes public and accessible private repository totals. Token-enabled
+repository, issue, pull request, commit, and review records are checked for
+valid visibility metadata before being counted; unknown or inconsistent metadata
+is excluded.
 
-Account age and follower counts come from the unauthenticated public profile
-endpoint, so a privileged token cannot expand the profile data being displayed.
-Organization counts use GitHub's documented public-membership endpoint. Reviews
-must be submitted, belong to the configured account, and fall within the past
-year. Pending reviews and archived pull requests are excluded.
+**A server token does not authenticate image viewers. Token-enabled private
+totals are published in the public SVG for anyone who opens its URL.** Only the
+hosting configuration can change this policy. The endpoint does not accept
+visitor tokens or a request parameter that enables private data.
 
-Only numeric trophy statistics reach the public SVG or shared statistics cache.
-Private repository names, file contents, email addresses, review bodies, and
-GitHub tokens are not part of that projection. Owner verification requests only
-the authenticated viewer's login through GraphQL.
+Only a strict projection of 14 numeric trophy statistics reaches the SVG or
+shared statistics cache. Repository names, file contents, commit messages, email
+addresses, review bodies, and GitHub tokens are not part of that projection. A
+token can allow the backend to receive private contribution metadata, but
+repository details are not rendered. Owner verification requests only the
+authenticated viewer's login through GraphQL.
 
-Requests are bounded: repository, issue, authored pull request, public
-organization, and reviewed pull request listings stop after 300 records each.
-Commit queries inspect at most 100 repository groups and the first 100
+Public profile endpoints supply account metadata and follower counts.
+Organization counts use GitHub's public-membership endpoint; private
+organization memberships are not included. Token-enabled reviews must be
+submitted, belong to the configured account, and fall within the past year.
+Pending reviews and archived pull requests are excluded.
+
+Token-enabled requests are bounded: repository, issue, authored pull request,
+public organization, and reviewed pull request listings stop after 300 records
+each. Commit queries inspect at most 100 repository groups and the first 100
 contribution days per group. Review queries inspect the latest 100 author
 reviews per checked pull request. Contributions use the past-year window. Counts
-can therefore be conservative for large accounts; the service never fills gaps
-with private totals.
+can be conservative for large accounts; unused aggregate fields do not fill
+gaps.
+
+Anonymous REST requests inspect up to 300 public repositories, public
+organizations, and public events. Repository and star counts are derived from
+checked public repositories, and language counts use their primary languages.
+Issues, pull requests, and commits use anonymous public search totals. Commit
+search covers the past year and GitHub's default-branch index. Review counts
+come from up to 300 public events in GitHub's available history, limited to the
+last 30 days. Anonymous and token-enabled sources can therefore produce
+different totals.
 
 ## Credentials and caching
 
-`GITHUB_TOKEN1` must belong to the configured account. `GITHUB_TOKEN2` is
-optional and must belong to the same account. Use the minimum read permissions
-required for public statistics, set an expiration, and rotate exposed tokens.
-The live endpoint does not accept tokens from visitors or query strings.
+Both GitHub tokens are optional. When supplied, `GITHUB_TOKEN1` and
+`GITHUB_TOKEN2` must belong to the configured account. Grant only the read
+permissions needed for the repository totals intended for publication, set an
+expiration, and rotate exposed tokens. Invalid configured credentials fail
+closed; they are not silently treated as anonymous access. The live endpoint
+does not accept tokens from visitors or query strings.
 
 A database is not required for local or hosted operation. Each server instance
-caches its validated owner proof for five minutes and a strict projection of 14
-numeric public statistics for 15 minutes. Concurrent requests in that instance
-share one in-flight source load. Cold starts and additional instances have
-independent caches.
+caches a configured token's validated owner proof for five minutes and a strict
+projection of 14 numeric statistics for 15 minutes. Anonymous requests do not
+need an owner proof. Concurrent requests in an instance share one in-flight
+source load. Public-only and token-enabled cache scopes are separate. Cold
+starts and additional instances have independent caches.
 
 An optional HTTPS Redis REST service can share caching and request budgets
 across instances. Configure both `RATE_LIMIT_REDIS_URL` and
@@ -52,18 +73,21 @@ credentials are rejected as Redis credentials.
 
 When configured, Redis stores a validated owner proof for five minutes and a
 strict projection of 14 numeric statistics for 15 minutes. Keys bind the
-account, GitHub API endpoint, policy version, and a SHA-256 credential
-fingerprint. Raw GitHub tokens are not stored in keys or values. Local in-flight
-requests coalesce; shared locks prevent multiple instances from refreshing the
-same source simultaneously. Expired lock owners cannot publish or remove another
-worker's lock.
+account, GitHub API endpoint, access mode, policy version, and a SHA-256
+credential fingerprint. Cached numbers can include private totals when the
+server token enables them. Raw GitHub tokens are not stored in keys or values.
+Local in-flight requests coalesce; shared locks prevent multiple instances from
+refreshing the same source simultaneously. Expired lock owners cannot publish or
+remove another worker's lock.
 
 With Redis configured, shared expiry is authoritative. A cache hit does not gain
-a new local lifetime. Token removal denies subsequent requests; token rotation
-changes the cache scope. Revocation at GitHub is detected during the next owner
-verification or upstream request. Public visibility changes are reflected on the
-next statistics refresh. A cached image is a snapshot of data that was public
-when fetched.
+a new local lifetime. Removing all configured GitHub tokens switches subsequent
+requests to the anonymous public-only source and its separate cache scope;
+previously cached private totals are not reused for that mode. Token rotation
+also changes the cache scope. Revocation at GitHub is detected during the next
+owner verification or upstream request. Visibility and permission changes are
+reflected on the next statistics refresh. Images already downloaded or published
+elsewhere are not revoked by changing server credentials.
 
 All HTTP responses use `private, no-store`, `nosniff`, and a restrictive content
 security policy. Failed ownership checks fail closed. If Redis is configured,
@@ -139,10 +163,11 @@ workflow tokens have explicit permissions. Real credentials are never required
 in unit tests. Run `deno task test`, `deno task lint`, and formatting checks
 before changes.
 
-Local tests verify public-only filtering, cache and lock behavior, request
-fairness, timeouts, credential boundaries, and safe failure. They do not prove
-that hosting firewall rules, optional Redis settings, or PAT permissions have
-been configured correctly. Confirm those settings in the hosting account.
+Local tests verify anonymous public-only filtering, token-enabled private
+counts, numeric-only rendering, cache and lock behavior, request fairness,
+timeouts, credential boundaries, and safe failure. They do not prove that
+hosting firewall rules, optional Redis settings, or PAT permissions have been
+configured correctly. Confirm those settings in the hosting account.
 
 References:
 [GitHub GraphQL users](https://docs.github.com/en/graphql/reference/users),

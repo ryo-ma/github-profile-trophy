@@ -265,7 +265,8 @@ Deno.test("Broad PAT responses cannot make private data affect public statistics
     }
     const body = JSON.parse(String(init?.body));
     if (body.query === queryUserRepository) {
-      assertEquals(body.query.includes("privacy: PUBLIC"), true);
+      assertEquals(body.query.includes("privacy: $privacy"), true);
+      assertEquals(body.variables.privacy, "PUBLIC");
       return Promise.resolve(Response.json({
         data: {
           user: { repositories: { ...repositories.repositories, pageInfo } },

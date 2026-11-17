@@ -1,4 +1,4 @@
-// Never request viewer-dependent contribution totals: a broad PAT includes private work.
+// Per-repository nodes let the counting policy exclude private work when requested.
 export const queryUserActivity = `
   query publicUserActivity($username: String!) {
     user(login: $username) {
@@ -29,7 +29,7 @@ export const queryUserReview = `
   }
 `;
 
-// The search string is built by the service with an explicit is:public qualifier.
+// The service applies is:public unless private repository counts are enabled.
 export const queryUserIssue = `
   query publicUserIssues($search: String!, $cursor: String) {
     search(query: $search, type: ISSUE, first: 100, after: $cursor) {
@@ -60,9 +60,9 @@ export const queryUserPullRequest = `
 `;
 
 export const queryUserRepository = `
-  query publicUserRepositories($username: String!, $cursor: String) {
+  query publicUserRepositories($username: String!, $cursor: String, $privacy: RepositoryPrivacy = PUBLIC) {
     user(login: $username) {
-      repositories(first: 100, after: $cursor, privacy: PUBLIC, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
+      repositories(first: 100, after: $cursor, privacy: $privacy, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
         pageInfo { hasNextPage endCursor }
         nodes {
           id

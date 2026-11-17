@@ -147,7 +147,7 @@ export function createTrophyHandler(deps: Dependencies) {
       return Promise.reject(new Response(null, { status: entry.errorStatus }));
     }
     const promise = (async () => {
-      if (now() >= entry.verifiedUntil) {
+      if (tokens.length && now() >= entry.verifiedUntil) {
         await deps.verifyTokens(tokens);
         entry.verifiedUntil = now() + (deps.verificationTtlMs ?? 5 * 60_000);
       }
@@ -210,12 +210,11 @@ export function createTrophyHandler(deps: Dependencies) {
     }
     const tokens = deps.tokens().filter((token) => !!token);
     if (
-      !tokens.length ||
       tokens.some((token) => /\s/.test(token) || token.length > 256)
     ) {
       state = undefined;
       return reply(
-        "A personal GitHub token must be configured on the server.",
+        "The configured GitHub token is invalid.",
         503,
       );
     }
@@ -241,7 +240,7 @@ export function createTrophyHandler(deps: Dependencies) {
         });
       }
     }
-    const key = tokens.join("\0");
+    const key = [tokens.length ? "private" : "public", ...tokens].join("\0");
     if (state?.key !== key) {
       state = {
         key,

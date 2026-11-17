@@ -1,5 +1,6 @@
 PORT=8080
-# Required: personal access token for the configured account. Keep it out of URLs.
+# Optional: enables accessible private repository totals in the PUBLIC SVG.
+# Leave both tokens blank for anonymous public-only statistics. Keep tokens out of URLs.
 GITHUB_TOKEN1=
 # Optional: a second personal token for the same account only.
 GITHUB_TOKEN2=

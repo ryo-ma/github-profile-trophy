@@ -1,6 +1,7 @@
 import { createTrophyHandler } from "../src/server.ts";
 import { configuredTokens, verifyTokenOwners } from "../src/security/github.ts";
 import { GithubApiService } from "../src/Services/GithubApiService.ts";
+import { PublicGithubApiService } from "../src/Services/PublicGithubApiService.ts";
 import {
   deploymentBudget,
   trustedClientAddress,
@@ -18,8 +19,10 @@ function buildHandler(requireShared: boolean) {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 6000);
       try {
-        return await new GithubApiService(tokens, controller.signal)
-          .requestUserInfo(owner);
+        const service = tokens.length
+          ? new GithubApiService(tokens, controller.signal, true)
+          : new PublicGithubApiService(controller.signal);
+        return await service.requestUserInfo(owner);
       } finally {
         clearTimeout(timer);
       }

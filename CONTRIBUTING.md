@@ -3,21 +3,25 @@
 ## Requirements
 
 - Deno 1.44.4, matching CI and the deployment runtime
-- A GitHub personal access token for the configured account
+- A GitHub personal access token for the configured account, if testing private
+  repository statistics
 - Docker and Docker Compose, if using the container environment
 
 ## Local setup
 
-Copy the environment example and configure credentials:
+Copy the environment example:
 
 ```sh
 cp env-example .env
 ```
 
-Set `GITHUB_TOKEN1` to a token belonging to the account identified by
-`PERSONAL_USERNAME` in `src/security/github.ts`. `GITHUB_TOKEN2` is optional and
-must belong to the same account. Use only the permissions required for the
-statistics the service displays.
+Leave `GITHUB_TOKEN1` and `GITHUB_TOKEN2` blank to test anonymous public-only
+statistics. To include private repository totals, set `GITHUB_TOKEN1` to a token
+belonging to the account identified by `PERSONAL_USERNAME` in
+`src/security/github.ts`. `GITHUB_TOKEN2` is optional and must belong to the
+same account. Use only the read permissions required for the statistics being
+published. The resulting SVG is public even when its totals include private
+activity.
 
 For GitHub Enterprise, set `GITHUB_API` to the HTTPS GraphQL endpoint:
 
@@ -67,8 +71,11 @@ Run `deno task format` to apply formatting. Follow the settings in
 Dependency updates must deliberately regenerate `deno.lock` and review changed
 URLs and checksums. CI rejects unexpected lockfile changes.
 
-Tests use mocked GitHub and Redis responses and example credentials. Keep real
-tokens out of tests, fixtures, logs, and commits.
+Tests use mocked GitHub and Redis responses and example credentials. Cover both
+anonymous public-only and token-enabled private totals, including cache
+separation when credentials change. Keep repository names and other raw metadata
+out of the numeric render projection. Keep real tokens out of tests, fixtures,
+logs, and commits.
 
 ## Pull requests
 

@@ -13,6 +13,8 @@ if (!username) {
 }
 
 import { GithubApiService } from "./src/Services/GithubApiService.ts";
+import { PublicGithubApiService } from "./src/Services/PublicGithubApiService.ts";
+import { configuredTokens } from "./src/security/github.ts";
 import { Card } from "./src/card.ts";
 import { COLORS } from "./src/theme.ts";
 import { ServiceError } from "./src/Types/index.ts";
@@ -23,7 +25,10 @@ async function main() {
   console.log("Output path:", outputPath);
   console.log("Theme:", themeName);
 
-  const svc = new GithubApiService();
+  const tokens = configuredTokens();
+  const svc = tokens.length
+    ? new GithubApiService(tokens, undefined, true)
+    : new PublicGithubApiService();
 
   const userInfoOrError = await svc.requestUserInfo(username);
 

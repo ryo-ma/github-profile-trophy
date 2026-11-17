@@ -9,8 +9,9 @@ inputs:
     required: true
     default: "trophy.svg"
   token:
-    description: "PAT or token to use for GitHub API"
-    required: true
+    description: "Optional GitHub token; enables totals from accessible private repositories"
+    required: false
+    default: ""
 runs:
   using: "composite"
   steps:

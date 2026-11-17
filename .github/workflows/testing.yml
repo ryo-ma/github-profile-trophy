@@ -106,7 +106,7 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
 
-      - name: Verify required production settings
+      - name: Verify optional production settings
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         shell: bash
@@ -131,7 +131,7 @@ jobs:
           except Exception:
               print("::error::Unable to inspect Vercel Production environment settings.")
               sys.exit(1)
-          required = {"GITHUB_TOKEN1"}
+          required = set()
           redis_settings = {"RATE_LIMIT_REDIS_URL", "RATE_LIMIT_REDIS_TOKEN"}
           if keys & redis_settings:
               required |= redis_settings

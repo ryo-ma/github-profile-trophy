@@ -32,7 +32,13 @@ function setup(overrides: Partial<Options> = {}) {
     },
     fetchUser: (owner, values) => {
       fetched.push({ owner, tokens: [...values] });
-      return Promise.resolve(sample);
+      return Promise.resolve(
+        values.length ? sample : {
+          ...sample,
+          totalRepositories: 2,
+          totalCommits: 4,
+        },
+      );
     },
     maxRequests: 100,
     ...overrides,
@@ -52,25 +58,28 @@ function assertPrivate(response: Response) {
   assertEquals(cache.includes("no-store"), true);
 }
 
-Deno.test("Missing or removed server tokens deny access despite cached data", async () => {
+Deno.test("Token removal switches cached private totals to anonymous public totals", async () => {
   const h = setup();
   h.setTokens([]);
   const missing = await h.handler(request());
-  assertEquals(missing.status, 503);
+  assertEquals(missing.status, 200);
   assertPrivate(missing);
   assertEquals(h.verified.length, 0);
-  assertEquals(h.fetched.length, 0);
+  assertEquals(h.fetched.length, 1);
+  assertEquals((await missing.text()).includes("70pt"), false);
   h.setTokens(["token-a"]);
   const success = await h.handler(request());
   assertEquals(success.status, 200);
   assertPrivate(success);
+  assertEquals((await success.text()).includes("70pt"), true);
   assertEquals(h.fetched[0].owner, "BaranaNadil");
   h.setTokens([]);
   const removed = await h.handler(request());
-  assertEquals(removed.status, 503);
+  assertEquals(removed.status, 200);
   assertPrivate(removed);
+  assertEquals((await removed.text()).includes("70pt"), false);
   assertEquals(h.verified.length, 1);
-  assertEquals(h.fetched.length, 1);
+  assertEquals(h.fetched.map((entry) => entry.tokens), [[], ["token-a"], []]);
 });
 
 Deno.test("Other usernames and abusive parameters never reach GitHub", async () => {
