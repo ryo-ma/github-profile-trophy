@@ -44,8 +44,13 @@ export class CacheManager {
     const text = await response.clone().text();
     const data = new TextEncoder().encode(text);
 
-    Deno.writeFile(this.cacheFilePath, data, { create: true }).catch(() => {
+    const temporaryPath = `${this.cacheFilePath}.${crypto.randomUUID()}.tmp`;
+    try {
+      await Deno.writeFile(temporaryPath, data, { createNew: true });
+      await Deno.rename(temporaryPath, this.cacheFilePath);
+    } catch {
       Logger.warn("Failed to save cache file");
-    });
+      await Deno.remove(temporaryPath).catch(() => {});
+    }
   }
 }

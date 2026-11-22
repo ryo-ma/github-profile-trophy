@@ -44,3 +44,9 @@ jobs:
       # Step 6: Run tests
       - name: Test Deno Module
         run: deno task test
+
+      - name: Check API types
+        run: deno check api/index.ts
+
+      - name: Test cache request reuse
+        run: ENABLE_REDIS= ENV_TYPE=test deno test --no-check --allow-env --allow-read=.,/tmp --allow-write=/tmp test/cache_amplification.repro.ts

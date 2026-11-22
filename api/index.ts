@@ -9,9 +9,35 @@ import { GithubApiService } from "../src/Services/GithubApiService.ts";
 import { ServiceError } from "../src/Types/index.ts";
 import { ErrorPage } from "../src/pages/Error.ts";
 import { cacheProvider } from "../src/config/cache.ts";
+import { UserInfo } from "../src/user_info.ts";
 
 const serviceProvider = new GithubApiService();
 const client = new GithubRepositoryService(serviceProvider).repository;
+const inFlight = new Map<string, Promise<UserInfo | ServiceError>>();
+
+function requestUserInfoOnce(
+  username: string,
+): Promise<UserInfo | ServiceError> {
+  const key = username.toLowerCase();
+  const existing = inFlight.get(key);
+  if (existing) return existing;
+
+  const request = (async () => {
+    const cacheKey = ["v1", key].join("-");
+    const cached = JSON.parse(await cacheProvider.get(cacheKey) || "{}");
+    if (Object.keys(cached).length) return cached as UserInfo;
+
+    const result = await client.requestUserInfo(username);
+    if (!(result instanceof ServiceError)) {
+      await cacheProvider.set(cacheKey, JSON.stringify(result));
+    }
+    return result;
+  })().finally(() => {
+    inFlight.delete(key);
+  });
+  inFlight.set(key, request);
+  return request;
+}
 
 // Build cache control header with optimized caching strategy
 const cacheControlHeader = [
@@ -125,27 +151,18 @@ async function app(req: Request): Promise<Response> {
     r.split(",")
   ).map((r) => r.trim());
 
-  const userKeyCache = ["v1", username].join("-");
-  const userInfoCached = await cacheProvider.get(userKeyCache) || "{}";
-  let userInfo = JSON.parse(userInfoCached);
-  const hasCache = !!Object.keys(userInfo).length;
-
-  if (!hasCache) {
-    const userResponseInfo = await client.requestUserInfo(username);
-    if (userResponseInfo instanceof ServiceError) {
-      return new Response(
-        ErrorPage({ error: userResponseInfo }).render(),
-        {
-          status: userResponseInfo.code,
-          headers: new Headers({
-            "Content-Type": "text/html",
-            "Cache-Control": cacheControlHeader,
-          }),
-        },
-      );
-    }
-    userInfo = userResponseInfo;
-    await cacheProvider.set(userKeyCache, JSON.stringify(userInfo));
+  const userInfo = await requestUserInfoOnce(username);
+  if (userInfo instanceof ServiceError) {
+    return new Response(
+      ErrorPage({ error: userInfo }).render(),
+      {
+        status: userInfo.code,
+        headers: new Headers({
+          "Content-Type": "text/html",
+          "Cache-Control": cacheControlHeader,
+        }),
+      },
+    );
   }
   // Success Response
   return new Response(
