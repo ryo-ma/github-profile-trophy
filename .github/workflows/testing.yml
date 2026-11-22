@@ -46,4 +46,4 @@ jobs:
         run: deno task test
 
       - name: Test cache request reuse
-        run: ENABLE_REDIS= ENV_TYPE=test deno test --no-check --allow-env --allow-read=. --allow-read=/tmp --allow-write=/tmp test/cache_amplification.repro.ts
+        run: ENABLE_REDIS= ENV_TYPE=test deno test --no-check --allow-env --allow-read=.,/tmp --allow-write=/tmp test/cache_amplification.repro.ts

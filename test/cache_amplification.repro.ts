@@ -1,4 +1,4 @@
-// Run with ENABLE_REDIS= deno test --no-check --allow-env --allow-read=. --allow-read=/tmp --allow-write=/tmp test/cache_amplification.repro.ts.
+// Run with ENABLE_REDIS= deno test --no-check --allow-env --allow-read=.,/tmp --allow-write=/tmp test/cache_amplification.repro.ts.
 // This test uses a mock GraphQL response. It does not use a GitHub token.
 import handler from "../api/index.ts";
 import { soxa, stub } from "../deps.ts";
