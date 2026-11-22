@@ -4,6 +4,8 @@ import handler from "../api/index.ts";
 import { soxa, stub } from "../deps.ts";
 import { getResponseCacheKey } from "../src/StaticRenderRegeneration/cache_key.ts";
 import { hashString } from "../src/StaticRenderRegeneration/utils.ts";
+import { cacheProvider } from "../src/config/cache.ts";
+import { UserInfo } from "../src/user_info.ts";
 import missing from "../src/Services/__mocks__/notFoundUserMock.json" with {
   type: "json",
 };
@@ -165,6 +167,72 @@ Deno.test("concurrent themes share one GraphQL request", async () => {
   } finally {
     mock.restore();
     for (const path of paths) await Deno.remove(path);
+  }
+});
+
+Deno.test("delayed cache misses stay inside singleflight", async () => {
+  const username = `cache-repro-${crypto.randomUUID()}`;
+  const urls = ["dark", "radical"].map((theme) =>
+    `https://example.test/?username=${username}&theme=${theme}`
+  );
+  const paths = await Promise.all(urls.map(cachePath));
+  let cacheReads = 0;
+  let upstreamCalls = 0;
+  const cacheMock = stub(cacheProvider, "get", async () => {
+    cacheReads++;
+    if (cacheReads === 2) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    return undefined;
+  });
+  const graphqlMock = stub(soxa, "post", async () => {
+    upstreamCalls++;
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    return success;
+  });
+  try {
+    const responses = await Promise.all(
+      urls.map((url) => handler(new Request(url))),
+    );
+    for (const response of responses) {
+      assertEqual(response.status, 200, "delayed cache status");
+    }
+    assertEqual(cacheReads, 1, "shared cache read");
+    assertEqual(upstreamCalls, 1, "shared GraphQL request");
+    for (const path of paths) await Deno.stat(path);
+  } finally {
+    graphqlMock.restore();
+    cacheMock.restore();
+    for (const path of paths) await Deno.remove(path).catch(() => {});
+  }
+});
+
+Deno.test("Redis cache hit skips GraphQL", async () => {
+  const username = `cache-repro-${crypto.randomUUID()}`;
+  const url = `https://example.test/?username=${username}`;
+  const path = await cachePath(url);
+  const user = UserInfo.fromCombined(success.data.data.user);
+  let upstreamCalls = 0;
+  const cacheMock = stub(
+    cacheProvider,
+    "get",
+    () => Promise.resolve(JSON.stringify(user)),
+  );
+  const graphqlMock = stub(soxa, "post", () => {
+    upstreamCalls++;
+    return Promise.resolve(success);
+  });
+  try {
+    assertEqual(
+      (await handler(new Request(url))).status,
+      200,
+      "cache hit status",
+    );
+    assertEqual(upstreamCalls, 0, "cache hit GraphQL calls");
+  } finally {
+    graphqlMock.restore();
+    cacheMock.restore();
+    await Deno.remove(path).catch(() => {});
   }
 });
 
