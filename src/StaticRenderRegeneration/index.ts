@@ -1,4 +1,5 @@
 import { CacheManager } from "./cache_manager.ts";
+import { getResponseCacheKey } from "./cache_key.ts";
 import { StaticRegenerationOptions } from "./types.ts";
 import { getUrl, hashString, readCache } from "./utils.ts";
 
@@ -15,7 +16,7 @@ export async function staticRenderRegeneration(
     return await render(request);
   }
 
-  const cacheFile = await hashString(url.pathname + (url.search ?? ""));
+  const cacheFile = await hashString(getResponseCacheKey(request));
   const cacheManager = new CacheManager(options.revalidate ?? 0, cacheFile);
   if (cacheManager.isCacheValid) {
     const cache = readCache(cacheManager.cacheFilePath);
@@ -29,7 +30,7 @@ export async function staticRenderRegeneration(
   const response = await render(request);
 
   if (response.status >= 200 && response.status < 300) {
-    void cacheManager.save(response);
+    await cacheManager.save(response);
   }
 
   return response;
