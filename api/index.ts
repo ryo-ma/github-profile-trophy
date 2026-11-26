@@ -124,6 +124,7 @@ async function app(req: Request): Promise<Response> {
   const ranks: Array<string> = params.getAll("rank").flatMap((r) =>
     r.split(",")
   ).map((r) => r.trim());
+  const trophy_style = params.get("trophy_style");
 
   const userKeyCache = ["v1", username].join("-");
   const userInfoCached = await cacheProvider.get(userKeyCache) || "{}";
@@ -159,6 +160,7 @@ async function app(req: Request): Promise<Response> {
       paddingHeight,
       noBackground,
       noFrame,
+      trophy_style,
     ).render(userInfo, theme),
     {
       headers: defaultHeaders,
